@@ -1,9 +1,6 @@
 import React from 'react'
 
-// Types
-export default TasksType
-
-type TasksType = {
+export type TasksType = {
     id: number
     title: string
     isDone: boolean
@@ -19,12 +16,15 @@ export const Todolist = (props: TodolistType) => {
         <div>
             <h3>{props.title}</h3>
             <div>
-                <input/>
+                <input type={'text'}/>
                 <button>+</button>
             </div>
             <ul>
                 {props.tasks.map(item =>
-                    <li><input type="checkbox" checked={item.isDone}/> <span>{item.title}</span></li>
+                    <li>
+                        <input type="checkbox" checked={item.isDone}/>
+                        <span>{item.title}</span>
+                    </li>
                 )}
             </ul>
             <div>
