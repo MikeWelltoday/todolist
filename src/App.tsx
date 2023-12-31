@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './App.css'
 import {Todolist} from './components/Todolist'
 
@@ -7,25 +7,44 @@ import {TasksType} from './components/Todolist'
 
 //===============================================================================================================================================================
 
+//типизация
+// ### [2] фильтрация элементов массива
+export type FilterValuesType = 'all' | 'active' | 'completed'
 
 function App() {
 
-
-    let tasks: Array<TasksType> = [
+    //### [1] удаление элементов массива
+    const [tasks, setTasks] = useState<Array<TasksType>>([
         {id: 1, title: 'HTML&CSS', isDone: true},
         {id: 2, title: 'TS', isDone: true},
         {id: 3, title: 'ReactJS', isDone: false},
         {id: 4, title: 'Redux', isDone: false}
-    ]
+    ])
 
     const removeTask = (id: number) => {
-        tasks = tasks.filter(item => item.id !== id)
+        setTasks(value => value.filter(item => item.id !== id))
+    }
+
+    //### [2] фильтрация элементов массива
+    const [filter, setFilter] = useState<FilterValuesType>('all')
+    let tasksForTodolist = tasks
+
+    const changeFilter = (value: FilterValuesType) => {
+        setFilter(value)
+    }
+
+    if (filter === 'completed') {
+        tasksForTodolist = tasks.filter(item => item.isDone === true)
+    }
+    if (filter === 'active') {
+        tasksForTodolist = tasks.filter(item => item.isDone === false)
     }
 
 
     return (
         <div className="App">
-            <Todolist title="What to learn" tasks={tasks} removeTask={removeTask}/>
+            <Todolist title="What to learn" tasks={tasksForTodolist} removeTask={removeTask}
+                      changeFilter={changeFilter}/>
         </div>
     )
 }
