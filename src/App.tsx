@@ -34,10 +34,10 @@ function App() {
     }
 
     if (filter === 'completed') {
-        tasksForTodolist = tasks.filter(item => item.isDone === true)
+        tasksForTodolist = tasks.filter(item => item.isDone)
     }
     if (filter === 'active') {
-        tasksForTodolist = tasks.filter(item => item.isDone === false)
+        tasksForTodolist = tasks.filter(item => !item.isDone)
     }
 
 
