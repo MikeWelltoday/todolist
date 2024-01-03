@@ -1,5 +1,9 @@
-import React from 'react'
-import {FilterValuesType} from '../App'
+import React, {JSX} from 'react'
+import {FilterValuesType} from '../../App'
+import classes from './TodoList.module.css'
+
+//===============================================================================================================================================================
+
 
 export type TasksType = {
     id: number
@@ -14,16 +18,17 @@ type TodolistType = {
     changeFilter: (value: FilterValuesType) => void
 }
 
+//===============================================================================================================================================================
 
-export const Todolist = (props: TodolistType) => {
+export const Todolist: React.FC<TodolistType> = (props) => {
     return (
-        <div>
+        <div className={classes.todolist}>
             <h3>{props.title}</h3>
             <div>
                 <input type={'text'}/>
                 <button>+</button>
             </div>
-            <ul>
+            <ul className={classes.list}>
                 {props.tasks.map(item =>
                     <li>
                         <input type="checkbox" checked={item.isDone} readOnly={true}/>
@@ -32,7 +37,7 @@ export const Todolist = (props: TodolistType) => {
                     </li>
                 )}
             </ul>
-            <div>
+            <div className={classes.buttonContainer}>
                 <button onClick={() => props.changeFilter('all')}>All</button>
                 <button onClick={() => props.changeFilter('active')}>Active</button>
                 <button onClick={() => props.changeFilter('completed')}>Completed</button>

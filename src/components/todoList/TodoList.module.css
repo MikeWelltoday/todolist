@@ -1,0 +1,41 @@
+.todolist {
+    background-color: rgba(168, 112, 153, 0.42);
+    padding: 25px;
+    border: 2px solid black;
+    border-radius: 15px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.list {
+    padding-left: 0;
+    list-style-type: none;
+    display: flex;
+    flex-flow: column nowrap;
+    row-gap: 5px;
+
+    width: 100%;
+}
+
+.list li {
+    width: 100%;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    column-gap: 10px;
+}
+
+.list li span {
+    display: inline-block;
+    flex-grow: 1;
+}
+
+
+.buttonContainer {
+    display: flex;
+    flex-flow: row nowrap;
+    column-gap: 10px;
+}

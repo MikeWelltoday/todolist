@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import './App.css'
-import {Todolist} from './components/Todolist'
+import {Todolist} from './components/todoList/Todolist'
 
 // Types
-import {TasksType} from './components/Todolist'
+import {TasksType} from './components/todoList/Todolist'
 
 //===============================================================================================================================================================
 
