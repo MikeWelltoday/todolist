@@ -23,17 +23,13 @@ function App() {
     ])
 
 
-    const removeTask = (id: string) => {
-        let filteredTasks = tasks.filter(item => item.id !== id)
-        setTasks(filteredTasks)
+    function removeTask(id: string) {
+        setTasks(tasks.filter(item => item.id !== id))
     }
 
-    const addTask = () => {
+    function addTask(value: string) {
         // создадим новый массив, чтобы не изменять изначальный массив с сервера
-        let newTask: TasksType = {id: v1(), title: 'New Title', isDone: false}
-        let newTasks: Array<TasksType> = [newTask, ...tasks]
-        setTasks(newTasks)
-        console.log(tasks)
+        setTasks([{id: v1(), title: value, isDone: false}, ...tasks])
     }
 
     const [filter, setFilter] = useState<FilterValuesType>('all')
@@ -46,7 +42,7 @@ function App() {
         tasksForTodolist = tasks.filter(item => item.isDone)
     }
 
-    const changeFilter = (value: FilterValuesType) => {
+    function changeFilter(value: FilterValuesType) {
         setFilter(value)
     }
 
