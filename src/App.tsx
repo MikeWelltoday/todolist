@@ -1,10 +1,8 @@
 import React, {useState} from 'react'
 import './App.css'
 import {Todolist} from './components/todoList/Todolist'
-
-// Types
-import {TasksType} from './components/todoList/Todolist'
 import {v1} from 'uuid'
+import {TasksType} from './components/todoList/Todolist'
 
 //===============================================================================================================================================================
 
@@ -21,7 +19,6 @@ function App() {
         {id: v1(), title: 'Redux', isDone: false},
         {id: v1(), title: 'Redux', isDone: false}
     ])
-
 
     function removeTask(id: string) {
         setTasks(tasks.filter(item => item.id !== id))
@@ -46,6 +43,28 @@ function App() {
         setFilter(value)
     }
 
+    function changeTaskStatus(taskId: string, isDone: boolean) {
+        // выдергиваем из массива нужную таску, по id
+        let task = tasks.find(item => item.id === taskId)
+
+        //проверка на ВООБЩЕ наличие таски
+        if (task) {
+            // перезаписываем значение свойства такски на isDone
+            task.isDone = isDone
+
+            // перезаписываем наш стейт
+            setTasks(tasks.map(item => {
+                if (item.id === taskId) {
+                    return {id: v1(), title: item.title, isDone: isDone}
+                } else {
+                    return item
+                }
+            }))
+        }
+
+    }
+
+
     return (
         <div className="App">
             <Todolist title="What to learn"
@@ -53,6 +72,7 @@ function App() {
                       removeTask={removeTask}
                       changeFilter={changeFilter}
                       addTask={addTask}
+                      changeTaskStatus={changeTaskStatus}
             />
         </div>
     )
