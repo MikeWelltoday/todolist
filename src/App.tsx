@@ -25,7 +25,6 @@ function App() {
     }
 
     function addTask(value: string) {
-        // создадим новый массив, чтобы не изменять изначальный массив с сервера
         setTasks([{id: v1(), title: value, isDone: false}, ...tasks])
     }
 
@@ -44,24 +43,11 @@ function App() {
     }
 
     function changeTaskStatus(taskId: string, isDone: boolean) {
-        // выдергиваем из массива нужную таску, по id
         let task = tasks.find(item => item.id === taskId)
-
-        //проверка на ВООБЩЕ наличие таски
         if (task) {
-            // перезаписываем значение свойства такски на isDone
             task.isDone = isDone
-
-            // перезаписываем наш стейт
-            setTasks(tasks.map(item => {
-                if (item.id === taskId) {
-                    return {id: v1(), title: item.title, isDone: isDone}
-                } else {
-                    return item
-                }
-            }))
+            setTasks([...tasks])
         }
-
     }
 
 

@@ -30,6 +30,10 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
     }
 
     function onNewTitleKeyPressHandler(e: React.KeyboardEvent<HTMLInputElement>) {
+        if (newTaskTitle.trim() === '') {
+            return
+        }
+
         if (e.key === 'Enter') {
             props.addTask(newTaskTitle)
             setNewTaskTitle('')
@@ -37,6 +41,9 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
     }
 
     function onAddTaskClickHandler() {
+        if (newTaskTitle.trim() === '') {
+            return
+        }
         props.addTask(newTaskTitle)
         setNewTaskTitle('')
     }
@@ -79,7 +86,7 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
                             }
 
                             return <li key={item.id}>
-                                <input type="checkbox" checked={item.isDone} readOnly={true}
+                                <input type="checkbox" checked={item.isDone}
                                        onChange={onCheckboxChangeHandler}/>
                                 <span>{item.title}</span>
                                 <button onClick={onRemoveClickHandler}>X</button>
