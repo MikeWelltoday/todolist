@@ -52,16 +52,8 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
         }
     }
 
-    function onAllClickHandler() {
-        props.changeFilter('all')
-    }
-
-    function onActiveClickHandler() {
-        props.changeFilter('active')
-    }
-
-    function onCompletedClickHandler() {
-        props.changeFilter('completed')
+    function onClickFilterHandler(filterValue: FilterValuesType) {
+        return () => props.changeFilter(filterValue)
     }
 
     return (
@@ -106,17 +98,17 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
 
 
             <div className={classes.buttonContainer}>
-                <button onClick={onAllClickHandler}
+                <button onClick={onClickFilterHandler('all')}
                         className={props.filter === 'all' ? 'active-filter' : ''}
                 >
                     All
                 </button>
-                <button onClick={onActiveClickHandler}
+                <button onClick={onClickFilterHandler('active')}
                         className={props.filter === 'active' ? 'active-filter' : ''}
                 >
                     Active
                 </button>
-                <button onClick={onCompletedClickHandler}
+                <button onClick={onClickFilterHandler('completed')}
                         className={props.filter === 'completed' ? 'active-filter' : ''}
                 >
                     Completed
