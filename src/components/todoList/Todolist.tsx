@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from 'react'
-import classes from './TodoList.module.css'
+import S from './Todolist.module.scss'
 import {FilterValuesType} from '../../App'
 
 //===============================================================================================================================================================
@@ -34,12 +34,7 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
     function onNewTitleKeyPressHandler(e: React.KeyboardEvent<HTMLInputElement>) {
         setError(null)
         if (e.key === 'Enter') {
-            if (newTaskTitle.trim() !== '') {
-                props.addTask(newTaskTitle)
-                setNewTaskTitle('')
-            } else {
-                setError('Field is required')
-            }
+            onAddTaskClickHandler()
         }
     }
 
@@ -65,7 +60,7 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
     }
 
     return (
-        <div className={classes.todolist}>
+        <div className={S.todolist}>
 
             <h3>{props.title}</h3>
 
@@ -82,7 +77,7 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
 
             {
                 props.tasks.length ?
-                    <ul className={classes.list}>
+                    <ul className={S.list}>
                         {props.tasks.map(item => {
                             function onRemoveClickHandler() {
                                 props.removeTask(item.id)
@@ -105,7 +100,7 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
             }
 
 
-            <div className={classes.buttonContainer}>
+            <div className={S.buttonContainer}>
                 <button onClick={onAllClickHandler}
                         className={props.filter === 'all' ? 'active-filter' : ''}
                 >
