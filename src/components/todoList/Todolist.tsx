@@ -11,10 +11,11 @@ export type TasksType = {
 }
 
 type TodolistPropsType = {
+    id: string
     title: string
     tasks: Array<TasksType>
     removeTask: (id: string) => void
-    changeFilter: (value: FilterValuesType) => void
+    changeFilter: (value: FilterValuesType, todolistId: string) => void
     addTask: (value: string) => void
     changeTaskStatus: (taskId: string, isDone: boolean) => void
     filter: FilterValuesType
@@ -47,16 +48,8 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
         }
     }
 
-    function onAllClickHandler() {
-        props.changeFilter('all')
-    }
-
-    function onActiveClickHandler() {
-        props.changeFilter('active')
-    }
-
-    function onCompletedClickHandler() {
-        props.changeFilter('completed')
+    function onClickFilterHandler(mode: FilterValuesType) {
+        return () => props.changeFilter(mode, props.id)
     }
 
     return (
@@ -101,17 +94,17 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
 
 
             <div className={S.buttonContainer}>
-                <button onClick={onAllClickHandler}
+                <button onClick={onClickFilterHandler('all')}
                         className={props.filter === 'all' ? 'active-filter' : ''}
                 >
                     All
                 </button>
-                <button onClick={onActiveClickHandler}
+                <button onClick={onClickFilterHandler('active')}
                         className={props.filter === 'active' ? 'active-filter' : ''}
                 >
                     Active
                 </button>
-                <button onClick={onCompletedClickHandler}
+                <button onClick={onClickFilterHandler('completed')}
                         className={props.filter === 'completed' ? 'active-filter' : ''}
                 >
                     Completed
