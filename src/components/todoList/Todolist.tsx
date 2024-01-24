@@ -27,14 +27,14 @@ type TodolistPropsType = {
 export const Todolist: React.FC<TodolistPropsType> = (props) => {
 
     const [newTaskTitle, setNewTaskTitle] = useState('')
-    const [error, setError] = useState<string | null>(null)
+    const [error, setError] = useState<boolean>(false)
 
     function onNewTitleChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
         setNewTaskTitle(e.currentTarget.value)
     }
 
     function onNewTitleKeyPressHandler(e: React.KeyboardEvent<HTMLInputElement>) {
-        setError(null)
+        error && setError(false)
         if (e.key === 'Enter') {
             onAddTaskClickHandler()
         }
@@ -45,7 +45,7 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
             props.addTask(newTaskTitle, props.id)
             setNewTaskTitle('')
         } else {
-            setError('Field is required')
+            setError(true)
         }
     }
 
@@ -74,7 +74,7 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
                        className={error ? 'error' : ''}
                 />
                 <button onClick={onAddTaskClickHandler}>+</button>
-                {error && <div className={'error-message'}>{error}</div>}
+                {error && <div className={'error-message'}>Field is required</div>}
             </div>
 
             {

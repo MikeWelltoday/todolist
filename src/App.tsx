@@ -23,8 +23,8 @@ function App() {
     let todolistId2 = v1()
 
     const [todolistsArr, setTodolistsArr] = useState<TodolistType[]>([
-        {id: todolistId1, title: 'What to learn', filter: 'active'},
-        {id: todolistId2, title: 'What to buy', filter: 'completed'}
+        {id: todolistId1, title: 'What to learn', filter: 'all'},
+        {id: todolistId2, title: 'What to buy', filter: 'all'}
     ])
 
     const [tasksObj, setTasksObj] = useState<tasksObjType>({
@@ -80,12 +80,8 @@ function App() {
 
             {todolistsArr.map(todolist => {
                     let tasksForTodolist = tasksObj[todolist.id]
-                    if (todolist.filter === 'active') {
-                        tasksForTodolist = tasksForTodolist.filter(item => !item.isDone)
-                    }
-                    if (todolist.filter === 'completed') {
-                        tasksForTodolist = tasksForTodolist.filter(item => item.isDone)
-                    }
+                    if (todolist.filter === 'active') tasksForTodolist = tasksForTodolist.filter(item => !item.isDone)
+                    if (todolist.filter === 'completed') tasksForTodolist = tasksForTodolist.filter(item => item.isDone)
 
                     return (
                         <Todolist
@@ -104,7 +100,7 @@ function App() {
                     )
                 }
             )}
-            
+
         </div>
     )
 }
