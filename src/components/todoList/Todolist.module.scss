@@ -43,19 +43,9 @@
   column-gap: 10px;
 
   button {
-
-
     &.activeFilter {
       background-color: aquamarine;
     }
   }
 }
 
-/* ВАЛИДАЦИЯ ИНПУТА */
-.error {
-  border: red 1px solid;
-}
-
-.errorMessage {
-  color: red;
-}
