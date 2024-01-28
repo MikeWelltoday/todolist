@@ -13,7 +13,9 @@ type TodolistType = {
     filter: FilterValuesType
 }
 
-type tasksObjType = Record<string, TasksType[]>
+type tasksObjType = {
+    [key: string]: TasksType[]
+}
 
 //===============================================================================================================================================================
 
@@ -79,17 +81,16 @@ function App() {
         <div className="App">
 
             {todolistsArr.map(todolist => {
-                    let tasksForTodolist = tasksObj[todolist.id]
-                    if (todolist.filter === 'active') tasksForTodolist = tasksForTodolist.filter(item => !item.isDone)
-                    if (todolist.filter === 'completed') tasksForTodolist = tasksForTodolist.filter(item => item.isDone)
+                    let filteredTasks = tasksObj[todolist.id]
+                    if (todolist.filter === 'active') filteredTasks = filteredTasks.filter(item => !item.isDone)
+                    if (todolist.filter === 'completed') filteredTasks = filteredTasks.filter(item => item.isDone)
 
                     return (
                         <Todolist
                             key={todolist.id}
-
-                            id={todolist.id}
+                            todolistId={todolist.id}
                             title={todolist.title}
-                            tasks={tasksForTodolist}
+                            tasks={filteredTasks}
                             filter={todolist.filter}
                             addTask={addTask}
                             removeTask={removeTask}

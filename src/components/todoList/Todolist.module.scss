@@ -7,28 +7,32 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+}
 
-  ul {
-    padding-left: 0;
-    list-style-type: none;
-    display: flex;
-    flex-flow: column nowrap;
-    row-gap: 5px;
+.tasksList {
+  padding-left: 0;
+  list-style-type: none;
+  display: flex;
+  flex-flow: column nowrap;
+  row-gap: 5px;
 
+  width: 100%;
+
+  li {
     width: 100%;
 
-    li {
-      width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    column-gap: 10px;
 
-      display: flex;
-      flex-flow: row nowrap;
-      justify-content: flex-start;
-      column-gap: 10px;
+    span {
+      display: inline-block;
+      flex-grow: 1;
+    }
 
-      span {
-        display: inline-block;
-        flex-grow: 1;
-      }
+    &.isDone {
+      opacity: 0.5;
     }
   }
 }
@@ -37,4 +41,21 @@
   display: flex;
   flex-flow: row nowrap;
   column-gap: 10px;
+
+  button {
+
+
+    &.activeFilter {
+      background-color: aquamarine;
+    }
+  }
+}
+
+/* ВАЛИДАЦИЯ ИНПУТА */
+.error {
+  border: red 1px solid;
+}
+
+.errorMessage {
+  color: red;
 }
