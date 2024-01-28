@@ -17,13 +17,13 @@ type TodolistPropsType = {
     todolistTitle: string
     filteredTasks: Array<TasksType>
     filter: FilterValuesType
-    addTask: (newTaskTitle: string, todolistId: string) => void
-    removeTask: (taskId: string, todolistId: string) => void
-    changeTaskFilter: (filterMode: FilterValuesType, todolistId: string) => void
-    changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void
-    changeTaskTitle: (newTaskTitle: string, taskId: string, todolistId: string) => void
+    addTask: (todolistId: string, newTaskTitle: string) => void
+    removeTask: (todolistId: string, taskId: string) => void
+    changeTaskFilter: (todolistId: string, filterMode: FilterValuesType) => void
+    changeTaskStatus: (todolistId: string, taskId: string, isDone: boolean) => void
+    changeTaskTitle: (todolistId: string, taskId: string, newTaskTitle: string) => void
+    changeTodolistTitle: (todolistId: string, newTodolistTitle: string) => void
     removeTodolist: (todolistId: string) => void
-    changeTodolistTitle: (newTodolistTitle: string, todolistId: string) => void
 }
 
 //========================================================================================
@@ -31,11 +31,11 @@ type TodolistPropsType = {
 export const Todolist: React.FC<TodolistPropsType> = (props) => {
 
     function onClickChangeTaskFilterHandler(mode: FilterValuesType) {
-        return () => props.changeTaskFilter(mode, props.todolistId)
+        return () => props.changeTaskFilter(props.todolistId, mode)
     }
 
     function addTaskHandler(title: string) {
-        props.addTask(title, props.todolistId)
+        props.addTask(props.todolistId, title)
     }
 
     function onClickRemoveTodolistHandler() {
@@ -43,7 +43,7 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
     }
 
     function onChangeChangeTodolistTitleHandler(newTitle: string) {
-        props.changeTodolistTitle(newTitle, props.todolistId)
+        props.changeTodolistTitle(props.todolistId, newTitle)
     }
 
     return (
@@ -61,15 +61,15 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
                     {props.filteredTasks.map(item => {
 
                         function onClickRemoveTaskHandler() {
-                            props.removeTask(item.id, props.todolistId)
+                            props.removeTask(props.todolistId, item.id)
                         }
 
                         function onChangeChangeTaskStatusHandler(event: ChangeEvent<HTMLInputElement>) {
-                            props.changeTaskStatus(item.id, event.currentTarget.checked, props.todolistId)
+                            props.changeTaskStatus(props.todolistId, item.id, event.currentTarget.checked)
                         }
 
                         function onChangeChangeTaskTitleHandler(newTitle: string) {
-                            props.changeTaskTitle(newTitle, item.id, props.todolistId)
+                            props.changeTaskTitle(props.todolistId, item.id, newTitle)
                         }
 
                         return (
