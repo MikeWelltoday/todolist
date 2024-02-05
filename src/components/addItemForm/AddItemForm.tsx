@@ -1,5 +1,6 @@
 import React, {FC, useState} from 'react'
 import S from './AddItemForm.module.scss'
+import {Button} from '@mui/material'
 
 //===============================================================================================================================================================
 
@@ -14,16 +15,16 @@ export const AddItemForm: FC<AddItemFormPropsType> = (props) => {
     const [newTitle, setNewInput] = useState('')
     const [error, setError] = useState<boolean>(false)
 
-    function onChangeNewTitleHandler(e: React.ChangeEvent<HTMLInputElement>) {
+    function newTitleOnChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
         setNewInput(e.currentTarget.value)
     }
 
-    function onKeyUpAddItemHandler(e: React.KeyboardEvent<HTMLInputElement>) {
+    function addItemOnKeyUPHandler(e: React.KeyboardEvent<HTMLInputElement>) {
         error && setError(false)
-        if (e.key === 'Enter') onClickAddItemHandler()
+        if (e.key === 'Enter') addItemOnClickHandler()
     }
 
-    function onClickAddItemHandler() {
+    function addItemOnClickHandler() {
         if (newTitle.trim() !== '') {
             props.addItem(newTitle)
             setNewInput('')
@@ -37,9 +38,10 @@ export const AddItemForm: FC<AddItemFormPropsType> = (props) => {
             <input className={`${error && S.error}`}
                    type={'text'}
                    value={newTitle}
-                   onChange={onChangeNewTitleHandler}
-                   onKeyUp={onKeyUpAddItemHandler}/>
-            <button onClick={onClickAddItemHandler}>+</button>
+                   onChange={newTitleOnChangeHandler}
+                   onKeyUp={addItemOnKeyUPHandler}/>
+            {/*<button onClick={addItemOnClickHandler}>+</button>*/}
+            <Button onClick={addItemOnClickHandler} variant={'contained'} color={'secondary'}>+</Button>
             {error && <div className={S.errorMessage}>Field is required</div>}
         </div>
     )

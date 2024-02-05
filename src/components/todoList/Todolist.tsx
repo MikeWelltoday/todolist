@@ -3,6 +3,8 @@ import S from './Todolist.module.scss'
 import {FilterValuesType} from '../../App'
 import {AddItemForm} from '../addItemForm/AddItemForm'
 import {EditableSpan} from '../editableSpan/EditableSpan'
+import {IconButton} from '@mui/material'
+import {Delete} from '@mui/icons-material'
 
 //========================================================================================
 
@@ -30,7 +32,7 @@ type TodolistPropsType = {
 
 export const Todolist: React.FC<TodolistPropsType> = (props) => {
 
-    function onClickChangeTaskFilterHandler(mode: FilterValuesType) {
+    function changeTaskFilterOnClickHandler(mode: FilterValuesType) {
         return () => props.changeTaskFilter(props.todolistId, mode)
     }
 
@@ -38,11 +40,11 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
         props.addTask(props.todolistId, title)
     }
 
-    function onClickRemoveTodolistHandler() {
+    function removeTodolistOnClickHandler() {
         props.removeTodolist(props.todolistId)
     }
 
-    function onChangeChangeTodolistTitleHandler(newTitle: string) {
+    function changeTodolistTitleOnChangeHandler(newTitle: string) {
         props.changeTodolistTitle(props.todolistId, newTitle)
     }
 
@@ -50,8 +52,11 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
         <div className={S.todolist}>
 
             <h3>
-                <EditableSpan onChangeTitle={onChangeChangeTodolistTitleHandler}>{props.todolistTitle}</EditableSpan>
-                <button onClick={onClickRemoveTodolistHandler}>✘</button>
+                <EditableSpan onChangeTitle={changeTodolistTitleOnChangeHandler}>{props.todolistTitle}</EditableSpan>
+                {/*<button onClick={removeTodolistOnClickHandler}>✘</button>*/}
+                <IconButton onClick={removeTodolistOnClickHandler}>
+                    <Delete/>
+                </IconButton>
             </h3>
 
             <AddItemForm addItem={addTaskHandler}/>
@@ -60,15 +65,15 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
                 (<ul className={S.tasksList}>
                     {props.filteredTasks.map(item => {
 
-                        function onClickRemoveTaskHandler() {
+                        function removeTaskOnClickHandler() {
                             props.removeTask(props.todolistId, item.id)
                         }
 
-                        function onChangeChangeTaskStatusHandler(event: ChangeEvent<HTMLInputElement>) {
+                        function changeTaskStatusOnChangeHandler(event: ChangeEvent<HTMLInputElement>) {
                             props.changeTaskStatus(props.todolistId, item.id, event.currentTarget.checked)
                         }
 
-                        function onChangeChangeTaskTitleHandler(newTitle: string) {
+                        function changeTaskTitleOnChangeHandler(newTitle: string) {
                             props.changeTaskTitle(props.todolistId, item.id, newTitle)
                         }
 
@@ -76,9 +81,12 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
                             <li key={item.id} className={`${item.isDone && S.isDone}`}>
                                 <input type="checkbox"
                                        checked={item.isDone}
-                                       onChange={onChangeChangeTaskStatusHandler}/>
-                                <EditableSpan onChangeTitle={onChangeChangeTaskTitleHandler}>{item.title}</EditableSpan>
-                                <button onClick={onClickRemoveTaskHandler}>X</button>
+                                       onChange={changeTaskStatusOnChangeHandler}/>
+                                <EditableSpan onChangeTitle={changeTaskTitleOnChangeHandler}>{item.title}</EditableSpan>
+                                {/*<button onClick={removeTaskOnClickHandler}>X</button>*/}
+                                <IconButton onClick={removeTaskOnClickHandler}>
+                                    <Delete/>
+                                </IconButton>
                             </li>
                         )
                     })}
@@ -87,15 +95,15 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
 
             <div className={S.buttonContainer}>
                 <button className={`${props.filter === 'all' && S.activeFilter}`}
-                        onClick={onClickChangeTaskFilterHandler('all')}>
+                        onClick={changeTaskFilterOnClickHandler('all')}>
                     All
                 </button>
                 <button className={`${props.filter === 'active' && S.activeFilter}`}
-                        onClick={onClickChangeTaskFilterHandler('active')}>
+                        onClick={changeTaskFilterOnClickHandler('active')}>
                     Active
                 </button>
                 <button className={`${props.filter === 'completed' && S.activeFilter}`}
-                        onClick={onClickChangeTaskFilterHandler('completed')}>
+                        onClick={changeTaskFilterOnClickHandler('completed')}>
                     Completed
                 </button>
             </div>

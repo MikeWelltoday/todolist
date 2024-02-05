@@ -15,7 +15,7 @@ export const EditableSpan: FC<EditableSpanPropsType> = (props) => {
     const [editMode, setEditMode] = useState<boolean>(false)
     const [title, setTitle] = useState<string>('')
 
-    function onChangeNewTitleHandler(event: ChangeEvent<HTMLInputElement>) {
+    function newTitleOnChangeHandler(event: ChangeEvent<HTMLInputElement>) {
         setTitle(event.currentTarget.value)
     }
 
@@ -41,7 +41,7 @@ export const EditableSpan: FC<EditableSpanPropsType> = (props) => {
                    value={title}
                    onBlur={activateViewMode}
                    onKeyDown={onKeyDown}
-                   onChange={onChangeNewTitleHandler}
+                   onChange={newTitleOnChangeHandler}
                    autoFocus
             />
             :
