@@ -53,7 +53,6 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
 
             <h3>
                 <EditableSpan onChangeTitle={changeTodolistTitleOnChangeHandler}>{props.todolistTitle}</EditableSpan>
-                {/*<button onClick={removeTodolistOnClickHandler}>✘</button>*/}
                 <IconButton onClick={removeTodolistOnClickHandler}>
                     <Delete/>
                 </IconButton>
@@ -62,7 +61,7 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
             <AddItemForm addItem={addTaskHandler}/>
 
             {props.filteredTasks.length ?
-                (<ul className={S.tasksList}>
+                (<div className={S.tasksList}>
                     {props.filteredTasks.map(item => {
 
                         function removeTaskOnClickHandler() {
@@ -78,37 +77,35 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
                         }
 
                         return (
-                            <li key={item.id} className={`${item.isDone && S.isDone}`}>
-                                {/*<input type="checkbox"*/}
-                                {/*       checked={item.isDone}*/}
-                                {/*       onChange={changeTaskStatusOnChangeHandler}/>*/}
+                            <div key={item.id} className={`${item.isDone && S.isDone}`}>
                                 <Checkbox checked={item.isDone}
                                           onChange={changeTaskStatusOnChangeHandler}
                                           color="secondary"/>
                                 <EditableSpan onChangeTitle={changeTaskTitleOnChangeHandler}>{item.title}</EditableSpan>
-                                {/*<button onClick={removeTaskOnClickHandler}>X</button>*/}
                                 <IconButton onClick={removeTaskOnClickHandler}>
                                     <Delete/>
                                 </IconButton>
-                            </li>
+                            </div>
                         )
                     })}
-                </ul>)
+                </div>)
                 : <div>NO TASKS</div>}
 
             <div className={S.buttonContainer}>
 
-                <Button variant={props.filter === 'all' ? 'contained' : 'text'}
-                        onClick={changeTaskFilterOnClickHandler('all')}>
+                <Button
+                    color={'inherit'}
+                    variant={props.filter === 'all' ? 'outlined' : 'text'}
+                    onClick={changeTaskFilterOnClickHandler('all')}>
                     All
                 </Button>
                 <Button color={'success'}
-                        variant={props.filter === 'active' ? 'contained' : 'text'}
+                        variant={props.filter === 'active' ? 'outlined' : 'text'}
                         onClick={changeTaskFilterOnClickHandler('active')}>
                     Active
                 </Button>
                 <Button color={'secondary'}
-                        variant={props.filter === 'completed' ? 'contained' : 'text'}
+                        variant={props.filter === 'completed' ? 'outlined' : 'text'}
                         onClick={changeTaskFilterOnClickHandler('completed')}>
                     Completed
                 </Button>

@@ -2,6 +2,7 @@ import React, {FC, useState} from 'react'
 import S from './AddItemForm.module.scss'
 import {TextField, IconButton} from '@mui/material'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
+import {AddBox} from '@mui/icons-material'
 
 //===============================================================================================================================================================
 
@@ -36,17 +37,20 @@ export const AddItemForm: FC<AddItemFormPropsType> = (props) => {
 
     return (
         <div className={S.addItemForm}>
-            <TextField error={error}
+            <TextField type={'text'}
                        variant={'outlined'}
-                       label={'Type value'}
-                       type={'text'}
-                       helperText={error ? 'Field is required' : ''}
                        value={newTitle}
                        onChange={newTitleOnChangeHandler}
-                       onKeyUp={addItemOnKeyUPHandler}/>
-            <IconButton onClick={addItemOnClickHandler} color={'secondary'}>
-                <AddCircleOutlineIcon color={'primary'}/>
+                       onKeyUp={addItemOnKeyUPHandler}
+                       label={'Type value'}
+                       error={error}
+                       helperText={error ? 'Field is required' : ''}
+            />
+
+            <IconButton onClick={addItemOnClickHandler} color={'primary'}>
+                <AddBox color={'primary'}/>
             </IconButton>
+
         </div>
     )
 }

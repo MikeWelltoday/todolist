@@ -3,7 +3,7 @@ import './App.scss'
 import {TasksType, Todolist} from './components/todoList/Todolist'
 import {v1} from 'uuid'
 import {AddItemForm} from './components/addItemForm/AddItemForm'
-import {AppBar, Container, Grid, IconButton, Toolbar, Typography, Paper} from '@mui/material'
+import {AppBar, Container, Grid, IconButton, Toolbar, Typography, Paper, Button} from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 
 //========================================================================================
@@ -99,8 +99,9 @@ function App() {
                         <MenuIcon/>
                     </IconButton>
                     <Typography variant="h6" color="inherit" component="div">
-                        Menu
+                        Todolist
                     </Typography>
+                    <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
 
@@ -108,7 +109,7 @@ function App() {
                 <Grid container style={{padding: '20px'}}>
                     <AddItemForm addItem={addTodolist}/>
                 </Grid>
-                <Grid container spacing={10}>
+                <Grid container spacing={3}>
                     {todolists.map(todolist => {
                             let filteredTasks = tasks[todolist.id]
                             if (todolist.filter === 'active') filteredTasks = filteredTasks.filter(item => !item.isDone)
@@ -116,7 +117,7 @@ function App() {
 
                             return (
                                 <Grid item>
-                                    <Paper>
+                                    <Paper style={{padding: '10px'}}>
                                         <Todolist key={todolist.id}
                                                   todolistId={todolist.id}
                                                   todolistTitle={todolist.title}

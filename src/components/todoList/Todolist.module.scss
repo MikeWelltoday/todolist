@@ -1,5 +1,5 @@
 .todolist {
-  background-color: rgba(168, 112, 153, 0.42);
+  background-color: rgba(232, 210, 224, 0.3);
   padding: 25px;
   border: 2px solid black;
   border-radius: 15px;
@@ -17,8 +17,8 @@
   row-gap: 5px;
 
   width: 100%;
-
-  li {
+  
+  div {
     width: 100%;
 
     display: flex;
@@ -41,11 +41,5 @@
   display: flex;
   flex-flow: row nowrap;
   column-gap: 10px;
-
-  //button {
-  //  &.activeFilter {
-  //    background-color: aquamarine;
-  //  }
-  //}
 }
 
