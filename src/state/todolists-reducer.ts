@@ -4,11 +4,6 @@ import {v1} from 'uuid'
 //========================================================================================
 //TYPES
 
-type OldActionType = {
-    type: string
-    [key: string]: any
-}
-
 export type RemoveTodolistActionType = {
     type: 'REMOVE-TODOLIST'
     id: string
@@ -64,26 +59,26 @@ export const todolistsReducer = (state: TodolistType[], action: ActionsType): To
 
 
         default:
-            throw new Error('### NOT CORRECT ACTION TYPE ###')
+            return state
     }
 }
 
 //========================================================================================
 // ACTION CREATER - контролирует правильность введенных данных для action
 
-export function RemoveTodolistAC(todolistId: string): RemoveTodolistActionType {
+export function removeTodolistAC(todolistId: string): RemoveTodolistActionType {
     return {type: 'REMOVE-TODOLIST', id: todolistId}
 }
 
-export function AddTodolistAC(title: string): AddTodolistActionType {
+export function addTodolistAC(title: string): AddTodolistActionType {
     return {type: 'ADD-TODOLIST', title}
 }
 
-export function ChangeTodolistTitleAC(id: string, title: string): ChangeTodolistTitleActionType {
+export function changeTodolistTitleAC(id: string, title: string): ChangeTodolistTitleActionType {
     return {type: 'CHANGE-TODOLIST-TITLE', id, title}
 }
 
-export function ChangeTodolistFilterAC(id: string, filter: FilterValuesType): ChangeTodolistFilterActionType {
+export function changeTodolistFilterAC(id: string, filter: FilterValuesType): ChangeTodolistFilterActionType {
     return {type: 'CHANGE-TODOLIST-FILTER', id, filter}
 }
 
