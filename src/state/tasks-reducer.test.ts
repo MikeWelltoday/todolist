@@ -1,6 +1,6 @@
 import {tasksObjType} from '../App'
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './tasks-reducer'
-import {addTodolistAC} from './todolists-reducer'
+import {addTodolistAC, removeTodolistAC} from './todolists-reducer'
 
 //========================================================================================
 
@@ -54,12 +54,8 @@ test('status of specified task should be changed', () => {
 })
 
 test('title of specified task should change its name', () => {
-
     const newTitle = 'MEAT'
-
-
     const endState = tasksReducer(startState, changeTaskTitleAC('todolistId2', '2', newTitle))
-
     expect(endState['todolistId1'][1].title).toBe('JS')
     expect(endState['todolistId2'][1].title).toBe(newTitle)
 })
@@ -68,19 +64,23 @@ test('new array should be added when new todolist is added', () => {
 
     const endState = tasksReducer(startState, addTodolistAC('new todolist'))
 
-    // получим массив только КЛЮЧЕЙ объекта
     const keys = Object.keys(endState)
-    // найдем новый ключ
     const newKey = keys.find(k => k !== 'todolistId1' && k !== 'todolistId2')
     if (!newKey) {
-        // если не нашли новый ключ => ошибка
         throw Error('new key should be added')
     }
 
-    //проверим общее количество ключей
     expect(keys.length).toBe(3)
-    //массив по новому ключу должен быть пустым
-    expect(endState[newKey]).toEqual([])
+    expect(endState[newKey]).toStrictEqual([])
 })
 
+test('property with todolistId should be deleted', () => {
 
+    const endState = tasksReducer(startState, removeTodolistAC('todolistId2'))
+
+    const keys = Object.keys(endState)
+
+    expect(keys.length).toBe(1)
+    expect(endState['todolistId2']).toBeUndefined()
+
+})

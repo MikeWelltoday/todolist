@@ -86,8 +86,9 @@ function App() {
 
     function removeTodolist(todolistId: string) {
         setTodolists([...todolists.filter(item => item.id !== todolistId)])
-        delete tasks[todolistId]
-        setTasks({...tasks})
+        const copy = {...tasks}
+        delete copy[todolistId]
+        setTasks(copy)
     }
 
     return (
