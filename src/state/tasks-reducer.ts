@@ -1,5 +1,6 @@
 import {tasksObjType} from '../App'
 import {v1} from 'uuid'
+import {AddTodolistActionType} from './todolists-reducer'
 
 //========================================================================================
 //TYPES
@@ -38,6 +39,7 @@ export type ActionsType =
     | AddTaskActionType
     | ChangeTaskTypeActionType
     | ChangeTaskTitleActionType
+    | AddTodolistActionType
 
 //========================================================================================
 // REDUCER
@@ -75,6 +77,11 @@ export const tasksReducer = (state: tasksObjType, action: ActionsType): tasksObj
                 } : t)
             }
         }
+
+        case 'ADD-TODOLIST':
+            // нельзя получить id нового тудулиста из todolistReducer, так как они не связанны.
+            // но нам нужен id для создания пустого массива по нему => пока поставим заглушку
+            return {...state, [v1()]: []}
 
         default:
             return state

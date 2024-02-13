@@ -64,18 +64,23 @@ test('title of specified task should change its name', () => {
     expect(endState['todolistId2'][1].title).toBe(newTitle)
 })
 
-test('123', () => {
+test('new array should be added when new todolist is added', () => {
 
-    const action = addTodolistAC('new todolist')
+    const endState = tasksReducer(startState, addTodolistAC('new todolist'))
 
-    const endState = tasksReducer(startState, action)
-
+    // получим массив только КЛЮЧЕЙ объекта
     const keys = Object.keys(endState)
+    // найдем новый ключ
     const newKey = keys.find(k => k !== 'todolistId1' && k !== 'todolistId2')
     if (!newKey) {
+        // если не нашли новый ключ => ошибка
         throw Error('new key should be added')
     }
 
+    //проверим общее количество ключей
     expect(keys.length).toBe(3)
+    //массив по новому ключу должен быть пустым
     expect(endState[newKey]).toEqual([])
 })
+
+
