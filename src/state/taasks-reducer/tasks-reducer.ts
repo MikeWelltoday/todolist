@@ -98,19 +98,19 @@ export const tasksReducer = (state: tasksObjType, action: ActionsType): tasksObj
 // ACTION-CREATER
 
 export function removeTaskAC(todolistId: string, taskId: string): RemoveTaskActionType {
-    return {type: 'REMOVE-TASK', payload: {todolistId, taskId}}
+    return {type: 'REMOVE-TASK', payload: {todolistId, taskId}} as const
 }
 
 export function addTaskAC(todolistId: string, title: string): AddTaskActionType {
-    return {type: 'ADD-TASK', payload: {id: todolistId, title}}
+    return {type: 'ADD-TASK', payload: {id: todolistId, title}} as const
 }
 
 export function changeTaskStatusAC(todolistId: string, taskId: string, isDone: boolean): ChangeTaskTypeActionType {
-    return {type: 'CHANGE-TASK-STATUS', payload: {todolistId, taskId, isDone}}
+    return {type: 'CHANGE-TASK-STATUS', payload: {todolistId, taskId, isDone}} as const
 }
 
 export function changeTaskTitleAC(todolistId: string, taskId: string, title: string): ChangeTaskTitleActionType {
-    return {type: 'CHANGE-TASK-TITLE', payload: {todolistId, taskId, title}}
+    return {type: 'CHANGE-TASK-TITLE', payload: {todolistId, taskId, title}} as const
 }
 
 //========================================================================================

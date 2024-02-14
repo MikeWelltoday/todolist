@@ -65,19 +65,19 @@ export const todolistsReducer = (state: TodolistType[], action: ActionsType): To
 // ACTION CREATER - контролирует правильность введенных данных для action
 
 export function removeTodolistAC(todolistId: string): RemoveTodolistActionType {
-    return {type: 'REMOVE-TODOLIST', payload: {id: todolistId}}
+    return {type: 'REMOVE-TODOLIST', payload: {id: todolistId}} as const
 }
 
 export function addTodolistAC(title: string): AddTodolistActionType {
-    return {type: 'ADD-TODOLIST', payload: {title, id: v1()}}
+    return {type: 'ADD-TODOLIST', payload: {title, id: v1()}} as const
 }
 
 export function changeTodolistTitleAC(id: string, title: string): ChangeTodolistTitleActionType {
-    return {type: 'CHANGE-TODOLIST-TITLE', payload: {id, title}}
+    return {type: 'CHANGE-TODOLIST-TITLE', payload: {id, title}} as const
 }
 
 export function changeTodolistFilterAC(id: string, filter: FilterValuesType): ChangeTodolistFilterActionType {
-    return {type: 'CHANGE-TODOLIST-FILTER', payload: {id, filter}}
+    return {type: 'CHANGE-TODOLIST-FILTER', payload: {id, filter}} as const
 }
 
 //========================================================================================
