@@ -3,8 +3,10 @@ import S from './Todolist.module.scss'
 import {FilterValuesType} from '../../App'
 import {AddItemForm} from '../addItemForm/AddItemForm'
 import {EditableSpan} from '../editableSpan/EditableSpan'
-import {Button, IconButton, Checkbox} from '@mui/material'
-import {Delete} from '@mui/icons-material'
+import Button from '@mui/material/Button'
+import IconButton from '@mui/material/IconButton'
+import Checkbox from '@mui/material/Checkbox'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 //========================================================================================
 
@@ -54,7 +56,7 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
             <h3>
                 <EditableSpan onChangeTitle={changeTodolistTitleOnChangeHandler}>{props.todolistTitle}</EditableSpan>
                 <IconButton onClick={removeTodolistOnClickHandler}>
-                    <Delete/>
+                    <DeleteIcon/>
                 </IconButton>
             </h3>
 
@@ -78,12 +80,14 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
 
                         return (
                             <div key={item.id} className={`${item.isDone && S.isDone}`}>
-                                <Checkbox checked={item.isDone}
-                                          onChange={changeTaskStatusOnChangeHandler}
-                                          color="secondary"/>
+                                <Checkbox
+                                    checked={item.isDone}
+                                    onChange={changeTaskStatusOnChangeHandler}
+                                    color="secondary"
+                                />
                                 <EditableSpan onChangeTitle={changeTaskTitleOnChangeHandler}>{item.title}</EditableSpan>
                                 <IconButton onClick={removeTaskOnClickHandler}>
-                                    <Delete/>
+                                    <DeleteIcon/>
                                 </IconButton>
                             </div>
                         )
@@ -92,21 +96,25 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
                 : <div>NO TASKS</div>}
 
             <div className={S.buttonContainer}>
-
                 <Button
                     color={'inherit'}
                     variant={props.filter === 'all' ? 'outlined' : 'text'}
-                    onClick={changeTaskFilterOnClickHandler('all')}>
+                    onClick={changeTaskFilterOnClickHandler('all')}
+                >
                     All
                 </Button>
-                <Button color={'success'}
-                        variant={props.filter === 'active' ? 'outlined' : 'text'}
-                        onClick={changeTaskFilterOnClickHandler('active')}>
+                <Button
+                    color={'success'}
+                    variant={props.filter === 'active' ? 'outlined' : 'text'}
+                    onClick={changeTaskFilterOnClickHandler('active')}
+                >
                     Active
                 </Button>
-                <Button color={'secondary'}
-                        variant={props.filter === 'completed' ? 'outlined' : 'text'}
-                        onClick={changeTaskFilterOnClickHandler('completed')}>
+                <Button
+                    color={'secondary'}
+                    variant={props.filter === 'completed' ? 'outlined' : 'text'}
+                    onClick={changeTaskFilterOnClickHandler('completed')}
+                >
                     Completed
                 </Button>
             </div>

@@ -1,6 +1,6 @@
-import {tasksObjType} from '../App'
+import {tasksObjType} from '../../App'
 import {v1} from 'uuid'
-import {AddTodolistActionType, RemoveTodolistActionType} from './todolists-reducer'
+import {AddTodolistActionType, RemoveTodolistActionType} from '../todolists-reducer/todolists-reducer'
 
 //========================================================================================
 //TYPES

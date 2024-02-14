@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FC, useState, KeyboardEvent} from 'react'
 import S from './EditableSpan.module.scss'
-import {TextField} from '@mui/material'
+import TextField from '@mui/material/TextField'
 
 //========================================================================================
 
@@ -37,18 +37,22 @@ export const EditableSpan: FC<EditableSpanPropsType> = (props) => {
 
     return (
         editMode ?
-            <TextField className={S.EditableSpan}
-                       type="text"
-                       value={title}
-                       onBlur={activateViewMode}
-                       onKeyDown={onKeyDown}
-                       onChange={newTitleOnChangeHandler}
-                       autoFocus
-                       variant="standard"
+            <TextField
+                className={S.EditableSpan}
+                type="text"
+                value={title}
+                onBlur={activateViewMode}
+                onKeyDown={onKeyDown}
+                onChange={newTitleOnChangeHandler}
+                autoFocus
+                variant="standard"
             />
             :
-            <span className={S.EditableSpan}
-                  onDoubleClick={activateEditMode}
-            >{props.children}</span>
+            <span
+                className={S.EditableSpan}
+                onDoubleClick={activateEditMode}
+            >
+                {props.children}
+            </span>
     )
 }
