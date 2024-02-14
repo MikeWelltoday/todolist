@@ -25,6 +25,6 @@ test('id should be equal', () => {
 
     const ifFromTodolists = endStateTodolists[0].id
 
-    expect(idFromTasks).toBe(action.id)
-    expect(ifFromTodolists).toBe(action.id)
+    expect(idFromTasks).toBe(action.payload.id)
+    expect(ifFromTodolists).toBe(action.payload.id)
 })

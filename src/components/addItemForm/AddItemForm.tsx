@@ -15,7 +15,7 @@ type AddItemFormPropsType = {
 export const AddItemForm: FC<AddItemFormPropsType> = (props) => {
 
     const [newTitle, setNewInput] = useState('')
-    const [error, setError] = useState<boolean>(false)
+    const [error, setError] = useState(false)
 
     function newTitleOnChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
         setNewInput(e.currentTarget.value)
@@ -38,14 +38,12 @@ export const AddItemForm: FC<AddItemFormPropsType> = (props) => {
     return (
         <div className={S.addItemForm}>
             <TextField
-                type={'text'}
-                variant={'outlined'}
                 value={newTitle}
                 onChange={newTitleOnChangeHandler}
                 onKeyUp={addItemOnKeyUPHandler}
-                label={'Type value'}
+
+                label={error ? 'TITLE IS REQUIRED' : 'NEW TITLE'}
                 error={error}
-                helperText={error ? 'Field is required' : ''}
             />
 
             <IconButton onClick={addItemOnClickHandler} color={'primary'}>

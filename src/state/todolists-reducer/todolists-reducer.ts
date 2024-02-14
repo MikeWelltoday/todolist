@@ -6,25 +6,22 @@ import {v1} from 'uuid'
 
 export type RemoveTodolistActionType = {
     type: 'REMOVE-TODOLIST'
-    id: string
+    payload: { id: string }
 }
 
 export type AddTodolistActionType = {
     type: 'ADD-TODOLIST'
-    title: string
-    id: string
+    payload: { title: string, id: string }
 }
 
 export type ChangeTodolistTitleActionType = {
     type: 'CHANGE-TODOLIST-TITLE'
-    id: string
-    title: string
+    payload: { id: string, title: string }
 }
 
 export type ChangeTodolistFilterActionType = {
     type: 'CHANGE-TODOLIST-FILTER'
-    id: string
-    filter: FilterValuesType
+    payload: { id: string, filter: FilterValuesType }
 }
 
 //========================================================================================
@@ -43,24 +40,24 @@ export const todolistsReducer = (state: TodolistType[], action: ActionsType): To
     switch (action.type) {
 
         case 'REMOVE-TODOLIST': {
-            return [...state.filter(t => t.id !== action.id)]
+            return [...state.filter(t => t.id !== action.payload.id)]
         }
 
         case 'ADD-TODOLIST': {
-            return [...state, {id: action.id, title: action.title, filter: 'all'}]
+            return [...state, {id: action.payload.id, title: action.payload.title, filter: 'all'}]
         }
 
         case 'CHANGE-TODOLIST-TITLE': {
-            return state.map(t => t.id === action.id ? {...t, title: action.title} : t)
+            return state.map(t => t.id === action.payload.id ? {...t, title: action.payload.title} : t)
         }
 
         case 'CHANGE-TODOLIST-FILTER': {
-            return state.map(t => t.id === action.id ? {...t, filter: action.filter} : t)
+            return state.map(t => t.id === action.payload.id ? {...t, filter: action.payload.filter} : t)
         }
 
-
-        default:
+        default: {
             return state
+        }
     }
 }
 
@@ -68,19 +65,19 @@ export const todolistsReducer = (state: TodolistType[], action: ActionsType): To
 // ACTION CREATER - контролирует правильность введенных данных для action
 
 export function removeTodolistAC(todolistId: string): RemoveTodolistActionType {
-    return {type: 'REMOVE-TODOLIST', id: todolistId}
+    return {type: 'REMOVE-TODOLIST', payload: {id: todolistId}}
 }
 
 export function addTodolistAC(title: string): AddTodolistActionType {
-    return {type: 'ADD-TODOLIST', title, id: v1()}
+    return {type: 'ADD-TODOLIST', payload: {title, id: v1()}}
 }
 
 export function changeTodolistTitleAC(id: string, title: string): ChangeTodolistTitleActionType {
-    return {type: 'CHANGE-TODOLIST-TITLE', id, title}
+    return {type: 'CHANGE-TODOLIST-TITLE', payload: {id, title}}
 }
 
 export function changeTodolistFilterAC(id: string, filter: FilterValuesType): ChangeTodolistFilterActionType {
-    return {type: 'CHANGE-TODOLIST-FILTER', id, filter}
+    return {type: 'CHANGE-TODOLIST-FILTER', payload: {id, filter}}
 }
 
 //========================================================================================

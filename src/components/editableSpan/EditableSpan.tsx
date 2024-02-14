@@ -13,44 +13,47 @@ type EditableSpanPropsType = {
 
 export const EditableSpan: FC<EditableSpanPropsType> = (props) => {
 
-    const [editMode, setEditMode] = useState<boolean>(false)
-    const [title, setTitle] = useState<string>('')
+    const [changeMode, setChangeMode] = useState(false)
+    const [title, setTitle] = useState(props.children)
 
     function newTitleOnChangeHandler(event: ChangeEvent<HTMLInputElement>) {
         setTitle(event.currentTarget.value)
     }
 
-    function activateEditMode() {
-        setEditMode(true)
-        setTitle(props.children)
+    function deactivateChangeMode() {
+        setChangeMode(false)
+        if (title.trim()) {
+            props.onChangeTitle(title.trim())
+        } else {
+            setTitle(props.children)
+        }
     }
 
-    function activateViewMode() {
-        setEditMode(false)
-        props.onChangeTitle(title.trim())
+    function activateChangeMode() {
+        setChangeMode(true)
     }
+
 
     function onKeyDown(event: KeyboardEvent<HTMLInputElement>) {
-        if (event.key === 'Escape' || event.key === 'Enter') activateViewMode()
+        if (event.key === 'Escape' || event.key === 'Enter') deactivateChangeMode()
     }
 
 
     return (
-        editMode ?
+        changeMode ?
             <TextField
                 className={S.EditableSpan}
-                type="text"
+                variant="standard"
                 value={title}
-                onBlur={activateViewMode}
+                onBlur={deactivateChangeMode}
                 onKeyDown={onKeyDown}
                 onChange={newTitleOnChangeHandler}
                 autoFocus
-                variant="standard"
             />
             :
             <span
                 className={S.EditableSpan}
-                onDoubleClick={activateEditMode}
+                onDoubleClick={activateChangeMode}
             >
                 {props.children}
             </span>
