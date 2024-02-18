@@ -55,23 +55,23 @@ export function changeTodolistFilterAC(id: string, filter: FilterValuesType): Ch
 //========================================================================================
 // .R.E.D.U.C.E.R.
 
-export const todolistsReducer = (state: TodolistType[], action: ActionsType): TodolistType[] => {
-    switch (action.type) {
+export const todolistsReducer = (state: TodolistType[], {type, payload}: ActionsType): TodolistType[] => {
+    switch (type) {
 
         case 'REMOVE-TODOLIST': {
-            return [...state.filter(t => t.id !== action.payload.id)]
+            return [...state.filter(t => t.id !== payload.id)]
         }
 
         case 'ADD-TODOLIST': {
-            return [...state, {id: action.payload.id, title: action.payload.title, filter: 'all'}]
+            return [{id: payload.id, title: payload.title, filter: 'all'}, ...state]
         }
 
         case 'CHANGE-TODOLIST-TITLE': {
-            return state.map(t => t.id === action.payload.id ? {...t, title: action.payload.title} : t)
+            return state.map(t => t.id === payload.id ? {...t, title: payload.title} : t)
         }
 
         case 'CHANGE-TODOLIST-FILTER': {
-            return state.map(t => t.id === action.payload.id ? {...t, filter: action.payload.filter} : t)
+            return state.map(t => t.id === payload.id ? {...t, filter: payload.filter} : t)
         }
 
         default: {

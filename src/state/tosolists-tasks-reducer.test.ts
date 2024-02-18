@@ -23,8 +23,10 @@ test('id should be equal', () => {
     const keys = Object.keys(endStateTasks)
     const idFromTasks = keys[0]
 
-    const ifFromTodolists = endStateTodolists[0].id
+    const idFromTodolists = endStateTodolists[0].id
 
     expect(idFromTasks).toBe(action.payload.id)
-    expect(ifFromTodolists).toBe(action.payload.id)
+    expect(idFromTodolists).toBe(action.payload.id)
+
+    expect(idFromTasks).toBe(idFromTodolists)
 })
