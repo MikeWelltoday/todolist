@@ -1,6 +1,11 @@
 import {tasksObjType} from '../../App'
 import {v1} from 'uuid'
-import {AddTodolistActionType, RemoveTodolistActionType} from '../todolists-reducer/todolists-reducer'
+import {
+    AddTodolistActionType,
+    RemoveTodolistActionType,
+    todolistId1,
+    todolistId2
+} from '../todolists-reducer/todolists-reducer'
 
 //========================================================================================
 // .T.Y.P.E.S. - .A.C.
@@ -58,7 +63,24 @@ export function changeTaskTitleAC(todolistId: string, taskId: string, title: str
 //========================================================================================
 // .R.E.D.U.C.E.R.
 
-export const tasksReducer = (state: tasksObjType, {type, payload}: ActionsType): tasksObjType => {
+const initialState: tasksObjType = {
+    [todolistId1]:
+        [
+            {id: v1(), title: 'HTML&CSS', isDone: true},
+            {id: v1(), title: 'TS', isDone: true},
+            {id: v1(), title: 'ReactJS', isDone: false},
+            {id: v1(), title: 'Redux', isDone: false},
+            {id: v1(), title: 'Redux', isDone: false}
+        ],
+    [todolistId2]:
+        [
+            {id: v1(), title: 'Book', isDone: false},
+            {id: v1(), title: 'Milk', isDone: true}
+        ]
+}
+
+export const tasksReducer = (state: tasksObjType = initialState, {type, payload}: ActionsType): tasksObjType => {
+
     switch (type) {
 
         case 'REMOVE-TASK': {
