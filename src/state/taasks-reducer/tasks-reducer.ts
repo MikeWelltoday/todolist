@@ -1,4 +1,4 @@
-import {tasksObjType} from '../../App'
+import {TasksType} from '../../AppWithRedux'
 import {v1} from 'uuid'
 import {
     AddTodolistActionType,
@@ -63,7 +63,7 @@ export function changeTaskTitleAC(todolistId: string, taskId: string, title: str
 //========================================================================================
 // .R.E.D.U.C.E.R.
 
-const initialState: tasksObjType = {
+const initialState: TasksType = {
     [todolistId1]:
         [
             {id: v1(), title: 'HTML&CSS', isDone: true},
@@ -79,7 +79,7 @@ const initialState: tasksObjType = {
         ]
 }
 
-export const tasksReducer = (state: tasksObjType = initialState, {type, payload}: ActionsType): tasksObjType => {
+export const tasksReducer = (state: TasksType = initialState, {type, payload}: ActionsType): TasksType => {
 
     switch (type) {
 
