@@ -37,7 +37,7 @@ export type tasksObjType = {
 
 //========================================================================================
 
-function AppWithReducer() {
+function AppWithRedux() {
 
     let todolistId1 = v1()
     let todolistId2 = v1()
@@ -150,4 +150,4 @@ function AppWithReducer() {
     )
 }
 
-export default AppWithReducer
+export default AppWithRedux
