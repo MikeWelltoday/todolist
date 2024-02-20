@@ -3,12 +3,12 @@ import {todolistsReducer} from './todolists-reducer/todolists-reducer'
 import {tasksReducer} from './taasks-reducer/tasks-reducer'
 
 //========================================================================================
-// .T.Y.P.E.S.
+// 🎲 .T.Y.P.E.S.
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
 
 //========================================================================================
-// .S.T.O.R.E.
+// 💾 .S.T.O.R.E.
 
 const rootReducer = combineReducers({
     todolists: todolistsReducer,
@@ -19,8 +19,4 @@ export const store = createStore(rootReducer)
 
 // @ts-ignore
 window.store = store
-
-
-
-
 

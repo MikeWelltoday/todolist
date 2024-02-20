@@ -12,6 +12,7 @@ import {AppRootStateType} from '../../state/store'
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from '../../state/taasks-reducer/tasks-reducer'
 
 //========================================================================================
+// 🎲 .T.Y.P.E.S.
 
 export type TaskType = {
     id: string
@@ -29,6 +30,7 @@ type TodolistPropsType = {
 }
 
 //========================================================================================
+// 🧁 .C.O.P.O.N.E.N.T.
 
 export const Todolist: React.FC<TodolistPropsType> = (props) => {
 

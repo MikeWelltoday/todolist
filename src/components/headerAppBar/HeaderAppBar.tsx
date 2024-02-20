@@ -7,6 +7,9 @@ import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 
+//========================================================================================
+// 🧁 .C.O.P.O.N.E.N.T.
+
 export const HeaderAppBar = () => {
     return (
         <Box sx={{flexGrow: 1}}>

@@ -16,6 +16,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {AppRootStateType} from './state/store'
 
 //========================================================================================
+// 🎲 .T.Y.P.E.S.
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 
@@ -30,6 +31,7 @@ export type TasksType = {
 }
 
 //========================================================================================
+// 🍇 .A.P.P.
 
 function AppWithRedux() {
 
