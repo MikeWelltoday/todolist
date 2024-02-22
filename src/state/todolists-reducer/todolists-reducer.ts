@@ -2,7 +2,7 @@ import {FilterValuesType, TodolistType} from '../../AppWithRedux'
 import {v1} from 'uuid'
 
 //========================================================================================
-// .T.Y.P.E.S. - .A.C.
+// 🎲 .T.Y.P.E.S. - .A.C.
 
 export type RemoveTodolistActionType = {
     type: 'REMOVE-TODOLIST'
@@ -25,7 +25,7 @@ export type ChangeTodolistFilterActionType = {
 }
 
 //========================================================================================
-// .T.Y.P.E.S. - .A.C.T.I.O.N.
+// 🎲 .T.Y.P.E.S. - .A.C.T.I.O.N.
 
 export type ActionsType =
     RemoveTodolistActionType
@@ -34,7 +34,7 @@ export type ActionsType =
     | ChangeTodolistFilterActionType
 
 //========================================================================================
-// .A.C.
+// 🍌 .A.C.
 
 export function removeTodolistAC(todolistId: string): RemoveTodolistActionType {
     return {type: 'REMOVE-TODOLIST', payload: {id: todolistId}} as const
@@ -53,7 +53,7 @@ export function changeTodolistFilterAC(id: string, filter: FilterValuesType): Ch
 }
 
 //========================================================================================
-// .R.E.D.U.C.E.R.
+// 🧰 .R.E.D.U.C.E.R.
 
 export let todolistId1 = v1()
 export let todolistId2 = v1()
