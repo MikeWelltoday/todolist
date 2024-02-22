@@ -1,0 +1,19 @@
+.task {
+
+  width: 100%;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  column-gap: 10px;
+
+  span {
+    display: inline-block;
+    flex-grow: 1;
+  }
+
+  &.isDone {
+    opacity: 0.5;
+  }
+
+}

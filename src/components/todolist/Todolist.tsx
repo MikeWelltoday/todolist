@@ -1,15 +1,15 @@
-import React, {ChangeEvent, FC, memo, useCallback} from 'react'
+import React, {FC, memo, useCallback} from 'react'
 import S from './Todolist.module.scss'
 import {FilterValuesType} from '../../AppWithRedux'
 import {AddItemForm} from '../addItemForm/AddItemForm'
 import {EditableSpan} from '../editableSpan/EditableSpan'
 import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
-import Checkbox from '@mui/material/Checkbox'
 import DeleteIcon from '@mui/icons-material/Delete'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppRootStateType} from '../../state/store'
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from '../../state/taasks-reducer/tasks-reducer'
+import {Task} from '../task/Task'
 
 //========================================================================================
 // 🎲 .T.Y.P.E.S.
@@ -34,6 +34,7 @@ type TodolistPropsType = {
 
 export const Todolist: FC<TodolistPropsType> = memo((props) => {
 
+    // todolist
     let tasks = useSelector<AppRootStateType, TaskType[]>(state => state.tasks[props.todolistId])
     const dispatch = useDispatch()
 
@@ -46,7 +47,7 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
 
     const addTaskHandler = useCallback(((title: string) => {
         dispatch(addTaskAC(props.todolistId, title))
-    }), [dispatch])
+    }), [dispatch, props.todolistId])
 
     const changeTaskFilterOnClickHandler = useCallback(((mode: FilterValuesType) => {
         return () => props.changeTaskFilter(props.todolistId, mode)
@@ -59,6 +60,20 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
     const changeTodolistTitleOnChangeHandler = useCallback(((newTitle: string) => {
         props.changeTodolistTitle(props.todolistId, newTitle)
     }), [props.changeTodolistTitle, props.todolistId])
+
+
+    // task
+    const removeTaskOnClickHandler = useCallback((taskId: string) => {
+        dispatch(removeTaskAC(props.todolistId, taskId))
+    }, [dispatch, props.todolistId])
+
+    const changeTaskStatusOnChangeHandler = useCallback((taskId: string, isDone: boolean) => {
+        dispatch(changeTaskStatusAC(props.todolistId, taskId, isDone))
+    }, [dispatch, props.todolistId])
+
+    const changeTaskTitleOnChangeHandler = useCallback((taskId: string, newTitle: string) => {
+        dispatch(changeTaskTitleAC(props.todolistId, taskId, newTitle))
+    }, [dispatch, props.todolistId])
 
 
     return (
@@ -75,40 +90,24 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
 
             {tasks.length ?
                 (<div className={S.tasksList}>
-                    {tasks.map(item => {
-
-                        function removeTaskOnClickHandler() {
-                            dispatch(removeTaskAC(props.todolistId, item.id))
-                        }
-
-                        function changeTaskStatusOnChangeHandler(event: ChangeEvent<HTMLInputElement>) {
-                            dispatch(changeTaskStatusAC(props.todolistId, item.id, event.currentTarget.checked))
-                        }
-
-                        function changeTaskTitleOnChangeHandler(newTitle: string) {
-                            dispatch(changeTaskTitleAC(props.todolistId, item.id, newTitle))
-                        }
+                    {tasks.map(t => {
 
                         return (
-                            <div key={item.id} className={`${item.isDone && S.isDone}`}>
+                            <Task
+                                key={t.id}
+                                taskId={t.id}
+                                title={t.title}
+                                isDone={t.isDone}
 
-                                <Checkbox
-                                    checked={item.isDone}
-                                    onChange={changeTaskStatusOnChangeHandler}
-                                    color="secondary"
-                                />
+                                removeTaskOnClickHandler={removeTaskOnClickHandler}
+                                changeTaskStatusOnChangeHandler={changeTaskStatusOnChangeHandler}
+                                changeTaskTitleOnChangeHandler={changeTaskTitleOnChangeHandler}
+                            />)
 
-                                <EditableSpan onChangeTitle={changeTaskTitleOnChangeHandler}>{item.title}</EditableSpan>
-
-                                <IconButton onClick={removeTaskOnClickHandler}>
-                                    <DeleteIcon/>
-                                </IconButton>
-
-                            </div>
-                        )
                     })}
                 </div>)
-                : <div>NO TASKS</div>}
+                :
+                <div>NO TASKS</div>}
 
             <div className={S.buttonContainer}>
                 <Button
