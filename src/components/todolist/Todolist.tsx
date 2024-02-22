@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react'
+import React, {ChangeEvent, FC, memo, useCallback} from 'react'
 import S from './Todolist.module.scss'
 import {FilterValuesType} from '../../AppWithRedux'
 import {AddItemForm} from '../addItemForm/AddItemForm'
@@ -12,6 +12,7 @@ import {AppRootStateType} from '../../state/store'
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from '../../state/taasks-reducer/tasks-reducer'
 
 //========================================================================================
+// 🎲 .T.Y.P.E.S.
 
 export type TaskType = {
     id: string
@@ -29,8 +30,9 @@ type TodolistPropsType = {
 }
 
 //========================================================================================
+// 🧁 .C.O.P.O.N.E.N.T.
 
-export const Todolist: React.FC<TodolistPropsType> = (props) => {
+export const Todolist: FC<TodolistPropsType> = memo((props) => {
 
     let tasks = useSelector<AppRootStateType, TaskType[]>(state => state.tasks[props.todolistId])
     const dispatch = useDispatch()
@@ -42,21 +44,22 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
         tasks = tasks.filter(item => item.isDone)
     }
 
-    function addTaskHandler(title: string) {
+    const addTaskHandler = useCallback(((title: string) => {
         dispatch(addTaskAC(props.todolistId, title))
-    }
+    }), [dispatch])
 
-    function changeTaskFilterOnClickHandler(mode: FilterValuesType) {
+    const changeTaskFilterOnClickHandler = useCallback(((mode: FilterValuesType) => {
         return () => props.changeTaskFilter(props.todolistId, mode)
-    }
+    }), [props.changeTaskFilter, props.todolistId])
 
-    function removeTodolistOnClickHandler() {
+    const removeTodolistOnClickHandler = useCallback((() => {
         props.removeTodolist(props.todolistId)
-    }
+    }), [props.removeTodolist, props.todolistId])
 
-    function changeTodolistTitleOnChangeHandler(newTitle: string) {
+    const changeTodolistTitleOnChangeHandler = useCallback(((newTitle: string) => {
         props.changeTodolistTitle(props.todolistId, newTitle)
-    }
+    }), [props.changeTodolistTitle, props.todolistId])
+
 
     return (
         <div className={S.todolist}>
@@ -88,15 +91,19 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
 
                         return (
                             <div key={item.id} className={`${item.isDone && S.isDone}`}>
+
                                 <Checkbox
                                     checked={item.isDone}
                                     onChange={changeTaskStatusOnChangeHandler}
                                     color="secondary"
                                 />
+
                                 <EditableSpan onChangeTitle={changeTaskTitleOnChangeHandler}>{item.title}</EditableSpan>
+
                                 <IconButton onClick={removeTaskOnClickHandler}>
                                     <DeleteIcon/>
                                 </IconButton>
+
                             </div>
                         )
                     })}
@@ -129,7 +136,4 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
 
         </div>
     )
-}
-
-
-
+})

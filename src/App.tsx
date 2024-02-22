@@ -1,12 +1,5 @@
-import React, {useState} from 'react'
 import './App.scss'
-import {v1} from 'uuid'
-import {TaskType, Todolist} from './components/todolist/Todolist'
-import {AddItemForm} from './components/addItemForm/AddItemForm'
-import {HeaderAppBar} from './components/headerAppBar/HeaderAppBar'
-import Container from '@mui/material/Container'
-import Paper from '@mui/material/Paper'
-import Grid from '@mui/material/Grid'
+import {TaskType} from './components/todolist/Todolist'
 
 //========================================================================================
 

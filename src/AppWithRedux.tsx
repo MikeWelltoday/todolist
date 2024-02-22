@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useCallback} from 'react'
 import './App.scss'
 import {TaskType, Todolist} from './components/todolist/Todolist'
 import {AddItemForm} from './components/addItemForm/AddItemForm'
@@ -16,6 +16,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {AppRootStateType} from './state/store'
 
 //========================================================================================
+// 🎲 .T.Y.P.E.S.
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 
@@ -30,6 +31,7 @@ export type TasksType = {
 }
 
 //========================================================================================
+// 🧁 .C.O.P.O.N.E.N.T.
 
 function AppWithRedux() {
 
@@ -37,22 +39,22 @@ function AppWithRedux() {
 
     const todolists = useSelector<AppRootStateType, TodolistType[]>(state => state.todolists)
 
-
-    function changeTaskFilter(todolistId: string, filterMode: FilterValuesType) {
+    const changeTaskFilter = useCallback((todolistId: string, filterMode: FilterValuesType) => {
         dispatch(changeTodolistFilterAC(todolistId, filterMode))
-    }
+    }, [dispatch])
 
-    function changeTodolistTitle(todolistId: string, newTodolistTitle: string) {
+    const changeTodolistTitle = useCallback(((todolistId: string, newTodolistTitle: string) => {
         dispatch(changeTodolistTitleAC(todolistId, newTodolistTitle))
-    }
+    }), [dispatch])
 
-    function addTodolist(newTodolistTitle: string) {
+    const addTodolist = useCallback((newTodolistTitle: string) => {
         dispatch(addTodolistAC(newTodolistTitle))
-    }
+    }, [dispatch])
 
-    function removeTodolist(todolistId: string) {
+    const removeTodolist = useCallback(((todolistId: string) => {
         dispatch(removeTodolistAC(todolistId))
-    }
+    }), [dispatch])
+
 
     return (
         <div className="App">
@@ -68,7 +70,7 @@ function AppWithRedux() {
                 <Grid container spacing={5}>
                     {todolists.map(todolist => {
                             return (
-                                <Grid item>
+                                <Grid item key={todolist.id}>
                                     <Paper sx={{padding: '10px'}} elevation={3}>
                                         <Todolist
                                             key={todolist.id}
