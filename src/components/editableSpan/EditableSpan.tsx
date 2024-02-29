@@ -1,7 +1,6 @@
 import React, {ChangeEvent, FC, useState, KeyboardEvent, memo, useCallback} from 'react'
 import S from './EditableSpan.module.scss'
 import TextField from '@mui/material/TextField'
-import {log} from 'node:util'
 
 //========================================================================================
 // 🎲 .T.Y.P.E.S.
@@ -15,8 +14,6 @@ type EditableSpanPropsType = {
 // 🧁 .C.O.P.O.N.E.N.T.
 
 export const EditableSpan: FC<EditableSpanPropsType> = memo((props) => {
-
-    console.log('render')
 
     const [changeMode, setChangeMode] = useState(false)
     const [title, setTitle] = useState(props.children)

@@ -9,17 +9,38 @@ export default {
     }
 }
 
-const callBack = action('CALL-BACK-ACTION => ')
+const removeTaskOnClickHandlerCallBack = action('TASK-IS-REMOVED => ')
+const changeTaskStatusOnChangeHandlerCallBack = action('TASK-STATUS-IS-CHANGED')
+const changeTaskTitleOnChangeHandlerCallBack = action('TASK-TITLE-IS-CHANGED')
 
 
 export const Primary = (props: any) => {
-    return <Task
-        taskId={'taskId'}
-        title={'Title'}
-        isDone={false}
+    return (
+        <>
+            
+            <Task
+                taskId={'1'}
+                title={'React'}
+                isDone={false}
 
-        removeTaskOnClickHandler={callBack}
-        changeTaskStatusOnChangeHandler={callBack}
-        changeTaskTitleOnChangeHandler={callBack}
-    />
+                removeTaskOnClickHandler={removeTaskOnClickHandlerCallBack}
+                changeTaskStatusOnChangeHandler={changeTaskStatusOnChangeHandlerCallBack}
+                changeTaskTitleOnChangeHandler={changeTaskTitleOnChangeHandlerCallBack}
+            />
+
+            <Task
+                taskId={'2'}
+                title={'JS'}
+                isDone={true}
+
+                removeTaskOnClickHandler={removeTaskOnClickHandlerCallBack}
+                changeTaskStatusOnChangeHandler={changeTaskStatusOnChangeHandlerCallBack}
+                changeTaskTitleOnChangeHandler={changeTaskTitleOnChangeHandlerCallBack}
+            />
+
+        </>
+    )
+
+
 }
+
