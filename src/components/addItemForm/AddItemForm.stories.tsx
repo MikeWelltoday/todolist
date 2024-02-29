@@ -5,7 +5,7 @@ export default {
     title: 'AddItemForm',
     component: AddItemForm,
     parameters: {
-        layout: 'centered'
+        layout: 'left'
     }
 }
 
