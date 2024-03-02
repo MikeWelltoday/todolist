@@ -23,18 +23,20 @@ type TaskPropsType = {
 
 export const Task: FC<TaskPropsType> = memo((props) => {
 
+    console.log('task => R E N D E R')
+
     const removeTaskOnClickHandler = useCallback(() => {
         props.removeTaskOnClickHandler(props.taskId)
-    }, [props.removeTaskOnClickHandler])
+    }, [props.removeTaskOnClickHandler, props.taskId])
 
     const changeTaskStatusOnChangeHandler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         props.changeTaskStatusOnChangeHandler(props.taskId, event.currentTarget.checked)
-    }, [props.changeTaskStatusOnChangeHandler])
+    }, [props.changeTaskStatusOnChangeHandler, props.taskId])
 
     const changeTaskTitleOnChangeHandler = useCallback((newTitle: string) => {
         props.changeTaskTitleOnChangeHandler(props.taskId, newTitle)
-    }, [props.changeTaskTitleOnChangeHandler])
-
+    }, [props.changeTaskTitleOnChangeHandler, props.taskId])
+    
     return (
         <div className={`${S.task} ${props.isDone && S.isDone}`}>
 

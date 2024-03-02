@@ -34,6 +34,8 @@ type TodolistPropsType = {
 
 export const Todolist: FC<TodolistPropsType> = memo((props) => {
 
+    console.log('todolist => R E N D E R')
+
     // todolist
     let tasks = useSelector<AppRootStateType, TaskType[]>(state => state.tasks[props.todolistId])
     const dispatch = useDispatch()
@@ -47,7 +49,7 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
 
     const addTaskHandler = useCallback(((title: string) => {
         dispatch(addTaskAC(props.todolistId, title))
-    }), [dispatch, props.todolistId])
+    }), [props.todolistId])
 
     const changeTaskFilterOnClickHandler = useCallback(((mode: FilterValuesType) => {
         return () => props.changeTaskFilter(props.todolistId, mode)
@@ -65,15 +67,15 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
     // task
     const removeTaskOnClickHandler = useCallback((taskId: string) => {
         dispatch(removeTaskAC(props.todolistId, taskId))
-    }, [dispatch, props.todolistId])
+    }, [props.todolistId])
 
     const changeTaskStatusOnChangeHandler = useCallback((taskId: string, isDone: boolean) => {
         dispatch(changeTaskStatusAC(props.todolistId, taskId, isDone))
-    }, [dispatch, props.todolistId])
+    }, [props.todolistId])
 
     const changeTaskTitleOnChangeHandler = useCallback((taskId: string, newTitle: string) => {
         dispatch(changeTaskTitleAC(props.todolistId, taskId, newTitle))
-    }, [dispatch, props.todolistId])
+    }, [props.todolistId])
 
 
     return (
@@ -91,7 +93,6 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
             {tasks.length ?
                 (<div className={S.tasksList}>
                     {tasks.map(t => {
-
                         return (
                             <Task
                                 key={t.id}
@@ -102,8 +103,8 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
                                 removeTaskOnClickHandler={removeTaskOnClickHandler}
                                 changeTaskStatusOnChangeHandler={changeTaskStatusOnChangeHandler}
                                 changeTaskTitleOnChangeHandler={changeTaskTitleOnChangeHandler}
-                            />)
-
+                            />
+                        )
                     })}
                 </div>)
                 :

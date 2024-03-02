@@ -15,13 +15,14 @@ type EditableSpanPropsType = {
 
 export const EditableSpan: FC<EditableSpanPropsType> = memo((props) => {
 
+    console.log('editableSpan => R E N D E R')
+
     const [changeMode, setChangeMode] = useState(false)
     const [title, setTitle] = useState(props.children)
 
     function newTitleOnChangeHandler(event: ChangeEvent<HTMLInputElement>) {
         setTitle(event.currentTarget.value)
     }
-
 
     const deactivateChangeMode = useCallback(() => {
         setChangeMode(false)
