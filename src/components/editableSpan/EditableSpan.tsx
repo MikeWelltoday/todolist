@@ -31,7 +31,7 @@ export const EditableSpan: FC<EditableSpanPropsType> = memo((props) => {
         } else {
             setTitle(props.children)
         }
-    }, [setChangeMode, title, props.onChangeTitle, props.children])
+    }, [title, props.onChangeTitle, props.children])
 
     function activateChangeMode() {
         setChangeMode(true)
