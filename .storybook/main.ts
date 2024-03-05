@@ -7,22 +7,7 @@ const config: StorybookConfig = {
         '@storybook/addon-essentials',
         '@storybook/preset-create-react-app',
         '@storybook/addon-onboarding',
-        '@storybook/addon-interactions',
-        {
-            name: '@storybook/addon-storysource',
-            options: {
-                rule: {
-                    test: [/\.stories\.tsx?$/]
-                },
-                loaderOptions: {
-                    prettierConfig: {
-                        printWidth: 80,
-                        singleQuote: true,
-                        option: {parser: 'typescript'}
-                    }
-                }
-            }
-        }
+        '@storybook/addon-interactions'
     ],
     framework: {
         name: '@storybook/react-webpack5',
