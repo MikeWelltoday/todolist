@@ -7,7 +7,7 @@ import {Task} from './Task'
 // 🔮 .S.T.O.R.Y. - .S.E.T.T.I.N.G.S.
 
 const meta: Meta<typeof Task> = {
-    title: '🍇 App/Task',
+    title: 'App/Task',
     component: Task,
     parameters: {
         layout: 'centered'

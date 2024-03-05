@@ -8,7 +8,7 @@ import {ReduxStoreProviderDecorator} from './stories/decorators/ReduxStoreProvid
 // 🔮 .S.T.O.R.Y. - .S.E.T.T.I.N.G.S.
 
 const meta: Meta<typeof AppWithRedux> = {
-    title: '🍇 App/AppWithRedux',
+    title: 'App/AppWithRedux',
     component: AppWithRedux,
     parameters: {
         layout: 'centered'

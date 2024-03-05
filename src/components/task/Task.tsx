@@ -36,7 +36,7 @@ export const Task: FC<TaskPropsType> = memo((props) => {
     const changeTaskTitleOnChangeHandler = useCallback((newTitle: string) => {
         props.changeTaskTitleOnChangeHandler(props.taskId, newTitle)
     }, [props.changeTaskTitleOnChangeHandler, props.taskId])
-    
+
     return (
         <div className={`${S.task} ${props.isDone && S.isDone}`}>
 
@@ -49,7 +49,7 @@ export const Task: FC<TaskPropsType> = memo((props) => {
             <EditableSpan onChangeTitle={changeTaskTitleOnChangeHandler}>{props.title}</EditableSpan>
 
             <IconButton onClick={removeTaskOnClickHandler}>
-                <DeleteIcon/>
+                <DeleteIcon/>!
             </IconButton>
 
         </div>

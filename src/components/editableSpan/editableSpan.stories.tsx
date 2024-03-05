@@ -7,7 +7,7 @@ import {EditableSpan} from './EditableSpan'
 // 🔮 .S.T.O.R.Y. - .S.E.T.T.I.N.G.S.
 
 const meta: Meta<typeof EditableSpan> = {
-    title: '🍇 App/EditableSpan',
+    title: 'App/EditableSpan',
     component: EditableSpan,
     parameters: {
         layout: 'centered'

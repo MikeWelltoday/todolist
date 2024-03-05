@@ -8,7 +8,7 @@ import {ReduxStoreProviderDecorator} from '../../stories/decorators/ReduxStorePr
 // 🔮 .S.T.O.R.Y. - .S.E.T.T.I.N.G.S.
 
 const meta: Meta<typeof Todolist> = {
-    title: '🍇 App/Todolist',
+    title: 'App/Todolist',
     component: Todolist,
     decorators: [ReduxStoreProviderDecorator],
     parameters: {
