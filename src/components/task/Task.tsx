@@ -49,7 +49,7 @@ export const Task: FC<TaskPropsType> = memo((props) => {
             <EditableSpan onChangeTitle={changeTaskTitleOnChangeHandler}>{props.title}</EditableSpan>
 
             <IconButton onClick={removeTaskOnClickHandler}>
-                <DeleteIcon/>!
+                <DeleteIcon/>
             </IconButton>
 
         </div>
