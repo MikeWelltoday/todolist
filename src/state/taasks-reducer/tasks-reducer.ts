@@ -8,7 +8,6 @@ import {
 } from '../todolists-reducer/todolists-reducer'
 
 //========================================================================================
-// 🎲 .T.Y.P.E.S. - .A.C.
 
 export type RemoveTaskActionType = {
     type: 'REMOVE-TASK'
@@ -31,7 +30,6 @@ export type ChangeTaskTitleActionType = {
 }
 
 //========================================================================================
-// 🎲 .T.Y.P.E.S. - .A.C.T.I.O.N.
 
 export type ActionsType =
     RemoveTaskActionType
@@ -61,7 +59,6 @@ export function changeTaskTitleAC(todolistId: string, taskId: string, title: str
 }
 
 //========================================================================================
-// 🧰 .R.E.D.U.C.E.R.
 
 const initialState: TasksType = {
     [todolistId1]:

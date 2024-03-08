@@ -3,7 +3,6 @@ import S from './EditableSpan.module.scss'
 import TextField from '@mui/material/TextField'
 
 //========================================================================================
-// 🎲 .T.Y.P.E.S.
 
 type EditableSpanPropsType = {
     children: string
@@ -11,7 +10,6 @@ type EditableSpanPropsType = {
 }
 
 //========================================================================================
-// 🧁 .C.O.P.O.N.E.N.T.
 
 export const EditableSpan: FC<EditableSpanPropsType> = memo((props) => {
 

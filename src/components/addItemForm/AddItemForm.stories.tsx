@@ -4,7 +4,6 @@ import {AddItemForm} from './AddItemForm'
 
 
 //========================================================================================
-// 🔮 .S.T.O.R.Y. - .S.E.T.T.I.N.G.S.
 
 const meta: Meta<typeof AddItemForm> = {
     title: 'App/AddItemForm',
@@ -30,6 +29,5 @@ export default meta
 type Story = StoryObj<typeof meta>;
 
 //========================================================================================
-// 📚 .S.T.O.R.I.E.S.
 
 export const Primary: Story = {}

@@ -6,7 +6,6 @@ import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 
 //========================================================================================
-// 🎲 .T.Y.P.E.S.
 
 type TaskPropsType = {
     taskId: string
@@ -19,7 +18,6 @@ type TaskPropsType = {
 }
 
 //========================================================================================
-// 🧁 .C.O.P.O.N.E.N.T.
 
 export const Task: FC<TaskPropsType> = memo((props) => {
 

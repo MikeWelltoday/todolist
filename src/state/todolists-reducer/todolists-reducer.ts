@@ -2,7 +2,6 @@ import {FilterValuesType, TodolistType} from '../../AppWithRedux'
 import {v1} from 'uuid'
 
 //========================================================================================
-// 🎲 .T.Y.P.E.S. - .A.C.
 
 export type RemoveTodolistActionType = {
     type: 'REMOVE-TODOLIST'
@@ -25,7 +24,6 @@ export type ChangeTodolistFilterActionType = {
 }
 
 //========================================================================================
-// 🎲 .T.Y.P.E.S. - .A.C.T.I.O.N.
 
 export type ActionsType =
     RemoveTodolistActionType
@@ -34,7 +32,6 @@ export type ActionsType =
     | ChangeTodolistFilterActionType
 
 //========================================================================================
-// 🍌 .A.C.
 
 export function removeTodolistAC(todolistId: string): RemoveTodolistActionType {
     return {type: 'REMOVE-TODOLIST', payload: {id: todolistId}} as const
@@ -44,16 +41,15 @@ export function addTodolistAC(title: string): AddTodolistActionType {
     return {type: 'ADD-TODOLIST', payload: {title, id: v1()}} as const
 }
 
-export function changeTodolistTitleAC(id: string, title: string): ChangeTodolistTitleActionType {
-    return {type: 'CHANGE-TODOLIST-TITLE', payload: {id, title}} as const
+export function changeTodolistTitleAC(todolistId: string, title: string): ChangeTodolistTitleActionType {
+    return {type: 'CHANGE-TODOLIST-TITLE', payload: {id: todolistId, title}} as const
 }
 
-export function changeTodolistFilterAC(id: string, filter: FilterValuesType): ChangeTodolistFilterActionType {
-    return {type: 'CHANGE-TODOLIST-FILTER', payload: {id, filter}} as const
+export function changeTodolistFilterAC(todolistId: string, filter: FilterValuesType): ChangeTodolistFilterActionType {
+    return {type: 'CHANGE-TODOLIST-FILTER', payload: {id: todolistId, filter}} as const
 }
 
 //========================================================================================
-// 🧰 .R.E.D.U.C.E.R.
 
 export let todolistId1 = v1()
 export let todolistId2 = v1()

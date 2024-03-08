@@ -6,6 +6,8 @@ import {tasksReducer} from '../../state/taasks-reducer/tasks-reducer'
 import {todolistsReducer} from '../../state/todolists-reducer/todolists-reducer'
 import {v1} from 'uuid'
 
+//========================================================================================
+
 const rootReducer = combineReducers({
     tasks: tasksReducer,
     todolists: todolistsReducer
@@ -31,6 +33,7 @@ const initialGlobalState = {
 // @ts-ignore
 export const storyBookStore = legacy_createStore(rootReducer, initialGlobalState as AppRootStateType)
 
+//========================================================================================
 
 export const ReduxStoreProviderDecorator = (storyFn: () => React.ReactNode) => {
 

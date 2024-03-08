@@ -5,14 +5,12 @@ import IconButton from '@mui/material/IconButton'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 
 //========================================================================================
-// 🎲 .T.Y.P.E.S.
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
 }
 
 //========================================================================================
-// 🧁 .C.O.P.O.N.E.N.T.
 
 export const AddItemForm: FC<AddItemFormPropsType> = memo((props) => {
 

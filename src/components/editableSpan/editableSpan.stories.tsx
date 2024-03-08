@@ -4,7 +4,6 @@ import {EditableSpan} from './EditableSpan'
 
 
 //========================================================================================
-// 🔮 .S.T.O.R.Y. - .S.E.T.T.I.N.G.S.
 
 const meta: Meta<typeof EditableSpan> = {
     title: 'App/EditableSpan',
@@ -35,6 +34,5 @@ export default meta
 type Story = StoryObj<typeof meta>;
 
 //========================================================================================
-// 📚 .S.T.O.R.I.E.S.
 
 export const Primary: Story = {}
