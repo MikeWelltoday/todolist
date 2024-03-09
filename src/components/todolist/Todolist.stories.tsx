@@ -31,6 +31,5 @@ export default meta
 type Story = StoryObj<typeof meta>;
 
 //========================================================================================
-// 📚 .S.T.O.R.I.E.S.
 
 export const Primary: Story = {}

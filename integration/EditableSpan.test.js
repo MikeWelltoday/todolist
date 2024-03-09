@@ -1,7 +1,7 @@
 describe('EditableSpan', () => {
     it('base example, visually looks correct', async () => {
         // APIs from jest-puppeteer
-        await page.goto('http://localhost:6006/iframe.html?id=app-editablespan--primary&viewMode=story',
+        await page.goto('http://localhost:3001/iframe.html?id=app-editablespan--primary&viewMode=story',
             {waitUntil: 'networkidle2'})
 
         const image = await page.screenshot()
