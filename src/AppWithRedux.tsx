@@ -6,12 +6,7 @@ import {HeaderAppBar} from './components/headerAppBar/HeaderAppBar'
 import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
-import {
-    addTodolistAC,
-    changeTodolistFilterAC,
-    changeTodolistTitleAC,
-    removeTodolistAC
-} from './state/todolists-reducer/todolists-reducer'
+import {addTodolistAC} from './state/todolists-reducer/todolists-reducer'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppRootStateType} from './state/store'
 
@@ -59,7 +54,9 @@ function AppWithRedux() {
                                     <Paper sx={{padding: '10px'}} elevation={3}>
                                         <Todolist
                                             key={t.id}
-                                            todolist={{id: t.id, title: t.title, filter: t.filter}}
+                                            todolistId={t.id}
+                                            title={t.title}
+                                            filter={t.filter}
                                         />
                                     </Paper>
                                 </Grid>

@@ -1,6 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {Todolist} from './Todolist'
 import {ReduxStoreProviderDecorator} from '../../stories/decorators/ReduxStoreProviderDecorator'
+import {FilterValuesType} from '../../AppWithRedux'
 
 
 //========================================================================================
@@ -16,14 +17,21 @@ const meta: Meta<typeof Todolist> = {
     tags: ['autodocs'],
 
     argTypes: {
-
-        todolist: {
-            description: 'unique todolist title value, filter value'
+        todolistId: {
+            description: 'unique todolist id'
+        },
+        title: {
+            description: 'todolist title'
+        },
+        filter: {
+            description: 'todolsit filter value'
         }
     },
 
     args: {
-        todolist: {id: 'todolistId1', title: 'todolist title', filter: 'all'}
+        todolistId: 'todolistId1',
+        title: 'todolist title',
+        filter: 'all'
     }
 }
 export default meta

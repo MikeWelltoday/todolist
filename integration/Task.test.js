@@ -9,4 +9,4 @@ describe('Task', () => {
         // API from jest-image-snapshot
         expect(image).toMatchImageSnapshot()
     })
-})
+}, 60000)
