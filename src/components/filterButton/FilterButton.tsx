@@ -4,15 +4,17 @@ import {FC, memo} from 'react'
 
 //========================================================================================
 
-type MyButtonPropsType = {
+type FilterButtonPropsType = {
     title: string
 } & ButtonProps
 
 //========================================================================================
 
 
-export const MyButton: FC<MyButtonPropsType> = memo((props) => {
-    console.log('myButton => R E N D E R')
+export const FilterButton: FC<FilterButtonPropsType> = memo((props) => {
+
+    console.log('filterButton => R E N D E R')
+
     return (
         <Button
             color={props.color}
