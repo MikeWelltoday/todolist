@@ -2,7 +2,7 @@ import {
     addTodolistAC,
     changeTodolistFilterAC,
     changeTodolistTitleAC,
-    removeTodolistAC,
+    removeTodolistAC, setTodolistsAC,
     todolistsReducer
 } from './todolists-reducer'
 import {v1} from 'uuid'
@@ -59,4 +59,19 @@ test('CHANGE-TODOLIST-FILTER', () => {
 
     expect(endState[0].filter).toBe('all')
     expect(endState[1].filter).toBe(newFilter)
+})
+
+test('SET-TODOLISTS', () => {
+
+    const newTodolists: TodolistType[] = [
+        {id: 'todolistId3', title: 'new todolists', filter: 'all'}
+    ]
+
+    const endState = todolistsReducer(startState, setTodolistsAC(newTodolists))
+
+    expect(endState.length).toBe(1)
+    expect(endState[0].id).toBe(newTodolists[0].id)
+    expect(endState[0].title).toBe(newTodolists[0].title)
+    expect(endState[0].filter).toBe(newTodolists[0].filter)
+
 })

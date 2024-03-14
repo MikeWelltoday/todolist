@@ -9,52 +9,36 @@ import {
 
 //========================================================================================
 
-export type RemoveTaskActionType = {
-    type: 'REMOVE-TASK'
-    payload: { todolistId: string, taskId: string }
-}
-
-export type AddTaskActionType = {
-    type: 'ADD-TASK'
-    payload: { id: string, title: string }
-}
-
-export type ChangeTaskTypeActionType = {
-    type: 'CHANGE-TASK-STATUS'
-    payload: { todolistId: string, taskId: string, isDone: boolean }
-}
-
-export type ChangeTaskTitleActionType = {
-    type: 'CHANGE-TASK-TITLE'
-    payload: { todolistId: string, taskId: string, title: string }
-}
+export type RemoveTaskActionType = ReturnType<typeof removeTaskAC>
+export type AddTaskActionType = ReturnType<typeof addTaskAC>
+export type ChangeTaskActionType = ReturnType<typeof changeTaskStatusAC>
+export type ChangeTaskTitleActionType = ReturnType<typeof changeTaskTitleAC>
 
 //========================================================================================
 
 export type ActionsType =
     RemoveTaskActionType
     | AddTaskActionType
-    | ChangeTaskTypeActionType
+    | ChangeTaskActionType
     | ChangeTaskTitleActionType
     | AddTodolistActionType
     | RemoveTodolistActionType
 
 //========================================================================================
-// 🍌 .A.C.
 
-export function removeTaskAC(todolistId: string, taskId: string): RemoveTaskActionType {
+export function removeTaskAC(todolistId: string, taskId: string) {
     return {type: 'REMOVE-TASK', payload: {todolistId, taskId}} as const
 }
 
-export function addTaskAC(todolistId: string, title: string): AddTaskActionType {
+export function addTaskAC(todolistId: string, title: string) {
     return {type: 'ADD-TASK', payload: {id: todolistId, title}} as const
 }
 
-export function changeTaskStatusAC(todolistId: string, taskId: string, isDone: boolean): ChangeTaskTypeActionType {
+export function changeTaskStatusAC(todolistId: string, taskId: string, isDone: boolean) {
     return {type: 'CHANGE-TASK-STATUS', payload: {todolistId, taskId, isDone}} as const
 }
 
-export function changeTaskTitleAC(todolistId: string, taskId: string, title: string): ChangeTaskTitleActionType {
+export function changeTaskTitleAC(todolistId: string, taskId: string, title: string) {
     return {type: 'CHANGE-TASK-TITLE', payload: {todolistId, taskId, title}} as const
 }
 
