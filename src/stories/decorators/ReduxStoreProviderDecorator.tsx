@@ -23,7 +23,7 @@ const initialGlobalState: AppRootStateType = {
         ],
     tasks:
         {
-            ['todolistId1']:
+            'todolistId1':
                 [
                     {
                         todoListId: 'todolistId1',
@@ -53,7 +53,7 @@ const initialGlobalState: AppRootStateType = {
                     }
 
                 ],
-            ['todolistId2']:
+            'todolistId2':
                 [
                     {
                         todoListId: 'todolistId2',
