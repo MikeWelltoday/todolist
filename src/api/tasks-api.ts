@@ -2,7 +2,7 @@ import axios from 'axios'
 
 //========================================================================================
 
-type TaskType = {
+export type TaskType = {
     description: string
     title: string
     completed: boolean
@@ -22,7 +22,7 @@ type GetTasksResponseType = {
     error: string
 }
 
-type TaskMethodsResponseType<D = { item: TaskType[] }> = {
+type TaskPostDeletePutResponseType<D = { item: TaskType[] }> = {
     resultCode: number
     messages: string[]
     data: D
@@ -47,15 +47,15 @@ export const tasksAPI = {
     },
 
     createTask(todolistId: string, title: string) {
-        return instance.post<TaskMethodsResponseType>(`${todolistId}/tasks`, {title})
+        return instance.post<TaskPostDeletePutResponseType>(`${todolistId}/tasks`, {title})
     },
 
     deleteTask(todolistId: string, tasksId: string) {
-        return instance.delete<TaskMethodsResponseType<{}>>(`${todolistId}/tasks/${tasksId}`)
+        return instance.delete<TaskPostDeletePutResponseType<{}>>(`${todolistId}/tasks/${tasksId}`)
     },
 
     updateTaskTitle(todolistId: string, tasksId: string, title: string) {
-        return instance.put<TaskMethodsResponseType>(`${todolistId}/tasks/${tasksId}`, {title})
+        return instance.put<TaskPostDeletePutResponseType>(`${todolistId}/tasks/${tasksId}`, {title})
     }
 
 }

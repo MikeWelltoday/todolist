@@ -1,14 +1,14 @@
 import React, {useCallback} from 'react'
 import './App.scss'
-import {TaskType, Todolist} from './components/todolist/Todolist'
-import {AddItemForm} from './components/addItemForm/AddItemForm'
-import {HeaderAppBar} from './components/headerAppBar/HeaderAppBar'
+import {TaskType, Todolist} from '../layout/todolist/Todolist'
+import {AddItemForm} from '../components/addItemForm/AddItemForm'
+import {HeaderAppBar} from '../layout/headerAppBar/HeaderAppBar'
 import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
-import {addTodolistAC} from './state/todolists-reducer/todolists-reducer'
+import {addTodolistAC} from '../state/todolists-reducer/todolists-reducer'
 import {useDispatch, useSelector} from 'react-redux'
-import {AppRootStateType} from './state/store'
+import {AppRootStateType} from '../state/store'
 
 //========================================================================================
 

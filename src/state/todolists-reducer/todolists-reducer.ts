@@ -1,4 +1,4 @@
-import {FilterValuesType, TodolistType} from '../../AppWithRedux'
+import {FilterValuesType, TodolistType} from '../../app/AppWithRedux'
 import {v1} from 'uuid'
 
 //========================================================================================

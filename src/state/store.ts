@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from 'redux'
+import {combineReducers, legacy_createStore} from 'redux'
 import {todolistsReducer} from './todolists-reducer/todolists-reducer'
 import {tasksReducer} from './taasks-reducer/tasks-reducer'
 
@@ -13,7 +13,7 @@ export const rootReducer = combineReducers({
     tasks: tasksReducer
 })
 
-export const store = createStore(rootReducer)
+export const store = legacy_createStore(rootReducer)
 
 // @ts-ignore
 window.store = store

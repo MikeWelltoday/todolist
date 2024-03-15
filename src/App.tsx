@@ -1,5 +1,5 @@
-import './App.scss'
-import {TaskType} from './components/todolist/Todolist'
+import './app/App.scss'
+import {TaskType} from './layout/todolist/Todolist'
 
 //========================================================================================
 
