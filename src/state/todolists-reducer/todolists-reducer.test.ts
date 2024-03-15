@@ -2,22 +2,21 @@ import {
     addTodolistAC,
     changeTodolistFilterAC,
     changeTodolistTitleAC,
-    removeTodolistAC, setTodolistsAC,
+    removeTodolistAC, setTodolistsAC, todolistFilterReducerType, todolistReducerType,
     todolistsReducer
 } from './todolists-reducer'
 import {v1} from 'uuid'
-import {FilterValuesType, TodolistType} from '../../App'
 
 //========================================================================================
 
 const todolistId1 = v1()
 const todolistId2 = v1()
-let startState: TodolistType[]
+let startState: todolistReducerType[]
 
 beforeEach(() => {
     startState = [
-        {id: todolistId1, title: 'What to learn', filter: 'all'},
-        {id: todolistId2, title: 'What to buy', filter: 'all'}
+        {id: todolistId1, title: 'What to learn', filter: 'all', addedDate: '', order: 0},
+        {id: todolistId2, title: 'What to buy', filter: 'all', addedDate: '', order: 0}
     ]
 })
 
@@ -53,7 +52,7 @@ test('CHANGE-TODOLIST-TITLE', () => {
 
 test('CHANGE-TODOLIST-FILTER', () => {
 
-    const newFilter: FilterValuesType = 'completed'
+    const newFilter: todolistFilterReducerType = 'completed'
 
     const endState = todolistsReducer(startState, changeTodolistFilterAC(todolistId2, newFilter))
 
@@ -63,8 +62,8 @@ test('CHANGE-TODOLIST-FILTER', () => {
 
 test('SET-TODOLISTS', () => {
 
-    const newTodolists: TodolistType[] = [
-        {id: 'todolistId3', title: 'new todolists', filter: 'all'}
+    const newTodolists: todolistReducerType[] = [
+        {id: 'todolistId3', title: 'new todolists', filter: 'all', addedDate: '', order: 0}
     ]
 
     const endState = todolistsReducer(startState, setTodolistsAC(newTodolists))

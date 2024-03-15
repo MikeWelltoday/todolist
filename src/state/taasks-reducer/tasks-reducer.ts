@@ -1,4 +1,3 @@
-import {TasksType} from '../../app/AppWithRedux'
 import {v1} from 'uuid'
 import {
     AddTodolistActionType,
@@ -6,6 +5,7 @@ import {
     todolistId1,
     todolistId2
 } from '../todolists-reducer/todolists-reducer'
+import {TaskApiType, TaskPrioritiesEnum, TaskStatusesEnum} from '../../api/tasks-api'
 
 //========================================================================================
 
@@ -26,16 +26,22 @@ export type ActionsType =
 
 //========================================================================================
 
+export type TasksReducerType = {
+    [key: string]: TaskApiType[]
+}
+
+//========================================================================================
+
 export function removeTaskAC(todolistId: string, taskId: string) {
     return {type: 'REMOVE-TASK', payload: {todolistId, taskId}} as const
 }
 
 export function addTaskAC(todolistId: string, title: string) {
-    return {type: 'ADD-TASK', payload: {id: todolistId, title}} as const
+    return {type: 'ADD-TASK', payload: {todolistId, title}} as const
 }
 
-export function changeTaskStatusAC(todolistId: string, taskId: string, isDone: boolean) {
-    return {type: 'CHANGE-TASK-STATUS', payload: {todolistId, taskId, isDone}} as const
+export function changeTaskStatusAC(todolistId: string, taskId: string, status: TaskStatusesEnum) {
+    return {type: 'CHANGE-TASK-STATUS', payload: {todolistId, taskId, status}} as const
 }
 
 export function changeTaskTitleAC(todolistId: string, taskId: string, title: string) {
@@ -44,23 +50,70 @@ export function changeTaskTitleAC(todolistId: string, taskId: string, title: str
 
 //========================================================================================
 
-const initialState: TasksType = {
+const initialState: TasksReducerType = {
     [todolistId1]:
         [
-            {id: v1(), title: 'HTML&CSS', isDone: true},
-            {id: v1(), title: 'TS', isDone: true},
-            {id: v1(), title: 'ReactJS', isDone: false},
-            {id: v1(), title: 'Redux', isDone: false},
-            {id: v1(), title: 'Redux', isDone: false}
+            {
+                todoListId: todolistId1,
+                id: v1(),
+                title: 'React',
+                status: TaskStatusesEnum.Completed,
+                priority: TaskPrioritiesEnum.Low,
+                description: '',
+                order: 0,
+                completed: false,
+                addedDate: '',
+                startDate: '',
+                deadline: ''
+            },
+            {
+                todoListId: todolistId1,
+                id: v1(),
+                title: 'Redux',
+                status: TaskStatusesEnum.New,
+                priority: TaskPrioritiesEnum.Low,
+                description: '',
+                order: 0,
+                completed: false,
+                addedDate: '',
+                startDate: '',
+                deadline: ''
+            }
+
         ],
     [todolistId2]:
         [
-            {id: v1(), title: 'Book', isDone: false},
-            {id: v1(), title: 'Milk', isDone: true}
+            {
+                todoListId: todolistId2,
+                id: v1(), title: 'Book',
+                status: TaskStatusesEnum.New,
+                priority: TaskPrioritiesEnum.Low,
+                description: '',
+                order: 0,
+                completed: false,
+                addedDate: '',
+                startDate: '',
+                deadline: ''
+            },
+            {
+                todoListId: todolistId2,
+                id: v1(), title: 'Milk',
+                status: TaskStatusesEnum.Completed,
+                priority: TaskPrioritiesEnum.Low,
+                description: '',
+                order: 0,
+                completed: false,
+                addedDate: '',
+                startDate: '',
+                deadline: ''
+            }
         ]
 }
 
-export const tasksReducer = (state: TasksType = initialState, {type, payload}: ActionsType): TasksType => {
+export const tasksReducer = (state: TasksReducerType = initialState, {
+    type,
+    payload
+}: ActionsType): TasksReducerType => {
 
     switch (type) {
 
@@ -74,21 +127,27 @@ export const tasksReducer = (state: TasksType = initialState, {type, payload}: A
         case 'ADD-TASK' : {
             return {
                 ...state,
-                [payload.id]: [{
+                [payload.todolistId]: [{
+                    todoListId: payload.todolistId,
                     id: v1(),
                     title: payload.title,
-                    isDone: false
-                }, ...state[payload.id]]
+                    status: TaskStatusesEnum.New,
+                    priority: TaskPrioritiesEnum.Low,
+                    description: '',
+                    order: 0,
+                    completed: false,
+                    addedDate: '',
+                    startDate: '',
+                    deadline: ''
+                }, ...state[payload.todolistId]]
             }
         }
 
         case 'CHANGE-TASK-STATUS' : {
             return {
                 ...state,
-                [payload.todolistId]: state[payload.todolistId].map(t => t.id === payload.taskId ? {
-                    ...t,
-                    isDone: payload.isDone
-                } : t)
+                [payload.todolistId]: state[payload.todolistId].map(t => t.id === payload.taskId ?
+                    {...t, status: payload.status} : t)
             }
         }
 

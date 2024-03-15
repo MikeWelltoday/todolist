@@ -1,12 +1,11 @@
-import {tasksReducer} from './taasks-reducer/tasks-reducer'
-import {addTodolistAC, todolistsReducer} from './todolists-reducer/todolists-reducer'
-import {tasksObjType, TodolistType} from '../App'
+import {tasksReducer, TasksReducerType} from './taasks-reducer/tasks-reducer'
+import {addTodolistAC, todolistReducerType, todolistsReducer} from './todolists-reducer/todolists-reducer'
 
 
 //========================================================================================
 
-let startStateTasks: tasksObjType
-let startStateTodolists: TodolistType[]
+let startStateTasks: TasksReducerType
+let startStateTodolists: todolistReducerType[]
 
 beforeEach(() => {
     startStateTasks = {}

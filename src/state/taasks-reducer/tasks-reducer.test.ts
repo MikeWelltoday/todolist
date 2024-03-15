@@ -1,24 +1,76 @@
-import {TasksType} from '../../app/AppWithRedux'
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './tasks-reducer'
+import {
+    addTaskAC,
+    changeTaskStatusAC,
+    changeTaskTitleAC,
+    removeTaskAC,
+    tasksReducer,
+    TasksReducerType
+} from './tasks-reducer'
 import {addTodolistAC, removeTodolistAC} from '../todolists-reducer/todolists-reducer'
+import {TaskPrioritiesEnum, TaskStatusesEnum} from '../../api/tasks-api'
 
 //========================================================================================
 
-let startState: TasksType
+let startState: TasksReducerType
 
 beforeEach(() => {
     startState = {
         'todolistId1':
             [
-                {id: '1', title: 'CSS', isDone: false},
-                {id: '2', title: 'JS', isDone: true},
-                {id: '3', title: 'React', isDone: false}
+                {
+                    todoListId: 'todolistId1',
+                    id: '1',
+                    title: 'React',
+                    status: TaskStatusesEnum.Completed,
+                    priority: TaskPrioritiesEnum.Low,
+                    description: '',
+                    order: 0,
+                    completed: false,
+                    addedDate: '',
+                    startDate: '',
+                    deadline: ''
+                },
+                {
+                    todoListId: 'todolistId1',
+                    id: '2',
+                    title: 'Redux',
+                    status: TaskStatusesEnum.New,
+                    priority: TaskPrioritiesEnum.Low,
+                    description: '',
+                    order: 0,
+                    completed: false,
+                    addedDate: '',
+                    startDate: '',
+                    deadline: ''
+                }
+
             ],
         'todolistId2':
             [
-                {id: '1', title: 'bread', isDone: false},
-                {id: '2', title: 'milk', isDone: true},
-                {id: '3', title: 'tea', isDone: false}
+                {
+                    todoListId: 'todolistId2',
+                    id: '1', title: 'Book',
+                    status: TaskStatusesEnum.New,
+                    priority: TaskPrioritiesEnum.Low,
+                    description: '',
+                    order: 0,
+                    completed: false,
+                    addedDate: '',
+                    startDate: '',
+                    deadline: ''
+                },
+                {
+                    todoListId: 'todolistId2',
+                    id: '2', title: 'Milk',
+                    status: TaskStatusesEnum.Completed,
+                    priority: TaskPrioritiesEnum.Low,
+                    description: '',
+                    order: 0,
+                    completed: false,
+                    addedDate: '',
+                    startDate: '',
+                    deadline: ''
+                }
             ]
     }
 })
@@ -27,8 +79,8 @@ test('REMOVE-TASK', () => {
 
     const endState = tasksReducer(startState, removeTaskAC('todolistId2', '2'))
 
-    expect(endState['todolistId1'].length).toBe(3)
-    expect(endState['todolistId2'].length).toBe(2)
+    expect(endState['todolistId1'].length).toBe(2)
+    expect(endState['todolistId2'].length).toBe(1)
     expect(endState['todolistId2'].every(t => t.id !== '2')).toBeTruthy()
 })
 
@@ -38,25 +90,25 @@ test('ADD-TASK', () => {
 
     const endState = tasksReducer(startState, addTaskAC('todolistId2', newTaskTitle))
 
-    expect(endState['todolistId1'].length).toBe(3)
-    expect(endState['todolistId2'].length).toBe(4)
+    expect(endState['todolistId1'].length).toBe(2)
+    expect(endState['todolistId2'].length).toBe(3)
     expect(endState['todolistId2'][0].id).toBeDefined()
     expect(endState['todolistId2'][0].title).toBe(newTaskTitle)
-    expect(endState['todolistId2'][0].isDone).toBe(false)
+    expect(endState['todolistId2'][0].status).toBe(TaskStatusesEnum.New)
 })
 
 test('CHANGE-TASK-STATUS', () => {
 
-    const endState = tasksReducer(startState, changeTaskStatusAC('todolistId2', '2', false))
+    const endState = tasksReducer(startState, changeTaskStatusAC('todolistId2', '2', TaskStatusesEnum.New))
 
-    expect(endState['todolistId1'][1].isDone).toBe(true)
-    expect(endState['todolistId2'][1].isDone).toBe(false)
+    expect(endState['todolistId1'][1].status).toBe(TaskStatusesEnum.New)
+    expect(endState['todolistId2'][1].status).toBe(TaskStatusesEnum.New)
 })
 
 test('CHANGE-TASK-TITLE', () => {
     const newTitle = 'MEAT'
     const endState = tasksReducer(startState, changeTaskTitleAC('todolistId2', '2', newTitle))
-    expect(endState['todolistId1'][1].title).toBe('JS')
+    expect(endState['todolistId1'][1].title).toBe('Redux')
     expect(endState['todolistId2'][1].title).toBe(newTitle)
 })
 

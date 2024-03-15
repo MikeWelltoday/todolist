@@ -4,16 +4,17 @@ import {EditableSpan} from '../../components/editableSpan/EditableSpan'
 import Checkbox from '@mui/material/Checkbox'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
+import {TaskStatusesEnum} from '../../api/tasks-api'
 
 //========================================================================================
 
 type TaskPropsType = {
     taskId: string
     title: string
-    isDone: boolean
+    status: TaskStatusesEnum
 
     removeTaskOnClickHandler: (taskId: string) => void
-    changeTaskStatusOnChangeHandler: (taskId: string, isDone: boolean) => void
+    changeTaskStatusOnChangeHandler: (taskId: string, status: TaskStatusesEnum) => void
     changeTaskTitleOnChangeHandler: (taskId: string, newTitle: string) => void
 }
 
@@ -28,7 +29,8 @@ export const Task: FC<TaskPropsType> = memo((props) => {
     }, [props.removeTaskOnClickHandler, props.taskId])
 
     const changeTaskStatusOnChangeHandler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        props.changeTaskStatusOnChangeHandler(props.taskId, event.currentTarget.checked)
+        const status = event.currentTarget.checked ? TaskStatusesEnum.New : TaskStatusesEnum.Completed
+        props.changeTaskStatusOnChangeHandler(props.taskId, status)
     }, [props.changeTaskStatusOnChangeHandler, props.taskId])
 
     const changeTaskTitleOnChangeHandler = useCallback((newTitle: string) => {
@@ -36,10 +38,10 @@ export const Task: FC<TaskPropsType> = memo((props) => {
     }, [props.changeTaskTitleOnChangeHandler, props.taskId])
 
     return (
-        <div className={`${S.task} ${props.isDone && S.isDone}`}>
+        <div className={`${S.task} ${props.status && S.isDone}`}>
 
             <Checkbox
-                checked={props.isDone}
+                checked={!!props.status}
                 onChange={changeTaskStatusOnChangeHandler}
                 color="secondary"
             />

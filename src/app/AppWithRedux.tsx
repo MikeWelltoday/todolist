@@ -1,28 +1,14 @@
 import React, {useCallback} from 'react'
 import './App.scss'
-import {TaskType, Todolist} from '../layout/todolist/Todolist'
+import {Todolist} from '../layout/todolist/Todolist'
 import {AddItemForm} from '../components/addItemForm/AddItemForm'
 import {HeaderAppBar} from '../layout/headerAppBar/HeaderAppBar'
 import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
-import {addTodolistAC} from '../state/todolists-reducer/todolists-reducer'
+import {addTodolistAC, todolistReducerType} from '../state/todolists-reducer/todolists-reducer'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppRootStateType} from '../state/store'
-
-//========================================================================================
-
-export type FilterValuesType = 'all' | 'active' | 'completed'
-
-export type TodolistType = {
-    id: string
-    title: string
-    filter: FilterValuesType
-}
-
-export type TasksType = {
-    [key: string]: TaskType[]
-}
 
 //========================================================================================
 
@@ -30,7 +16,7 @@ function AppWithRedux() {
 
     const dispatch = useDispatch()
 
-    const todolists = useSelector<AppRootStateType, TodolistType[]>(state => state.todolists)
+    const todolists = useSelector<AppRootStateType, todolistReducerType[]>(state => state.todolists)
 
     const addTodolist = useCallback((newTodolistTitle: string) => {
         dispatch(addTodolistAC(newTodolistTitle))

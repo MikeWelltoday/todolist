@@ -2,11 +2,11 @@ import axios from 'axios'
 
 //========================================================================================
 
-export type TodolistType = {
+export type TodolistApiType = {
     id: string
+    title: string
     addedDate: string
     order: number
-    title: string
 }
 
 type FieldErrorType = {
@@ -14,7 +14,7 @@ type FieldErrorType = {
     field: string
 }
 
-type TodolistsMethodsResponseType<D = {}> = {
+type TodolistsApiResponseType<D = {}> = {
     resultCode: number
     messages: string[]
     fieldsErrors: FieldErrorType[]
@@ -36,18 +36,18 @@ const instance = axios.create({
 export const todolistAPI = {
 
     getTodolist() {
-        return instance.get<TodolistsMethodsResponseType<{ item: TodolistType }>>('todo-lists')
+        return instance.get<TodolistsApiResponseType<{ item: TodolistApiType }>>('todo-lists')
     },
 
     createTodolist(title: string) {
-        return instance.post<TodolistsMethodsResponseType>('todo-lists', {title})
+        return instance.post<TodolistsApiResponseType>('todo-lists', {title})
     },
 
     deleteTodolist(todolistId: string) {
-        return instance.delete<TodolistsMethodsResponseType>(`todo-lists/${todolistId}`)
+        return instance.delete<TodolistsApiResponseType>(`todo-lists/${todolistId}`)
     },
 
     updateTodolist(todolistId: string, title: string) {
-        return instance.put<TodolistsMethodsResponseType>(`todo-lists/${todolistId}`, {title})
+        return instance.put<TodolistsApiResponseType>(`todo-lists/${todolistId}`, {title})
     }
 }
