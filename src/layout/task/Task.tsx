@@ -29,8 +29,9 @@ export const Task: FC<TaskPropsType> = memo((props) => {
     }, [props.removeTaskOnClickHandler, props.taskId])
 
     const changeTaskStatusOnChangeHandler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        const status = event.currentTarget.checked ? TaskStatusesEnum.New : TaskStatusesEnum.Completed
+        const status = event.currentTarget.checked ? TaskStatusesEnum.Completed : TaskStatusesEnum.New
         props.changeTaskStatusOnChangeHandler(props.taskId, status)
+
     }, [props.changeTaskStatusOnChangeHandler, props.taskId])
 
     const changeTaskTitleOnChangeHandler = useCallback((newTitle: string) => {
