@@ -1,7 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {Todolist} from './Todolist'
 import {ReduxStoreProviderDecorator} from '../../stories/decorators/ReduxStoreProviderDecorator'
-import {FilterValuesType} from '../../app/AppWithRedux'
 
 
 //========================================================================================
