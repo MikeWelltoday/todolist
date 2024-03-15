@@ -1,8 +1,8 @@
 import React, {useCallback} from 'react'
 import './App.scss'
-import {Todolist} from '../layout/todolist/Todolist'
-import {AddItemForm} from '../components/addItemForm/AddItemForm'
-import {HeaderAppBar} from '../layout/headerAppBar/HeaderAppBar'
+import {Todolist} from '../components/todolist/Todolist'
+import {AddItemForm} from '../components/UI/addItemForm/AddItemForm'
+import {HeaderAppBar} from '../components/headerAppBar/HeaderAppBar'
 import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
@@ -12,7 +12,7 @@ import {AppRootStateType} from '../state/store'
 
 //========================================================================================
 
-function AppWithRedux() {
+function App() {
 
     const dispatch = useDispatch()
 
@@ -57,4 +57,4 @@ function AppWithRedux() {
     )
 }
 
-export default AppWithRedux
+export default App

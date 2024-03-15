@@ -1,7 +1,7 @@
 import React, {FC, memo, useCallback} from 'react'
 import S from './Todolist.module.scss'
-import {AddItemForm} from '../../components/addItemForm/AddItemForm'
-import {EditableSpan} from '../../components/editableSpan/EditableSpan'
+import {AddItemForm} from '../UI/addItemForm/AddItemForm'
+import {EditableSpan} from '../UI/editableSpan/EditableSpan'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 import {useDispatch, useSelector} from 'react-redux'
@@ -13,7 +13,7 @@ import {
     changeTodolistTitleAC,
     removeTodolistAC, todolistFilterReducerType
 } from '../../state/todolists-reducer/todolists-reducer'
-import {FilterButton} from '../../components/filterButton/FilterButton'
+import {FilterButton} from '../UI/filterButton/FilterButton'
 import {TaskApiType, TaskStatusesEnum} from '../../api/tasks-api'
 
 //========================================================================================

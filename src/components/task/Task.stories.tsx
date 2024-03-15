@@ -1,6 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {action} from '@storybook/addon-actions'
 import {Task} from './Task'
+import {TaskStatusesEnum} from '../../api/tasks-api'
 
 //========================================================================================
 
@@ -19,8 +20,8 @@ const meta: Meta<typeof Task> = {
             description: 'task title',
             control: 'text'
         },
-        isDone: {
-            description: 'task checkbox',
+        status: {
+            description: 'task checkbox status',
             control: 'boolean'
         },
         removeTaskOnClickHandler: {
@@ -36,7 +37,7 @@ const meta: Meta<typeof Task> = {
     args: {
         taskId: 'gsdbgsng;sdfngf',
         title: 'JavaScript',
-        isDone: false,
+        status: TaskStatusesEnum.New,
         removeTaskOnClickHandler: action('taskId is send by cb-function =>'),
         changeTaskStatusOnChangeHandler: action('taskId, isDone  are send by cb-function =>'),
         changeTaskTitleOnChangeHandler: action('taskId, newTitle  are send by cb-function =>')
@@ -53,6 +54,6 @@ export const Primary: Story = {}
 export const TaskIsDone: Story = {
     args: {
         taskId: 'gsdbgsn45345fd',
-        isDone: true
+        status: TaskStatusesEnum.Completed
     }
 }

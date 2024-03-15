@@ -174,5 +174,3 @@ export const tasksReducer = (state: TasksReducerType = initialState, {
             return state
     }
 }
-
-//========================================================================================
