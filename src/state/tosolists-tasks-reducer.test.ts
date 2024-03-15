@@ -1,4 +1,4 @@
-import {tasksReducer, TasksReducerType} from './taasks-reducer/tasks-reducer'
+import {tasksReducer, TasksReducerType} from './tasks-reducer/tasks-reducer'
 import {addTodolistAC, todolistReducerType, todolistsReducer} from './todolists-reducer/todolists-reducer'
 
 

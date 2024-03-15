@@ -6,6 +6,7 @@ import {
     todolistsReducer
 } from './todolists-reducer'
 import {v1} from 'uuid'
+import {TodolistApiType} from '../../api/todolists-api'
 
 //========================================================================================
 
@@ -62,8 +63,8 @@ test('CHANGE-TODOLIST-FILTER', () => {
 
 test('SET-TODOLISTS', () => {
 
-    const newTodolists: todolistReducerType[] = [
-        {id: 'todolistId3', title: 'new todolists', filter: 'all', addedDate: '', order: 0}
+    const newTodolists: TodolistApiType[] = [
+        {id: 'todolistId3', title: 'new todolists', addedDate: '', order: 0}
     ]
 
     const endState = todolistsReducer(startState, setTodolistsAC(newTodolists))
@@ -71,6 +72,6 @@ test('SET-TODOLISTS', () => {
     expect(endState.length).toBe(1)
     expect(endState[0].id).toBe(newTodolists[0].id)
     expect(endState[0].title).toBe(newTodolists[0].title)
-    expect(endState[0].filter).toBe(newTodolists[0].filter)
+    expect(endState[0].filter).toBe('all')
 
 })

@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react'
+import React, {useCallback, useEffect} from 'react'
 import './App.scss'
 import {Todolist} from '../components/todolist/Todolist'
 import {AddItemForm} from '../components/UI/addItemForm/AddItemForm'
@@ -6,21 +6,33 @@ import {HeaderAppBar} from '../components/headerAppBar/HeaderAppBar'
 import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
-import {addTodolistAC, todolistReducerType} from '../state/todolists-reducer/todolists-reducer'
-import {useDispatch, useSelector} from 'react-redux'
-import {AppRootStateType} from '../state/store'
+import {
+    addTodolistAC,
+    fetchTodolistsTC,
+    todolistReducerType
+} from '../state/todolists-reducer/todolists-reducer'
+import {useSelector} from 'react-redux'
+import {AppRootStateType, useAppDispatch} from '../state/store'
 
 //========================================================================================
 
 function App() {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const todolists = useSelector<AppRootStateType, todolistReducerType[]>(state => state.todolists)
 
     const addTodolist = useCallback((newTodolistTitle: string) => {
         dispatch(addTodolistAC(newTodolistTitle))
     }, [])
+
+    debugger
+
+    useEffect(() => {
+        dispatch(fetchTodolistsTC())
+    }, [])
+
+    debugger
 
     return (
         <div className="App">

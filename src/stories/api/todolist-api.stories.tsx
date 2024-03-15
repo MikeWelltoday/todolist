@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {todolistAPI} from '../../api/todolist-api'
+import {todolistsAPI} from '../../api/todolists-api'
 
 //========================================================================================
 
@@ -12,7 +12,7 @@ export default {
 export const GetTodolists = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        todolistAPI.getTodolist().then(res => setState(res.data))
+        todolistsAPI.getTodolist().then(res => setState(res.data))
     }, [])
     return <div>{JSON.stringify(state)}</div>
 }
@@ -20,7 +20,7 @@ export const GetTodolists = () => {
 export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        todolistAPI.createTodolist('🍌').then(res => setState(res.data))
+        todolistsAPI.createTodolist('🍌').then(res => setState(res.data))
     }, [])
 
     return <div>{JSON.stringify(state)}</div>
@@ -29,7 +29,7 @@ export const CreateTodolist = () => {
 export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        todolistAPI.deleteTodolist('6216df54-3497-49b7-b06b-1d2ac0b07503').then(res => setState(res.data))
+        todolistsAPI.deleteTodolist('6216df54-3497-49b7-b06b-1d2ac0b07503').then(res => setState(res.data))
     }, [])
 
     return <div>{JSON.stringify(state)}</div>
@@ -38,7 +38,7 @@ export const DeleteTodolist = () => {
 export const UpdateTodolistTitle = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        todolistAPI.updateTodolist('47fa525b-159e-4332-ac0b-bf5b4b8c7e59', '🍌').then(res => setState(res.data))
+        todolistsAPI.updateTodolist('47fa525b-159e-4332-ac0b-bf5b4b8c7e59', '🍌').then(res => setState(res.data))
     }, [])
 
     return <div>{JSON.stringify(state)}</div>

@@ -33,10 +33,10 @@ const instance = axios.create({
 
 //========================================================================================
 
-export const todolistAPI = {
+export const todolistsAPI = {
 
     getTodolist() {
-        return instance.get<TodolistsApiResponseType<{ item: TodolistApiType }>>('todo-lists')
+        return instance.get<TodolistApiType[]>('todo-lists')
     },
 
     createTodolist(title: string) {
