@@ -16,9 +16,9 @@ import {
 import {Task} from '../task/Task'
 import {
     changeTodolistFilterAC,
-    changeTodolistTitleAC,
-    removeTodolistAC,
-    todolistFilterReducerType
+    removeTodolistTC,
+    todolistFilterReducerType,
+    updateTodolistTitleTC
 } from '../../state/todolists-reducer/todolists-reducer'
 import {FilterButton} from '../UI/filterButton/FilterButton'
 import {TaskApiType, TaskStatusesEnum} from '../../api/tasks-api'
@@ -57,12 +57,11 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
     }), [props.todolistId])
 
     const removeTodolistOnClickHandler = useCallback((() => {
-        dispatch(removeTodolistAC(props.todolistId
-        ))
+        dispatch(removeTodolistTC(props.todolistId))
     }), [props.todolistId])
 
     const changeTodolistTitleOnChangeHandler = useCallback(((newTitle: string) => {
-        dispatch(changeTodolistTitleAC(props.todolistId, newTitle))
+        dispatch(updateTodolistTitleTC(props.todolistId, newTitle))
     }), [props.todolistId])
 
     const changeTaskFilterAllOnClickHandler = useCallback((() => {

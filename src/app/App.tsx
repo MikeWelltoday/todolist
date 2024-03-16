@@ -6,11 +6,7 @@ import {HeaderAppBar} from '../components/headerAppBar/HeaderAppBar'
 import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
-import {
-    addTodolistAC,
-    fetchTodolistsTC,
-    todolistReducerType
-} from '../state/todolists-reducer/todolists-reducer'
+import {addTodolistTC, fetchTodolistsTC, todolistReducerType} from '../state/todolists-reducer/todolists-reducer'
 import {useSelector} from 'react-redux'
 import {AppRootStateType, useAppDispatch} from '../state/store'
 
@@ -22,13 +18,14 @@ function App() {
 
     const todolists = useSelector<AppRootStateType, todolistReducerType[]>(state => state.todolists)
 
-    const addTodolist = useCallback((newTodolistTitle: string) => {
-        dispatch(addTodolistAC(newTodolistTitle))
-    }, [])
-
     useEffect(() => {
         dispatch(fetchTodolistsTC())
     }, [])
+
+    const addTodolist = useCallback((newTodolistTitle: string) => {
+        dispatch(addTodolistTC(newTodolistTitle))
+    }, [])
+
 
     return (
         <div className="App">

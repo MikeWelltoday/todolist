@@ -1,10 +1,9 @@
-import {v1} from 'uuid'
 import {
     AddTodolistActionType,
     RemoveTodolistActionType,
     setTodolistsActionType
 } from '../todolists-reducer/todolists-reducer'
-import {TaskApiType, TaskPrioritiesEnum, tasksAPI, TaskStatusesEnum} from '../../api/tasks-api'
+import {TaskApiType, tasksAPI, TaskStatusesEnum} from '../../api/tasks-api'
 import {Dispatch} from 'redux'
 import {AppRootStateType} from '../store'
 
@@ -164,7 +163,7 @@ export const tasksReducer = (state: TasksReducerType = tasksInitialState, {
         }
 
         case 'ADD-TODOLIST':
-            return {...state, [payload.id]: []}
+            return {...state, [payload.newTodolistFromAPI.id]: []}
 
         case 'REMOVE-TODOLIST': {
             const stateCopy = {...state}

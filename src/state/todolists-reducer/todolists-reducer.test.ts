@@ -32,12 +32,12 @@ test('REMOVE-TODOLIST', () => {
 
 test('ADD-TODOLIST', () => {
 
-    const newTodolistTitle = 'New Todolist'
+    const newTodolistFromAPI = {id: 'todolistId3', title: 'todolist from server', addedDate: '', order: 0}
 
-    const endState = todolistsReducer(startState, addTodolistAC(newTodolistTitle))
+    const endState = todolistsReducer(startState, addTodolistAC(newTodolistFromAPI))
 
     expect(endState.length).toBe(3)
-    expect(endState[0].title).toBe(newTodolistTitle)
+    expect(endState[0].title).toBe(newTodolistFromAPI.title)
     expect(endState[0].filter).toBe('all')
 })
 

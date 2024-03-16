@@ -2,14 +2,14 @@ import {
     addTaskAC,
     changeTaskStatusAC,
     changeTaskTitleAC,
-    removeTaskAC, setTasksAC,
+    removeTaskAC,
+    setTasksAC,
     tasksReducer,
     TasksReducerType
 } from './tasks-reducer'
 import {addTodolistAC, removeTodolistAC, setTodolistsAC} from '../todolists-reducer/todolists-reducer'
 import {TaskPrioritiesEnum, TaskStatusesEnum} from '../../api/tasks-api'
 import {TodolistApiType} from '../../api/todolists-api'
-import {v1} from 'uuid'
 
 //========================================================================================
 
@@ -126,16 +126,17 @@ test('CHANGE-TASK-TITLE', () => {
 
 test('ADD-TODOLIST', () => {
 
-    const endState = tasksReducer(startState, addTodolistAC('new todolist'))
+    const newTodolistFromAPI = {id: 'todolistId3', title: 'todolist from server', addedDate: '', order: 0}
+
+    const endState = tasksReducer(startState, addTodolistAC(newTodolistFromAPI))
 
     const keys = Object.keys(endState)
-    const newKey = keys.find(k => k !== 'todolistId1' && k !== 'todolistId2')
-    if (!newKey) {
-        throw Error('new key should be added')
-    }
+    const newKey = keys.filter(k => k !== 'todolistId1' && k !== 'todolistId2')[0]
+
 
     expect(keys.length).toBe(3)
-    expect(endState[newKey]).toStrictEqual([])
+    expect(newKey).toBe(newTodolistFromAPI.id)
+    expect(endState[newKey]).toEqual([])
 })
 
 test('REMOVE-TODOLIST', () => {

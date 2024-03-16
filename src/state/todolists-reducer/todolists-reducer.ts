@@ -1,4 +1,3 @@
-import {v1} from 'uuid'
 import {TodolistApiType, todolistsAPI} from '../../api/todolists-api'
 import {Dispatch} from 'redux'
 
@@ -34,8 +33,8 @@ export function removeTodolistAC(todolistId: string) {
     return {type: 'REMOVE-TODOLIST', payload: {id: todolistId}} as const
 }
 
-export function addTodolistAC(title: string) {
-    return {type: 'ADD-TODOLIST', payload: {title, id: v1()}} as const
+export function addTodolistAC(newTodolistFromAPI: TodolistApiType) {
+    return {type: 'ADD-TODOLIST', payload: {newTodolistFromAPI}} as const
 }
 
 export function changeTodolistTitleAC(todolistId: string, title: string) {
@@ -63,15 +62,28 @@ export function fetchTodolistsTC() {
 export function addTodolistTC(title: string) {
     return (dispatch: Dispatch) => {
         todolistsAPI.createTodolist(title).then(res => {
-            dispatch(addTodolistAC())
+            dispatch(addTodolistAC(res.data.data.item))
+        })
+    }
+}
+
+export function removeTodolistTC(todolistId: string) {
+    return (dispatch: Dispatch) => {
+        todolistsAPI.deleteTodolist(todolistId).then(res => {
+            dispatch(removeTodolistAC(todolistId))
+        })
+    }
+}
+
+export function updateTodolistTitleTC(todolistId: string, newTitle: string) {
+    return (dispatch: Dispatch) => {
+        todolistsAPI.updateTodolist(todolistId, newTitle).then(res => {
+            dispatch(changeTodolistTitleAC(todolistId, newTitle))
         })
     }
 }
 
 //=======================================================================================
-
-export let todolistId1 = v1()
-export let todolistId2 = v1()
 
 export const todolistsInitialState: todolistReducerType[] = []
 
@@ -87,7 +99,7 @@ export const todolistsReducer = (state: todolistReducerType[] = todolistsInitial
         }
 
         case 'ADD-TODOLIST': {
-            return [{id: payload.id, title: payload.title, filter: 'all', addedDate: '', order: 0}, ...state]
+            return [{...payload.newTodolistFromAPI, filter: 'all'}, ...state]
         }
 
         case 'CHANGE-TODOLIST-TITLE': {

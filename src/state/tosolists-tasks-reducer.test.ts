@@ -14,7 +14,9 @@ beforeEach(() => {
 
 test('id should be equal', () => {
 
-    const action = addTodolistAC('new todolist')
+    const newTodolistFromAPI = {id: 'todolistId3', title: 'todolist from server', addedDate: '', order: 0}
+
+    const action = addTodolistAC(newTodolistFromAPI)
 
     const endStateTasks = tasksReducer(startStateTasks, action)
     const endStateTodolists = todolistsReducer(startStateTodolists, action)
@@ -24,8 +26,8 @@ test('id should be equal', () => {
 
     const idFromTodolists = endStateTodolists[0].id
 
-    expect(idFromTasks).toBe(action.payload.id)
-    expect(idFromTodolists).toBe(action.payload.id)
+    expect(idFromTasks).toBe(action.payload.newTodolistFromAPI.id)
+    expect(idFromTodolists).toBe(action.payload.newTodolistFromAPI.id)
 
     expect(idFromTasks).toBe(idFromTodolists)
 })
