@@ -2,13 +2,14 @@
 // SELECTORS
 export {tasksSelector} from './selectors/tasksSelector'
 export {todolistsSelector} from './selectors/todolistsSelector'
+export {statusSelector} from './selectors/statusSelector'
 
 //========================================================================================
-// STORE
-export type {AppRootStateType} from './store'
-export type {AppThunkDispatchType} from './store'
-export {useAppDispatch} from './store'
-export {store} from './store'
+// APP-REDUCER
+export type {RequestStatusType} from './reducers/app-reducer'
+export type {InitialStateType} from './reducers/app-reducer'
+export {appReducer} from './reducers/app-reducer'
+export {appChangeStatusAC} from './reducers/app-reducer'
 
 //========================================================================================
 // TASKS-REDUCER
@@ -42,3 +43,10 @@ export {addTodolistTC} from './reducers/todolists-reducer'
 export {removeTodolistTC} from './reducers/todolists-reducer'
 export {updateTodolistTitleTC} from './reducers/todolists-reducer'
 export {todolistsReducer} from './reducers/todolists-reducer'
+
+//========================================================================================
+// STORE
+export type {AppRootStateType} from './store'
+export type {AppThunkDispatchType} from './store'
+export {useAppDispatch} from './store'
+export {store} from './store'

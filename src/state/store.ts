@@ -3,6 +3,8 @@ import {todolistsReducer} from './reducers/todolists-reducer'
 import {tasksReducer} from './reducers/tasks-reducer'
 import {thunk, ThunkDispatch} from 'redux-thunk'
 import {useDispatch} from 'react-redux'
+import {appReducer} from './index'
+
 
 //========================================================================================
 
@@ -18,7 +20,8 @@ export const useAppDispatch = () => useDispatch<AppThunkDispatchType>()
 
 export const rootReducer = combineReducers({
     todolists: todolistsReducer,
-    tasks: tasksReducer
+    tasks: tasksReducer,
+    app: appReducer
 })
 
 export const store = legacy_createStore(

@@ -1,5 +1,6 @@
 import {Dispatch} from 'redux'
 import {TodolistApiType, todolistsAPI} from '../../api'
+import {appChangeStatusAC} from './app-reducer'
 
 //========================================================================================
 
@@ -53,8 +54,10 @@ export function setTodolistsAC(todolistsFromAPI: TodolistApiType[]) {
 
 export function fetchTodolistsTC() {
     return (dispatch: Dispatch) => {
+        dispatch(appChangeStatusAC('loading'))
         todolistsAPI.getTodolist().then(res => {
             dispatch(setTodolistsAC(res.data))
+            dispatch(appChangeStatusAC('succeeded'))
         })
     }
 }

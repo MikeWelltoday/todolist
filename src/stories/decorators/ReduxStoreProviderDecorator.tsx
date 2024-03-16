@@ -81,7 +81,10 @@ const initialGlobalState: AppRootStateType = {
                         deadline: ''
                     }
                 ]
-        }
+        },
+    app: {
+        status: 'loading'
+    }
 }
 
 // @ts-ignore

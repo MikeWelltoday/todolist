@@ -7,10 +7,15 @@ import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import LinearProgress from '@mui/material/LinearProgress'
+import {useSelector} from 'react-redux'
+import {statusSelector} from '../../state'
 
 //========================================================================================
 
 export const HeaderAppBar = () => {
+
+    const status = useSelector(statusSelector)
+
     return (
         <Box sx={{flexGrow: 1}}>
             <AppBar position="static" color={'success'}>
@@ -30,7 +35,7 @@ export const HeaderAppBar = () => {
                     <Button color="inherit">Login</Button>
                 </Toolbar>
 
-                <LinearProgress color={'secondary'}/>
+                {status === 'loading' && <LinearProgress color={'secondary'}/>}
 
             </AppBar>
         </Box>
