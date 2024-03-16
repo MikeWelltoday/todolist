@@ -26,13 +26,9 @@ function App() {
         dispatch(addTodolistAC(newTodolistTitle))
     }, [])
 
-    debugger
-
     useEffect(() => {
         dispatch(fetchTodolistsTC())
     }, [])
-
-    debugger
 
     return (
         <div className="App">

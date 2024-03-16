@@ -7,11 +7,11 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import {useSelector} from 'react-redux'
 import {AppRootStateType, useAppDispatch} from '../../state/store'
 import {
-    addTaskAC,
-    changeTaskStatusAC,
-    changeTaskTitleAC,
-    FetchTasksTC,
-    removeTaskAC
+    addTaskTC,
+    fetchTasksTC,
+    removeTaskTC,
+    updateTaskStatusTC,
+    updateTaskTitleTC
 } from '../../state/tasks-reducer/tasks-reducer'
 import {Task} from '../task/Task'
 import {
@@ -38,13 +38,12 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
     console.log('todolist => R E N D E R')
 
     useEffect(() => {
-        dispatch(FetchTasksTC(props.todolistId))
+        dispatch(fetchTasksTC(props.todolistId))
     }, [])
 
     let tasks = useSelector<AppRootStateType, TaskApiType[]>(state => state.tasks[props.todolistId])
 
     const dispatch = useAppDispatch()
-
 
     if (props.filter === 'active') {
         tasks = tasks.filter(item => !item.status)
@@ -54,8 +53,7 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
     }
 
     const addTaskHandler = useCallback(((title: string) => {
-        dispatch(addTaskAC(props.todolistId
-            , title))
+        dispatch(addTaskTC(props.todolistId, title))
     }), [props.todolistId])
 
     const removeTodolistOnClickHandler = useCallback((() => {
@@ -81,18 +79,15 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
 
     // task
     const removeTaskOnClickHandler = useCallback((taskId: string) => {
-        dispatch(removeTaskAC(props.todolistId
-            , taskId))
+        dispatch(removeTaskTC(props.todolistId, taskId))
     }, [props.todolistId])
 
     const changeTaskStatusOnChangeHandler = useCallback((taskId: string, status: TaskStatusesEnum) => {
-        dispatch(changeTaskStatusAC(props.todolistId
-            , taskId, status))
+        dispatch(updateTaskStatusTC(props.todolistId, taskId, status))
     }, [props.todolistId])
 
     const changeTaskTitleOnChangeHandler = useCallback((taskId: string, newTitle: string) => {
-        dispatch(changeTaskTitleAC(props.todolistId
-            , taskId, newTitle))
+        dispatch(updateTaskTitleTC(props.todolistId, taskId, newTitle))
     }, [props.todolistId])
 
     return (

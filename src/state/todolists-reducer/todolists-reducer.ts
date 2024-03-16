@@ -60,6 +60,14 @@ export function fetchTodolistsTC() {
     }
 }
 
+export function addTodolistTC(title: string) {
+    return (dispatch: Dispatch) => {
+        todolistsAPI.createTodolist(title).then(res => {
+            dispatch(addTodolistAC())
+        })
+    }
+}
+
 //=======================================================================================
 
 export let todolistId1 = v1()

@@ -9,6 +9,7 @@ import {
 import {addTodolistAC, removeTodolistAC, setTodolistsAC} from '../todolists-reducer/todolists-reducer'
 import {TaskPrioritiesEnum, TaskStatusesEnum} from '../../api/tasks-api'
 import {TodolistApiType} from '../../api/todolists-api'
+import {v1} from 'uuid'
 
 //========================================================================================
 
@@ -85,14 +86,26 @@ test('REMOVE-TASK', () => {
 
 test('ADD-TASK', () => {
 
-    const newTaskTitle = 'meat'
+    const newTaskFromAPI = {
+        todoListId: 'todolistId2',
+        id: '2lwjk-1-dcjk1',
+        title: 'Title form Server',
+        status: TaskStatusesEnum.New,
+        priority: TaskPrioritiesEnum.Low,
+        description: '',
+        order: 0,
+        completed: false,
+        addedDate: '',
+        startDate: '',
+        deadline: ''
+    }
 
-    const endState = tasksReducer(startState, addTaskAC('todolistId2', newTaskTitle))
+    const endState = tasksReducer(startState, addTaskAC(newTaskFromAPI))
 
     expect(endState['todolistId1'].length).toBe(2)
     expect(endState['todolistId2'].length).toBe(3)
-    expect(endState['todolistId2'][0].id).toBeDefined()
-    expect(endState['todolistId2'][0].title).toBe(newTaskTitle)
+    expect(endState['todolistId2'][0].id).toBe(newTaskFromAPI.id)
+    expect(endState['todolistId2'][0].title).toBe(newTaskFromAPI.title)
     expect(endState['todolistId2'][0].status).toBe(TaskStatusesEnum.New)
 })
 

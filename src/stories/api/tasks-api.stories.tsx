@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {tasksAPI} from '../../api/tasks-api'
+import {TaskPrioritiesEnum, tasksAPI, TaskStatusesEnum, UpdateTaskModelType} from '../../api/tasks-api'
 
 //========================================================================================
 
@@ -9,11 +9,11 @@ export default {
 
 //========================================================================================
 
-const todolistID = 'd0e26554-eeee-45cc-804a-dd892f30e1ed'
-const taskToDeleteID = '83bb6b51-efcf-4fa4-9ef5-af8c493a529f'
-const taskToUpdateTitleID = '8970e85c-7ba2-4ed9-9674-a2b555fb8b9f'
+const todolistID = '7f9c296a-bbe9-4803-a3b5-eaac8f7d3bb7'
+const taskToDeleteID = 'd0479913-b474-4cf9-91ed-aa04ef7a85eb'
+const taskToUpdateID = 'e698d706-b877-4fd4-a594-e3a7fdf2f0a8'
 
-export const GetTTask = () => {
+export const GetTask = () => {
     const [state, setState] = useState<any>(null)
 
     useEffect(() => {
@@ -42,11 +42,20 @@ export const DeleteTask = () => {
     return <div>{JSON.stringify(state)}</div>
 }
 
-export const UpdateTaskTitle = () => {
+export const UpdateTask = () => {
     const [state, setState] = useState<any>(null)
 
+    const model: UpdateTaskModelType = {
+        title: '🍙🍙🍙',
+        description: 'description',
+        status: TaskStatusesEnum.Draft,
+        priority: TaskPrioritiesEnum.High,
+        startDate: '',
+        deadline: ''
+    }
+
     useEffect(() => {
-        tasksAPI.updateTaskTitle(todolistID, taskToUpdateTitleID, '🥝').then(res => setState(res.data))
+        tasksAPI.updateTask(todolistID, taskToUpdateID, model).then(res => setState(res.data))
     }, [])
 
     return <div>{JSON.stringify(state)}</div>

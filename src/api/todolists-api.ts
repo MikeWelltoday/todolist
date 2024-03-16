@@ -40,7 +40,7 @@ export const todolistsAPI = {
     },
 
     createTodolist(title: string) {
-        return instance.post<TodolistsApiResponseType>('todo-lists', {title})
+        return instance.post<TodolistsApiResponseType<{ item: TodolistApiType }>>('todo-lists', {title})
     },
 
     deleteTodolist(todolistId: string) {

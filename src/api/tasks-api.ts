@@ -38,10 +38,19 @@ type GetTasksApiResponseType = {
     error: string
 }
 
-type PostDeletePutTaskApiResponseType<D = { item: TaskApiType[] }> = {
+type PostDeletePutTaskApiResponseType<D = { item: TaskApiType }> = {
     resultCode: number
     messages: string[]
     data: D
+}
+
+export type UpdateTaskModelType = {
+    title: string
+    description: string
+    status: TaskStatusesEnum
+    priority: TaskPrioritiesEnum
+    startDate: string
+    deadline: string
 }
 
 //========================================================================================
@@ -70,8 +79,8 @@ export const tasksAPI = {
         return instance.delete<PostDeletePutTaskApiResponseType<{}>>(`${todolistId}/tasks/${tasksId}`)
     },
 
-    updateTaskTitle(todolistId: string, tasksId: string, title: string) {
-        return instance.put<PostDeletePutTaskApiResponseType>(`${todolistId}/tasks/${tasksId}`, {title})
+    updateTask(todolistId: string, tasksId: string, model: UpdateTaskModelType) {
+        return instance.put<PostDeletePutTaskApiResponseType>(`${todolistId}/tasks/${tasksId}`, model)
     }
 
 }
