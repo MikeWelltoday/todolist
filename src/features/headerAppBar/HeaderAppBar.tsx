@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
+import LinearProgress from '@mui/material/LinearProgress'
 
 //========================================================================================
 
@@ -28,6 +29,9 @@ export const HeaderAppBar = () => {
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
+
+                <LinearProgress color={'secondary'}/>
+
             </AppBar>
         </Box>
     )

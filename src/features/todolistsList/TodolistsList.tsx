@@ -1,12 +1,10 @@
 import React, {FC, useCallback, useEffect} from 'react'
-import {AppRootStateType, useAppDispatch} from '../../state/store'
 import {useSelector} from 'react-redux'
-import {addTodolistTC, fetchTodolistsTC, todolistReducerType} from '../../state/todolists-reducer/todolists-reducer'
 import Grid from '@mui/material/Grid'
-import {AddItemForm} from '../../components/addItemForm/AddItemForm'
 import Paper from '@mui/material/Paper'
 import {Todolist} from '../todolist/Todolist'
-
+import {addTodolistTC, fetchTodolistsTC, todolistsSelector, useAppDispatch} from '../../state'
+import {AddItemForm} from '../../components'
 
 //========================================================================================
 
@@ -14,8 +12,7 @@ import {Todolist} from '../todolist/Todolist'
 export const TodolistsList: FC = () => {
 
     const dispatch = useAppDispatch()
-
-    const todolists = useSelector<AppRootStateType, todolistReducerType[]>(state => state.todolists)
+    const todolists = useSelector(todolistsSelector)
 
     useEffect(() => {
         dispatch(fetchTodolistsTC())

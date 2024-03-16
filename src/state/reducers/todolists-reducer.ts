@@ -1,5 +1,5 @@
-import {TodolistApiType, todolistsAPI} from '../../api/todolists-api'
 import {Dispatch} from 'redux'
+import {TodolistApiType, todolistsAPI} from '../../api'
 
 //========================================================================================
 
@@ -85,7 +85,7 @@ export function updateTodolistTitleTC(todolistId: string, newTitle: string) {
 
 //=======================================================================================
 
-export const todolistsInitialState: todolistReducerType[] = []
+const todolistsInitialState: todolistReducerType[] = []
 
 export const todolistsReducer = (state: todolistReducerType[] = todolistsInitialState, {
     type,

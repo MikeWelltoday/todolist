@@ -6,10 +6,10 @@ import {
     setTasksAC,
     tasksReducer,
     TasksReducerType
-} from './tasks-reducer'
-import {addTodolistAC, removeTodolistAC, setTodolistsAC} from '../todolists-reducer/todolists-reducer'
-import {TaskPrioritiesEnum, TaskStatusesEnum} from '../../api/tasks-api'
-import {TodolistApiType} from '../../api/todolists-api'
+} from '../reducers/tasks-reducer'
+import {addTodolistAC, removeTodolistAC, setTodolistsAC} from '../reducers/todolists-reducer'
+import {TaskPrioritiesEnum, TaskStatusesEnum} from '../../api'
+import {TodolistApiType} from '../../api'
 
 //========================================================================================
 

@@ -1,7 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react'
 import {action} from '@storybook/addon-actions'
 import {Task} from './Task'
-import {TaskStatusesEnum} from '../../api/tasks-api'
+import {TaskStatusesEnum} from '../../api'
 
 //========================================================================================
 

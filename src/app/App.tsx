@@ -1,8 +1,7 @@
 import React from 'react'
 import './App.scss'
-import {HeaderAppBar} from '../features/headerAppBar/HeaderAppBar'
 import Container from '@mui/material/Container'
-import {TodolistsList} from '../features/todolistsList/TodolistsList'
+import {HeaderAppBar, TodolistsList} from '../features'
 
 //========================================================================================
 

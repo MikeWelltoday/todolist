@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {TaskPrioritiesEnum, tasksAPI, TaskStatusesEnum, UpdateTaskModelType} from '../../api/tasks-api'
+import {TaskPrioritiesEnum, tasksAPI, TaskStatusesEnum, UpdateTaskModelType} from '../../api'
 
 //========================================================================================
 

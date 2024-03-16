@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {todolistsAPI} from '../../api/todolists-api'
+import {todolistsAPI} from '../../api'
 
 //========================================================================================
 

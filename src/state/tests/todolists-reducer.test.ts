@@ -4,9 +4,9 @@ import {
     changeTodolistTitleAC,
     removeTodolistAC, setTodolistsAC, todolistFilterReducerType, todolistReducerType,
     todolistsReducer
-} from './todolists-reducer'
+} from '../reducers/todolists-reducer'
 import {v1} from 'uuid'
-import {TodolistApiType} from '../../api/todolists-api'
+import {TodolistApiType} from '../../api'
 
 //========================================================================================
 

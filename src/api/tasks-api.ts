@@ -23,7 +23,6 @@ export type TaskApiType = {
     title: string
     status: TaskStatusesEnum
     priority: TaskPrioritiesEnum
-
     description: string
     order: number
     completed: boolean

@@ -2,10 +2,10 @@ import {
     AddTodolistActionType,
     RemoveTodolistActionType,
     setTodolistsActionType
-} from '../todolists-reducer/todolists-reducer'
-import {TaskApiType, tasksAPI, TaskStatusesEnum} from '../../api/tasks-api'
+} from './todolists-reducer'
 import {Dispatch} from 'redux'
 import {AppRootStateType} from '../store'
+import {TaskApiType, tasksAPI, TaskStatusesEnum} from '../../api'
 
 //========================================================================================
 
@@ -121,7 +121,7 @@ export function updateTaskTitleTC(todolistId: string, taskId: string, title: str
 
 //========================================================================================
 
-export const tasksInitialState: TasksReducerType = {}
+const tasksInitialState: TasksReducerType = {}
 
 export const tasksReducer = (state: TasksReducerType = tasksInitialState, {
     type,
