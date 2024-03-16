@@ -6,7 +6,7 @@ import {
 import {Dispatch} from 'redux'
 import {AppRootStateType} from '../store'
 import {TaskApiType, tasksAPI, TaskStatusesEnum} from '../../api'
-import {appChangeStatusAC} from './app-reducer'
+import {appSetStatusAC} from './app-reducer'
 
 //========================================================================================
 
@@ -60,30 +60,30 @@ export function setTasksAC(todolistId: string, tasksFromAPI: TaskApiType[]) {
 
 export function fetchTasksTC(todolistId: string) {
     return (dispatch: Dispatch) => {
-        dispatch(appChangeStatusAC('loading'))
+        dispatch(appSetStatusAC('loading'))
         tasksAPI.getTasks(todolistId).then(res => {
             dispatch(setTasksAC(todolistId, res.data.items))
-            dispatch(appChangeStatusAC('succeeded'))
+            dispatch(appSetStatusAC('succeeded'))
         })
     }
 }
 
 export function removeTaskTC(todolistId: string, taskId: string) {
     return (dispatch: Dispatch) => {
-        dispatch(appChangeStatusAC('loading'))
+        dispatch(appSetStatusAC('loading'))
         tasksAPI.deleteTask(todolistId, taskId).then(() => {
             dispatch(removeTaskAC(todolistId, taskId))
-            dispatch(appChangeStatusAC('succeeded'))
+            dispatch(appSetStatusAC('succeeded'))
         })
     }
 }
 
 export function addTaskTC(todolistId: string, newTitle: string) {
     return (dispatch: Dispatch) => {
-        dispatch(appChangeStatusAC('loading'))
+        dispatch(appSetStatusAC('loading'))
         tasksAPI.createTask(todolistId, newTitle).then(res => {
             dispatch(addTaskAC(res.data.data.item))
-            dispatch(appChangeStatusAC('succeeded'))
+            dispatch(appSetStatusAC('succeeded'))
         })
     }
 }
@@ -91,7 +91,7 @@ export function addTaskTC(todolistId: string, newTitle: string) {
 export function updateTaskStatusTC(todolistId: string, taskId: string, status: TaskStatusesEnum) {
     return (dispatch: Dispatch, getState: () => AppRootStateType) => {
 
-        dispatch(appChangeStatusAC('loading'))
+        dispatch(appSetStatusAC('loading'))
 
         const taskToUpdate = getState().tasks[todolistId].filter(t => t.id === taskId)[0]
         const model = {
@@ -105,7 +105,7 @@ export function updateTaskStatusTC(todolistId: string, taskId: string, status: T
 
         tasksAPI.updateTask(todolistId, taskId, model).then(() => {
             dispatch(changeTaskStatusAC(todolistId, taskId, status))
-            dispatch(appChangeStatusAC('succeeded'))
+            dispatch(appSetStatusAC('succeeded'))
         })
     }
 }
@@ -113,7 +113,7 @@ export function updateTaskStatusTC(todolistId: string, taskId: string, status: T
 export function updateTaskTitleTC(todolistId: string, taskId: string, title: string) {
     return (dispatch: Dispatch, getState: () => AppRootStateType) => {
 
-        dispatch(appChangeStatusAC('loading'))
+        dispatch(appSetStatusAC('loading'))
 
         const taskToUpdate = getState().tasks[todolistId].filter(t => t.id === taskId)[0]
         const model = {
@@ -127,7 +127,7 @@ export function updateTaskTitleTC(todolistId: string, taskId: string, title: str
 
         tasksAPI.updateTask(todolistId, taskId, model).then(() => {
             dispatch(changeTaskTitleAC(todolistId, taskId, title))
-            dispatch(appChangeStatusAC('succeeded'))
+            dispatch(appSetStatusAC('succeeded'))
         })
     }
 }

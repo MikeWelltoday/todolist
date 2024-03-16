@@ -6,8 +6,8 @@ import {
     setTasksAC,
     tasksReducer,
     TasksReducerType
-} from '../reducers/tasks-reducer'
-import {addTodolistAC, removeTodolistAC, setTodolistsAC} from '../reducers/todolists-reducer'
+} from '../../state'
+import {addTodolistAC, removeTodolistAC, setTodolistsAC} from '../../state'
 import {TaskPrioritiesEnum, TaskStatusesEnum} from '../../api'
 import {TodolistApiType} from '../../api'
 

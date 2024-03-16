@@ -1,6 +1,6 @@
 import {Dispatch} from 'redux'
 import {TodolistApiType, todolistsAPI} from '../../api'
-import {appChangeStatusAC} from './app-reducer'
+import {appSetStatusAC} from './app-reducer'
 
 //========================================================================================
 
@@ -54,40 +54,40 @@ export function setTodolistsAC(todolistsFromAPI: TodolistApiType[]) {
 
 export function fetchTodolistsTC() {
     return (dispatch: Dispatch) => {
-        dispatch(appChangeStatusAC('loading'))
+        dispatch(appSetStatusAC('loading'))
         todolistsAPI.getTodolist().then(res => {
             dispatch(setTodolistsAC(res.data))
-            dispatch(appChangeStatusAC('succeeded'))
+            dispatch(appSetStatusAC('succeeded'))
         })
     }
 }
 
 export function addTodolistTC(title: string) {
     return (dispatch: Dispatch) => {
-        dispatch(appChangeStatusAC('loading'))
+        dispatch(appSetStatusAC('loading'))
         todolistsAPI.createTodolist(title).then(res => {
             dispatch(addTodolistAC(res.data.data.item))
-            dispatch(appChangeStatusAC('succeeded'))
+            dispatch(appSetStatusAC('succeeded'))
         })
     }
 }
 
 export function removeTodolistTC(todolistId: string) {
     return (dispatch: Dispatch) => {
-        dispatch(appChangeStatusAC('loading'))
+        dispatch(appSetStatusAC('loading'))
         todolistsAPI.deleteTodolist(todolistId).then(() => {
             dispatch(removeTodolistAC(todolistId))
-            dispatch(appChangeStatusAC('succeeded'))
+            dispatch(appSetStatusAC('succeeded'))
         })
     }
 }
 
 export function updateTodolistTitleTC(todolistId: string, newTitle: string) {
     return (dispatch: Dispatch) => {
-        dispatch(appChangeStatusAC('loading'))
+        dispatch(appSetStatusAC('loading'))
         todolistsAPI.updateTodolist(todolistId, newTitle).then(() => {
             dispatch(changeTodolistTitleAC(todolistId, newTitle))
-            dispatch(appChangeStatusAC('succeeded'))
+            dispatch(appSetStatusAC('succeeded'))
         })
     }
 }

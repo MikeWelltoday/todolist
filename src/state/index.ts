@@ -1,9 +1,11 @@
 //========================================================================================
 // APP-REDUCER
-export type {RequestStatusType} from './reducers/app-reducer'
+export type {appReducerStatusType} from './reducers/app-reducer'
+export type {appReducerErrorType} from './reducers/app-reducer'
 export type {InitialStateType} from './reducers/app-reducer'
 export {appReducer} from './reducers/app-reducer'
-export {appChangeStatusAC} from './reducers/app-reducer'
+export {appSetStatusAC} from './reducers/app-reducer'
+export {appSetErrorAC} from './reducers/app-reducer'
 
 //========================================================================================
 // TASKS-REDUCER
@@ -43,6 +45,7 @@ export {todolistsReducer} from './reducers/todolists-reducer'
 export {tasksSelector} from './selectors/tasksSelector'
 export {todolistsSelector} from './selectors/todolistsSelector'
 export {statusSelector} from './selectors/statusSelector'
+export {errorSelector} from './selectors/errorSelector'
 
 //========================================================================================
 // STORE

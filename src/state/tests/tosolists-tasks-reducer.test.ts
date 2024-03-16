@@ -1,5 +1,7 @@
-import {tasksReducer, TasksReducerType} from '../reducers/tasks-reducer'
-import {addTodolistAC, todolistReducerType, todolistsReducer} from '../reducers/todolists-reducer'
+import {
+    addTodolistAC, todolistReducerType, todolistsReducer,
+    tasksReducer, TasksReducerType
+} from '../../state'
 
 
 //========================================================================================
