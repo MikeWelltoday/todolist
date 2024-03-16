@@ -64,24 +64,30 @@ export function fetchTodolistsTC() {
 
 export function addTodolistTC(title: string) {
     return (dispatch: Dispatch) => {
+        dispatch(appChangeStatusAC('loading'))
         todolistsAPI.createTodolist(title).then(res => {
             dispatch(addTodolistAC(res.data.data.item))
+            dispatch(appChangeStatusAC('succeeded'))
         })
     }
 }
 
 export function removeTodolistTC(todolistId: string) {
     return (dispatch: Dispatch) => {
-        todolistsAPI.deleteTodolist(todolistId).then(res => {
+        dispatch(appChangeStatusAC('loading'))
+        todolistsAPI.deleteTodolist(todolistId).then(() => {
             dispatch(removeTodolistAC(todolistId))
+            dispatch(appChangeStatusAC('succeeded'))
         })
     }
 }
 
 export function updateTodolistTitleTC(todolistId: string, newTitle: string) {
     return (dispatch: Dispatch) => {
-        todolistsAPI.updateTodolist(todolistId, newTitle).then(res => {
+        dispatch(appChangeStatusAC('loading'))
+        todolistsAPI.updateTodolist(todolistId, newTitle).then(() => {
             dispatch(changeTodolistTitleAC(todolistId, newTitle))
+            dispatch(appChangeStatusAC('succeeded'))
         })
     }
 }

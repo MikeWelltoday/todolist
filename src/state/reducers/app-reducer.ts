@@ -28,7 +28,7 @@ export function appReducer(state: InitialStateType = initialState, {type, payloa
     switch (type) {
 
         case'APP-CHANGE-STATUS': {
-            return {...state, status: payload.status}
+            return {status: payload.status}
         }
 
         default: {

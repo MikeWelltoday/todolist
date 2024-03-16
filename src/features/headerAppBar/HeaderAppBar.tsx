@@ -1,4 +1,7 @@
 import React from 'react'
+import {useSelector} from 'react-redux'
+import {statusSelector} from '../../state'
+import S from './HeaderAppBar.module.scss'
 import Box from '@mui/material/Box'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
@@ -7,8 +10,6 @@ import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import LinearProgress from '@mui/material/LinearProgress'
-import {useSelector} from 'react-redux'
-import {statusSelector} from '../../state'
 
 //========================================================================================
 
@@ -35,7 +36,9 @@ export const HeaderAppBar = () => {
                     <Button color="inherit">Login</Button>
                 </Toolbar>
 
-                {status === 'loading' && <LinearProgress color={'secondary'}/>}
+                <div className={S.loaderContainer}>
+                    {status === 'loading' && <LinearProgress color={'success'}/>}
+                </div>
 
             </AppBar>
         </Box>

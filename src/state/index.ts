@@ -1,10 +1,4 @@
 //========================================================================================
-// SELECTORS
-export {tasksSelector} from './selectors/tasksSelector'
-export {todolistsSelector} from './selectors/todolistsSelector'
-export {statusSelector} from './selectors/statusSelector'
-
-//========================================================================================
 // APP-REDUCER
 export type {RequestStatusType} from './reducers/app-reducer'
 export type {InitialStateType} from './reducers/app-reducer'
@@ -43,6 +37,12 @@ export {addTodolistTC} from './reducers/todolists-reducer'
 export {removeTodolistTC} from './reducers/todolists-reducer'
 export {updateTodolistTitleTC} from './reducers/todolists-reducer'
 export {todolistsReducer} from './reducers/todolists-reducer'
+
+//========================================================================================
+// SELECTORS
+export {tasksSelector} from './selectors/tasksSelector'
+export {todolistsSelector} from './selectors/todolistsSelector'
+export {statusSelector} from './selectors/statusSelector'
 
 //========================================================================================
 // STORE
