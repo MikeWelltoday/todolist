@@ -8,7 +8,7 @@ import {RequestStatusType} from '../../state'
 //========================================================================================
 
 type AddItemFormPropsType = {
-    entityStatus: RequestStatusType
+    entityStatus?: RequestStatusType
 
     addItem: (title: string) => void
 }
@@ -21,6 +21,7 @@ export const AddItemForm: FC<AddItemFormPropsType> = memo((props) => {
 
     const [newTitle, setNewInput] = useState('')
     const [error, setError] = useState(false)
+    const disabled = props.entityStatus === 'loading'
 
     function newTitleOnChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
         setNewInput(e.currentTarget.value)
@@ -49,9 +50,10 @@ export const AddItemForm: FC<AddItemFormPropsType> = memo((props) => {
 
                 label={error ? 'TITLE IS REQUIRED' : 'NEW TITLE'}
                 error={error}
+                disabled={disabled}
             />
 
-            <IconButton onClick={addItemOnClickHandler} color={'primary'} disabled={props.entityStatus === 'loading'}>
+            <IconButton onClick={addItemOnClickHandler} color={'primary'} disabled={disabled}>
                 <AddCircleOutlineIcon/>
             </IconButton>
 

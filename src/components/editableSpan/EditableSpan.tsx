@@ -22,23 +22,20 @@ export const EditableSpan: FC<EditableSpanPropsType> = memo((props) => {
         setTitle(event.currentTarget.value)
     }
 
+
     const deactivateChangeMode = useCallback(() => {
         setChangeMode(false)
-        if (title.trim()) {
-            props.onChangeTitle(title.trim())
-        } else {
-            setTitle(props.children)
-        }
+        props.onChangeTitle(title.trim())
     }, [title, props.onChangeTitle, props.children])
 
     function activateChangeMode() {
         setChangeMode(true)
+        setTitle(props.children)
     }
 
     function onKeyDown(event: KeyboardEvent<HTMLInputElement>) {
         if (event.key === 'Escape' || event.key === 'Enter') deactivateChangeMode()
     }
-
 
     return (
         changeMode ?

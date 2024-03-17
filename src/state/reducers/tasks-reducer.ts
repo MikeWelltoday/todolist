@@ -130,20 +130,24 @@ export function changeTaskTitleAC(todolistId: string, taskId: string, title: str
 export function fetchTasksTC(todolistId: string) {
     return (dispatch: Dispatch) => {
         dispatch(appSetStatusAC('loading'))
-        tasksAPI.getTasks(todolistId).then(res => {
-            dispatch(setTasksAC(todolistId, res.data.items))
-            dispatch(appSetStatusAC('succeeded'))
-        })
+        tasksAPI
+            .getTasks(todolistId)
+            .then(res => {
+                dispatch(setTasksAC(todolistId, res.data.items))
+                dispatch(appSetStatusAC('succeeded'))
+            })
     }
 }
 
 export function removeTaskTC(todolistId: string, taskId: string) {
     return (dispatch: Dispatch) => {
         dispatch(appSetStatusAC('loading'))
-        tasksAPI.deleteTask(todolistId, taskId).then(() => {
-            dispatch(removeTaskAC(todolistId, taskId))
-            dispatch(appSetStatusAC('succeeded'))
-        })
+        tasksAPI
+            .deleteTask(todolistId, taskId)
+            .then(() => {
+                dispatch(removeTaskAC(todolistId, taskId))
+                dispatch(appSetStatusAC('succeeded'))
+            })
     }
 }
 
@@ -151,33 +155,32 @@ export function addTaskTC(todolistId: string, newTitle: string) {
     return (dispatch: Dispatch) => {
         dispatch(appSetStatusAC('loading'))
         dispatch(changeTodolistEntityStatusAC(todolistId, 'loading'))
-        tasksAPI.createTask(todolistId, newTitle).then(res => {
-
-            if (res.data.resultCode === 0) {
-                dispatch(addTaskAC(res.data.data.item))
-                dispatch(appSetStatusAC('succeeded'))
-            } else {
-
-                if (res.data.messages.length) {
-                    dispatch(appSetErrorAC(res.data.messages[0]))
+        tasksAPI
+            .createTask(todolistId, newTitle)
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    dispatch(addTaskAC(res.data.data.item))
+                    dispatch(appSetStatusAC('succeeded'))
                 } else {
-                    dispatch(appSetErrorAC('Some error occurred'))
+                    if (res.data.messages.length) {
+                        dispatch(appSetErrorAC(res.data.messages[0]))
+                    } else {
+                        dispatch(appSetErrorAC('Some error occurred'))
+                    }
+                    dispatch(appSetStatusAC('failed'))
                 }
-
+                dispatch(changeTodolistEntityStatusAC(todolistId, 'succeeded'))
+            })
+            .catch(error => {
+                dispatch(appSetErrorAC(error.message()))
                 dispatch(appSetStatusAC('failed'))
-            }
-
-            dispatch(changeTodolistEntityStatusAC(todolistId, 'succeeded'))
-
-        })
+            })
     }
 }
 
 export function updateTaskStatusTC(todolistId: string, taskId: string, status: TaskStatusesEnum) {
     return (dispatch: Dispatch, getState: () => AppRootStateType) => {
-
         dispatch(appSetStatusAC('loading'))
-
         const taskToUpdate = getState().tasks[todolistId].filter(t => t.id === taskId)[0]
         const model = {
             title: taskToUpdate.title,
@@ -187,19 +190,21 @@ export function updateTaskStatusTC(todolistId: string, taskId: string, status: T
             startDate: taskToUpdate.startDate,
             deadline: taskToUpdate.deadline
         }
-
-        tasksAPI.updateTask(todolistId, taskId, model).then(() => {
-            dispatch(changeTaskStatusAC(todolistId, taskId, status))
-            dispatch(appSetStatusAC('succeeded'))
+        tasksAPI
+            .updateTask(todolistId, taskId, model)
+            .then(() => {
+                dispatch(changeTaskStatusAC(todolistId, taskId, status))
+                dispatch(appSetStatusAC('succeeded'))
+            }).catch(error => {
+            dispatch(appSetErrorAC(error.message()))
+            dispatch(appSetStatusAC('failed'))
         })
     }
 }
 
 export function updateTaskTitleTC(todolistId: string, taskId: string, title: string) {
     return (dispatch: Dispatch, getState: () => AppRootStateType) => {
-
         dispatch(appSetStatusAC('loading'))
-
         const taskToUpdate = getState().tasks[todolistId].filter(t => t.id === taskId)[0]
         const model = {
             title,
@@ -209,11 +214,25 @@ export function updateTaskTitleTC(todolistId: string, taskId: string, title: str
             startDate: taskToUpdate.startDate,
             deadline: taskToUpdate.deadline
         }
-
-        tasksAPI.updateTask(todolistId, taskId, model).then(() => {
-            dispatch(changeTaskTitleAC(todolistId, taskId, title))
-            dispatch(appSetStatusAC('succeeded'))
-        })
+        tasksAPI
+            .updateTask(todolistId, taskId, model)
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    dispatch(changeTaskTitleAC(todolistId, taskId, title))
+                    dispatch(appSetStatusAC('succeeded'))
+                } else {
+                    if (res.data.messages.length) {
+                        dispatch(appSetErrorAC(res.data.messages[0]))
+                    } else {
+                        dispatch(appSetErrorAC('Some error occurred'))
+                    }
+                    dispatch(appSetStatusAC('failed'))
+                }
+            })
+            .catch(error => {
+                dispatch(appSetErrorAC(error.message()))
+                dispatch(appSetStatusAC('failed'))
+            })
     }
 }
 

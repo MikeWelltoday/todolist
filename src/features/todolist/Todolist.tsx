@@ -10,7 +10,7 @@ import {
     changeTodolistFilterAC,
     fetchTasksTC,
     removeTaskTC,
-    removeTodolistTC, RequestStatusType,
+    removeTodolistTC, RequestStatusType, statusSelector,
     todolistFilterReducerType,
     updateTaskStatusTC,
     updateTaskTitleTC,
@@ -45,6 +45,7 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
     }, [])
 
     let tasks = useSelector<AppRootStateType, TaskApiType[]>(state => state.tasks[props.todolistId])
+    const status = useSelector(statusSelector)
 
     if (props.filter === 'active') {
         tasks = tasks.filter(item => !item.status)
@@ -87,6 +88,9 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
     }, [props.todolistId])
 
     const changeTaskTitleOnChangeHandler = useCallback((taskId: string, newTitle: string) => {
+
+        console.log(status)
+
         dispatch(updateTaskTitleTC(props.todolistId, taskId, newTitle))
     }, [props.todolistId])
 

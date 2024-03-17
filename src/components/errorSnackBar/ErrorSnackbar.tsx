@@ -16,7 +16,6 @@ export const ErrorSnackbar = () => {
 
     const dispatch = useAppDispatch()
     const error = useSelector(errorSelector)
-    const [message, setMessage] = useState(error)
 
     const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
@@ -37,7 +36,7 @@ export const ErrorSnackbar = () => {
                 severity="error"
                 sx={{width: '100%', backgroundColor: 'orangered'}}
             >
-                {message}😠
+                {error}😠
             </Alert>
         </Snackbar>
     )

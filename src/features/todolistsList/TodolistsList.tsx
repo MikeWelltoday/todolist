@@ -32,7 +32,7 @@ export const TodolistsList: FC<TodolistsListPropsType> = (props) => {
         <>
 
             <Grid container sx={{padding: '20px'}}>
-                <AddItemForm addItem={addTodolist} entityStatus={'succeeded'}/>
+                <AddItemForm addItem={addTodolist}/>
             </Grid>
 
             <Grid container spacing={5}>
