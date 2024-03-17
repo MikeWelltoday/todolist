@@ -153,7 +153,7 @@ export function removeTaskTC(todolistId: string, taskId: string) {
                     dispatch(removeTaskAC(todolistId, taskId))
                     dispatch(appSetStatusAC('succeeded'))
                 } else {
-                    handleServerAppError(res.data, dispatch)
+                    handleServerAppError(res.data.messages, dispatch)
                 }
             })
             .catch(error => handleServerNetworkError(error, dispatch))
@@ -171,7 +171,7 @@ export function addTaskTC(todolistId: string, newTitle: string) {
                     dispatch(addTaskAC(res.data.data.item))
                     dispatch(appSetStatusAC('succeeded'))
                 } else {
-                    handleServerAppError(res.data, dispatch)
+                    handleServerAppError(res.data.messages, dispatch)
                 }
                 dispatch(changeTodolistEntityStatusAC(todolistId, 'succeeded'))
             })
@@ -199,7 +199,7 @@ export function updateTaskTC(todolistId: string, taskId: string, taskUpdateModel
                     dispatch(updateTaskAC(todolistId, taskId, model))
                     dispatch(appSetStatusAC('succeeded'))
                 } else {
-                    handleServerAppError(res.data, dispatch)
+                    handleServerAppError(res.data.messages, dispatch)
                 }
             })
             .catch(error => handleServerNetworkError(error, dispatch))

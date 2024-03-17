@@ -1,5 +1,4 @@
 import {Dispatch} from 'redux'
-import {PostDeletePutTaskApiResponseType, TodolistsApiResponseType} from '../api'
 import {appSetErrorAC, AppSetErrorActionType, appSetStatusAC, AppSetStatusActionType} from '../state'
 
 //========================================================================================
@@ -7,15 +6,11 @@ import {appSetErrorAC, AppSetErrorActionType, appSetStatusAC, AppSetStatusAction
 type ErrorUtilsDispatchType = Dispatch<AppSetStatusActionType | AppSetErrorActionType>
 
 export const handleServerAppError =
-    <T>(
-        data: PostDeletePutTaskApiResponseType<T> | TodolistsApiResponseType<T>,
+    (
+        resMessagesArr: string[],
         dispatch: ErrorUtilsDispatchType
     ) => {
-        if (data.messages.length) {
-            dispatch(appSetErrorAC(data.messages[0]))
-        } else {
-            dispatch(appSetErrorAC('Some error occurred'))
-        }
+        dispatch(appSetErrorAC(resMessagesArr.length ? resMessagesArr[0] : 'Some error occurred'))
         dispatch(appSetStatusAC('failed'))
     }
 

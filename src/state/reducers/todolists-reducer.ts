@@ -134,7 +134,7 @@ export function addTodolistTC(title: string) {
                     dispatch(addTodolistAC(res.data.data.item))
                     dispatch(appSetStatusAC('succeeded'))
                 } else {
-                    handleServerAppError(res.data, dispatch)
+                    handleServerAppError(res.data.messages, dispatch)
                 }
             })
             .catch(error => handleServerNetworkError(error, dispatch))
@@ -152,7 +152,7 @@ export function removeTodolistTC(todolistId: string) {
                     dispatch(removeTodolistAC(todolistId))
                     dispatch(appSetStatusAC('succeeded'))
                 } else {
-                    handleServerAppError(res.data, dispatch)
+                    handleServerAppError(res.data.messages, dispatch)
                 }
             })
             .catch(error => handleServerNetworkError(error, dispatch))
@@ -169,7 +169,7 @@ export function updateTodolistTitleTC(todolistId: string, newTitle: string) {
                     dispatch(changeTodolistTitleAC(todolistId, newTitle))
                     dispatch(appSetStatusAC('succeeded'))
                 } else {
-                    handleServerAppError(res.data, dispatch)
+                    handleServerAppError(res.data.messages, dispatch)
                 }
             })
             .catch(error => handleServerNetworkError(error, dispatch))
