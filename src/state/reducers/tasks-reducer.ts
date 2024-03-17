@@ -1,5 +1,5 @@
 import {
-    AddTodolistActionType,
+    AddTodolistActionType, changeTodolistEntityStatusAC,
     RemoveTodolistActionType,
     setTodolistsActionType
 } from './todolists-reducer'
@@ -125,7 +125,6 @@ export function changeTaskTitleAC(todolistId: string, taskId: string, title: str
     return {type: 'CHANGE-TASK-TITLE', payload: {todolistId, taskId, title}} as const
 }
 
-
 //========================================================================================
 
 export function fetchTasksTC(todolistId: string) {
@@ -151,6 +150,7 @@ export function removeTaskTC(todolistId: string, taskId: string) {
 export function addTaskTC(todolistId: string, newTitle: string) {
     return (dispatch: Dispatch) => {
         dispatch(appSetStatusAC('loading'))
+        dispatch(changeTodolistEntityStatusAC(todolistId, 'loading'))
         tasksAPI.createTask(todolistId, newTitle).then(res => {
 
             if (res.data.resultCode === 0) {
@@ -166,6 +166,9 @@ export function addTaskTC(todolistId: string, newTitle: string) {
 
                 dispatch(appSetStatusAC('failed'))
             }
+
+            dispatch(changeTodolistEntityStatusAC(todolistId, 'succeeded'))
+
         })
     }
 }

@@ -14,12 +14,16 @@ const meta: Meta<typeof AddItemForm> = {
     tags: ['autodocs'],
 
     argTypes: {
+        entityStatus: {
+            description: 'entityStatus for loading and disable'
+        },
         addItem: {
             description: 'title is send by cb-function =>'
         }
     },
 
     args: {
+        entityStatus: 'succeeded',
         addItem: action('title is send by cb-function =>')
     }
 }

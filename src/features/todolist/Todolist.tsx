@@ -97,7 +97,7 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
                 </IconButton>
             </h3>
 
-            <AddItemForm addItem={addTaskHandler}/>
+            <AddItemForm addItem={addTaskHandler} entityStatus={props.entityStatus}/>
 
             {tasks.length ?
                 (<div className={S.tasksList}>

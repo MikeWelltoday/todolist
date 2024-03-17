@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import {Todolist} from '../todolist/Todolist'
-import {addTodolistTC, appSetStatusAC, fetchTodolistsTC, todolistsSelector, useAppDispatch} from '../../state'
+import {addTodolistTC, fetchTodolistsTC, todolistsSelector, useAppDispatch} from '../../state'
 import {AddItemForm} from '../../components'
 
 //========================================================================================
@@ -22,13 +22,11 @@ export const TodolistsList: FC = () => {
         dispatch(addTodolistTC(newTodolistTitle))
     }, [])
 
-    dispatch(appSetStatusAC('loading'))
-
     return (
         <>
 
             <Grid container sx={{padding: '20px'}}>
-                <AddItemForm addItem={addTodolist}/>
+                <AddItemForm addItem={addTodolist} entityStatus={'succeeded'}/>
             </Grid>
 
             <Grid container spacing={5}>

@@ -3,10 +3,13 @@ import S from './AddItemForm.module.scss'
 import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
+import {RequestStatusType} from '../../state'
 
 //========================================================================================
 
 type AddItemFormPropsType = {
+    entityStatus: RequestStatusType
+
     addItem: (title: string) => void
 }
 
@@ -48,7 +51,7 @@ export const AddItemForm: FC<AddItemFormPropsType> = memo((props) => {
                 error={error}
             />
 
-            <IconButton onClick={addItemOnClickHandler} color={'primary'}>
+            <IconButton onClick={addItemOnClickHandler} color={'primary'} disabled={props.entityStatus === 'loading'}>
                 <AddCircleOutlineIcon/>
             </IconButton>
 
