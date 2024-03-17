@@ -6,14 +6,16 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import {Task} from '../task/Task'
 import {AddItemForm, EditableSpan, FilterButton} from '../../components'
 import {
-    addTaskTC, AppRootStateType,
+    addTaskTC,
+    AppRootStateType,
     changeTodolistFilterAC,
     fetchTasksTC,
     removeTaskTC,
-    removeTodolistTC, RequestStatusType, statusSelector,
+    removeTodolistTC,
+    RequestStatusType,
+    statusSelector,
     todolistFilterReducerType,
-    updateTaskStatusTC,
-    updateTaskTitleTC,
+    updateTaskTC,
     updateTodolistTitleTC,
     useAppDispatch
 } from '../../state'
@@ -45,7 +47,6 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
     }, [])
 
     let tasks = useSelector<AppRootStateType, TaskApiType[]>(state => state.tasks[props.todolistId])
-    const status = useSelector(statusSelector)
 
     if (props.filter === 'active') {
         tasks = tasks.filter(item => !item.status)
@@ -84,14 +85,11 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
     }, [props.todolistId])
 
     const changeTaskStatusOnChangeHandler = useCallback((taskId: string, status: TaskStatusesEnum) => {
-        dispatch(updateTaskStatusTC(props.todolistId, taskId, status))
+        dispatch(updateTaskTC(props.todolistId, taskId, {status}))
     }, [props.todolistId])
 
     const changeTaskTitleOnChangeHandler = useCallback((taskId: string, newTitle: string) => {
-
-        console.log(status)
-
-        dispatch(updateTaskTitleTC(props.todolistId, taskId, newTitle))
+        dispatch(updateTaskTC(props.todolistId, taskId, {title: newTitle}))
     }, [props.todolistId])
 
     return (

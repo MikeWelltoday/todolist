@@ -1,15 +1,15 @@
 import {
     addTaskAC,
-    changeTaskStatusAC,
-    changeTaskTitleAC,
+    addTodolistAC,
     removeTaskAC,
+    removeTodolistAC,
     setTasksAC,
+    setTodolistsAC,
     tasksReducer,
-    TasksReducerType
+    TasksReducerType,
+    updateTaskAC
 } from '../../state'
-import {addTodolistAC, removeTodolistAC, setTodolistsAC} from '../../state'
-import {TaskPrioritiesEnum, TaskStatusesEnum} from '../../api'
-import {TodolistApiType} from '../../api'
+import {TaskPrioritiesEnum, TaskStatusesEnum, TodolistApiType} from '../../api'
 
 //========================================================================================
 
@@ -109,19 +109,18 @@ test('ADD-TASK', () => {
     expect(endState['todolistId2'][0].status).toBe(TaskStatusesEnum.New)
 })
 
-test('CHANGE-TASK-STATUS', () => {
+test('UPDATE-TASK', () => {
 
-    const endState = tasksReducer(startState, changeTaskStatusAC('todolistId2', '2', TaskStatusesEnum.New))
-
-    expect(endState['todolistId1'][1].status).toBe(TaskStatusesEnum.New)
-    expect(endState['todolistId2'][1].status).toBe(TaskStatusesEnum.New)
-})
-
-test('CHANGE-TASK-TITLE', () => {
     const newTitle = 'MEAT'
-    const endState = tasksReducer(startState, changeTaskTitleAC('todolistId2', '2', newTitle))
+    const newStatus = TaskStatusesEnum.New
+
+    const endState = tasksReducer(startState,
+        updateTaskAC('todolistId2', '2', {title: newTitle, status: newStatus}))
+
     expect(endState['todolistId1'][1].title).toBe('Redux')
     expect(endState['todolistId2'][1].title).toBe(newTitle)
+    expect(endState['todolistId1'][1].status).toBe(TaskStatusesEnum.New)
+    expect(endState['todolistId2'][1].status).toBe(TaskStatusesEnum.New)
 })
 
 test('ADD-TODOLIST', () => {

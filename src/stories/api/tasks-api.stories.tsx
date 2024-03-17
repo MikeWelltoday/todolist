@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {TaskPrioritiesEnum, tasksAPI, TaskStatusesEnum, UpdateTaskModelType} from '../../api'
+import {TaskPrioritiesEnum, tasksAPI, TaskStatusesEnum, ApiUpdateTaskModelType} from '../../api'
 
 //========================================================================================
 
@@ -45,7 +45,7 @@ export const DeleteTask = () => {
 export const UpdateTask = () => {
     const [state, setState] = useState<any>(null)
 
-    const model: UpdateTaskModelType = {
+    const model: ApiUpdateTaskModelType = {
         title: '🍙🍙🍙',
         description: 'description',
         status: TaskStatusesEnum.Draft,

@@ -43,7 +43,7 @@ type PostDeletePutTaskApiResponseType<D = { item: TaskApiType }> = {
     data: D
 }
 
-export type UpdateTaskModelType = {
+export type ApiUpdateTaskModelType = {
     title: string
     description: string
     status: TaskStatusesEnum
@@ -78,7 +78,7 @@ export const tasksAPI = {
         return instance.delete<PostDeletePutTaskApiResponseType<{}>>(`${todolistId}/tasks/${tasksId}`)
     },
 
-    updateTask(todolistId: string, tasksId: string, model: UpdateTaskModelType) {
+    updateTask(todolistId: string, tasksId: string, model: ApiUpdateTaskModelType) {
         return instance.put<PostDeletePutTaskApiResponseType>(`${todolistId}/tasks/${tasksId}`, model)
     }
 
