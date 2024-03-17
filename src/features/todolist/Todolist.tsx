@@ -14,7 +14,7 @@ import {
     removeTodolistTC,
     RequestStatusType,
     statusSelector,
-    todolistFilterReducerType,
+    TodolistFilterReducerType,
     updateTaskTC,
     updateTodolistTitleTC,
     useAppDispatch
@@ -27,7 +27,7 @@ import {TaskApiType, TaskStatusesEnum} from '../../api'
 type TodolistPropsType = {
     todolistId: string
     title: string
-    filter: todolistFilterReducerType
+    filter: TodolistFilterReducerType
     entityStatus: RequestStatusType
 
     demo?: boolean

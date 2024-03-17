@@ -1,25 +1,26 @@
 //========================================================================================
 
-export type appReducerStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
-export type appReducerErrorType = string | null
+export type AppReducerStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
+export type AppReducerErrorType = string | null
 
 export type InitialStateType = {
-    status: appReducerStatusType,
-    error: appReducerErrorType
+    status: AppReducerStatusType,
+    error: AppReducerErrorType
 }
 
 //========================================================================================
 
-type appSetStatusActionType = ReturnType<typeof appSetStatusAC>
-type appSetErrorActionType = ReturnType<typeof appSetErrorAC>
+export type AppSetStatusActionType = ReturnType<typeof appSetStatusAC>
+export type AppSetErrorActionType = ReturnType<typeof appSetErrorAC>
 
 //========================================================================================
 
-type ActionType = appSetStatusActionType | appSetErrorActionType
+type ActionType = AppSetStatusActionType | AppSetErrorActionType
+export type AppActionsForThunkDispatch = ActionType
 
 //========================================================================================
 const initialState: InitialStateType = {
-    status: 'idle' as appReducerStatusType,
+    status: 'idle' as AppReducerStatusType,
     error: null
 }
 
@@ -43,11 +44,11 @@ export function appReducer(state: InitialStateType = initialState, {type, payloa
 
 //========================================================================================
 
-export function appSetStatusAC(status: appReducerStatusType) {
+export function appSetStatusAC(status: AppReducerStatusType) {
     return {type: 'APP-SET-STATUS', payload: {status}} as const
 }
 
-export function appSetErrorAC(error: appReducerErrorType) {
+export function appSetErrorAC(error: AppReducerErrorType) {
     return {type: 'APP-SET-ERROR', payload: {error}} as const
 }
 

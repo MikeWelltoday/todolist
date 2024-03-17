@@ -4,8 +4,8 @@ import {
     changeTodolistTitleAC,
     removeTodolistAC,
     setTodolistsAC,
-    todolistFilterReducerType,
-    todolistReducerType,
+    TodolistFilterReducerType,
+    TodolistReducerType,
     todolistsReducer
 } from '../../state'
 import {TodolistApiType} from '../../api'
@@ -13,7 +13,7 @@ import {TodolistApiType} from '../../api'
 //========================================================================================
 
 
-let startState: todolistReducerType[]
+let startState: TodolistReducerType[]
 
 beforeEach(() => {
     startState = [
@@ -58,7 +58,7 @@ test('CHANGE-TODOLIST-TITLE', () => {
 
 test('CHANGE-TODOLIST-FILTER', () => {
 
-    const newFilter: todolistFilterReducerType = 'completed'
+    const newFilter: TodolistFilterReducerType = 'completed'
 
     const endState = todolistsReducer(startState, changeTodolistFilterAC('todolistId2', newFilter))
 

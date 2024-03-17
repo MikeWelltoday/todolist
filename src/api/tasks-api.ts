@@ -37,7 +37,7 @@ type GetTasksApiResponseType = {
     error: string
 }
 
-type PostDeletePutTaskApiResponseType<D = { item: TaskApiType }> = {
+export type PostDeletePutTaskApiResponseType<D = { item: TaskApiType }> = {
     resultCode: number
     messages: string[]
     data: D

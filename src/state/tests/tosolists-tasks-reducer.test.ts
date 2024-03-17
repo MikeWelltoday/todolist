@@ -1,5 +1,5 @@
 import {
-    addTodolistAC, todolistReducerType, todolistsReducer,
+    addTodolistAC, TodolistReducerType, todolistsReducer,
     tasksReducer, TasksReducerType
 } from '../../state'
 
@@ -7,7 +7,7 @@ import {
 //========================================================================================
 
 let startStateTasks: TasksReducerType
-let startStateTodolists: todolistReducerType[]
+let startStateTodolists: TodolistReducerType[]
 
 beforeEach(() => {
     startStateTasks = {}

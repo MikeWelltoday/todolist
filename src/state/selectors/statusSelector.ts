@@ -1,6 +1,6 @@
 import {AppRootStateType} from '../store'
-import {appReducerStatusType} from '../reducers/app-reducer'
+import {AppReducerStatusType} from '../reducers/app-reducer'
 
 //========================================================================================
 
-export const statusSelector = (state: AppRootStateType): appReducerStatusType => state.app.status
+export const statusSelector = (state: AppRootStateType): AppReducerStatusType => state.app.status

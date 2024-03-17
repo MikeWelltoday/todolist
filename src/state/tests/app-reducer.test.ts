@@ -2,8 +2,8 @@ import {
     appSetStatusAC,
     appReducer,
     InitialStateType,
-    appReducerStatusType,
-    appReducerErrorType,
+    AppReducerStatusType,
+    AppReducerErrorType,
     appSetErrorAC
 } from '../../state'
 
@@ -20,7 +20,7 @@ beforeEach(() => {
 
 test('APP-SET-STATUS', () => {
 
-    const newStatus: appReducerStatusType = 'succeeded'
+    const newStatus: AppReducerStatusType = 'succeeded'
 
     const endState = appReducer(startState, appSetStatusAC(newStatus))
 
@@ -29,7 +29,7 @@ test('APP-SET-STATUS', () => {
 
 test('APP-SET-ERROR', () => {
 
-    const newError: appReducerErrorType = 'error is set here'
+    const newError: AppReducerErrorType = 'error is set here'
 
     const endState = appReducer(startState, appSetErrorAC(newError))
 
