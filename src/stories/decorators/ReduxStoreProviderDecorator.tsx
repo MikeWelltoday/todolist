@@ -1,18 +1,16 @@
 import React from 'react'
 import {Provider} from 'react-redux'
-import {AppRootStateType} from '../../state'
-import {applyMiddleware, combineReducers, legacy_createStore} from 'redux'
-import {tasksReducer} from '../../state'
-import {todolistsReducer} from '../../state'
-import {v1} from 'uuid'
-import {TaskPrioritiesEnum, TaskStatusesEnum} from '../../api'
 import {thunk} from 'redux-thunk'
+import {appReducer, AppRootStateType, tasksReducer, todolistsReducer} from '../../state'
+import {applyMiddleware, combineReducers, legacy_createStore} from 'redux'
+import {TaskPrioritiesEnum, TaskStatusesEnum} from '../../api'
 
 //========================================================================================
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
-    todolists: todolistsReducer
+    todolists: todolistsReducer,
+    app: appReducer
 })
 
 
@@ -27,7 +25,14 @@ const initialGlobalState: AppRootStateType = {
                 order: 0,
                 entityStatus: 'succeeded'
             },
-            {id: 'todolistId2', title: 'What to buy', filter: 'all', addedDate: '', order: 0, entityStatus: 'succeeded'}
+            {
+                id: 'todolistId2',
+                title: 'What to buy',
+                filter: 'all',
+                addedDate: '',
+                order: 0,
+                entityStatus: 'loading'
+            }
         ],
     tasks:
         {
@@ -35,7 +40,7 @@ const initialGlobalState: AppRootStateType = {
                 [
                     {
                         todoListId: 'todolistId1',
-                        id: v1(),
+                        id: 'hfaspdfaiufg',
                         title: 'React',
                         status: TaskStatusesEnum.Completed,
                         priority: TaskPrioritiesEnum.Low,
@@ -48,7 +53,7 @@ const initialGlobalState: AppRootStateType = {
                     },
                     {
                         todoListId: 'todolistId1',
-                        id: v1(),
+                        id: 'bjgwmfwf',
                         title: 'Redux',
                         status: TaskStatusesEnum.New,
                         priority: TaskPrioritiesEnum.Low,
@@ -65,7 +70,8 @@ const initialGlobalState: AppRootStateType = {
                 [
                     {
                         todoListId: 'todolistId2',
-                        id: v1(), title: 'Book',
+                        id: 'rkml;qwemq',
+                        title: 'Book',
                         status: TaskStatusesEnum.New,
                         priority: TaskPrioritiesEnum.Low,
                         description: '',
@@ -77,7 +83,8 @@ const initialGlobalState: AppRootStateType = {
                     },
                     {
                         todoListId: 'todolistId2',
-                        id: v1(), title: 'Milk',
+                        id: 'qmwnbcvbciz',
+                        title: 'Milk',
                         status: TaskStatusesEnum.Completed,
                         priority: TaskPrioritiesEnum.Low,
                         description: '',
@@ -90,7 +97,7 @@ const initialGlobalState: AppRootStateType = {
                 ]
         },
     app: {
-        status: 'loading',
+        status: 'idle',
         error: null
     }
 }

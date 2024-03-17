@@ -27,6 +27,8 @@ type TodolistPropsType = {
     title: string
     filter: todolistFilterReducerType
     entityStatus: RequestStatusType
+
+    demo?: boolean
 }
 
 //========================================================================================
@@ -38,6 +40,7 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
+        if (props.demo) return
         dispatch(fetchTasksTC(props.todolistId))
     }, [])
 

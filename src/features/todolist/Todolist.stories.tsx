@@ -28,6 +28,9 @@ const meta: Meta<typeof Todolist> = {
         },
         entityStatus: {
             description: 'entityStatus for loading and disable'
+        },
+        demo: {
+            description: 'demo - to block API request to server'
         }
     },
 
@@ -35,7 +38,8 @@ const meta: Meta<typeof Todolist> = {
         todolistId: 'todolistId1',
         title: 'todolist title',
         filter: 'all',
-        entityStatus: 'succeeded'
+        entityStatus: 'succeeded',
+        demo: true
     }
 }
 export default meta

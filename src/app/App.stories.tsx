@@ -13,7 +13,17 @@ const meta: Meta<typeof App> = {
 
     tags: ['autodocs'],
 
-    decorators: [ReduxStoreProviderDecorator]
+    decorators: [ReduxStoreProviderDecorator],
+
+    argTypes: {
+        demo: {
+            description: 'demo - to block API request to server'
+        }
+    },
+
+    args: {
+        demo: true
+    }
 }
 export default meta
 

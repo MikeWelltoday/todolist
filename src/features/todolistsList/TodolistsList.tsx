@@ -8,13 +8,19 @@ import {AddItemForm} from '../../components'
 
 //========================================================================================
 
+type TodolistsListPropsType = {
+    demo: boolean
+}
 
-export const TodolistsList: FC = () => {
+//========================================================================================
+
+export const TodolistsList: FC<TodolistsListPropsType> = (props) => {
 
     const dispatch = useAppDispatch()
     const todolists = useSelector(todolistsSelector)
 
     useEffect(() => {
+        if (props.demo) return
         dispatch(fetchTodolistsTC())
     }, [])
 
@@ -40,6 +46,8 @@ export const TodolistsList: FC = () => {
                                         title={t.title}
                                         filter={t.filter}
                                         entityStatus={t.entityStatus}
+
+                                        demo={props.demo}
                                     />
                                 </Paper>
                             </Grid>

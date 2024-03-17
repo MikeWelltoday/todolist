@@ -6,7 +6,13 @@ import {ErrorSnackbar} from '../components'
 
 //========================================================================================
 
-function App() {
+type AppPropsType = {
+    demo: boolean
+}
+
+//========================================================================================
+
+function App(props: AppPropsType) {
     return (
         <div className="App">
 
@@ -15,7 +21,7 @@ function App() {
             <HeaderAppBar/>
 
             <Container fixed>
-                <TodolistsList/>
+                <TodolistsList demo={props.demo}/>
             </Container>
 
         </div>
