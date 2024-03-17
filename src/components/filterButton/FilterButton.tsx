@@ -13,7 +13,7 @@ type FilterButtonPropsType = {
 
 export const FilterButton: FC<FilterButtonPropsType> = memo((props) => {
 
-    console.log('filterButton => R E N D E R')
+    console.log('🥛 FILTER-BUTTON')
 
     return (
         <Button

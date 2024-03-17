@@ -1,4 +1,4 @@
-import React, {MouseEventHandler, useState} from 'react'
+import React, {useState} from 'react'
 import MuiAlert, {AlertProps} from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
 import {useSelector} from 'react-redux'
@@ -12,25 +12,16 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props,
 
 export const ErrorSnackbar = () => {
 
+    console.log('🍅 ERROR-SNACK-BAR')
+
     const dispatch = useAppDispatch()
     const error = useSelector(errorSelector)
-
-    // костыль, чтобы когда сетался null в error
-    // надпись не исчезала раньше snackbar
-    const [message] = useState(error)
+    const [message, setMessage] = useState(error)
 
     const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
-            dispatch(appSetErrorAC(null))
             return
         }
-    }
-
-    setTimeout(() => {
-        dispatch(appSetErrorAC(null))
-    }, 4000)
-
-    function closeOnClickHandler() {
         dispatch(appSetErrorAC(null))
     }
 
@@ -45,9 +36,8 @@ export const ErrorSnackbar = () => {
                 onClose={handleClose}
                 severity="error"
                 sx={{width: '100%', backgroundColor: 'orangered'}}
-                onClick={closeOnClickHandler}
             >
-                {message} 😠
+                {message}😠
             </Alert>
         </Snackbar>
     )

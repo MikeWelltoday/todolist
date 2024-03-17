@@ -1,4 +1,14 @@
 
 .loaderContainer {
-  height: 2px;
+  height: 6px;
+
+  span {
+    height: 6px;
+    background-color: inherit;
+
+    span {
+      background-color: #bf2de5;
+      border-radius: 20px;
+    }
+  }
 }

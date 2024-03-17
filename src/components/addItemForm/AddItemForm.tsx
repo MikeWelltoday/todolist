@@ -14,7 +14,7 @@ type AddItemFormPropsType = {
 
 export const AddItemForm: FC<AddItemFormPropsType> = memo((props) => {
 
-    console.log('addItemForm => R E N D E R')
+    console.log('🥨 ADD-ITEM-FROM ')
 
     const [newTitle, setNewInput] = useState('')
     const [error, setError] = useState(false)

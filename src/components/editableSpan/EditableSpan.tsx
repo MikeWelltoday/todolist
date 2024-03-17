@@ -13,7 +13,7 @@ type EditableSpanPropsType = {
 
 export const EditableSpan: FC<EditableSpanPropsType> = memo((props) => {
 
-    console.log('editableSpan => R E N D E R')
+    console.log('🧄 EDITABLE-SPAN')
 
     const [changeMode, setChangeMode] = useState(false)
     const [title, setTitle] = useState(props.children)

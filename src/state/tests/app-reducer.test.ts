@@ -29,7 +29,7 @@ test('APP-SET-STATUS', () => {
 
 test('APP-SET-ERROR', () => {
 
-    const newError: appReducerErrorType = 'error'
+    const newError: appReducerErrorType = 'error is set here'
 
     const endState = appReducer(startState, appSetErrorAC(newError))
 

@@ -28,6 +28,43 @@ export type todolistReducerType = TodolistApiType & {
     filter: todolistFilterReducerType
 }
 
+//=======================================================================================
+
+const todolistsInitialState: todolistReducerType[] = []
+
+export const todolistsReducer = (state: todolistReducerType[] = todolistsInitialState, {
+    type,
+    payload
+}: ActionsType): todolistReducerType[] => {
+
+    switch (type) {
+
+        case 'REMOVE-TODOLIST': {
+            return [...state.filter(t => t.id !== payload.id)]
+        }
+
+        case 'ADD-TODOLIST': {
+            return [{...payload.newTodolistFromAPI, filter: 'all'}, ...state]
+        }
+
+        case 'CHANGE-TODOLIST-TITLE': {
+            return state.map(t => t.id === payload.id ? {...t, title: payload.title} : t)
+        }
+
+        case 'CHANGE-TODOLIST-FILTER': {
+            return state.map(t => t.id === payload.id ? {...t, filter: payload.filter} : t)
+        }
+
+        case 'SET-TODOLISTS': {
+            return payload.todolistsFromAPI.map(t => ({...t, filter: 'all'}))
+        }
+
+        default: {
+            return state
+        }
+    }
+}
+
 //========================================================================================
 
 export function removeTodolistAC(todolistId: string) {
@@ -89,43 +126,6 @@ export function updateTodolistTitleTC(todolistId: string, newTitle: string) {
             dispatch(changeTodolistTitleAC(todolistId, newTitle))
             dispatch(appSetStatusAC('succeeded'))
         })
-    }
-}
-
-//=======================================================================================
-
-const todolistsInitialState: todolistReducerType[] = []
-
-export const todolistsReducer = (state: todolistReducerType[] = todolistsInitialState, {
-    type,
-    payload
-}: ActionsType): todolistReducerType[] => {
-
-    switch (type) {
-
-        case 'REMOVE-TODOLIST': {
-            return [...state.filter(t => t.id !== payload.id)]
-        }
-
-        case 'ADD-TODOLIST': {
-            return [{...payload.newTodolistFromAPI, filter: 'all'}, ...state]
-        }
-
-        case 'CHANGE-TODOLIST-TITLE': {
-            return state.map(t => t.id === payload.id ? {...t, title: payload.title} : t)
-        }
-
-        case 'CHANGE-TODOLIST-FILTER': {
-            return state.map(t => t.id === payload.id ? {...t, filter: payload.filter} : t)
-        }
-
-        case 'SET-TODOLISTS': {
-            return payload.todolistsFromAPI.map(t => ({...t, filter: 'all'}))
-        }
-
-        default: {
-            return state
-        }
     }
 }
 

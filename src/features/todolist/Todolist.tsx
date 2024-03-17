@@ -2,19 +2,22 @@ import React, {FC, memo, useCallback, useEffect} from 'react'
 import S from './Todolist.module.scss'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
-import {useSelector} from 'react-redux'
 import {Task} from '../task/Task'
 import {AddItemForm, EditableSpan, FilterButton} from '../../components'
 import {
-    addTaskTC, changeTodolistFilterAC,
+    addTaskTC, AppRootStateType,
+    changeTodolistFilterAC,
     fetchTasksTC,
-    removeTaskTC, removeTodolistTC,
-    tasksSelector, todolistFilterReducerType,
+    removeTaskTC,
+    removeTodolistTC,
+    todolistFilterReducerType,
     updateTaskStatusTC,
-    updateTaskTitleTC, updateTodolistTitleTC,
+    updateTaskTitleTC,
+    updateTodolistTitleTC,
     useAppDispatch
 } from '../../state'
-import {TaskStatusesEnum} from '../../api'
+import {TaskApiType, TaskStatusesEnum} from '../../api'
+import {useSelector} from 'react-redux'
 
 //========================================================================================
 
@@ -28,14 +31,15 @@ type TodolistPropsType = {
 
 export const Todolist: FC<TodolistPropsType> = memo((props) => {
 
-    console.log('todolist => R E N D E R')
+    console.log('🍄 TODOLIST')
+
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         dispatch(fetchTasksTC(props.todolistId))
     }, [])
 
-    let tasks = useSelector(tasksSelector)[props.todolistId]
-    const dispatch = useAppDispatch()
+    let tasks = useSelector<AppRootStateType, TaskApiType[]>(state => state.tasks[props.todolistId])
 
     if (props.filter === 'active') {
         tasks = tasks.filter(item => !item.status)

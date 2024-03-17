@@ -18,19 +18,9 @@ type appSetErrorActionType = ReturnType<typeof appSetErrorAC>
 type ActionType = appSetStatusActionType | appSetErrorActionType
 
 //========================================================================================
-
-export function appSetStatusAC(status: appReducerStatusType) {
-    return {type: 'APP-SET-STATUS', payload: {status}} as const
-}
-
-export function appSetErrorAC(error: appReducerErrorType) {
-    return {type: 'APP-SET-ERROR', payload: {error}} as const
-}
-
-//========================================================================================
 const initialState: InitialStateType = {
     status: 'idle' as appReducerStatusType,
-    error: 'error'
+    error: null
 }
 
 export function appReducer(state: InitialStateType = initialState, {type, payload}: ActionType): InitialStateType {
@@ -49,6 +39,16 @@ export function appReducer(state: InitialStateType = initialState, {type, payloa
             return state
         }
     }
+}
+
+//========================================================================================
+
+export function appSetStatusAC(status: appReducerStatusType) {
+    return {type: 'APP-SET-STATUS', payload: {status}} as const
+}
+
+export function appSetErrorAC(error: appReducerErrorType) {
+    return {type: 'APP-SET-ERROR', payload: {error}} as const
 }
 
 

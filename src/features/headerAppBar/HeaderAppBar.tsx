@@ -15,6 +15,8 @@ import LinearProgress from '@mui/material/LinearProgress'
 
 export const HeaderAppBar = () => {
 
+    console.log('🍭 APP-BAR')
+
     const status = useSelector(statusSelector)
 
     return (
@@ -37,7 +39,7 @@ export const HeaderAppBar = () => {
                 </Toolbar>
 
                 <div className={S.loaderContainer}>
-                    {status === 'loading' && <LinearProgress color={'success'}/>}
+                    {status === 'loading' && <LinearProgress color={'primary'}/>}
                 </div>
 
             </AppBar>

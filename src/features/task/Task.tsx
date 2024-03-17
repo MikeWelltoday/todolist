@@ -22,7 +22,7 @@ type TaskPropsType = {
 
 export const Task: FC<TaskPropsType> = memo((props) => {
 
-    console.log('task => R E N D E R')
+    console.log('🍓 TASK')
 
     const removeTaskOnClickHandler = useCallback(() => {
         props.removeTaskOnClickHandler(props.taskId)

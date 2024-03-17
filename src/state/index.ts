@@ -42,7 +42,6 @@ export {todolistsReducer} from './reducers/todolists-reducer'
 
 //========================================================================================
 // SELECTORS
-export {tasksSelector} from './selectors/tasksSelector'
 export {todolistsSelector} from './selectors/todolistsSelector'
 export {statusSelector} from './selectors/statusSelector'
 export {errorSelector} from './selectors/errorSelector'
