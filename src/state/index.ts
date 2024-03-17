@@ -29,6 +29,7 @@ export type {AddTodolistActionType} from './reducers/todolists-reducer'
 export type {setTodolistsActionType} from './reducers/todolists-reducer'
 export type {todolistFilterReducerType} from './reducers/todolists-reducer'
 export type {todolistReducerType} from './reducers/todolists-reducer'
+export type {RequestStatusType} from './reducers/todolists-reducer'
 export {removeTodolistAC} from './reducers/todolists-reducer'
 export {addTodolistAC} from './reducers/todolists-reducer'
 export {changeTodolistTitleAC} from './reducers/todolists-reducer'
@@ -39,6 +40,7 @@ export {addTodolistTC} from './reducers/todolists-reducer'
 export {removeTodolistTC} from './reducers/todolists-reducer'
 export {updateTodolistTitleTC} from './reducers/todolists-reducer'
 export {todolistsReducer} from './reducers/todolists-reducer'
+export {changeTodolistEntityStatusAC} from './reducers/todolists-reducer'
 
 //========================================================================================
 // SELECTORS

@@ -7,6 +7,8 @@ import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import {Loader} from './loader/Loader'
+import {useSelector} from 'react-redux'
+import {statusSelector} from '../../state'
 
 
 //========================================================================================
@@ -14,7 +16,6 @@ import {Loader} from './loader/Loader'
 export const HeaderAppBar = () => {
 
     console.log('🍭 APP-BAR')
-
 
     return (
         <Box sx={{flexGrow: 1}}>

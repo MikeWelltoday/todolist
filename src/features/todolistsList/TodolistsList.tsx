@@ -3,14 +3,7 @@ import {useSelector} from 'react-redux'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import {Todolist} from '../todolist/Todolist'
-import {
-    addTodolistTC,
-    appSetErrorAC,
-    appSetStatusAC,
-    fetchTodolistsTC,
-    todolistsSelector,
-    useAppDispatch
-} from '../../state'
+import {addTodolistTC, appSetStatusAC, fetchTodolistsTC, todolistsSelector, useAppDispatch} from '../../state'
 import {AddItemForm} from '../../components'
 
 //========================================================================================
@@ -48,6 +41,7 @@ export const TodolistsList: FC = () => {
                                         todolistId={t.id}
                                         title={t.title}
                                         filter={t.filter}
+                                        entityStatus={t.entityStatus}
                                     />
                                 </Paper>
                             </Grid>

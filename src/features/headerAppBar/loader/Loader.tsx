@@ -12,6 +12,8 @@ export const Loader: FC = () => {
 
     const status = useSelector(statusSelector)
 
+    console.log(status)
+
     return (
         <div className={S.loaderContainer}>
             {status === 'loading' && <LinearProgress color={'primary'}/>}

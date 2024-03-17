@@ -1,4 +1,5 @@
 import React, {FC, memo, useCallback, useEffect} from 'react'
+import {useSelector} from 'react-redux'
 import S from './Todolist.module.scss'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -9,7 +10,7 @@ import {
     changeTodolistFilterAC,
     fetchTasksTC,
     removeTaskTC,
-    removeTodolistTC,
+    removeTodolistTC, RequestStatusType,
     todolistFilterReducerType,
     updateTaskStatusTC,
     updateTaskTitleTC,
@@ -17,7 +18,7 @@ import {
     useAppDispatch
 } from '../../state'
 import {TaskApiType, TaskStatusesEnum} from '../../api'
-import {useSelector} from 'react-redux'
+
 
 //========================================================================================
 
@@ -25,6 +26,7 @@ type TodolistPropsType = {
     todolistId: string
     title: string
     filter: todolistFilterReducerType
+    entityStatus: RequestStatusType
 }
 
 //========================================================================================
@@ -90,7 +92,7 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
 
             <h3>
                 <EditableSpan onChangeTitle={changeTodolistTitleOnChangeHandler}>{props.title}</EditableSpan>
-                <IconButton onClick={removeTodolistOnClickHandler}>
+                <IconButton onClick={removeTodolistOnClickHandler} disabled={props.entityStatus === 'loading'}>
                     <DeleteIcon/>
                 </IconButton>
             </h3>

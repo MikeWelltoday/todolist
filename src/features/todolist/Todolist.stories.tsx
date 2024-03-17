@@ -25,13 +25,17 @@ const meta: Meta<typeof Todolist> = {
         },
         filter: {
             description: 'todolsit filter value'
+        },
+        entityStatus: {
+            description: 'entityStatus for loading and disable'
         }
     },
 
     args: {
         todolistId: 'todolistId1',
         title: 'todolist title',
-        filter: 'all'
+        filter: 'all',
+        entityStatus: 'succeeded'
     }
 }
 export default meta

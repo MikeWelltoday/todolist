@@ -9,6 +9,7 @@ export type AddTodolistActionType = ReturnType<typeof addTodolistAC>
 export type setTodolistsActionType = ReturnType<typeof setTodolistsAC>
 type ChangeTodolistTitleActionType = ReturnType<typeof changeTodolistTitleAC>
 type ChangeTodolistFilterActionType = ReturnType<typeof changeTodolistFilterAC>
+type ChangeTodolistEntityStatusAction = ReturnType<typeof changeTodolistEntityStatusAC>
 
 
 //========================================================================================
@@ -19,13 +20,16 @@ type ActionsType =
     | ChangeTodolistTitleActionType
     | ChangeTodolistFilterActionType
     | setTodolistsActionType
+    | ChangeTodolistEntityStatusAction
 
 //========================================================================================
 
 export type todolistFilterReducerType = 'all' | 'active' | 'completed'
+export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
 export type todolistReducerType = TodolistApiType & {
     filter: todolistFilterReducerType
+    entityStatus: RequestStatusType
 }
 
 //=======================================================================================
@@ -44,7 +48,7 @@ export const todolistsReducer = (state: todolistReducerType[] = todolistsInitial
         }
 
         case 'ADD-TODOLIST': {
-            return [{...payload.newTodolistFromAPI, filter: 'all'}, ...state]
+            return [{...payload.newTodolistFromAPI, filter: 'all', entityStatus: 'succeeded'}, ...state]
         }
 
         case 'CHANGE-TODOLIST-TITLE': {
@@ -56,7 +60,11 @@ export const todolistsReducer = (state: todolistReducerType[] = todolistsInitial
         }
 
         case 'SET-TODOLISTS': {
-            return payload.todolistsFromAPI.map(t => ({...t, filter: 'all'}))
+            return payload.todolistsFromAPI.map(t => ({...t, filter: 'all', entityStatus: 'succeeded'}))
+        }
+
+        case 'CHANGE-TODOLIST-ENTITY-STATUS': {
+            return state.map(t => t.id === payload.todolistId ? {...t, entityStatus: payload.newStatus} : t)
         }
 
         default: {
@@ -87,6 +95,10 @@ export function setTodolistsAC(todolistsFromAPI: TodolistApiType[]) {
     return {type: 'SET-TODOLISTS', payload: {todolistsFromAPI}} as const
 }
 
+export function changeTodolistEntityStatusAC(todolistId: string, newStatus: RequestStatusType) {
+    return {type: 'CHANGE-TODOLIST-ENTITY-STATUS', payload: {todolistId, newStatus}} as const
+}
+
 //=======================================================================================
 
 export function fetchTodolistsTC() {
@@ -112,8 +124,10 @@ export function addTodolistTC(title: string) {
 export function removeTodolistTC(todolistId: string) {
     return (dispatch: Dispatch) => {
         dispatch(appSetStatusAC('loading'))
+        dispatch(changeTodolistEntityStatusAC(todolistId, 'loading'))
         todolistsAPI.deleteTodolist(todolistId).then(() => {
             dispatch(removeTodolistAC(todolistId))
+            dispatch(changeTodolistEntityStatusAC(todolistId, 'succeeded'))
             dispatch(appSetStatusAC('succeeded'))
         })
     }

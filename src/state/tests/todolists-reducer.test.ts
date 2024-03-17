@@ -1,5 +1,5 @@
 import {
-    addTodolistAC,
+    addTodolistAC, changeTodolistEntityStatusAC,
     changeTodolistFilterAC,
     changeTodolistTitleAC,
     removeTodolistAC,
@@ -17,8 +17,8 @@ let startState: todolistReducerType[]
 
 beforeEach(() => {
     startState = [
-        {id: 'todolistId1', title: 'What to learn', filter: 'all', addedDate: '', order: 0},
-        {id: 'todolistId2', title: 'What to buy', filter: 'all', addedDate: '', order: 0}
+        {id: 'todolistId1', title: 'What to learn', filter: 'all', addedDate: '', order: 0, entityStatus: 'succeeded'},
+        {id: 'todolistId2', title: 'What to buy', filter: 'all', addedDate: '', order: 0, entityStatus: 'succeeded'}
     ]
 })
 
@@ -37,9 +37,13 @@ test('ADD-TODOLIST', () => {
 
     const endState = todolistsReducer(startState, addTodolistAC(newTodolistFromAPI))
 
+    const keys = Object.keys(endState[0])
+
     expect(endState.length).toBe(3)
     expect(endState[0].title).toBe(newTodolistFromAPI.title)
     expect(endState[0].filter).toBe('all')
+    expect(endState[0].entityStatus).toBe('succeeded')
+    expect(keys.length).toBe(6)
 })
 
 test('CHANGE-TODOLIST-TITLE', () => {
@@ -70,9 +74,22 @@ test('SET-TODOLISTS', () => {
 
     const endState = todolistsReducer(startState, setTodolistsAC(newTodolists))
 
+    const keys = Object.keys(endState[0])
+
     expect(endState.length).toBe(1)
     expect(endState[0].id).toBe(newTodolists[0].id)
     expect(endState[0].title).toBe(newTodolists[0].title)
     expect(endState[0].filter).toBe('all')
+    expect(endState[0].entityStatus).toBe('succeeded')
+    expect(keys.length).toBe(6)
+})
 
+test('CHANGE-TODOLIST-ENTITY-STATUS', () => {
+
+    const newEntityStatus = 'loading'
+
+    const endState = todolistsReducer(startState, changeTodolistEntityStatusAC('todolistId2', newEntityStatus))
+
+    expect(endState[0].entityStatus).toBe('succeeded')
+    expect(endState[1].entityStatus).toBe(newEntityStatus)
 })
