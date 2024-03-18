@@ -5,7 +5,7 @@ import {handleServerAppError, handleServerNetworkError} from '../../utils'
 
 //========================================================================================
 
-type ThunkDispatch = Dispatch<ActionsType | AppActionsForThunkDispatch>
+type ThunkDispatch = Dispatch<TodolistsActionsType | AppActionsForThunkDispatch>
 
 //========================================================================================
 
@@ -19,7 +19,7 @@ type ChangeTodolistEntityStatusAction = ReturnType<typeof changeTodolistEntitySt
 
 //========================================================================================
 
-type ActionsType =
+type TodolistsActionsType =
     RemoveTodolistActionType
     | AddTodolistActionType
     | ChangeTodolistTitleActionType
@@ -44,7 +44,7 @@ const todolistsInitialState: TodolistReducerType[] = []
 export const todolistsReducer = (state: TodolistReducerType[] = todolistsInitialState, {
     type,
     payload
-}: ActionsType): TodolistReducerType[] => {
+}: TodolistsActionsType): TodolistReducerType[] => {
 
     switch (type) {
 

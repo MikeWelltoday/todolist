@@ -18,7 +18,7 @@ type SetTasksActionType = ReturnType<typeof setTasksAC>
 
 //========================================================================================
 
-type ActionsType =
+type TasksActionsType =
     SetTasksActionType
     | AddTaskActionType
     | ChangeTaskTitleActionType
@@ -49,7 +49,7 @@ const tasksInitialState: TasksReducerType = {}
 export const tasksReducer = (state: TasksReducerType = tasksInitialState, {
     type,
     payload
-}: ActionsType): TasksReducerType => {
+}: TasksActionsType): TasksReducerType => {
 
     switch (type) {
 

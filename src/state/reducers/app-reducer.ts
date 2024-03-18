@@ -15,8 +15,8 @@ export type AppSetErrorActionType = ReturnType<typeof appSetErrorAC>
 
 //========================================================================================
 
-type ActionType = AppSetStatusActionType | AppSetErrorActionType
-export type AppActionsForThunkDispatch = ActionType
+type AppActionType = AppSetStatusActionType | AppSetErrorActionType
+export type AppActionsForThunkDispatch = AppActionType
 
 //========================================================================================
 const initialState: InitialStateType = {
@@ -24,7 +24,7 @@ const initialState: InitialStateType = {
     error: null
 }
 
-export function appReducer(state: InitialStateType = initialState, {type, payload}: ActionType): InitialStateType {
+export function appReducer(state: InitialStateType = initialState, {type, payload}: AppActionType): InitialStateType {
 
     switch (type) {
 
