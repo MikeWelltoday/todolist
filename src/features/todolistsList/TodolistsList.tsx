@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import {Todolist} from '../todolist/Todolist'
-import {addTodolistTC, fetchTodolistsTC, todolistsSelector, useAppDispatch} from '../../state'
+import {addTodolistTC, appSetErrorAC, fetchTodolistsTC, todolistsSelector, useAppDispatch} from '../../state'
 import {AddItemForm} from '../../components'
 
 //========================================================================================
@@ -18,6 +18,8 @@ export const TodolistsList: FC<TodolistsListPropsType> = (props) => {
 
     const dispatch = useAppDispatch()
     const todolists = useSelector(todolistsSelector)
+
+    dispatch(appSetErrorAC('look at me'))
 
     useEffect(() => {
         if (props.demo) return
