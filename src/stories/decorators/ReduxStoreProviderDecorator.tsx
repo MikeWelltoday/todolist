@@ -49,7 +49,8 @@ const initialGlobalState: AppRootStateType = {
                         completed: false,
                         addedDate: '',
                         startDate: '',
-                        deadline: ''
+                        deadline: '',
+                        entityStatus: 'succeeded'
                     },
                     {
                         todoListId: 'todolistId1',
@@ -62,7 +63,8 @@ const initialGlobalState: AppRootStateType = {
                         completed: false,
                         addedDate: '',
                         startDate: '',
-                        deadline: ''
+                        deadline: '',
+                        entityStatus: 'succeeded'
                     }
 
                 ],
@@ -79,7 +81,8 @@ const initialGlobalState: AppRootStateType = {
                         completed: false,
                         addedDate: '',
                         startDate: '',
-                        deadline: ''
+                        deadline: '',
+                        entityStatus: 'succeeded'
                     },
                     {
                         todoListId: 'todolistId2',
@@ -92,7 +95,8 @@ const initialGlobalState: AppRootStateType = {
                         completed: false,
                         addedDate: '',
                         startDate: '',
-                        deadline: ''
+                        deadline: '',
+                        entityStatus: 'succeeded'
                     }
                 ]
         },

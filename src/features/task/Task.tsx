@@ -5,6 +5,7 @@ import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 import {EditableSpan} from '../../components'
 import {TaskStatusesEnum} from '../../api'
+import {RequestStatusType} from '../../state'
 
 //========================================================================================
 
@@ -12,6 +13,7 @@ type TaskPropsType = {
     taskId: string
     title: string
     status: TaskStatusesEnum
+    entityStatus: RequestStatusType
 
     removeTaskOnClickHandler: (taskId: string) => void
     changeTaskStatusOnChangeHandler: (taskId: string, status: TaskStatusesEnum) => void
@@ -23,6 +25,8 @@ type TaskPropsType = {
 export const Task: FC<TaskPropsType> = memo((props) => {
 
     console.log('🍓 TASK')
+
+    const isDisabled = props.entityStatus === 'loading'
 
     const removeTaskOnClickHandler = useCallback(() => {
         props.removeTaskOnClickHandler(props.taskId)
@@ -45,11 +49,16 @@ export const Task: FC<TaskPropsType> = memo((props) => {
                 checked={!!props.status}
                 onChange={changeTaskStatusOnChangeHandler}
                 color="secondary"
+                disabled={isDisabled}
             />
 
-            <EditableSpan onChangeTitle={changeTaskTitleOnChangeHandler}>{props.title}</EditableSpan>
+            <EditableSpan
+                title={props.title}
+                onChangeTitle={changeTaskTitleOnChangeHandler}
+                entityStatus={props.entityStatus}
+            />
 
-            <IconButton onClick={removeTaskOnClickHandler}>
+            <IconButton onClick={removeTaskOnClickHandler} disabled={isDisabled}>
                 <DeleteIcon/>
             </IconButton>
 

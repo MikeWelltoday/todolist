@@ -8,7 +8,7 @@ import {RequestStatusType} from '../../state'
 //========================================================================================
 
 type AddItemFormPropsType = {
-    entityStatus?: RequestStatusType
+    todolistEntityStatus?: RequestStatusType
 
     addItem: (title: string) => void
 }
@@ -21,7 +21,7 @@ export const AddItemForm: FC<AddItemFormPropsType> = memo((props) => {
 
     const [newTitle, setNewInput] = useState('')
     const [error, setError] = useState(false)
-    const disabled = props.entityStatus === 'loading'
+    const disabled = props.todolistEntityStatus === 'loading'
 
     function newTitleOnChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
         setNewInput(e.currentTarget.value)

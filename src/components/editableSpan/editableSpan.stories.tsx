@@ -14,18 +14,22 @@ const meta: Meta<typeof EditableSpan> = {
     tags: ['autodocs'],
 
     argTypes: {
-        children: {
-            description: 'children from props',
+        title: {
+            description: 'title from props',
             control: 'text'
         },
         onChangeTitle: {
             description: 'title is send by cb-function =>'
+        },
+        entityStatus: {
+            description: 'status to disable editableSpan'
         }
     },
 
     args: {
-        children: 'title',
-        onChangeTitle: action('title is send by cb-function =>')
+        title: 'title',
+        onChangeTitle: action('title is send by cb-function =>'),
+        entityStatus: 'idle'
     }
 }
 export default meta

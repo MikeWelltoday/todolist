@@ -1,28 +1,24 @@
-import {Dispatch} from 'redux'
-import {appSetErrorAC, AppSetErrorActionType, appSetStatusAC, AppSetStatusActionType} from '../state'
+import {appSetErrorAC, appSetStatusAC, AppThunkDispatchType} from '../state'
 
 //========================================================================================
 
-type ErrorUtilsDispatchType = Dispatch<AppSetStatusActionType | AppSetErrorActionType>
+export const handleServerAppError = (resMessagesArr: string[], dispatch: AppThunkDispatchType) => {
+    dispatch(appSetErrorAC(resMessagesArr.length ? resMessagesArr[0] : 'Some error occurred'))
+    dispatch(appSetStatusAC('failed'))
+    console.error(resMessagesArr.length ? resMessagesArr[0] : 'Some error occurred')
+}
 
-export const handleServerAppError =
-    (
-        resMessagesArr: string[],
-        dispatch: ErrorUtilsDispatchType
-    ) => {
-        dispatch(appSetErrorAC(resMessagesArr.length ? resMessagesArr[0] : 'Some error occurred'))
+export function handleServerNetworkError(error: any, dispatch: AppThunkDispatchType) {
+    if (typeof error === 'string') {
+        dispatch(appSetErrorAC(error))
         dispatch(appSetStatusAC('failed'))
-    }
-
-export const handleServerNetworkError =
-    (
-        error: { message: string },
-        dispatch: ErrorUtilsDispatchType
-    ) => {
+        console.error(error)
+    } else if (error instanceof Error) {
         dispatch(appSetErrorAC(error.message))
         dispatch(appSetStatusAC('failed'))
         console.error(error.message)
     }
+}
 
 
 

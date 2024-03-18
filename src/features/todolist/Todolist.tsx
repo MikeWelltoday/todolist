@@ -13,13 +13,13 @@ import {
     removeTaskTC,
     removeTodolistTC,
     RequestStatusType,
-    statusSelector,
+    TaskReducerType,
     TodolistFilterReducerType,
     updateTaskTC,
     updateTodolistTitleTC,
     useAppDispatch
 } from '../../state'
-import {TaskApiType, TaskStatusesEnum} from '../../api'
+import {TaskStatusesEnum} from '../../api'
 
 
 //========================================================================================
@@ -46,7 +46,7 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
         dispatch(fetchTasksTC(props.todolistId))
     }, [])
 
-    let tasks = useSelector<AppRootStateType, TaskApiType[]>(state => state.tasks[props.todolistId])
+    let tasks = useSelector<AppRootStateType, TaskReducerType[]>(state => state.tasks[props.todolistId])
 
     if (props.filter === 'active') {
         tasks = tasks.filter(item => !item.status)
@@ -96,13 +96,18 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
         <div className={S.todolist}>
 
             <h3>
-                <EditableSpan onChangeTitle={changeTodolistTitleOnChangeHandler}>{props.title}</EditableSpan>
+                <EditableSpan
+                    title={props.title}
+                    onChangeTitle={changeTodolistTitleOnChangeHandler}
+                    entityStatus={props.entityStatus}
+                />
+
                 <IconButton onClick={removeTodolistOnClickHandler} disabled={props.entityStatus === 'loading'}>
                     <DeleteIcon/>
                 </IconButton>
             </h3>
 
-            <AddItemForm addItem={addTaskHandler} entityStatus={props.entityStatus}/>
+            <AddItemForm addItem={addTaskHandler} todolistEntityStatus={props.entityStatus}/>
 
             {tasks.length ?
                 (<div className={S.tasksList}>
@@ -113,6 +118,7 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
                                 taskId={t.id}
                                 title={t.title}
                                 status={t.status}
+                                entityStatus={t.entityStatus}
 
                                 removeTaskOnClickHandler={removeTaskOnClickHandler}
                                 changeTaskStatusOnChangeHandler={changeTaskStatusOnChangeHandler}

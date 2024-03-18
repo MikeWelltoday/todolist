@@ -24,6 +24,9 @@ const meta: Meta<typeof Task> = {
             description: 'task checkbox status',
             control: 'boolean'
         },
+        entityStatus: {
+            description: 'entityStatus to disable component while pending'
+        },
         removeTaskOnClickHandler: {
             description: 'taskId is send by cb-function =>'
         },
@@ -38,6 +41,7 @@ const meta: Meta<typeof Task> = {
         taskId: 'gsdbgsng;sdfngf',
         title: 'JavaScript',
         status: TaskStatusesEnum.New,
+        entityStatus: 'succeeded',
         removeTaskOnClickHandler: action('taskId is send by cb-function =>'),
         changeTaskStatusOnChangeHandler: action('taskId, isDone  are send by cb-function =>'),
         changeTaskTitleOnChangeHandler: action('taskId, newTitle  are send by cb-function =>')

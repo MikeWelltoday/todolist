@@ -10,6 +10,7 @@ import {
     updateTaskAC
 } from '../../state'
 import {TaskPrioritiesEnum, TaskStatusesEnum, TodolistApiType} from '../../api'
+import {changeTasksEntityStatusAC} from '../reducers/tasks-reducer'
 
 //========================================================================================
 
@@ -29,7 +30,8 @@ beforeEach(() => {
                 completed: false,
                 addedDate: '',
                 startDate: '',
-                deadline: ''
+                deadline: '',
+                entityStatus: 'succeeded'
             },
             {
                 todoListId: 'todolistId1',
@@ -42,14 +44,16 @@ beforeEach(() => {
                 completed: false,
                 addedDate: '',
                 startDate: '',
-                deadline: ''
+                deadline: '',
+                entityStatus: 'succeeded'
             }
 
         ],
         'todolistId2': [
             {
                 todoListId: 'todolistId2',
-                id: '1', title: 'Book',
+                id: '1',
+                title: 'Book',
                 status: TaskStatusesEnum.New,
                 priority: TaskPrioritiesEnum.Low,
                 description: '',
@@ -57,11 +61,13 @@ beforeEach(() => {
                 completed: false,
                 addedDate: '',
                 startDate: '',
-                deadline: ''
+                deadline: '',
+                entityStatus: 'succeeded'
             },
             {
                 todoListId: 'todolistId2',
-                id: '2', title: 'Milk',
+                id: '2',
+                title: 'Milk',
                 status: TaskStatusesEnum.Completed,
                 priority: TaskPrioritiesEnum.Low,
                 description: '',
@@ -69,7 +75,8 @@ beforeEach(() => {
                 completed: false,
                 addedDate: '',
                 startDate: '',
-                deadline: ''
+                deadline: '',
+                entityStatus: 'succeeded'
             }
         ]
     }
@@ -102,11 +109,15 @@ test('ADD-TASK', () => {
 
     const endState = tasksReducer(startState, addTaskAC(newTaskFromAPI))
 
+    const keysLength = Object.keys(endState['todolistId2'][0]).length
+
     expect(endState['todolistId1'].length).toBe(2)
     expect(endState['todolistId2'].length).toBe(3)
     expect(endState['todolistId2'][0].id).toBe(newTaskFromAPI.id)
     expect(endState['todolistId2'][0].title).toBe(newTaskFromAPI.title)
     expect(endState['todolistId2'][0].status).toBe(TaskStatusesEnum.New)
+    expect(endState['todolistId2'][0].entityStatus).toBe('succeeded')
+    expect(keysLength).toBe(12)
 })
 
 test('UPDATE-TASK', () => {
@@ -161,8 +172,7 @@ test('SET-TODOLISTS', () => {
 
     const endStateLength = Object.keys(endState).length
 
-    expect(endStateLength).toBe(5)
-
+    expect(endStateLength).toBe(3)
     expect(endState['todolistId3']).toEqual([])
     expect(endState['todolistId4']).toEqual([])
     expect(endState['todolistId5']).toEqual([])
@@ -203,10 +213,27 @@ test('SET-TASKS', () => {
 
     const endState = tasksReducer(startState, setTasksAC(todolistID, tasksFromAPI))
 
+    const taskKeysLength = Object.keys(endState[todolistID][0]).length
+
     expect(endState[todolistID].length).toBe(2)
     expect(endState[todolistID][0].id).toBe('3')
     expect(endState[todolistID][1].id).toBe('4')
     expect(endState[todolistID][0].title).toBe('From Server with id 3')
     expect(endState[todolistID][1].title).toBe('From Server with id 4')
+    expect(endState[todolistID][0].entityStatus).toBe('succeeded')
+    expect(endState[todolistID][1].entityStatus).toBe('succeeded')
+    expect(taskKeysLength).toBe(12)
+})
 
+test('CHANGE-TASKS-ENTITY-STATUS', () => {
+
+    const newStatus = 'loading'
+
+    const endState = tasksReducer(startState,
+        changeTasksEntityStatusAC('todolistId2', '2', newStatus))
+
+    expect(endState['todolistId1'][0].entityStatus).toBe('succeeded')
+    expect(endState['todolistId1'][1].entityStatus).toBe('succeeded')
+    expect(endState['todolistId2'][0].entityStatus).toBe('succeeded')
+    expect(endState['todolistId2'][1].entityStatus).toBe(newStatus)
 })

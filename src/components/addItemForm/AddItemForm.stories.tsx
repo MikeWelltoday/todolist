@@ -14,7 +14,7 @@ const meta: Meta<typeof AddItemForm> = {
     tags: ['autodocs'],
 
     argTypes: {
-        entityStatus: {
+        todolistEntityStatus: {
             description: 'entityStatus for loading and disable'
         },
         addItem: {
@@ -23,7 +23,7 @@ const meta: Meta<typeof AddItemForm> = {
     },
 
     args: {
-        entityStatus: 'succeeded',
+        todolistEntityStatus: 'succeeded',
         addItem: action('title is send by cb-function =>')
     }
 }

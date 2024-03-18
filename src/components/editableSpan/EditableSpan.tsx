@@ -1,11 +1,13 @@
 import React, {ChangeEvent, FC, useState, KeyboardEvent, memo, useCallback} from 'react'
-import S from './EditableSpan.module.scss'
+import s from './EditableSpan.module.scss'
 import TextField from '@mui/material/TextField'
+import {RequestStatusType} from '../../state'
 
 //========================================================================================
 
 type EditableSpanPropsType = {
-    children: string
+    title: string
+    entityStatus: RequestStatusType
     onChangeTitle: (newTitle: string) => void
 }
 
@@ -16,7 +18,8 @@ export const EditableSpan: FC<EditableSpanPropsType> = memo((props) => {
     console.log('🧄 EDITABLE-SPAN')
 
     const [changeMode, setChangeMode] = useState(false)
-    const [title, setTitle] = useState(props.children)
+    const [title, setTitle] = useState(props.title)
+    const isDisabled = props.entityStatus === 'loading'
 
     function newTitleOnChangeHandler(event: ChangeEvent<HTMLInputElement>) {
         setTitle(event.currentTarget.value)
@@ -26,21 +29,22 @@ export const EditableSpan: FC<EditableSpanPropsType> = memo((props) => {
     const deactivateChangeMode = useCallback(() => {
         setChangeMode(false)
         props.onChangeTitle(title.trim())
-    }, [title, props.onChangeTitle, props.children])
+    }, [title, props.onChangeTitle, props.title])
 
     function activateChangeMode() {
         setChangeMode(true)
-        setTitle(props.children)
+        setTitle(props.title)
     }
 
     function onKeyDown(event: KeyboardEvent<HTMLInputElement>) {
         if (event.key === 'Escape' || event.key === 'Enter') deactivateChangeMode()
     }
 
+
     return (
-        changeMode ?
+        (changeMode && !isDisabled) ?
             <TextField
-                className={S.EditableSpan}
+                className={s.EditableSpan}
                 variant="standard"
                 value={title}
                 onBlur={deactivateChangeMode}
@@ -50,10 +54,10 @@ export const EditableSpan: FC<EditableSpanPropsType> = memo((props) => {
             />
             :
             <span
-                className={S.EditableSpan}
+                className={`${s.EditableSpan} ${isDisabled && s.disabled}`}
                 onDoubleClick={activateChangeMode}
             >
-                {props.children}
+                {props.title}
             </span>
     )
 })
