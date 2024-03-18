@@ -6,10 +6,6 @@ import Alert from '@mui/material/Alert'
 
 //========================================================================================
 
-// const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
-//     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
-// })
-
 export const ErrorSnackbar = () => {
 
     console.log('🍅 ERROR-SNACK-BAR')
@@ -37,18 +33,8 @@ export const ErrorSnackbar = () => {
                 sx={{width: '100%', backgroundColor: 'orangered'}}
                 elevation={6}
                 variant="filled"
-            >
-                {error} 😠
-            </Alert>
+            >{error} 😠</Alert>
 
-
-            {/*<Alert*/}
-            {/*    onClose={handleClose}*/}
-            {/*    severity="error"*/}
-            {/*    sx={{width: '100%', backgroundColor: 'orangered'}}*/}
-            {/*>*/}
-            {/*    {error}😠*/}
-            {/*</Alert>*/}
         </Snackbar>
     )
 }
