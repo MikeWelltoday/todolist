@@ -19,8 +19,6 @@ export const TodolistsList: FC<TodolistsListPropsType> = (props) => {
     const dispatch = useAppDispatch()
     const todolists = useSelector(todolistsSelector)
 
-    dispatch(appSetErrorAC('look at me'))
-
     useEffect(() => {
         if (props.demo) return
         dispatch(fetchTodolistsTC())
