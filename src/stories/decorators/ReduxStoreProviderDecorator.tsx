@@ -73,7 +73,7 @@ const initialGlobalState: AppRootStateType = {
                     {
                         todoListId: 'todolistId2',
                         id: 'rkml;qwemq',
-                        title: 'Book',
+                        title: 'BookS',
                         status: TaskStatusesEnum.New,
                         priority: TaskPrioritiesEnum.Low,
                         description: '',

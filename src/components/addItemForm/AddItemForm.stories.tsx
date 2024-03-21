@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react'
-import {action} from '@storybook/addon-actions'
 import {AddItemForm} from './AddItemForm'
+import {fn} from '@storybook/test'
 
 //========================================================================================
 
@@ -24,7 +24,7 @@ const meta: Meta<typeof AddItemForm> = {
 
     args: {
         todolistEntityStatus: 'succeeded',
-        addItem: action('title is send by cb-function =>')
+        addItem: fn()
     }
 }
 export default meta

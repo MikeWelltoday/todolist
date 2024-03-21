@@ -6,7 +6,6 @@ import {useDispatch} from 'react-redux'
 import {appReducer} from './index'
 import {AppActionsType} from './reducers/app-reducer'
 
-
 //========================================================================================
 
 export type AppRootStateType = ReturnType<typeof rootReducer>

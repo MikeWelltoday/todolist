@@ -40,8 +40,8 @@
     "build-storybook": "storybook build",
     "jest:integration": "jest -c integration/jest.config.js",
     "test:integration": "start-server-and-test storybook http-get://localhost:3001 jest:integration",
-    "snapshots-test": "yarn test:integration",
-    "snapshots-update": "yarn jest:integration --updateSnapshot"
+    "snapshots-test": "yarn jest -c integration/jest.config.js",
+    "snapshots-update": "yarn jest -c integration/jest.config.js --updateSnapshot"
   },
   "eslintConfig": {
     "extends": [

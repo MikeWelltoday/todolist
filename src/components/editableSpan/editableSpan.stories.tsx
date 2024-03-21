@@ -27,7 +27,7 @@ const meta: Meta<typeof EditableSpan> = {
     },
 
     args: {
-        title: 'title',
+        title: 'title123',
         onChangeTitle: action('title is send by cb-function =>'),
         entityStatus: 'idle'
     }
