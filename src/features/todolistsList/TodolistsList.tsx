@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import {Todolist} from '../todolist/Todolist'
-import {addTodolistTC, appSetErrorAC, fetchTodolistsTC, todolistsSelector, useAppDispatch} from '../../state'
+import {addTodolistTC, fetchTodolistsTC, todolistsSelector, useAppDispatch} from '../../state'
 import {AddItemForm} from '../../components'
 
 //========================================================================================
