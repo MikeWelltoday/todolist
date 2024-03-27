@@ -9,6 +9,7 @@ export const handleServerAppError = (resMessagesArr: string[], dispatch: AppThun
 }
 
 export function handleServerNetworkError(error: any, dispatch: AppThunkDispatchType) {
+
     if (typeof error === 'string') {
         dispatch(appSetErrorAC(error))
         dispatch(appSetStatusAC('failed'))
