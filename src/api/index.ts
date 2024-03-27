@@ -12,3 +12,7 @@ export {tasksAPI} from './tasks-api'
 export type {TodolistApiType} from './todolists-api'
 export {todolistsAPI} from './todolists-api'
 export type {TodolistsApiResponseType} from './todolists-api'
+
+//========================================================================================
+// AUTH-API
+export type {authAPI} from './auth-api'
