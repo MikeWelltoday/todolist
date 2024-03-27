@@ -79,19 +79,7 @@ export const Login: FC = () => {
                                 label="Email"
                                 margin="normal"
                                 color={'success'}
-
-                                // красная рамка если есть ошибка
                                 error={!!emailError}
-
-                                // будем проверят на валидацию только после
-                                // окончания заполнения поля пользователем
-                                // onBlur={formik.handleBlur}
-
-                                // делаем компоненту управляемой
-                                // onChange={formik.handleChange}
-                                // value={formik.values.email}
-
-                                // сокращаем атрибуты => убираем: onChange | name | value | onBlur
                                 {...formik.getFieldProps('email')}
                             />
                             {emailError ? <div className={S.error}>{formik.errors.email}</div> : null}

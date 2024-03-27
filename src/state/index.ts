@@ -5,6 +5,7 @@ export type {AppReducerErrorType} from './reducers/app-reducer'
 export type {InitialStateType} from './reducers/app-reducer'
 export type {AppSetStatusActionType} from './reducers/app-reducer'
 export type {AppSetErrorActionType} from './reducers/app-reducer'
+export type {AppActionsType} from './reducers/app-reducer'
 export {appReducer} from './reducers/app-reducer'
 export {appSetStatusAC} from './reducers/app-reducer'
 export {appSetErrorAC} from './reducers/app-reducer'
@@ -44,6 +45,11 @@ export {removeTodolistTC} from './reducers/todolists-reducer'
 export {updateTodolistTitleTC} from './reducers/todolists-reducer'
 export {todolistsReducer} from './reducers/todolists-reducer'
 export {changeTodolistEntityStatusAC} from './reducers/todolists-reducer'
+
+//========================================================================================
+// AUTH-REDUCER
+export type {AuthActionsType} from './reducers/auth-reducer'
+export {authReducer} from './reducers/auth-reducer'
 
 //========================================================================================
 // SELECTORS

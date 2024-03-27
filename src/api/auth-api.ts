@@ -12,13 +12,18 @@ const instance = axios.create({
 
 //========================================================================================
 
+type LoginParamsType = {
+    resultCode: number
+    messages: string[]
+    data: { userId: number }
+}
 
 //========================================================================================
 
 export const authAPI = {
 
+    login(email: string, password: string, rememberMe: boolean, captcha: boolean) {
+        return instance.post<LoginParamsType>('', {email, password, rememberMe, captcha})
+    }
 
-
-
-    return instance.post<>('', {email, password, rememberMe, captcha})
 }
