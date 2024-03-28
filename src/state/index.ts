@@ -3,12 +3,11 @@
 export type {AppReducerStatusType} from './reducers/app-reducer'
 export type {AppReducerErrorType} from './reducers/app-reducer'
 export type {InitialStateType} from './reducers/app-reducer'
-export type {AppSetStatusActionType} from './reducers/app-reducer'
-export type {AppSetErrorActionType} from './reducers/app-reducer'
 export type {AppActionsType} from './reducers/app-reducer'
 export {appReducer} from './reducers/app-reducer'
 export {appSetStatusAC} from './reducers/app-reducer'
 export {appSetErrorAC} from './reducers/app-reducer'
+export {appSetIsInitialized} from './reducers/app-reducer'
 
 //========================================================================================
 // TASKS-REDUCER
@@ -53,12 +52,16 @@ export type {AuthReducerType} from './reducers/auth-reducer'
 export {authSetLoggedAC} from './reducers/auth-reducer'
 export {authReducer} from './reducers/auth-reducer'
 export {authSetLoggedTC} from './reducers/auth-reducer'
+export {authIsInitializedTC} from './reducers/auth-reducer'
+export {authLogoutTC} from './reducers/auth-reducer'
 
 //========================================================================================
 // SELECTORS
-export {todolistsSelector} from './selectors/todolistsSelector'
-export {statusSelector} from './selectors/statusSelector'
-export {errorSelector} from './selectors/errorSelector'
+export {todolistsSelector} from './selectors/todolists-selector'
+export {statusSelector} from './selectors/status-selector'
+export {errorSelector} from './selectors/error-selector'
+export {isLoggedSelector} from './selectors/isLogged-selector'
+export {isInitializedSelector} from './selectors/isInitialized-selector'
 
 //========================================================================================
 // STORE

@@ -10,7 +10,7 @@ beforeEach(() => {
     }
 })
 
-test('AUTH-SET-LOGGED', () => {
+test('AUTH-LOGIN', () => {
 
     const newLoggedMode = true
 

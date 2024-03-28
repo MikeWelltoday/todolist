@@ -9,7 +9,9 @@ import FormLabel from '@mui/material/FormLabel'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import {useFormik} from 'formik'
-import {authSetLoggedTC, useAppDispatch} from '../../state'
+import {authSetLoggedTC, isLoggedSelector, useAppDispatch} from '../../state'
+import {useSelector} from 'react-redux'
+import {Navigate} from 'react-router-dom'
 
 //========================================================================================
 
@@ -24,6 +26,7 @@ type FormikErrorType = {
 export const Login: FC = () => {
 
     const dispatch = useAppDispatch()
+    const isLogged = useSelector(isLoggedSelector)
 
     const formik = useFormik({
         initialValues: {
@@ -42,18 +45,17 @@ export const Login: FC = () => {
 
             if (!values.password) {
                 errors.password = 'Required'
-            } else if (values.password.length < 4) {
-                errors.password = 'Password has to be more than 3 symbols'
+            } else if (values.password.length < 6) {
+                errors.password = 'Password has to be more than 6 symbols'
             }
 
             return errors
         },
         onSubmit: values => {
-            alert(JSON.stringify(values))
             dispatch(authSetLoggedTC(
-                formik.values.email,
-                formik.values.password,
-                formik.values.rememberMe,
+                values.email,
+                values.password,
+                values.rememberMe,
                 true
             ))
             formik.resetForm()
@@ -64,6 +66,7 @@ export const Login: FC = () => {
     const passwordError = formik.touched.password && formik.errors.password
     const isError = emailError || passwordError
 
+    if (isLogged) return <Navigate to={'/'}/>
 
     return (
         <Grid container justifyContent={'center'}>

@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import {Loader} from './loader/Loader'
 import {useSelector} from 'react-redux'
-import {statusSelector} from '../../state'
+import {authLogoutTC, isLoggedSelector, useAppDispatch} from '../../state'
 
 
 //========================================================================================
@@ -17,10 +17,19 @@ export const HeaderAppBar = () => {
 
     console.log('🍭 APP-BAR')
 
+    const dispatch = useAppDispatch()
+    const isLogged = useSelector(isLoggedSelector)
+
+    function logoutOnClickHandler() {
+        dispatch(authLogoutTC())
+
+    }
+
     return (
         <Box sx={{flexGrow: 1}}>
             <AppBar position="static" color={'success'}>
                 <Toolbar>
+
                     <IconButton
                         size="large"
                         edge="start"
@@ -30,10 +39,13 @@ export const HeaderAppBar = () => {
                     >
                         <MenuIcon/>
                     </IconButton>
+
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         Todolist
                     </Typography>
-                    <Button color="inherit">Login</Button>
+
+                    {isLogged && <Button color="inherit" onClick={logoutOnClickHandler}>LOGOUT</Button>}
+
                 </Toolbar>
 
                 <Loader/>

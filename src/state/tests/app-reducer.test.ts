@@ -4,7 +4,7 @@ import {
     InitialStateType,
     AppReducerStatusType,
     AppReducerErrorType,
-    appSetErrorAC
+    appSetErrorAC, appSetIsInitialized
 } from '../../state'
 
 //========================================================================================
@@ -14,7 +14,8 @@ let startState: InitialStateType
 beforeEach(() => {
     startState = {
         status: 'loading',
-        error: null
+        error: null,
+        isInitialized: false
     }
 })
 
@@ -34,4 +35,13 @@ test('APP-SET-ERROR', () => {
     const endState = appReducer(startState, appSetErrorAC(newError))
 
     expect(endState.error).toBe(newError)
+})
+
+test('APP-SET-IS-INITIALIZED', () => {
+
+    const isInitializedResponse: boolean = true
+
+    const endState = appReducer(startState, appSetIsInitialized(isInitializedResponse))
+
+    expect(endState.isInitialized).toBe(isInitializedResponse)
 })

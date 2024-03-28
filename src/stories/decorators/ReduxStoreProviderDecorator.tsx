@@ -1,16 +1,19 @@
 import React from 'react'
 import {Provider} from 'react-redux'
 import {thunk} from 'redux-thunk'
-import {appReducer, AppRootStateType, tasksReducer, todolistsReducer} from '../../state'
+import {appReducer, AppRootStateType, authReducer, store, tasksReducer, todolistsReducer} from '../../state'
 import {applyMiddleware, combineReducers, legacy_createStore} from 'redux'
 import {TaskPrioritiesEnum, TaskStatusesEnum} from '../../api'
+import App from '../../app/App'
+import {BrowserRouter} from 'react-router-dom'
 
 //========================================================================================
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
     todolists: todolistsReducer,
-    app: appReducer
+    app: appReducer,
+    auth: authReducer
 })
 
 
@@ -102,10 +105,11 @@ const initialGlobalState: AppRootStateType = {
         },
     app: {
         status: 'idle',
-        error: null
+        error: null,
+        isInitialized: true
     },
     auth: {
-        isLoggedIn: false
+        isLoggedIn: true
     }
 }
 
@@ -118,8 +122,10 @@ export const storyBookStore = legacy_createStore(rootReducer, initialGlobalState
 export const ReduxStoreProviderDecorator = (storyFn: () => React.ReactNode) => {
 
     return (
-        <Provider store={storyBookStore}>
-            {storyFn()}
-        </Provider>
+        <BrowserRouter>
+            <Provider store={storyBookStore}>
+                {storyFn()}
+            </Provider>
+        </BrowserRouter>
     )
 }

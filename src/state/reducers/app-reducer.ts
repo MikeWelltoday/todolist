@@ -4,23 +4,23 @@ export type AppReducerStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 export type AppReducerErrorType = string | null
 
 export type InitialStateType = {
-    status: AppReducerStatusType,
+    status: AppReducerStatusType
     error: AppReducerErrorType
+    isInitialized: boolean
 }
 
 //========================================================================================
 
-export type AppSetStatusActionType = ReturnType<typeof appSetStatusAC>
-export type AppSetErrorActionType = ReturnType<typeof appSetErrorAC>
-
-//========================================================================================
-
-export type AppActionsType = AppSetStatusActionType | AppSetErrorActionType
+export type AppActionsType =
+    ReturnType<typeof appSetStatusAC>
+    | ReturnType<typeof appSetErrorAC>
+    | ReturnType<typeof appSetIsInitialized>
 
 //========================================================================================
 const initialState: InitialStateType = {
     status: 'idle' as AppReducerStatusType,
-    error: null
+    error: null,
+    isInitialized: false
 }
 
 export function appReducer(state: InitialStateType = initialState, {type, payload}: AppActionsType): InitialStateType {
@@ -33,6 +33,10 @@ export function appReducer(state: InitialStateType = initialState, {type, payloa
 
         case'APP-SET-ERROR': {
             return {...state, error: payload.error}
+        }
+
+        case 'APP-SET-IS-INITIALIZED': {
+            return {...state, isInitialized: payload.status}
         }
 
         default: {
@@ -49,6 +53,10 @@ export function appSetStatusAC(status: AppReducerStatusType) {
 
 export function appSetErrorAC(error: AppReducerErrorType) {
     return {type: 'APP-SET-ERROR', payload: {error}} as const
+}
+
+export function appSetIsInitialized(status: boolean) {
+    return {type: 'APP-SET-IS-INITIALIZED', payload: {status}} as const
 }
 
 

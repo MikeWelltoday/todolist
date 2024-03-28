@@ -2,6 +2,7 @@ import {TodolistApiType, todolistsAPI} from '../../api'
 import {appSetErrorAC, appSetStatusAC} from './app-reducer'
 import {AppThunkDispatchType} from '../store'
 import {handleServerAppError, handleServerNetworkError} from '../../utils'
+import {fetchTasksTC} from './tasks-reducer'
 
 //========================================================================================
 
@@ -110,6 +111,11 @@ export function fetchTodolistsTC() {
             if (res.data.length) {
                 dispatch(setTodolistsAC(res.data))
                 dispatch(appSetStatusAC('succeeded'))
+
+                res.data.forEach((todolist) => {
+                    dispatch(fetchTasksTC(todolist.id))
+                })
+
             } else {
                 dispatch(appSetErrorAC('GET-TODOLISTS FAILED'))
                 dispatch(appSetStatusAC('failed'))

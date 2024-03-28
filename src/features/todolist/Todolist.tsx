@@ -41,10 +41,10 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
 
     const dispatch = useAppDispatch()
 
-    useEffect(() => {
-        if (props.demo) return
-        dispatch(fetchTasksTC(props.todolistId))
-    }, [])
+    // useEffect(() => {
+    //     if (props.demo) return
+    //     dispatch(fetchTasksTC(props.todolistId))
+    // }, [])
 
     let tasks = useSelector<AppRootStateType, TaskReducerType[]>(state => state.tasks[props.todolistId])
 
