@@ -9,6 +9,7 @@ import FormLabel from '@mui/material/FormLabel'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import {useFormik} from 'formik'
+import {authSetLoggedTC, useAppDispatch} from '../../state'
 
 //========================================================================================
 
@@ -21,6 +22,8 @@ type FormikErrorType = {
 //========================================================================================
 
 export const Login: FC = () => {
+
+    const dispatch = useAppDispatch()
 
     const formik = useFormik({
         initialValues: {
@@ -39,14 +42,20 @@ export const Login: FC = () => {
 
             if (!values.password) {
                 errors.password = 'Required'
-            } else if (values.password.length < 6) {
-                errors.password = 'Password has to be more than 5 symbols'
+            } else if (values.password.length < 4) {
+                errors.password = 'Password has to be more than 3 symbols'
             }
 
             return errors
         },
         onSubmit: values => {
             alert(JSON.stringify(values))
+            dispatch(authSetLoggedTC(
+                formik.values.email,
+                formik.values.password,
+                formik.values.rememberMe,
+                true
+            ))
             formik.resetForm()
         }
     })

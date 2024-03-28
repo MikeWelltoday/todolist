@@ -49,7 +49,10 @@ export {changeTodolistEntityStatusAC} from './reducers/todolists-reducer'
 //========================================================================================
 // AUTH-REDUCER
 export type {AuthActionsType} from './reducers/auth-reducer'
+export type {AuthReducerType} from './reducers/auth-reducer'
+export {authSetLoggedAC} from './reducers/auth-reducer'
 export {authReducer} from './reducers/auth-reducer'
+export {authSetLoggedTC} from './reducers/auth-reducer'
 
 //========================================================================================
 // SELECTORS

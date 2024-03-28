@@ -15,4 +15,4 @@ export type {TodolistsApiResponseType} from './todolists-api'
 
 //========================================================================================
 // AUTH-API
-export type {authAPI} from './auth-api'
+export {authAPI} from './auth-api'
