@@ -22,7 +22,6 @@ export const HeaderAppBar = () => {
 
 	function logoutOnClickHandler() {
 		dispatch(authLogoutTC())
-
 	}
 
 	return (
