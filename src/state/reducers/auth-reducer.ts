@@ -1,4 +1,4 @@
-import { AppThunkDispatchType } from '../store'
+import { AppThunkDispatchType } from 'app/store'
 import { appSetIsInitialized, appSetStatusAC } from './app-reducer'
 import { authAPI } from 'api'
 import { handleServerAppError, handleServerNetworkError } from 'utils'

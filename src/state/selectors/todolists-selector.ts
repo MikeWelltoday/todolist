@@ -1,5 +1,5 @@
-import {TodolistReducerType} from '../reducers/todolists-reducer'
-import {AppRootStateType} from '../store'
+import { TodolistReducerType } from '../reducers/todolists-reducer'
+import { AppRootStateType } from 'app/store'
 
 //========================================================================================
 

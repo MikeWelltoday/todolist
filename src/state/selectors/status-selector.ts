@@ -1,5 +1,5 @@
-import {AppRootStateType} from '../store'
-import {AppReducerStatusType} from '../reducers/app-reducer'
+import { AppRootStateType } from 'app/store'
+import { AppReducerStatusType } from '../reducers/app-reducer'
 
 //========================================================================================
 
