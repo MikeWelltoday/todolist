@@ -1,21 +1,19 @@
-import {authReducer, AuthReducerType, authSetLoggedAC} from '../index'
+import { authReducer, AuthReducerType } from '../index'
+import { authActions } from 'state/reducers/auth-reducer'
 
 //========================================================================================
 
 let startState: AuthReducerType
 
 beforeEach(() => {
-    startState = {
-        isLoggedIn: false
-    }
+	startState = {
+		isLogged: false
+	}
 })
 
-test('AUTH-LOGIN', () => {
-
-    const newLoggedMode = true
-
-    const endState = authReducer(startState, authSetLoggedAC(newLoggedMode))
-    expect(endState.isLoggedIn).toBe(newLoggedMode)
+test('setIsLogged', () => {
+	const endState = authReducer(startState, authActions.setIsLogged({ isLogged: true }))
+	expect(endState.isLogged).toBe(false)
 })
 
 

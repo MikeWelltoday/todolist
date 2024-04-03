@@ -2,4 +2,4 @@ import { AppRootStateType } from 'app/store'
 
 //========================================================================================
 
-export const isLoggedSelector = (state: AppRootStateType): boolean => state.authReducer.isLogged
+export const isAppInitializedSelector = (state: AppRootStateType): boolean => state.appReducer.isAppInitialized

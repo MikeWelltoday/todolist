@@ -1,13 +1,8 @@
-import {
-	AddTodolistActionType,
-	changeTodolistEntityStatusAC,
-	RemoveTodolistActionType, RequestStatusType,
-	SetTodolistsActionType
-} from './todolists-reducer'
-import { AppRootStateType, AppThunkDispatchType } from 'app/store'
-import { ApiUpdateTaskModelType, TaskApiType, TaskPrioritiesEnum, tasksAPI, TaskStatusesEnum } from '../../api'
-import { appSetErrorAC, appSetStatusAC } from './app-reducer'
-import { handleServerAppError, handleServerNetworkError } from '../../utils'
+import { RequestStatusType } from './todolists-reducer'
+import { AppDispatchType, AppRootStateType } from 'app/store'
+import { ApiUpdateTaskModelType, TaskApiType, TaskPrioritiesEnum, tasksAPI, TaskStatusesEnum } from 'api'
+import { handleServerAppError, handleServerNetworkError } from 'utils'
+import { appActions } from 'state/reducers/app-reducer'
 
 //========================================================================================
 
@@ -147,54 +142,52 @@ export function changeTasksEntityStatusAC(todolistId: string, taskId: string, ne
 //========================================================================================
 
 export function fetchTasksTC(todolistId: string) {
-	return async (dispatch: AppThunkDispatchType) => {
-		dispatch(appSetStatusAC('loading'))
+	return async (dispatch: AppDispatchType) => {
+		dispatch(appActions.setStatus({ status: true }))
 		try {
 			const res = await tasksAPI.getTasks(todolistId)
 			if (!res.data.error) {
 				dispatch(setTasksAC(todolistId, res.data.items))
-				dispatch(appSetStatusAC('succeeded'))
 			} else {
 				if (res.data.error) {
-					dispatch(appSetErrorAC(res.data.error))
+					dispatch(appActions.setError({ error: res.data.error }))
 				} else {
-					dispatch(appSetErrorAC('Some error occurred'))
+					dispatch(appActions.setError({ error: 'to get Tasks is failed' }))
 				}
-				dispatch(appSetStatusAC('failed'))
 			}
 		} catch (e) {
 			handleServerNetworkError(e, dispatch)
 		}
+		dispatch(appActions.setStatus({ status: false }))
 	}
 }
 
 export function removeTaskTC(todolistId: string, taskId: string) {
-	return async (dispatch: AppThunkDispatchType) => {
-		dispatch(appSetStatusAC('loading'))
+	return async (dispatch: AppDispatchType) => {
+		dispatch(appActions.setStatus({ status: true }))
 		dispatch(changeTasksEntityStatusAC(todolistId, taskId, 'loading'))
 		try {
 			const res = await tasksAPI.deleteTask(todolistId, taskId)
 			if (res.data.resultCode === 0) {
 				dispatch(removeTaskAC(todolistId, taskId))
-				dispatch(appSetStatusAC('succeeded'))
 			} else {
 				handleServerAppError(res.data.messages, dispatch)
 			}
 		} catch (e) {
 			handleServerNetworkError(e, dispatch)
 		}
+		dispatch(appActions.setStatus({ status: false }))
 	}
 }
 
 export function addTaskTC(todolistId: string, newTitle: string) {
-	return async (dispatch: AppThunkDispatchType) => {
-		dispatch(appSetStatusAC('loading'))
+	return async (dispatch: AppDispatchType) => {
+		dispatch(appActions.setStatus({ status: true }))
 		dispatch(changeTodolistEntityStatusAC(todolistId, 'loading'))
 		try {
 			const res = await tasksAPI.createTask(todolistId, newTitle)
 			if (res.data.resultCode === 0) {
 				dispatch(addTaskAC(res.data.data.item))
-				dispatch(appSetStatusAC('succeeded'))
 			} else {
 				handleServerAppError(res.data.messages, dispatch)
 			}
@@ -202,12 +195,13 @@ export function addTaskTC(todolistId: string, newTitle: string) {
 		} catch (e) {
 			handleServerNetworkError(e, dispatch)
 		}
+		dispatch(appActions.setStatus({ status: false }))
 	}
 }
 
 export function updateTaskTC(todolistId: string, taskId: string, taskUpdateModel: UiUpdateTaskModelType) {
-	return async (dispatch: AppThunkDispatchType, getState: () => AppRootStateType) => {
-		dispatch(appSetStatusAC('loading'))
+	return async (dispatch: AppDispatchType, getState: () => AppRootStateType) => {
+		dispatch(appActions.setStatus({ status: true }))
 		dispatch(changeTasksEntityStatusAC(todolistId, taskId, 'loading'))
 		const taskToUpdate = getState().tasks[todolistId].filter(t => t.id === taskId)[0]
 		const model: ApiUpdateTaskModelType = {
@@ -224,7 +218,6 @@ export function updateTaskTC(todolistId: string, taskId: string, taskUpdateModel
 			const res = await tasksAPI.updateTask(todolistId, taskId, model)
 			if (res.data.resultCode === 0) {
 				dispatch(updateTaskAC(todolistId, taskId, model))
-				dispatch(appSetStatusAC('succeeded'))
 				dispatch(changeTasksEntityStatusAC(todolistId, taskId, 'succeeded'))
 			} else {
 				handleServerAppError(res.data.messages, dispatch)
@@ -233,6 +226,7 @@ export function updateTaskTC(todolistId: string, taskId: string, taskUpdateModel
 		} catch (e) {
 			handleServerNetworkError(e, dispatch)
 		}
+		dispatch(appActions.setStatus({ status: false }))
 	}
 }
 

@@ -1,47 +1,32 @@
 import {
-    appSetStatusAC,
-    appReducer,
-    InitialStateType,
-    AppReducerStatusType,
-    AppReducerErrorType,
-    appSetErrorAC, appSetIsInitialized
-} from '../../state'
+	appReducer, AppReducerType, appActions
+} from 'state'
 
 //========================================================================================
 
-let startState: InitialStateType
+let startState: AppReducerType
 
 beforeEach(() => {
-    startState = {
-        status: 'loading',
-        error: null,
-        isInitialized: false
-    }
+	startState = {
+		status: true,
+		error: null,
+		isAppInitialized: false
+	}
 })
 
-test('APP-SET-STATUS', () => {
-
-    const newStatus: AppReducerStatusType = 'succeeded'
-
-    const endState = appReducer(startState, appSetStatusAC(newStatus))
-
-    expect(endState.status).toBe(newStatus)
+test('setStatus', () => {
+	const endState = appReducer(startState, appActions.setStatus({ status: true }))
+	expect(endState.status).toBe(true)
 })
 
-test('APP-SET-ERROR', () => {
-
-    const newError: AppReducerErrorType = 'error is set here'
-
-    const endState = appReducer(startState, appSetErrorAC(newError))
-
-    expect(endState.error).toBe(newError)
+test('setError', () => {
+	const endState = appReducer(startState, appActions.setError({ error: 'error is set here' }))
+	expect(endState.error).toBe('error is set here')
 })
 
-test('APP-SET-IS-INITIALIZED', () => {
+test('setAppIsInitialized', () => {
+	const endState = appReducer(startState,
+		appActions.setAppIsInitialized({ isAppInitialized: true }))
 
-    const isInitializedResponse: boolean = true
-
-    const endState = appReducer(startState, appSetIsInitialized(isInitializedResponse))
-
-    expect(endState.isInitialized).toBe(isInitializedResponse)
+	expect(endState.isAppInitialized).toBe(true)
 })

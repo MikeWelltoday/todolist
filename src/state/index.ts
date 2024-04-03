@@ -1,13 +1,10 @@
 //========================================================================================
 // APP-REDUCER
-export type { AppReducerStatusType } from './reducers/app-reducer'
-export type { AppReducerErrorType } from './reducers/app-reducer'
-export type { InitialStateType } from './reducers/app-reducer'
-export type { AppActionsType } from './reducers/app-reducer'
+export type { AppErrorType } from './reducers/app-reducer'
+export type { AppReducerType } from './reducers/app-reducer'
 export { appReducer } from './reducers/app-reducer'
-export { appSetStatusAC } from './reducers/app-reducer'
-export { appSetErrorAC } from './reducers/app-reducer'
-export { appSetIsInitialized } from './reducers/app-reducer'
+export { appActions } from './reducers/app-reducer'
+
 
 //========================================================================================
 // TASKS-REDUCER
@@ -26,46 +23,41 @@ export { tasksReducer } from './reducers/tasks-reducer'
 
 //========================================================================================
 // TODOLISTS-REDUCER
-export type { RemoveTodolistActionType } from './reducers/todolists-reducer'
-export type { AddTodolistActionType } from './reducers/todolists-reducer'
-export type { SetTodolistsActionType } from './reducers/todolists-reducer'
 export type { TodolistFilterReducerType } from './reducers/todolists-reducer'
-export type { TodolistReducerType } from './reducers/todolists-reducer'
 export type { RequestStatusType } from './reducers/todolists-reducer'
-export type { TodolistsActionsType } from './reducers/todolists-reducer'
-export { removeTodolistAC } from './reducers/todolists-reducer'
-export { addTodolistAC } from './reducers/todolists-reducer'
-export { changeTodolistTitleAC } from './reducers/todolists-reducer'
-export { changeTodolistFilterAC } from './reducers/todolists-reducer'
-export { setTodolistsAC } from './reducers/todolists-reducer'
+export type { TodolistReducerType } from './reducers/todolists-reducer'
+
+export { todolistsReducer } from './reducers/todolists-reducer'
+export { todolistsActions } from './reducers/todolists-reducer'
+
 export { fetchTodolistsTC } from './reducers/todolists-reducer'
 export { addTodolistTC } from './reducers/todolists-reducer'
 export { removeTodolistTC } from './reducers/todolists-reducer'
 export { updateTodolistTitleTC } from './reducers/todolists-reducer'
-export { todolistsReducer } from './reducers/todolists-reducer'
-export { changeTodolistEntityStatusAC } from './reducers/todolists-reducer'
+
 
 //========================================================================================
 // AUTH-REDUCER
-export type { AuthActionsType } from './reducers/auth-reducer'
+
 export type { AuthReducerType } from './reducers/auth-reducer'
-export { authSetLoggedAC } from './reducers/auth-reducer'
 export { authReducer } from './reducers/auth-reducer'
+
 export { authSetLoggedTC } from './reducers/auth-reducer'
 export { authIsInitializedTC } from './reducers/auth-reducer'
 export { authLogoutTC } from './reducers/auth-reducer'
 
 //========================================================================================
 // SELECTORS
+export { appErrorSelector } from 'state/selectors/appError-selector'
+
+
 export { todolistsSelector } from './selectors/todolists-selector'
-export { statusSelector } from './selectors/status-selector'
-export { errorSelector } from './selectors/error-selector'
+export { appStatusSelector } from 'state/selectors/appStatus-selector'
 export { isLoggedSelector } from './selectors/isLogged-selector'
-export { isInitializedSelector } from './selectors/isInitialized-selector'
+export { isAppInitializedSelector } from 'state/selectors/isAppInitialized-selector'
 
 //========================================================================================
 // STORE
 export type { AppRootStateType } from 'app/store'
-export type { AppThunkDispatchType } from 'app/store'
 export { useAppDispatch } from 'app/store'
 export { store } from 'app/store'

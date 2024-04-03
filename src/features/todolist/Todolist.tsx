@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback } from 'react'
+import React, { FC, memo, useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import S from './Todolist.module.scss'
 import IconButton from '@mui/material/IconButton'
@@ -8,12 +8,11 @@ import { AddItemForm, EditableSpan, FilterButton } from 'components'
 import {
 	addTaskTC,
 	AppRootStateType,
-	changeTodolistFilterAC,
 	removeTaskTC,
 	removeTodolistTC,
 	RequestStatusType,
 	TaskReducerType,
-	TodolistFilterReducerType,
+	TodolistFilterReducerType, todolistsActions,
 	updateTaskTC,
 	updateTodolistTitleTC,
 	useAppDispatch
@@ -40,10 +39,9 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
 
 	const dispatch = useAppDispatch()
 
-	// useEffect(() => {
-	//     if (props.demo) return
-	//     dispatch(fetchTasksTC(props.todolistId))
-	// }, [])
+	useEffect(() => {
+		if (props.demo) return
+	}, [])
 
 	let tasks = useSelector<AppRootStateType, TaskReducerType[]>(state => state.tasks[props.todolistId])
 
@@ -67,15 +65,15 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
 	}), [props.todolistId])
 
 	const changeTaskFilterAllOnClickHandler = useCallback((() => {
-		dispatch(changeTodolistFilterAC(props.todolistId, 'all'))
+		dispatch(todolistsActions.changeTodolistFilter({ todolistId: props.todolistId, filter: 'all' }))
 	}), [props.todolistId])
 
 	const changeTaskFilterActiveOnClickHandler = useCallback((() => {
-		dispatch(changeTodolistFilterAC(props.todolistId, 'active'))
+		dispatch(todolistsActions.changeTodolistFilter({ todolistId: props.todolistId, filter: 'active' }))
 	}), [props.todolistId])
 
 	const changeTaskFilterCompletedOnClickHandler = useCallback((() => {
-		dispatch(changeTodolistFilterAC(props.todolistId, 'completed'))
+		dispatch(todolistsActions.changeTodolistFilter({ todolistId: props.todolistId, filter: 'completed' }))
 	}), [props.todolistId])
 
 	// task

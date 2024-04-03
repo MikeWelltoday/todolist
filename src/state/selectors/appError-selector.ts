@@ -1,5 +1,6 @@
 import { AppRootStateType } from 'app/store'
+import { AppErrorType } from 'state'
 
 //========================================================================================
 
-export const isLoggedSelector = (state: AppRootStateType): boolean => state.authReducer.isLogged
+export const appErrorSelector = (state: AppRootStateType): AppErrorType => state.appReducer.error

@@ -5,7 +5,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import { HeaderAppBar, Login, TodolistsList } from 'features'
 import { ErrorSnackbar } from 'components'
 import { Route, Routes, Navigate } from 'react-router-dom'
-import { authIsInitializedTC, isInitializedSelector, useAppDispatch } from 'state'
+import { authIsInitializedTC, isAppInitializedSelector, useAppDispatch } from 'state'
 import { useSelector } from 'react-redux'
 
 //========================================================================================
@@ -19,7 +19,7 @@ type AppPropsType = {
 function App(props: AppPropsType) {
 
 	const dispatch = useAppDispatch()
-	const isInitialized = useSelector(isInitializedSelector)
+	const isInitialized = useSelector(isAppInitializedSelector)
 
 	useEffect(() => {
 		if (props.demo) return

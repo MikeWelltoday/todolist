@@ -3,4 +3,4 @@ import { AppRootStateType } from 'app/store'
 
 //========================================================================================
 
-export const todolistsSelector = (state: AppRootStateType): TodolistReducerType[] => state.todolists
+export const todolistsSelector = (state: AppRootStateType): TodolistReducerType[] => state.todolistsReducer

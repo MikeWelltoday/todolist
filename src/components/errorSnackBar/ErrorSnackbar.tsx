@@ -1,7 +1,7 @@
 import React from 'react'
 import Snackbar from '@mui/material/Snackbar'
 import { useSelector } from 'react-redux'
-import { appSetErrorAC, errorSelector, useAppDispatch } from 'state'
+import { appActions, appErrorSelector, useAppDispatch } from 'state'
 import Alert from '@mui/material/Alert'
 
 //========================================================================================
@@ -11,13 +11,13 @@ export const ErrorSnackbar = () => {
 	console.log('🍅 ERROR-SNACK-BAR')
 
 	const dispatch = useAppDispatch()
-	const error = useSelector(errorSelector)
+	const error = useSelector(appErrorSelector)
 
 	const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
 		if (reason === 'clickaway') {
 			return
 		}
-		dispatch(appSetErrorAC(null))
+		dispatch(appActions.setError({ error: null }))
 	}
 
 	return (

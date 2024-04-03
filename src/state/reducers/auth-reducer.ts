@@ -1,95 +1,85 @@
-import { AppThunkDispatchType } from 'app/store'
-import { appSetIsInitialized, appSetStatusAC } from './app-reducer'
 import { authAPI } from 'api'
 import { handleServerAppError, handleServerNetworkError } from 'utils'
-import { setTodolistsAC } from './todolists-reducer'
-
-export type AuthActionsType = ReturnType<typeof authSetLoggedAC>
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { AppDispatchType } from 'app/store'
+import { appActions } from 'state/reducers/app-reducer'
+import { todolistsActions } from 'state/reducers/todolists-reducer'
 
 //========================================================================================
 
-export type AuthReducerType = {
-	isLoggedIn: boolean
-}
+export type AuthReducerType = { isLogged: boolean }
 
 //========================================================================================
 
 const initialState: AuthReducerType = {
-	isLoggedIn: false
+	isLogged: false
 }
 
-export function authReducer(state: AuthReducerType = initialState,
-														action: AuthActionsType): AuthReducerType {
-	switch (action.type) {
+const slice = createSlice({
+	name: 'auth',
+	initialState,
+	reducers: {
 
-		case 'AUTH-LOGIN': {
-			return { ...state, isLoggedIn: action.payload.isLoggedIn }
+		setIsLogged: (state, action: PayloadAction<{ isLogged: boolean }>) => {
+			state.isLogged = action.payload.isLogged
 		}
 
-		default: {
-			return state
-		}
 	}
-}
+})
+
+export const authReducer = slice.reducer
+export const authActions = slice.actions
 
 //========================================================================================
 
-export function authSetLoggedAC(isLoggedIn: boolean) {
-	return { type: 'AUTH-LOGIN', payload: { isLoggedIn } } as const
-}
-
-//==================================== ====================================================
-
 export const authSetLoggedTC = (email: string, password: string, rememberMe: boolean,
-																captcha: boolean) => async (dispatch: AppThunkDispatchType) => {
-
-	dispatch(appSetStatusAC('loading'))
+																captcha: boolean) => async (dispatch: AppDispatchType) => {
+	dispatch(appActions.setStatus({ status: true }))
 	try {
 		const res = await authAPI.login(email, password, rememberMe, captcha)
 		if (res.data.resultCode === 0) {
-			dispatch(authSetLoggedAC(true))
-			dispatch(appSetStatusAC('succeeded'))
+			dispatch(authActions.setIsLogged({ isLogged: true }))
 		} else {
 			handleServerAppError(res.data.messages, dispatch)
 		}
+		dispatch(appActions.setStatus({ status: false }))
 	} catch (error) {
 		handleServerNetworkError(error, dispatch)
 	}
 }
 
-export const authIsInitializedTC = () => async (dispatch: AppThunkDispatchType) => {
+
+export const authIsInitializedTC = () => async (dispatch: AppDispatchType) => {
 	try {
 		const res = await authAPI.me()
 		if (res.data.resultCode === 0) {
-			dispatch(authSetLoggedAC(true))
+			dispatch(authActions.setIsLogged({ isLogged: true }))
 		}
 	} catch (error) {
-		// так как будет крутилка isInitialized, не нужно отключать другие крутилки
 		if (typeof error === 'string') {
 			console.error(error)
 		} else if (error instanceof Error) {
 			console.error(error.message)
 		}
 	}
-
-	dispatch(appSetIsInitialized(true))
+	dispatch(appActions.setAppIsInitialized({ isAppInitialized: true }))
 }
 
-export const authLogoutTC = () => async (dispatch: AppThunkDispatchType) => {
-	dispatch(appSetStatusAC('loading'))
+export const authLogoutTC = () => async (dispatch: AppDispatchType) => {
+
+	dispatch(appActions.setStatus({ status: true }))
 	try {
 		const res = await authAPI.logout()
 		if (res.data.resultCode === 0) {
-			dispatch(authSetLoggedAC(false))
-			dispatch(setTodolistsAC([]))
-			dispatch(appSetStatusAC('succeeded'))
+			dispatch(authActions.setIsLogged({ isLogged: false }))
+			dispatch(todolistsActions.setTodolists({ todolistsFromAPI: [] }))
 		} else {
 			handleServerAppError(res.data.messages, dispatch)
 		}
-
 	} catch (error) {
 		handleServerNetworkError(error, dispatch)
 	}
+	dispatch(appActions.setStatus({ status: false }))
 }
 
 

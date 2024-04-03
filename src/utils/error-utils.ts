@@ -1,24 +1,22 @@
-import {appSetErrorAC, appSetStatusAC, AppThunkDispatchType} from '../state'
+import { AppDispatchType } from 'app/store'
+import { appActions } from 'state'
 
 //========================================================================================
 
-export const handleServerAppError = (resMessagesArr: string[], dispatch: AppThunkDispatchType) => {
-    dispatch(appSetErrorAC(resMessagesArr.length ? resMessagesArr[0] : 'Some error occurred'))
-    dispatch(appSetStatusAC('failed'))
-    console.error(resMessagesArr.length ? resMessagesArr[0] : 'Some error occurred')
+export const handleServerAppError = (resMessagesArr: string[], dispatch: AppDispatchType) => {
+	dispatch(appActions.setError({ error: resMessagesArr.length ? resMessagesArr[0] : 'Some error occurred' }))
+	console.error(resMessagesArr.length ? resMessagesArr[0] : 'Some error occurred')
 }
 
-export function handleServerNetworkError(error: any, dispatch: AppThunkDispatchType) {
+export function handleServerNetworkError(error: any, dispatch: AppDispatchType) {
 
-    if (typeof error === 'string') {
-        dispatch(appSetErrorAC(error))
-        dispatch(appSetStatusAC('failed'))
-        console.error(error)
-    } else if (error instanceof Error) {
-        dispatch(appSetErrorAC(error.message))
-        dispatch(appSetStatusAC('failed'))
-        console.error(error.message)
-    }
+	if (typeof error === 'string') {
+		dispatch(appActions.setError({ error }))
+		console.error(error)
+	} else if (error instanceof Error) {
+		dispatch(appActions.setError({ error: error.message }))
+		console.error(error.message)
+	}
 }
 
 
