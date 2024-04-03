@@ -3,26 +3,7 @@ import { AppDispatchType, AppRootStateType } from 'app/store'
 import { ApiUpdateTaskModelType, TaskApiType, TaskPrioritiesEnum, tasksAPI, TaskStatusesEnum } from 'api'
 import { handleServerAppError, handleServerNetworkError } from 'utils'
 import { appActions } from 'state/reducers/app-reducer'
-
-//========================================================================================
-
-type RemoveTaskActionType = ReturnType<typeof removeTaskAC>
-type AddTaskActionType = ReturnType<typeof addTaskAC>
-type ChangeTaskTitleActionType = ReturnType<typeof updateTaskAC>
-type SetTasksActionType = ReturnType<typeof setTasksAC>
-type ChangeTasksEntityStatusActionType = ReturnType<typeof changeTasksEntityStatusAC>
-
-//========================================================================================
-
-export type TasksActionsType =
-	SetTasksActionType
-	| AddTaskActionType
-	| ChangeTaskTitleActionType
-	| AddTodolistActionType
-	| RemoveTodolistActionType
-	| SetTodolistsActionType
-	| RemoveTaskActionType
-	| ChangeTasksEntityStatusActionType
+import { createSlice } from '@reduxjs/toolkit'
 
 //========================================================================================
 
@@ -35,19 +16,18 @@ export type UiUpdateTaskModelType = {
 	deadline?: string
 }
 
-export type TaskReducerType = TaskApiType & {
+export type TaskType = TaskApiType & {
 	entityStatus: RequestStatusType
 }
 
 export type TasksReducerType = {
-	[key: string]: TaskReducerType[]
+	[key: string]: TaskType[]
 }
 
 //========================================================================================
 
-const tasksInitialState: TasksReducerType = {}
 
-export const tasksReducer = (state: TasksReducerType = tasksInitialState, {
+export const tasksReducer = (state: TasksReducerType = initialState, {
 	type,
 	payload
 }: TasksActionsType): TasksReducerType => {
@@ -116,6 +96,17 @@ export const tasksReducer = (state: TasksReducerType = tasksInitialState, {
 			return state
 	}
 }
+
+//========================================================================================
+
+const initialState: TasksReducerType = {}
+
+const slice = createSlice({
+	name: 'tasks',
+	initialState,
+	reducers: {}
+})
+
 
 //========================================================================================
 

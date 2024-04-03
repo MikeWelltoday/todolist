@@ -25,7 +25,7 @@ const slice = createSlice({
 	reducers: {
 
 		removeTodolist: (state, action: PayloadAction<{ todolistId: string }>) => {
-			state = state.filter(t => t.id !== action.payload.todolistId)
+			return state.filter(t => t.id !== action.payload.todolistId)
 		},
 
 		addTodolist: (state, action: PayloadAction<{ newTodolistFromAPI: TodolistApiType }>) => {
@@ -47,10 +47,7 @@ const slice = createSlice({
 		},
 
 		setTodolists: (state, action: PayloadAction<{ todolistsFromAPI: TodolistApiType[] }>) => {
-			action.payload.todolistsFromAPI.forEach(t => {
-				state.push({ ...t, filter: 'all', entityStatus: 'idle' })
-			})
-
+			return action.payload.todolistsFromAPI.map(tl => ({ ...tl, filter: 'all', entityStatus: 'idle' }))
 		},
 
 		changeTodolistEntityStatus: (state, action: PayloadAction<{

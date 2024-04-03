@@ -10,7 +10,7 @@ export { appActions } from './reducers/app-reducer'
 // TASKS-REDUCER
 export type { TasksReducerType } from './reducers/tasks-reducer'
 export type { TasksActionsType } from './reducers/tasks-reducer'
-export type { TaskReducerType } from './reducers/tasks-reducer'
+export type { TaskType } from './reducers/tasks-reducer'
 export { removeTaskAC } from './reducers/tasks-reducer'
 export { addTaskAC } from './reducers/tasks-reducer'
 export { updateTaskAC } from './reducers/tasks-reducer'

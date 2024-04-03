@@ -11,7 +11,7 @@ import {
 	removeTaskTC,
 	removeTodolistTC,
 	RequestStatusType,
-	TaskReducerType,
+	TaskType,
 	TodolistFilterReducerType, todolistsActions,
 	updateTaskTC,
 	updateTodolistTitleTC,
@@ -43,7 +43,7 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
 		if (props.demo) return
 	}, [])
 
-	let tasks = useSelector<AppRootStateType, TaskReducerType[]>(state => state.tasks[props.todolistId])
+	let tasks = useSelector<AppRootStateType, TaskType[]>(state => state.tasks[props.todolistId])
 
 	if (props.filter === 'active') {
 		tasks = tasks.filter(item => !item.status)

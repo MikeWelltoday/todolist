@@ -1,15 +1,3 @@
-import {
-	addTaskAC,
-	addTodolistAC,
-	removeTaskAC,
-	removeTodolistAC,
-	setTasksAC,
-	setTodolistsAC,
-	tasksReducer,
-	TasksReducerType,
-	updateTaskAC
-} from '../../state'
-import { TaskPrioritiesEnum, TaskStatusesEnum, TodolistApiType } from '../../api'
 import { changeTasksEntityStatusAC } from '../reducers/tasks-reducer'
 //
 // //========================================================================================
