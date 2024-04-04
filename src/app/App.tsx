@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { Route, Routes, Navigate } from 'react-router-dom'
 import './App.scss'
 import Container from '@mui/material/Container'
 import CircularProgress from '@mui/material/CircularProgress'
 import { HeaderAppBar, Login, TodolistsList } from 'features'
 import { ErrorSnackbar } from 'components'
-import { Route, Routes, Navigate } from 'react-router-dom'
 import { authIsInitializedTC, isAppInitializedSelector, useAppDispatch } from 'state'
-import { useSelector } from 'react-redux'
 
 //========================================================================================
 

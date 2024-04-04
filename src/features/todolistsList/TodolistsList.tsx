@@ -35,7 +35,6 @@ export const TodolistsList: FC<TodolistsListPropsType> = (props) => {
 
 	return (
 		<>
-
 			<Grid container sx={{ padding: '20px' }}>
 				<AddItemForm addItem={addTodolist} />
 			</Grid>
