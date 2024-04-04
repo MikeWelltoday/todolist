@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import App from './App'
 import { ReduxStoreProviderDecorator } from 'stories'
+import { BrowserRouterDecorator } from 'stories/decorators/ReduxStoreProviderDecorator'
 
 //========================================================================================
 
@@ -13,7 +14,7 @@ const meta: Meta<typeof App> = {
 
 	tags: ['autodocs'],
 
-	decorators: [ReduxStoreProviderDecorator],
+	decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator],
 
 	argTypes: {
 		demo: {

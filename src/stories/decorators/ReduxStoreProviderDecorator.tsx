@@ -1,12 +1,11 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { thunk } from 'redux-thunk'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import { configureStore } from '@reduxjs/toolkit'
 import { appReducer, AppRootStateType, authReducer, tasksReducer, todolistsReducer } from 'state'
-import { applyMiddleware, combineReducers } from 'redux'
+import { combineReducers } from 'redux'
 import { TaskPrioritiesEnum, TaskStatusesEnum } from 'api'
-
 
 //========================================================================================
 
@@ -125,10 +124,24 @@ export const storyBookStore = configureStore({
 
 export const ReduxStoreProviderDecorator = (storyFn: () => React.ReactNode) => {
 	return (
-		<BrowserRouter>
-			<Provider store={storyBookStore}>
-				{storyFn()}
-			</Provider>
-		</BrowserRouter>
+		<Provider store={storyBookStore}>
+			{storyFn()}
+		</Provider>
+
+		// <MemoryRouter initialEntries={['/']} initialIndex={0}>
+		// <Provider store={storyBookStore}>
+		// 	{storyFn()}
+		// </Provider>
+		// </MemoryRouter>
 	)
 }
+
+export const BrowserRouterDecorator = (storyFn: () => React.ReactNode) => {
+	return (
+		<HashRouter>
+			{storyFn()}
+		</HashRouter>
+	)
+}
+
+
