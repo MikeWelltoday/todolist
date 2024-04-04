@@ -8,18 +8,18 @@ export { appActions } from './reducers/app-reducer'
 
 //========================================================================================
 // TASKS-REDUCER
-export type { TasksReducerType } from './reducers/tasks-reducer'
-export type { TasksActionsType } from './reducers/tasks-reducer'
+export type { UiUpdateTaskModelType } from './reducers/tasks-reducer'
 export type { TaskType } from './reducers/tasks-reducer'
-export { removeTaskAC } from './reducers/tasks-reducer'
-export { addTaskAC } from './reducers/tasks-reducer'
-export { updateTaskAC } from './reducers/tasks-reducer'
-export { setTasksAC } from './reducers/tasks-reducer'
+export type { TasksReducerType } from './reducers/tasks-reducer'
+export { tasksReducer } from './reducers/tasks-reducer'
+export { tasksActions } from './reducers/tasks-reducer'
+
+
 export { fetchTasksTC } from './reducers/tasks-reducer'
 export { removeTaskTC } from './reducers/tasks-reducer'
 export { addTaskTC } from './reducers/tasks-reducer'
 export { updateTaskTC } from './reducers/tasks-reducer'
-export { tasksReducer } from './reducers/tasks-reducer'
+
 
 //========================================================================================
 // TODOLISTS-REDUCER

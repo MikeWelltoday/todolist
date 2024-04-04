@@ -13,17 +13,18 @@ export type AppDispatchType = typeof store.dispatch
 
 export const useAppDispatch = () => useDispatch<AppDispatchType>()
 
-export const rootReducer = combineReducers({
-	todolistsReducer,
-	tasks: tasksReducer,
-	appReducer,
-	authReducer
+const rootReducer = combineReducers({
+	 todolistsReducer,
+	 tasksReducer,
+	 appReducer,
+	 authReducer
 })
 
 export const store = configureStore({
-	reducer: rootReducer,
-	middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(thunk)
+	 reducer: rootReducer,
+	 middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(thunk)
 })
+
 
 // @ts-ignore
 window.store = store
