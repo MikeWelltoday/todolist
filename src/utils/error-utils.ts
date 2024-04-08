@@ -1,24 +1,24 @@
 import { AppDispatchType } from 'app/store'
 import { appActions } from 'state'
-import { Dispatch } from 'redux'
+import { isAxiosError } from 'axios'
 
 //========================================================================================
 
 export const handleServerAppError = (resMessagesArr: string[], dispatch: AppDispatchType) => {
 	dispatch(appActions.setError({ error: resMessagesArr.length ? resMessagesArr[0] : 'Some error occurred' }))
-	console.error(resMessagesArr.length ? resMessagesArr[0] : 'Some error occurred')
+	dispatch(appActions.setStatus({ status: false }))
 }
 
-export function handleServerNetworkError(error: any, dispatch: Dispatch) {
-
-	if (typeof error === 'string') {
-		dispatch(appActions.setError({ error }))
-		console.error('⛔', error)
+export function handleServerNetworkError(error: unknown, dispatch: AppDispatchType): void {
+	let errorMessage = 'Some error occurred'
+	if (isAxiosError(error)) {
+		errorMessage = error.response?.data?.message || error?.message || errorMessage
 	} else if (error instanceof Error) {
-		dispatch(appActions.setError({ error: error.message }))
-		console.error('⛔', error.message)
+		errorMessage = `Native error: ${error.message}`
+	} else {
+		errorMessage = JSON.stringify(error)
 	}
+	dispatch(appActions.setError({ error: errorMessage }))
+	dispatch(appActions.setStatus({ status: false }))
 }
-
-
 

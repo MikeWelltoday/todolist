@@ -1,4 +1,4 @@
-import { tasksActions, tasksReducer, TasksReducerType, tasksThunks } from 'state'
+import { addTaskTC, tasksActions, tasksReducer, TasksReducerType, tasksThunks } from 'state'
 import { TaskApiType, TaskPrioritiesEnum, TaskStatusesEnum, TodolistApiType } from 'api'
 import { todolistsActions } from 'state'
 
@@ -94,7 +94,14 @@ test('addTask', () => {
 		startDate: '',
 		deadline: ''
 	}
-	const endState = tasksReducer(startState, tasksActions.addTask({ newTaskFromAPI }))
+
+	const action = tasksThunks.addTaskTC.fulfilled(
+		{ newTaskFromAPI },
+		'metaData',
+		{ todolistId: newTaskFromAPI.todoListId, newTitle: newTaskFromAPI.title }
+	)
+
+	const endState = tasksReducer(startState, action)
 	const keysLength = Object.keys(endState['todolistId2'][0]).length
 	expect(endState['todolistId1'].length).toBe(2)
 	expect(endState['todolistId2'].length).toBe(3)
@@ -168,7 +175,7 @@ test('changeTasksEntityStatusAC', () => {
 	expect(endState['todolistId2'][1].entityStatus).toBe('loading')
 })
 
-test('setTasks - 1 version', () => {
+test('setTasks', () => {
 	const todolistID = 'todolistId1'
 	const tasksFromAPI = [
 		{
