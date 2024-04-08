@@ -13,6 +13,7 @@ export type { TaskType } from './reducers/tasks-reducer'
 export type { TasksReducerType } from './reducers/tasks-reducer'
 export { tasksReducer } from './reducers/tasks-reducer'
 export { tasksActions } from './reducers/tasks-reducer'
+export { tasksThunks } from './reducers/tasks-reducer'
 
 
 export { fetchTasksTC } from './reducers/tasks-reducer'
