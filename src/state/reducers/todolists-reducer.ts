@@ -2,7 +2,7 @@ import { TodolistApiType, todolistsAPI } from 'api'
 import { handleServerAppError, handleServerNetworkError } from 'utils'
 import { tasksThunks } from './tasks-reducer'
 import { appActions } from 'state/reducers/app-reducer'
-import { AppDispatchType } from 'app/store'
+import { AppDispatchType } from 'state/store'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 //========================================================================================

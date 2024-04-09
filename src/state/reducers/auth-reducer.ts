@@ -1,7 +1,7 @@
 import { authAPI } from 'api'
 import { handleServerAppError, handleServerNetworkError } from 'utils'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { AppDispatchType } from 'app/store'
+import { AppDispatchType } from 'state/store'
 import { appActions } from 'state/reducers/app-reducer'
 import { todolistsActions } from 'state/reducers/todolists-reducer'
 

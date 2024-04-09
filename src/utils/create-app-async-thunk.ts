@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { AppDispatchType, AppRootStateType } from 'app/store'
+import { AppDispatchType, AppRootStateType } from 'state/store'
 
 
 export const createAppAsyncThunk = createAsyncThunk.withTypes<{

@@ -1,4 +1,4 @@
-import { AppDispatchType } from 'app/store'
+import { AppDispatchType } from 'state/store'
 import { appActions } from 'state'
 import { isAxiosError } from 'axios'
 
