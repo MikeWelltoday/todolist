@@ -1,4 +1,4 @@
-import { TodolistApiType, todolistsAPI } from 'api'
+import { ResultCode, TodolistApiType, todolistsAPI } from 'api'
 import { handleServerAppError, handleServerNetworkError } from 'utils'
 import { tasksThunks } from './tasks-reducer'
 import { appActions } from 'state/reducers/app-reducer'
@@ -98,7 +98,7 @@ export function addTodolistTC(title: string) {
 		dispatch(appActions.setStatus({ status: true }))
 		try {
 			const res = await todolistsAPI.createTodolist(title)
-			if (res.data.resultCode === 0) {
+			if (res.data.resultCode === ResultCode.success) {
 				dispatch(todolistsActions.addTodolist({ newTodolistFromAPI: res.data.data.item }))
 			} else {
 				handleServerAppError(res.data.messages, dispatch)
@@ -116,7 +116,7 @@ export function removeTodolistTC(todolistId: string) {
 		dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'loading' }))
 		try {
 			const res = await todolistsAPI.deleteTodolist(todolistId)
-			if (res.data.resultCode === 0) {
+			if (res.data.resultCode === ResultCode.success) {
 				dispatch(todolistsActions.removeTodolist({ todolistId }))
 			} else {
 				handleServerAppError(res.data.messages, dispatch)
@@ -134,7 +134,7 @@ export function updateTodolistTitleTC(todolistId: string, newTitle: string) {
 		dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'loading' }))
 		try {
 			const res = await todolistsAPI.updateTodolist(todolistId, newTitle)
-			if (res.data.resultCode === 0) {
+			if (res.data.resultCode === ResultCode.success) {
 				dispatch(todolistsActions.changeTodolistTitle({ todolistId, title: newTitle }))
 			} else {
 				handleServerAppError(res.data.messages, dispatch)

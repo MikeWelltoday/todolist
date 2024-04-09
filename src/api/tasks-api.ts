@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { instance } from 'api/instance'
 
 //========================================================================================
 
@@ -54,32 +54,22 @@ export type ApiUpdateTaskModelType = {
 
 //========================================================================================
 
-const instance = axios.create({
-	baseURL: 'https://social-network.samuraijs.com/api/1.1/todo-lists/',
-	withCredentials: true,
-	headers: {
-		'API-KEY': '833317a0-7a1b-4997-ba09-b643d5fe2749'
-	}
-})
-
-//========================================================================================
-
 export const tasksAPI = {
 
 	getTasks(todolistId: string) {
-		return instance.get<GetTasksApiResponseType>(`${todolistId}/tasks`)
+		return instance.get<GetTasksApiResponseType>(`todo-lists/${todolistId}/tasks`)
 	},
 
 	createTask(todolistId: string, title: string) {
-		return instance.post<TasksAxiosContainerType>(`${todolistId}/tasks`, { title })
+		return instance.post<TasksAxiosContainerType>(`todo-lists/${todolistId}/tasks`, { title })
 	},
 
 	deleteTask(todolistId: string, tasksId: string) {
-		return instance.delete<TasksAxiosContainerType<{}>>(`${todolistId}/tasks/${tasksId}`)
+		return instance.delete<TasksAxiosContainerType<{}>>(`todo-lists/${todolistId}/tasks/${tasksId}`)
 	},
 
 	updateTask(todolistId: string, tasksId: string, model: ApiUpdateTaskModelType) {
-		return instance.put<TasksAxiosContainerType>(`${todolistId}/tasks/${tasksId}`, model)
+		return instance.put<TasksAxiosContainerType>(`todo-lists/${todolistId}/tasks/${tasksId}`, model)
 	}
 
 }

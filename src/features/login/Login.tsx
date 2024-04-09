@@ -9,7 +9,7 @@ import FormLabel from '@mui/material/FormLabel'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { useFormik } from 'formik'
-import { authSetLoggedTC, isLoggedSelector, useAppDispatch } from 'state'
+import { auththunks, isLoggedSelector, useAppDispatch } from 'state'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 
@@ -52,12 +52,12 @@ export const Login: FC = () => {
 			return errors
 		},
 		onSubmit: values => {
-			dispatch(authSetLoggedTC(
-				values.email,
-				values.password,
-				values.rememberMe,
-				true
-			))
+			dispatch(auththunks.authSetLoggedTC({
+				email: values.email,
+				password: values.password,
+				rememberMe: values.rememberMe,
+				captcha: true
+			}))
 			formik.resetForm()
 		}
 	})

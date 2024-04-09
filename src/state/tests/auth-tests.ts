@@ -1,5 +1,4 @@
-import { authReducer, AuthReducerType } from '../index'
-import { authActions } from 'state/reducers/auth-reducer'
+import { authReducer, AuthReducerType, auththunks } from '../index'
 
 //========================================================================================
 
@@ -11,8 +10,13 @@ beforeEach(() => {
 	}
 })
 
-test('setIsLogged', () => {
-	const endState = authReducer(startState, authActions.setIsLogged({ isLogged: true }))
+test('setIsLogged with authSetLoggedTC', () => {
+	const action = auththunks.authSetLoggedTC.fulfilled(
+		{ isLogged: true },
+		'',
+		{ email: '', password: '', rememberMe: true, captcha: true }
+	)
+	const endState = authReducer(startState, action)
 	expect(endState.isLogged).toBe(false)
 })
 

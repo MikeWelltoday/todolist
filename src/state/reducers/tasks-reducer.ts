@@ -1,5 +1,5 @@
 import { RequestStatusType, todolistsActions } from './todolists-reducer'
-import { ApiUpdateTaskModelType, TaskApiType, TaskPrioritiesEnum, tasksAPI, TaskStatusesEnum } from 'api'
+import { ApiUpdateTaskModelType, ResultCode, TaskApiType, TaskPrioritiesEnum, tasksAPI, TaskStatusesEnum } from 'api'
 import { createAppAsyncThunk, handleServerAppError, handleServerNetworkError } from 'utils'
 import { appActions } from 'state/reducers/app-reducer'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
@@ -25,7 +25,8 @@ export type TasksReducerType = {
 
 //========================================================================================
 
-const fetchTasksTC = createAppAsyncThunk<{ tasks: TaskApiType[], todolistId: string }, string>(
+const fetchTasksTC = createAppAsyncThunk<{ tasks: TaskApiType[], todolistId: string }, string
+>(
 	'tasks/fetchTasksTC',
 	async (todolistId, thunkAPI) => {
 		thunkAPI.dispatch(appActions.setStatus({ status: true }))
@@ -40,14 +41,15 @@ const fetchTasksTC = createAppAsyncThunk<{ tasks: TaskApiType[], todolistId: str
 	}
 )
 
-const addTaskTC = createAppAsyncThunk<{ newTaskFromAPI: TaskApiType }, { todolistId: string, newTitle: string }>(
+const addTaskTC = createAppAsyncThunk<{ newTaskFromAPI: TaskApiType }, { todolistId: string, newTitle: string }
+>(
 	'tasks/addTaskTC',
 	async ({ todolistId, newTitle }, thunkAPI) => {
 		thunkAPI.dispatch(appActions.setStatus({ status: true }))
 		thunkAPI.dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'loading' }))
 		try {
 			const res = await tasksAPI.createTask(todolistId, newTitle)
-			if (res.data.resultCode === 0) {
+			if (res.data.resultCode === ResultCode.success) {
 				thunkAPI.dispatch(appActions.setStatus({ status: false }))
 				thunkAPI.dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
 				return { newTaskFromAPI: res.data.data.item }
@@ -66,7 +68,8 @@ const addTaskTC = createAppAsyncThunk<{ newTaskFromAPI: TaskApiType }, { todolis
 
 const updateTaskTC = createAppAsyncThunk<
 	{ todolistId: string, taskId: string, taskUpdateModel: ApiUpdateTaskModelType },
-	{ todolistId: string, taskId: string, taskUpdateModel: UiUpdateTaskModelType }>(
+	{ todolistId: string, taskId: string, taskUpdateModel: UiUpdateTaskModelType }
+>(
 	'tasks/updateTaskTC',
 	async ({ todolistId, taskId, taskUpdateModel }, thunkAPI) => {
 		thunkAPI.dispatch(appActions.setStatus({ status: true }))
@@ -89,7 +92,7 @@ const updateTaskTC = createAppAsyncThunk<
 		}
 		try {
 			const res = await tasksAPI.updateTask(todolistId, taskId, model)
-			if (res.data.resultCode === 0) {
+			if (res.data.resultCode === ResultCode.success) {
 				thunkAPI.dispatch(appActions.setStatus({ status: false }))
 				thunkAPI.dispatch(tasksActions.changeTasksEntityStatusAC({ todolistId, taskId, newStatus: 'idle' }))
 				return { todolistId, taskId, taskUpdateModel: model }
@@ -116,7 +119,7 @@ const removeTaskTC = createAppAsyncThunk<
 		thunkAPI.dispatch(tasksActions.changeTasksEntityStatusAC({ todolistId, taskId, newStatus: 'loading' }))
 		try {
 			const res = await tasksAPI.deleteTask(todolistId, taskId)
-			if (res.data.resultCode === 0) {
+			if (res.data.resultCode === ResultCode.success) {
 				thunkAPI.dispatch(appActions.setStatus({ status: false }))
 				return { todolistId, taskId }
 			} else {
