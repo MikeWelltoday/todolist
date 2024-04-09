@@ -1,5 +1,4 @@
 import { RequestStatusType, todolistsActions } from './todolists-reducer'
-import { AppDispatchType, AppRootStateType } from 'app/store'
 import { ApiUpdateTaskModelType, TaskApiType, TaskPrioritiesEnum, tasksAPI, TaskStatusesEnum } from 'api'
 import { createAppAsyncThunk, handleServerAppError, handleServerNetworkError } from 'utils'
 import { appActions } from 'state/reducers/app-reducer'
@@ -118,7 +117,7 @@ const removeTaskTC = createAppAsyncThunk<
 		try {
 			const res = await tasksAPI.deleteTask(todolistId, taskId)
 			if (res.data.resultCode === 0) {
-				thunkAPI.dispatch(appActions.setStatus({ status: true }))
+				thunkAPI.dispatch(appActions.setStatus({ status: false }))
 				return { todolistId, taskId }
 			} else {
 				handleServerAppError(res.data.messages, thunkAPI.dispatch)
@@ -128,29 +127,8 @@ const removeTaskTC = createAppAsyncThunk<
 			handleServerNetworkError(error, thunkAPI.dispatch)
 			return thunkAPI.rejectWithValue(null)
 		}
-
-
 	}
 )
-
-// export function removeTask(todolistId: string, taskId: string) {
-// 	return async (dispatch: AppDispatchType) => {
-// 		dispatch(appActions.setStatus({ status: true }))
-// 		dispatch(tasksActions.changeTasksEntityStatusAC({ todolistId, taskId, newStatus: 'loading' }))
-// 		try {
-// 			const res = await tasksAPI.deleteTask(todolistId, taskId)
-// 			if (res.data.resultCode === 0) {
-// 				dispatch(tasksActions.removeTask({ todolistId, taskId }))
-// 			} else {
-// 				handleServerAppError(res.data.messages, dispatch)
-// 			}
-// 		} catch (e) {
-// 			handleServerNetworkError(e, dispatch)
-// 		}
-// 		dispatch(appActions.setStatus({ status: false }))
-// 	}
-// }
-
 
 //========================================================================================
 const initialState: TasksReducerType = {}
@@ -161,9 +139,9 @@ const slice = createSlice({
 
 	reducers: {
 
-		// removeTask: (state, action: PayloadAction<{ todolistId: string, taskId: string }>) => {
-		// 	state[action.payload.todolistId] = state[action.payload.todolistId].filter(tsk => tsk.id !== action.payload.taskId)
-		// },
+		removeTask: (state, action: PayloadAction<{ todolistId: string, taskId: string }>) => {
+			state[action.payload.todolistId] = state[action.payload.todolistId].filter(tsk => tsk.id !== action.payload.taskId)
+		},
 
 		changeTasksEntityStatusAC: (state, action: PayloadAction<{
 			todolistId: string,
@@ -220,26 +198,3 @@ const slice = createSlice({
 export const tasksReducer = slice.reducer
 export const tasksActions = slice.actions
 export const tasksThunks = { fetchTasksTC, addTaskTC, updateTaskTC, removeTaskTC }
-
-//========================================================================================
-
-
-// export function removeTaskTC(todolistId: string, taskId: string) {
-// 	return async (dispatch: AppDispatchType) => {
-// 		dispatch(appActions.setStatus({ status: true }))
-// 		dispatch(tasksActions.changeTasksEntityStatusAC({ todolistId, taskId, newStatus: 'loading' }))
-// 		try {
-// 			const res = await tasksAPI.deleteTask(todolistId, taskId)
-// 			if (res.data.resultCode === 0) {
-// 				dispatch(tasksActions.removeTask({ todolistId, taskId }))
-// 			} else {
-// 				handleServerAppError(res.data.messages, dispatch)
-// 			}
-// 		} catch (e) {
-// 			handleServerNetworkError(e, dispatch)
-// 		}
-// 		dispatch(appActions.setStatus({ status: false }))
-// 	}
-// }
-
-

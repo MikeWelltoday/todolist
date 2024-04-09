@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "preserveConstEnums": true,
     "baseUrl": "src",
     "target": "es5",
     "lib": [

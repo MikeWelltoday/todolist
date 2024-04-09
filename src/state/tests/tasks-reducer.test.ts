@@ -71,9 +71,13 @@ beforeEach(() => {
 	}
 })
 
-
 test('removeTask', () => {
-	const endState = tasksReducer(startState, tasksActions.removeTask({ todolistId: 'todolistId2', taskId: '2' }))
+	const action = tasksThunks.removeTaskTC.fulfilled(
+		{ todolistId: 'todolistId2', taskId: '2' },
+		'metaData',
+		{ todolistId: 'todolistId2', taskId: '2' }
+	)
+	const endState = tasksReducer(startState, action)
 	expect(endState['todolistId1'].length).toBe(2)
 	expect(endState['todolistId2'].length).toBe(1)
 	expect(endState['todolistId2'].every(t => t.id !== '2')).toBeTruthy()

@@ -7,7 +7,6 @@ import { Task } from '../task/Task'
 import { AddItemForm, EditableSpan, FilterButton } from 'components'
 import {
 	AppRootStateType,
-	removeTaskTC,
 	removeTodolistTC,
 	RequestStatusType, tasksThunks,
 	TaskType,
@@ -76,7 +75,7 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
 
 	// task
 	const removeTaskOnClickHandler = useCallback((taskId: string) => {
-		dispatch(removeTaskTC(props.todolistId, taskId))
+		dispatch(tasksThunks.removeTaskTC({ todolistId: props.todolistId, taskId }))
 	}, [props.todolistId])
 
 	const changeTaskStatusOnChangeHandler = useCallback((taskId: string, status: TaskStatusesEnum) => {

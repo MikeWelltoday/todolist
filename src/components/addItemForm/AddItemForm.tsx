@@ -1,5 +1,5 @@
 import React, { FC, useState, memo } from 'react'
-import S from './AddItemForm.module.scss'
+import S from 'components/addItemForm/AddItemForm.module.scss'
 import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'

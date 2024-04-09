@@ -2,12 +2,6 @@ import { AppDispatchType } from 'app/store'
 import { appActions } from 'state'
 import { isAxiosError } from 'axios'
 
-//========================================================================================
-
-export const handleServerAppError = (resMessagesArr: string[], dispatch: AppDispatchType) => {
-	dispatch(appActions.setError({ error: resMessagesArr.length ? resMessagesArr[0] : 'Some error occurred' }))
-	dispatch(appActions.setStatus({ status: false }))
-}
 
 export function handleServerNetworkError(error: unknown, dispatch: AppDispatchType): void {
 	let errorMessage = 'Some error occurred'

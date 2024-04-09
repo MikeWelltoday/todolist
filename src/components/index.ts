@@ -1,5 +1,4 @@
-//========================================================================================
-export {AddItemForm} from './addItemForm/AddItemForm'
-export {EditableSpan} from './editableSpan/EditableSpan'
-export {FilterButton} from './filterButton/FilterButton'
-export {ErrorSnackbar} from './errorSnackBar/ErrorSnackbar'
+export { AddItemForm } from 'components/addItemForm/AddItemForm'
+export { EditableSpan } from 'components/editableSpan/EditableSpan'
+export { FilterButton } from 'components/filterButton/FilterButton'
+export { ErrorSnackbar } from 'components/errorSnackBar/ErrorSnackbar'

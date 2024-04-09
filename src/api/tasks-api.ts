@@ -2,14 +2,14 @@ import axios from 'axios'
 
 //========================================================================================
 
-export enum TaskStatusesEnum {
+export const enum TaskStatusesEnum {
 	New = 0,
 	InProgress = 1,
 	Completed = 2,
 	Draft = 3
 }
 
-export enum TaskPrioritiesEnum {
+export const enum TaskPrioritiesEnum {
 	Low = 0,
 	Middle = 1,
 	High = 2,

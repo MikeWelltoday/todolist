@@ -16,9 +16,6 @@ export { tasksActions } from './reducers/tasks-reducer'
 export { tasksThunks } from './reducers/tasks-reducer'
 
 
-export { removeTaskTC } from './reducers/tasks-reducer'
-
-
 //========================================================================================
 // TODOLISTS-REDUCER
 export type { TodolistFilterReducerType } from './reducers/todolists-reducer'

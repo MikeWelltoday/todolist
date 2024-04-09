@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, useState, KeyboardEvent, memo, useCallback } from 'react'
-import s from './EditableSpan.module.scss'
+import s from 'components/editableSpan/EditableSpan.module.scss'
 import TextField from '@mui/material/TextField'
 import { RequestStatusType } from 'state'
 
