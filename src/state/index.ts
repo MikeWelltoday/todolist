@@ -16,10 +16,7 @@ export { tasksActions } from './reducers/tasks-reducer'
 export { tasksThunks } from './reducers/tasks-reducer'
 
 
-export { fetchTasksTC } from './reducers/tasks-reducer'
 export { removeTaskTC } from './reducers/tasks-reducer'
-export { addTaskTC } from './reducers/tasks-reducer'
-export { updateTaskTC } from './reducers/tasks-reducer'
 
 
 //========================================================================================

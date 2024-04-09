@@ -1,5 +1,5 @@
-import { addTaskTC, tasksActions, tasksReducer, TasksReducerType, tasksThunks } from 'state'
-import { TaskApiType, TaskPrioritiesEnum, TaskStatusesEnum, TodolistApiType } from 'api'
+import { tasksActions, tasksReducer, TasksReducerType, tasksThunks } from 'state'
+import { TaskPrioritiesEnum, TaskStatusesEnum, TodolistApiType } from 'api'
 import { todolistsActions } from 'state'
 
 //========================================================================================
@@ -116,12 +116,13 @@ test('addTask', () => {
 test('updateTask', () => {
 	const newTitle = 'MEAT'
 	const newStatus = TaskStatusesEnum.New
-	const endState = tasksReducer(startState,
-		tasksActions.updateTask({
-			todolistId: 'todolistId2',
-			taskId: '2',
-			taskUpdateModel: { title: newTitle, status: newStatus }
-		}))
+	const updatedTask = { ...startState['todolistId2'][1], title: newTitle, status: newStatus }
+	const action = tasksThunks.updateTaskTC.fulfilled(
+		{ todolistId: 'todolistId2', taskId: '2', taskUpdateModel: updatedTask },
+		'metaData',
+		{ todolistId: 'todolistId2', taskId: '2', taskUpdateModel: { title: newTitle, status: newStatus } }
+	)
+	const endState = tasksReducer(startState, action)
 	expect(endState['todolistId1'][1].title).toBe('Redux')
 	expect(endState['todolistId2'][1].title).toBe(newTitle)
 	expect(endState['todolistId1'][1].status).toBe(TaskStatusesEnum.New)

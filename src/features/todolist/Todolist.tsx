@@ -6,14 +6,12 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import { Task } from '../task/Task'
 import { AddItemForm, EditableSpan, FilterButton } from 'components'
 import {
-	addTaskTC,
 	AppRootStateType,
 	removeTaskTC,
 	removeTodolistTC,
-	RequestStatusType,
+	RequestStatusType, tasksThunks,
 	TaskType,
 	TodolistFilterReducerType, todolistsActions,
-	updateTaskTC,
 	updateTodolistTitleTC,
 	useAppDispatch
 } from 'state'
@@ -53,7 +51,7 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
 	}
 
 	const addTaskHandler = useCallback(((title: string) => {
-		dispatch(addTaskTC({ todolistId: props.todolistId, newTitle: title }))
+		dispatch(tasksThunks.addTaskTC({ todolistId: props.todolistId, newTitle: title }))
 	}), [props.todolistId])
 
 	const removeTodolistOnClickHandler = useCallback((() => {
@@ -82,11 +80,15 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
 	}, [props.todolistId])
 
 	const changeTaskStatusOnChangeHandler = useCallback((taskId: string, status: TaskStatusesEnum) => {
-		dispatch(updateTaskTC(props.todolistId, taskId, { status }))
+		dispatch(tasksThunks.updateTaskTC({ todolistId: props.todolistId, taskId, taskUpdateModel: { status } }))
 	}, [props.todolistId])
 
 	const changeTaskTitleOnChangeHandler = useCallback((taskId: string, newTitle: string) => {
-		dispatch(updateTaskTC(props.todolistId, taskId, { title: newTitle }))
+		dispatch(tasksThunks.updateTaskTC({
+			todolistId: props.todolistId,
+			taskId,
+			taskUpdateModel: { title: newTitle }
+		}))
 	}, [props.todolistId])
 
 	return (
