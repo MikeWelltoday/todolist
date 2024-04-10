@@ -3,9 +3,10 @@ import { Provider } from 'react-redux'
 import { thunk } from 'redux-thunk'
 import { HashRouter } from 'react-router-dom'
 import { configureStore } from '@reduxjs/toolkit'
-import { appReducer, AppRootStateType, authReducer, tasksReducer, todolistsReducer } from 'state'
+import { appReducer, authReducer, tasksReducer, todolistsReducer } from 'state'
 import { combineReducers } from 'redux'
 import { TaskPrioritiesEnum, TaskStatusesEnum } from 'api'
+import { AppRootStateType } from 'app/store'
 
 //========================================================================================
 

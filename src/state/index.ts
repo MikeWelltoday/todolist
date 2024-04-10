@@ -19,24 +19,16 @@ export { tasksThunks } from './reducers/tasks-reducer'
 export type { TodolistFilterReducerType } from './reducers/todolists-reducer'
 export type { RequestStatusType } from './reducers/todolists-reducer'
 export type { TodolistReducerType } from './reducers/todolists-reducer'
-
 export { todolistsReducer } from './reducers/todolists-reducer'
 export { todolistsActions } from './reducers/todolists-reducer'
-
-export { fetchTodolistsTC } from './reducers/todolists-reducer'
-export { addTodolistTC } from './reducers/todolists-reducer'
-export { removeTodolistTC } from './reducers/todolists-reducer'
-export { updateTodolistTitleTC } from './reducers/todolists-reducer'
+export { todolistsThunks } from './reducers/todolists-reducer'
 
 //========================================================================================
 // auth-reducer
 export type { AuthReducerType } from './reducers/auth-reducer'
 export { authReducer } from './reducers/auth-reducer'
 export { authActions } from './reducers/auth-reducer'
-export { auththunks } from './reducers/auth-reducer'
-
-export { authIsInitializedTC } from './reducers/auth-reducer'
-export { authLogoutTC } from './reducers/auth-reducer'
+export { authThunks } from './reducers/auth-reducer'
 
 
 //========================================================================================
@@ -48,9 +40,4 @@ export { isLoggedSelector } from './selectors/isLogged-selector'
 export { isAppInitializedSelector } from 'state/selectors/isAppInitialized-selector'
 
 
-//========================================================================================
-// store
-export type { AppRootStateType } from './store'
-export type { AppDispatchType } from './store'
-export { useAppDispatch } from './store'
-export { store } from './store'
+

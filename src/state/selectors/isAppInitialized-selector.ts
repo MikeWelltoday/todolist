@@ -1,4 +1,4 @@
-import { AppRootStateType } from 'state/store'
+import { AppRootStateType } from 'app/store'
 
 //========================================================================================
 

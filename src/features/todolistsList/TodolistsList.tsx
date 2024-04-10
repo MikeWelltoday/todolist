@@ -3,9 +3,10 @@ import { useSelector } from 'react-redux'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import { Todolist } from '../todolist/Todolist'
-import { addTodolistTC, fetchTodolistsTC, isLoggedSelector, todolistsSelector, useAppDispatch } from 'state'
+import { isLoggedSelector, todolistsSelector, todolistsThunks } from 'state'
 import { AddItemForm } from 'components'
 import { Navigate } from 'react-router-dom'
+import { useAppDispatch } from 'app/store'
 
 //========================================================================================
 
@@ -24,11 +25,11 @@ export const TodolistsList: FC<TodolistsListPropsType> = (props) => {
 	useEffect(() => {
 		if (props.demo) return
 		if (!isLogged) return
-		dispatch(fetchTodolistsTC())
+		dispatch(todolistsThunks.fetchTodolistsTC({}))
 	}, [])
 
 	const addTodolist = useCallback((newTodolistTitle: string) => {
-		dispatch(addTodolistTC(newTodolistTitle))
+		dispatch(todolistsThunks.addTodolistTC(newTodolistTitle))
 	}, [])
 
 	if (!isLogged) return <Navigate to={'/login'} />

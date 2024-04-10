@@ -6,15 +6,15 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import { Task } from '../task/Task'
 import { AddItemForm, EditableSpan, FilterButton } from 'components'
 import {
-	AppRootStateType,
-	removeTodolistTC,
-	RequestStatusType, tasksThunks,
+	RequestStatusType,
+	tasksThunks,
 	TaskType,
-	TodolistFilterReducerType, todolistsActions,
-	updateTodolistTitleTC,
-	useAppDispatch
+	TodolistFilterReducerType,
+	todolistsActions,
+	todolistsThunks
 } from 'state'
 import { TaskStatusesEnum } from 'api'
+import { AppRootStateType, useAppDispatch } from 'app/store'
 
 
 //========================================================================================
@@ -54,11 +54,11 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
 	}), [props.todolistId])
 
 	const removeTodolistOnClickHandler = useCallback((() => {
-		dispatch(removeTodolistTC(props.todolistId))
+		dispatch(todolistsThunks.removeTodolistTC(props.todolistId))
 	}), [props.todolistId])
 
 	const changeTodolistTitleOnChangeHandler = useCallback(((newTitle: string) => {
-		dispatch(updateTodolistTitleTC(props.todolistId, newTitle))
+		dispatch(todolistsThunks.updateTodolistTitleTC({ todolistId: props.todolistId, newTitle }))
 	}), [props.todolistId])
 
 	const changeTaskFilterAllOnClickHandler = useCallback((() => {

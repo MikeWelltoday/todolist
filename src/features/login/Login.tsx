@@ -9,9 +9,10 @@ import FormLabel from '@mui/material/FormLabel'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { useFormik } from 'formik'
-import { auththunks, isLoggedSelector, useAppDispatch } from 'state'
+import { authThunks, isLoggedSelector } from 'state'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
+import { useAppDispatch } from 'app/store'
 
 //========================================================================================
 
@@ -52,7 +53,7 @@ export const Login: FC = () => {
 			return errors
 		},
 		onSubmit: values => {
-			dispatch(auththunks.authSetLoggedTC({
+			dispatch(authThunks.authSetLoggedTC({
 				email: values.email,
 				password: values.password,
 				rememberMe: values.rememberMe,

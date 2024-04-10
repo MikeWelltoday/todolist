@@ -1,4 +1,4 @@
-import { tasksActions, tasksReducer, TasksReducerType, tasksThunks } from 'state'
+import { tasksActions, tasksReducer, TasksReducerType, tasksThunks, todolistsThunks } from 'state'
 import { TaskPrioritiesEnum, TaskStatusesEnum, TodolistApiType } from 'api'
 import { todolistsActions } from 'state'
 
@@ -136,7 +136,12 @@ test('updateTask', () => {
 
 test('addTodolist', () => {
 	const newTodolistFromAPI = { id: 'todolistId3', title: 'todolist from server', addedDate: '', order: 0 }
-	const endState = tasksReducer(startState, todolistsActions.addTodolist({ newTodolistFromAPI }))
+	const action = todolistsThunks.addTodolistTC.fulfilled(
+		{ newTodolistFromAPI },
+		'',
+		newTodolistFromAPI.title
+	)
+	const endState = tasksReducer(startState, action)
 	const keys = Object.keys(endState)
 	const newKey = keys.filter(k => k !== 'todolistId1' && k !== 'todolistId2')[0]
 	expect(keys.length).toBe(3)
@@ -146,7 +151,12 @@ test('addTodolist', () => {
 
 
 test('removeTodolist', () => {
-	const endState = tasksReducer(startState, todolistsActions.removeTodolist({ todolistId: 'todolistId2' }))
+	const action = todolistsThunks.removeTodolistTC.fulfilled(
+		{ todolistId: 'todolistId2' },
+		'',
+		'todolistId2'
+	)
+	const endState = tasksReducer(startState, action)
 	const keys = Object.keys(endState)
 	expect(keys.length).toBe(1)
 	expect(endState['todolistId2']).toBeUndefined()
@@ -160,7 +170,12 @@ test('setTodolists', () => {
 			{ id: 'todolistId4', title: 'new todolists 4', addedDate: '', order: 0 },
 			{ id: 'todolistId5', title: 'new todolists 5', addedDate: '', order: 0 }
 		]
-	const endState = tasksReducer(startState, todolistsActions.setTodolists({ todolistsFromAPI }))
+	const action = todolistsThunks.fetchTodolistsTC.fulfilled(
+		{ todolistsFromAPI },
+		'',
+		{}
+	)
+	const endState = tasksReducer(startState, action)
 	const endStateLength = Object.keys(endState).length
 	expect(endStateLength).toBe(3)
 	expect(endState['todolistId3']).toEqual([])

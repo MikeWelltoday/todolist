@@ -1,8 +1,9 @@
-import { RequestStatusType, todolistsActions } from './todolists-reducer'
+import { RequestStatusType, todolistsActions, todolistsThunks } from './todolists-reducer'
 import { ApiUpdateTaskModelType, ResultCode, TaskApiType, TaskPrioritiesEnum, tasksAPI, TaskStatusesEnum } from 'api'
 import { createAppAsyncThunk, handleServerAppError, handleServerNetworkError } from 'utils'
 import { appActions } from 'state/reducers/app-reducer'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { authThunks } from 'state/reducers/auth-reducer'
 
 //========================================================================================
 
@@ -137,11 +138,6 @@ const slice = createSlice({
 	initialState,
 
 	reducers: {
-
-		removeTask: (state, action: PayloadAction<{ todolistId: string, taskId: string }>) => {
-			state[action.payload.todolistId] = state[action.payload.todolistId].filter(tsk => tsk.id !== action.payload.taskId)
-		},
-
 		changeTasksEntityStatusAC: (state, action: PayloadAction<{
 			todolistId: string,
 			taskId: string,
@@ -157,19 +153,6 @@ const slice = createSlice({
 
 	extraReducers: builder => {
 		builder
-			.addCase(todolistsActions.addTodolist, (state, action) => {
-				state[action.payload.newTodolistFromAPI.id] = []
-			})
-			.addCase(todolistsActions.removeTodolist, (state, action) => {
-				delete state[action.payload.todolistId]
-			})
-			.addCase(todolistsActions.setTodolists, (state, action) => {
-				const tasks: TasksReducerType = {}
-				action.payload.todolistsFromAPI.forEach(tl => {
-					tasks[tl.id] = []
-				})
-				return tasks
-			})
 			.addCase(fetchTasksTC.fulfilled, (state, action) => {
 				state[action.payload.todolistId] = action.payload.tasks.map(tsk => ({
 					...tsk, entityStatus: 'idle'
@@ -190,6 +173,22 @@ const slice = createSlice({
 			})
 			.addCase(removeTaskTC.fulfilled, (state, action) => {
 				state[action.payload.todolistId] = state[action.payload.todolistId].filter(tsk => tsk.id !== action.payload.taskId)
+			})
+			.addCase(todolistsThunks.fetchTodolistsTC.fulfilled, (state, action) => {
+				const tasks: TasksReducerType = {}
+				action.payload.todolistsFromAPI.forEach(tl => {
+					tasks[tl.id] = []
+				})
+				return tasks
+			})
+			.addCase(authThunks.authLogoutTC.fulfilled, (state, action) => {
+				return {}
+			})
+			.addCase(todolistsThunks.addTodolistTC.fulfilled, (state, action) => {
+				state[action.payload.newTodolistFromAPI.id] = []
+			})
+			.addCase(todolistsThunks.removeTodolistTC.fulfilled, (state, action) => {
+				delete state[action.payload.todolistId]
 			})
 	}
 })

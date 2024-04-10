@@ -8,8 +8,8 @@ import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Loader } from './loader/Loader'
 import { useSelector } from 'react-redux'
-import { authLogoutTC, isLoggedSelector, useAppDispatch } from 'state'
-
+import { authThunks, isLoggedSelector } from 'state'
+import { useAppDispatch } from 'app/store'
 
 //========================================================================================
 
@@ -21,7 +21,7 @@ export const HeaderAppBar = () => {
 	const isLogged = useSelector(isLoggedSelector)
 
 	function logoutOnClickHandler() {
-		dispatch(authLogoutTC())
+		dispatch(authThunks.authLogoutTC({}))
 	}
 
 	return (
