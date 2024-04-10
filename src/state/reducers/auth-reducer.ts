@@ -13,8 +13,7 @@ export type AuthReducerType = { isLogged: boolean }
 
 
 const authSetLoggedTC = createAppAsyncThunk<{ isLogged: boolean },
-	{ email: string, password: string, rememberMe: boolean, captcha: boolean }
->(
+	{ email: string, password: string, rememberMe: boolean, captcha: boolean }>(
 	'auth/authSetLoggedTC',
 	async ({ email, password, rememberMe, captcha }, thunkAPI) => {
 		thunkAPI.dispatch(appActions.setStatus({ status: true }))
@@ -33,6 +32,32 @@ const authSetLoggedTC = createAppAsyncThunk<{ isLogged: boolean },
 		}
 	}
 )
+//
+// const authIsInitializedTC = createAppAsyncThunk<{isLogged:boolean}, string>(
+// 	'auth/authIsInitializedTC',
+//
+// )
+
+
+export const authIsInitializedTC_ = () => async (dispatch: AppDispatchType) => {
+	try {
+		const res = await authAPI.me()
+		if (res.data.resultCode === ResultCode.success) {
+			dispatch(authActions.setIsLogged({ isLogged: true }))
+		}
+	} catch (error) {
+		if (typeof error === 'string') {
+			console.error(error)
+		} else if (error instanceof Error) {
+			console.error(error.message)
+		}
+	}
+	dispatch(appActions.setAppIsInitialized({ isAppInitialized: true }))
+}
+
+
+//========================================================================================
+
 
 const initialState: AuthReducerType = {
 	isLogged: false
@@ -77,22 +102,21 @@ export const auththunks = { authSetLoggedTC }
 // 	}
 // }
 
-
-export const authIsInitializedTC = () => async (dispatch: AppDispatchType) => {
-	try {
-		const res = await authAPI.me()
-		if (res.data.resultCode === ResultCode.success) {
-			dispatch(authActions.setIsLogged({ isLogged: true }))
-		}
-	} catch (error) {
-		if (typeof error === 'string') {
-			console.error(error)
-		} else if (error instanceof Error) {
-			console.error(error.message)
-		}
-	}
-	dispatch(appActions.setAppIsInitialized({ isAppInitialized: true }))
-}
+// export const authIsInitializedTC = () => async (dispatch: AppDispatchType) => {
+// 	try {
+// 		const res = await authAPI.me()
+// 		if (res.data.resultCode === ResultCode.success) {
+// 			dispatch(authActions.setIsLogged({ isLogged: true }))
+// 		}
+// 	} catch (error) {
+// 		if (typeof error === 'string') {
+// 			console.error(error)
+// 		} else if (error instanceof Error) {
+// 			console.error(error.message)
+// 		}
+// 	}
+// 	dispatch(appActions.setAppIsInitialized({ isAppInitialized: true }))
+// }
 
 export const authLogoutTC = () => async (dispatch: AppDispatchType) => {
 

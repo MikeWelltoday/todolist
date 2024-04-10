@@ -25,8 +25,7 @@ export type TasksReducerType = {
 
 //========================================================================================
 
-const fetchTasksTC = createAppAsyncThunk<{ tasks: TaskApiType[], todolistId: string }, string
->(
+const fetchTasksTC = createAppAsyncThunk<{ tasks: TaskApiType[], todolistId: string }, string>(
 	'tasks/fetchTasksTC',
 	async (todolistId, thunkAPI) => {
 		thunkAPI.dispatch(appActions.setStatus({ status: true }))
@@ -41,8 +40,7 @@ const fetchTasksTC = createAppAsyncThunk<{ tasks: TaskApiType[], todolistId: str
 	}
 )
 
-const addTaskTC = createAppAsyncThunk<{ newTaskFromAPI: TaskApiType }, { todolistId: string, newTitle: string }
->(
+const addTaskTC = createAppAsyncThunk<{ newTaskFromAPI: TaskApiType }, { todolistId: string, newTitle: string }>(
 	'tasks/addTaskTC',
 	async ({ todolistId, newTitle }, thunkAPI) => {
 		thunkAPI.dispatch(appActions.setStatus({ status: true }))
@@ -68,8 +66,7 @@ const addTaskTC = createAppAsyncThunk<{ newTaskFromAPI: TaskApiType }, { todolis
 
 const updateTaskTC = createAppAsyncThunk<
 	{ todolistId: string, taskId: string, taskUpdateModel: ApiUpdateTaskModelType },
-	{ todolistId: string, taskId: string, taskUpdateModel: UiUpdateTaskModelType }
->(
+	{ todolistId: string, taskId: string, taskUpdateModel: UiUpdateTaskModelType }>(
 	'tasks/updateTaskTC',
 	async ({ todolistId, taskId, taskUpdateModel }, thunkAPI) => {
 		thunkAPI.dispatch(appActions.setStatus({ status: true }))
@@ -111,8 +108,7 @@ const updateTaskTC = createAppAsyncThunk<
 
 const removeTaskTC = createAppAsyncThunk<
 	{ todolistId: string, taskId: string },
-	{ todolistId: string, taskId: string }
->(
+	{ todolistId: string, taskId: string }>(
 	'tasks/removeTaskTC',
 	async ({ todolistId, taskId }, thunkAPI) => {
 		thunkAPI.dispatch(appActions.setStatus({ status: true }))
