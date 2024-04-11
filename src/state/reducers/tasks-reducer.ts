@@ -181,7 +181,7 @@ const slice = createSlice({
 				})
 				return tasks
 			})
-			.addCase(authThunks.authLogoutTC.fulfilled, (state, action) => {
+			.addCase(authThunks.authLogoutTC.fulfilled, () => {
 				return {}
 			})
 			.addCase(todolistsThunks.addTodolistTC.fulfilled, (state, action) => {

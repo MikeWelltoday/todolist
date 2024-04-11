@@ -86,13 +86,13 @@ const slice = createSlice({
 	reducers: {},
 	extraReducers: builder => {
 		builder
-			.addCase(authSetLoggedTC.fulfilled, (state, action) => {
+			.addCase(authSetLoggedTC.fulfilled, (state) => {
 				state.isLogged = true
 			})
-			.addCase(authIsInitializedTC.fulfilled, (state, action) => {
+			.addCase(authIsInitializedTC.fulfilled, (state) => {
 				state.isLogged = true
 			})
-			.addCase(authLogoutTC.fulfilled, (state, action) => {
+			.addCase(authLogoutTC.fulfilled, (state) => {
 				state.isLogged = false
 			})
 	}
