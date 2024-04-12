@@ -1,4 +1,4 @@
-import { authAPI, ResultCode } from 'api'
+import { authAPI, ResultCodeEnum } from 'api'
 import { createAppAsyncThunk, handleServerAppError, handleServerNetworkError } from 'utils'
 import { createSlice } from '@reduxjs/toolkit'
 import { appActions } from 'state/reducers/app-reducer'
@@ -17,7 +17,7 @@ const authSetLoggedTC = createAppAsyncThunk<{},
 		thunkAPI.dispatch(appActions.setStatus({ status: 'loading' }))
 		try {
 			const res = await authAPI.login(email, password, rememberMe, captcha)
-			if (res.data.resultCode === ResultCode.success) {
+			if (res.data.resultCode === ResultCodeEnum.Success) {
 				thunkAPI.dispatch(appActions.setStatus({ status: 'idle' }))
 				return {}
 			} else {
@@ -36,7 +36,7 @@ const authIsInitializedTC = createAppAsyncThunk<{}, {}>(
 	async ({}, thunkAPI) => {
 		try {
 			const res = await authAPI.me()
-			if (res.data.resultCode === ResultCode.success) {
+			if (res.data.resultCode === ResultCodeEnum.Success) {
 				thunkAPI.dispatch(appActions.setAppIsInitialized({ isAppInitialized: true }))
 				return {}
 			} else {
@@ -59,7 +59,7 @@ const authLogoutTC = createAppAsyncThunk<{}, {}>(
 		thunkAPI.dispatch(appActions.setStatus({ status: 'loading' }))
 		try {
 			const res = await authAPI.logout()
-			if (res.data.resultCode === ResultCode.success) {
+			if (res.data.resultCode === ResultCodeEnum.Success) {
 				thunkAPI.dispatch(appActions.setStatus({ status: 'idle' }))
 				return {}
 			} else {

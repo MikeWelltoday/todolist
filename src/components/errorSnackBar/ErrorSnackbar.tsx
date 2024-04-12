@@ -34,7 +34,9 @@ export const ErrorSnackbar = () => {
 				sx={{ width: '100%', backgroundColor: 'orangered' }}
 				elevation={6}
 				variant='filled'
-			>{error} 😠</Alert>
+			>
+				{error} 😠
+			</Alert>
 
 		</Snackbar>
 	)

@@ -27,4 +27,4 @@ export { instance } from './instance'
 
 //========================================================================================
 // result-code
-export { ResultCode } from 'api/result-code'
+export { ResultCodeEnum } from 'api/result-code'

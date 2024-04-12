@@ -1,4 +1,4 @@
-import { ResultCode, TodolistApiType, todolistsAPI } from 'api'
+import { ResultCodeEnum, TodolistApiType, todolistsAPI } from 'api'
 import { createAppAsyncThunk, handleServerAppError, handleServerNetworkError } from 'utils'
 import { tasksThunks } from './tasks-reducer'
 import { appActions } from 'state/reducers/app-reducer'
@@ -46,7 +46,7 @@ const addTodolistTC = createAppAsyncThunk<{ newTodolistFromAPI: TodolistApiType 
 		thunkAPI.dispatch(appActions.setStatus({ status: 'loading' }))
 		try {
 			const res = await todolistsAPI.createTodolist(title)
-			if (res.data.resultCode === ResultCode.success) {
+			if (res.data.resultCode === ResultCodeEnum.Success) {
 				thunkAPI.dispatch(appActions.setStatus({ status: 'idle' }))
 				return { newTodolistFromAPI: res.data.data.item }
 			} else {
@@ -67,7 +67,7 @@ const removeTodolistTC = createAppAsyncThunk<{ todolistId: string }, string>(
 		thunkAPI.dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'loading' }))
 		try {
 			const res = await todolistsAPI.deleteTodolist(todolistId)
-			if (res.data.resultCode === ResultCode.success) {
+			if (res.data.resultCode === ResultCodeEnum.Success) {
 				thunkAPI.dispatch(appActions.setStatus({ status: 'idle' }))
 				thunkAPI.dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
 				return { todolistId }
@@ -92,7 +92,7 @@ const updateTodolistTitleTC = createAppAsyncThunk<{ todolistId: string, title: s
 		thunkAPI.dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'loading' }))
 		try {
 			const res = await todolistsAPI.updateTodolist(todolistId, newTitle)
-			if (res.data.resultCode === ResultCode.success) {
+			if (res.data.resultCode === ResultCodeEnum.Success) {
 				thunkAPI.dispatch(appActions.setStatus({ status: 'idle' }))
 				thunkAPI.dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
 				return { todolistId, title: newTitle }

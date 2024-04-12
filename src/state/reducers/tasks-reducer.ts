@@ -1,5 +1,12 @@
 import { RequestStatusType, todolistsActions, todolistsThunks } from './todolists-reducer'
-import { ApiUpdateTaskModelType, ResultCode, TaskApiType, TaskPrioritiesEnum, tasksAPI, TaskStatusesEnum } from 'api'
+import {
+	ApiUpdateTaskModelType,
+	ResultCodeEnum,
+	TaskApiType,
+	TaskPrioritiesEnum,
+	tasksAPI,
+	TaskStatusesEnum
+} from 'api'
 import { createAppAsyncThunk, handleServerAppError, handleServerNetworkError } from 'utils'
 import { appActions } from 'state/reducers/app-reducer'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
@@ -48,7 +55,7 @@ const addTaskTC = createAppAsyncThunk<{ newTaskFromAPI: TaskApiType }, { todolis
 		thunkAPI.dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'loading' }))
 		try {
 			const res = await tasksAPI.createTask(todolistId, newTitle)
-			if (res.data.resultCode === ResultCode.success) {
+			if (res.data.resultCode === ResultCodeEnum.Success) {
 				thunkAPI.dispatch(appActions.setStatus({ status: 'idle' }))
 				thunkAPI.dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
 				return { newTaskFromAPI: res.data.data.item }
@@ -90,7 +97,7 @@ const updateTaskTC = createAppAsyncThunk<
 		}
 		try {
 			const res = await tasksAPI.updateTask(todolistId, taskId, model)
-			if (res.data.resultCode === ResultCode.success) {
+			if (res.data.resultCode === ResultCodeEnum.Success) {
 				thunkAPI.dispatch(appActions.setStatus({ status: 'idle' }))
 				thunkAPI.dispatch(tasksActions.changeTasksEntityStatusAC({ todolistId, taskId, newStatus: 'idle' }))
 				return { todolistId, taskId, taskUpdateModel: model }
@@ -116,7 +123,7 @@ const removeTaskTC = createAppAsyncThunk<
 		thunkAPI.dispatch(tasksActions.changeTasksEntityStatusAC({ todolistId, taskId, newStatus: 'loading' }))
 		try {
 			const res = await tasksAPI.deleteTask(todolistId, taskId)
-			if (res.data.resultCode === ResultCode.success) {
+			if (res.data.resultCode === ResultCodeEnum.Success) {
 				thunkAPI.dispatch(appActions.setStatus({ status: 'idle' }))
 				return { todolistId, taskId }
 			} else {
