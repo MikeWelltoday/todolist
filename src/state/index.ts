@@ -2,6 +2,7 @@
 // app-reducer
 export type { AppErrorType } from './reducers/app-reducer'
 export type { AppReducerType } from './reducers/app-reducer'
+export type { StatusType } from './reducers/app-reducer'
 export { appReducer } from './reducers/app-reducer'
 export { appActions } from './reducers/app-reducer'
 

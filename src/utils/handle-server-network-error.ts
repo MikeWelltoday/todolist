@@ -13,6 +13,6 @@ export function handleServerNetworkError(error: unknown, dispatch: AppDispatchTy
 		errorMessage = JSON.stringify(error)
 	}
 	dispatch(appActions.setError({ error: errorMessage }))
-	dispatch(appActions.setStatus({ status: false }))
+	dispatch(appActions.setStatus({ status: 'idle' }))
 }
 

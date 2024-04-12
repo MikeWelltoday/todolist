@@ -29,10 +29,10 @@ export type TasksReducerType = {
 const fetchTasksTC = createAppAsyncThunk<{ tasks: TaskApiType[], todolistId: string }, string>(
 	'tasks/fetchTasksTC',
 	async (todolistId, thunkAPI) => {
-		thunkAPI.dispatch(appActions.setStatus({ status: true }))
+		thunkAPI.dispatch(appActions.setStatus({ status: 'loading' }))
 		try {
 			const res = await tasksAPI.getTasks(todolistId)
-			thunkAPI.dispatch(appActions.setStatus({ status: false }))
+			thunkAPI.dispatch(appActions.setStatus({ status: 'idle' }))
 			return { tasks: res.data.items, todolistId }
 		} catch (error) {
 			handleServerNetworkError(error, thunkAPI.dispatch)
@@ -44,12 +44,12 @@ const fetchTasksTC = createAppAsyncThunk<{ tasks: TaskApiType[], todolistId: str
 const addTaskTC = createAppAsyncThunk<{ newTaskFromAPI: TaskApiType }, { todolistId: string, newTitle: string }>(
 	'tasks/addTaskTC',
 	async ({ todolistId, newTitle }, thunkAPI) => {
-		thunkAPI.dispatch(appActions.setStatus({ status: true }))
+		thunkAPI.dispatch(appActions.setStatus({ status: 'loading' }))
 		thunkAPI.dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'loading' }))
 		try {
 			const res = await tasksAPI.createTask(todolistId, newTitle)
 			if (res.data.resultCode === ResultCode.success) {
-				thunkAPI.dispatch(appActions.setStatus({ status: false }))
+				thunkAPI.dispatch(appActions.setStatus({ status: 'idle' }))
 				thunkAPI.dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
 				return { newTaskFromAPI: res.data.data.item }
 			} else {
@@ -70,12 +70,12 @@ const updateTaskTC = createAppAsyncThunk<
 	{ todolistId: string, taskId: string, taskUpdateModel: UiUpdateTaskModelType }>(
 	'tasks/updateTaskTC',
 	async ({ todolistId, taskId, taskUpdateModel }, thunkAPI) => {
-		thunkAPI.dispatch(appActions.setStatus({ status: true }))
+		thunkAPI.dispatch(appActions.setStatus({ status: 'loading' }))
 		thunkAPI.dispatch(tasksActions.changeTasksEntityStatusAC({ todolistId, taskId, newStatus: 'loading' }))
 		const taskToUpdate = thunkAPI.getState().tasksReducer[todolistId].filter(t => t.id === taskId)[0]
 		if (!taskToUpdate) {
 			thunkAPI.dispatch(appActions.setError({ error: 'Task not found' }))
-			thunkAPI.dispatch(appActions.setStatus({ status: false }))
+			thunkAPI.dispatch(appActions.setStatus({ status: 'idle' }))
 			thunkAPI.dispatch(tasksActions.changeTasksEntityStatusAC({ todolistId, taskId, newStatus: 'idle' }))
 			return thunkAPI.rejectWithValue(null)
 		}
@@ -91,7 +91,7 @@ const updateTaskTC = createAppAsyncThunk<
 		try {
 			const res = await tasksAPI.updateTask(todolistId, taskId, model)
 			if (res.data.resultCode === ResultCode.success) {
-				thunkAPI.dispatch(appActions.setStatus({ status: false }))
+				thunkAPI.dispatch(appActions.setStatus({ status: 'idle' }))
 				thunkAPI.dispatch(tasksActions.changeTasksEntityStatusAC({ todolistId, taskId, newStatus: 'idle' }))
 				return { todolistId, taskId, taskUpdateModel: model }
 			} else {
@@ -112,12 +112,12 @@ const removeTaskTC = createAppAsyncThunk<
 	{ todolistId: string, taskId: string }>(
 	'tasks/removeTaskTC',
 	async ({ todolistId, taskId }, thunkAPI) => {
-		thunkAPI.dispatch(appActions.setStatus({ status: true }))
+		thunkAPI.dispatch(appActions.setStatus({ status: 'loading' }))
 		thunkAPI.dispatch(tasksActions.changeTasksEntityStatusAC({ todolistId, taskId, newStatus: 'loading' }))
 		try {
 			const res = await tasksAPI.deleteTask(todolistId, taskId)
 			if (res.data.resultCode === ResultCode.success) {
-				thunkAPI.dispatch(appActions.setStatus({ status: false }))
+				thunkAPI.dispatch(appActions.setStatus({ status: 'idle' }))
 				return { todolistId, taskId }
 			} else {
 				handleServerAppError(res.data.messages, thunkAPI.dispatch)

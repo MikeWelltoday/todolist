@@ -105,7 +105,7 @@ const initialGlobalState: AppRootStateType = {
 				]
 		},
 	appReducer: {
-		status: false,
+		status: 'idle',
 		error: null,
 		isAppInitialized: true
 	},

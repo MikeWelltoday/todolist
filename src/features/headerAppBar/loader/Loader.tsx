@@ -14,7 +14,7 @@ export const Loader: FC = () => {
 
 	return (
 		<div className={S.loaderContainer}>
-			{status && <LinearProgress color={'primary'} />}
+			{status === 'loading' && <LinearProgress color={'primary'} />}
 		</div>
 	)
 }

@@ -8,15 +8,15 @@ let startState: AppReducerType
 
 beforeEach(() => {
 	startState = {
-		status: true,
+		status: 'idle',
 		error: null,
 		isAppInitialized: false
 	}
 })
 
 test('setStatus', () => {
-	const endState = appReducer(startState, appActions.setStatus({ status: true }))
-	expect(endState.status).toBe(true)
+	const endState = appReducer(startState, appActions.setStatus({ status: 'loading' }))
+	expect(endState.status).toBe('loading')
 })
 
 test('setError', () => {

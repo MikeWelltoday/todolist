@@ -14,11 +14,11 @@ const authSetLoggedTC = createAppAsyncThunk<{},
 	{ email: string, password: string, rememberMe: boolean, captcha: boolean }>(
 	'auth/authSetLoggedTC',
 	async ({ email, password, rememberMe, captcha }, thunkAPI) => {
-		thunkAPI.dispatch(appActions.setStatus({ status: true }))
+		thunkAPI.dispatch(appActions.setStatus({ status: 'loading' }))
 		try {
 			const res = await authAPI.login(email, password, rememberMe, captcha)
 			if (res.data.resultCode === ResultCode.success) {
-				thunkAPI.dispatch(appActions.setStatus({ status: true }))
+				thunkAPI.dispatch(appActions.setStatus({ status: 'idle' }))
 				return {}
 			} else {
 				handleServerAppError(res.data.messages, thunkAPI.dispatch)
@@ -56,11 +56,11 @@ const authIsInitializedTC = createAppAsyncThunk<{}, {}>(
 const authLogoutTC = createAppAsyncThunk<{}, {}>(
 	'auth/authLogoutTC',
 	async ({}, thunkAPI) => {
-		thunkAPI.dispatch(appActions.setStatus({ status: true }))
+		thunkAPI.dispatch(appActions.setStatus({ status: 'loading' }))
 		try {
 			const res = await authAPI.logout()
 			if (res.data.resultCode === ResultCode.success) {
-				thunkAPI.dispatch(appActions.setStatus({ status: false }))
+				thunkAPI.dispatch(appActions.setStatus({ status: 'idle' }))
 				return {}
 			} else {
 				handleServerAppError(res.data.messages, thunkAPI.dispatch)
