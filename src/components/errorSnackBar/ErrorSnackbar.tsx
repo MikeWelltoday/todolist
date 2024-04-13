@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import Snackbar from '@mui/material/Snackbar'
 import { useSelector } from 'react-redux'
 import { appActions, appErrorSelector } from 'state'
-import Alert from '@mui/material/Alert'
 import { useAppDispatch } from 'app/store'
+import Alert from '@mui/material/Alert'
+import Snackbar from '@mui/material/Snackbar'
 
 //========================================================================================
 
@@ -41,9 +41,7 @@ export const ErrorSnackbar = () => {
 			// autoHideDuration устанавливает время срабатывания onClose
 			autoHideDuration={6000}
 			onClose={handleClose}
-			TransitionProps={{
-				onExited: handleExited
-			}}
+			TransitionProps={{ onExited: handleExited }}
 			anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
 		>
 			<Alert
@@ -53,7 +51,7 @@ export const ErrorSnackbar = () => {
 				elevation={6}
 				variant='filled'
 			>
-				{error} 😠
+				{error}
 			</Alert>
 
 		</Snackbar>
