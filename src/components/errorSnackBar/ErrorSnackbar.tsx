@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Snackbar from '@mui/material/Snackbar'
 import { useSelector } from 'react-redux'
 import { appActions, appErrorSelector } from 'state'
@@ -14,18 +14,36 @@ export const ErrorSnackbar = () => {
 	const dispatch = useAppDispatch()
 	const error = useSelector(appErrorSelector)
 
+	// добавил локальное состояния, по которому будет отрисовываться компонент
+	const [open, setOpen] = useState(false)
+
+	useEffect(() => {
+		if (error) {
+			setOpen(true)
+		}
+	}, [error])
+
+
 	const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
 		if (reason === 'clickaway') {
 			return
 		}
+		setOpen(false)
+	}
+
+	const handleExited = () => {
 		dispatch(appActions.setError({ error: null }))
 	}
 
 	return (
 		<Snackbar
-			open={error !== null}
+			open={open}
+			// autoHideDuration устанавливает время срабатывания onClose
 			autoHideDuration={6000}
 			onClose={handleClose}
+			TransitionProps={{
+				onExited: handleExited
+			}}
 			anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
 		>
 			<Alert
