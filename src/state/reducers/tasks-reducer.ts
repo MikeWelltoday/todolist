@@ -34,7 +34,7 @@ export type TasksReducerType = {
 //========================================================================================
 
 const fetchTasksTC = createAppAsyncThunk<{ tasks: TaskApiType[], todolistId: string }, string>(
-	'tasks/fetchTasksTC',
+	'tasksReducer/fetchTasksTC',
 	async (todolistId, thunkAPI) => {
 		thunkAPI.dispatch(appActions.setStatus({ status: 'loading' }))
 		try {
@@ -49,7 +49,7 @@ const fetchTasksTC = createAppAsyncThunk<{ tasks: TaskApiType[], todolistId: str
 )
 
 const addTaskTC = createAppAsyncThunk<{ newTaskFromAPI: TaskApiType }, { todolistId: string, newTitle: string }>(
-	'tasks/addTaskTC',
+	'tasksReducer/addTaskTC',
 	async ({ todolistId, newTitle }, thunkAPI) => {
 		thunkAPI.dispatch(appActions.setStatus({ status: 'loading' }))
 		thunkAPI.dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'loading' }))
@@ -75,7 +75,7 @@ const addTaskTC = createAppAsyncThunk<{ newTaskFromAPI: TaskApiType }, { todolis
 const updateTaskTC = createAppAsyncThunk<
 	{ todolistId: string, taskId: string, taskUpdateModel: ApiUpdateTaskModelType },
 	{ todolistId: string, taskId: string, taskUpdateModel: UiUpdateTaskModelType }>(
-	'tasks/updateTaskTC',
+	'tasksReducer/updateTaskTC',
 	async ({ todolistId, taskId, taskUpdateModel }, thunkAPI) => {
 		thunkAPI.dispatch(appActions.setStatus({ status: 'loading' }))
 		thunkAPI.dispatch(tasksActions.changeTasksEntityStatusAC({ todolistId, taskId, newStatus: 'loading' }))
@@ -117,7 +117,7 @@ const updateTaskTC = createAppAsyncThunk<
 const removeTaskTC = createAppAsyncThunk<
 	{ todolistId: string, taskId: string },
 	{ todolistId: string, taskId: string }>(
-	'tasks/removeTaskTC',
+	'tasksReducer/removeTaskTC',
 	async ({ todolistId, taskId }, thunkAPI) => {
 		thunkAPI.dispatch(appActions.setStatus({ status: 'loading' }))
 		thunkAPI.dispatch(tasksActions.changeTasksEntityStatusAC({ todolistId, taskId, newStatus: 'loading' }))
@@ -141,7 +141,7 @@ const removeTaskTC = createAppAsyncThunk<
 const initialState: TasksReducerType = {}
 
 const slice = createSlice({
-	name: 'tasks',
+	name: 'tasksReducer',
 	initialState,
 
 	reducers: {

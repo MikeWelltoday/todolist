@@ -21,7 +21,7 @@ const initialState: AppReducerType = {
 }
 
 const slice = createSlice({
-	name: 'app',
+	name: 'appReducer',
 	initialState,
 	reducers: {
 

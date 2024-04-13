@@ -12,7 +12,7 @@ export type AuthReducerType = { isLogged: boolean }
 
 const authSetLoggedTC = createAppAsyncThunk<{},
 	{ email: string, password: string, rememberMe: boolean, captcha: boolean }>(
-	'auth/authSetLoggedTC',
+	'authReducer/authSetLoggedTC',
 	async ({ email, password, rememberMe, captcha }, thunkAPI) => {
 		thunkAPI.dispatch(appActions.setStatus({ status: 'loading' }))
 		try {
@@ -32,7 +32,7 @@ const authSetLoggedTC = createAppAsyncThunk<{},
 )
 
 const authIsInitializedTC = createAppAsyncThunk<{}, {}>(
-	'auth/authIsInitializedTC',
+	'authReducer/authIsInitializedTC',
 	async ({}, thunkAPI) => {
 		try {
 			const res = await authAPI.me()
@@ -54,7 +54,7 @@ const authIsInitializedTC = createAppAsyncThunk<{}, {}>(
 )
 
 const authLogoutTC = createAppAsyncThunk<{}, {}>(
-	'auth/authLogoutTC',
+	'authReducer/authLogoutTC',
 	async ({}, thunkAPI) => {
 		thunkAPI.dispatch(appActions.setStatus({ status: 'loading' }))
 		try {
@@ -81,7 +81,7 @@ const initialState: AuthReducerType = {
 }
 
 const slice = createSlice({
-	name: 'auth',
+	name: 'authReducer',
 	initialState,
 	reducers: {},
 	extraReducers: builder => {

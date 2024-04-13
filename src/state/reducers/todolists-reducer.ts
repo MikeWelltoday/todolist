@@ -18,7 +18,7 @@ export type TodolistReducerType = TodolistApiType & {
 //========================================================================================
 
 const fetchTodolistsTC = createAppAsyncThunk<{ todolistsFromAPI: TodolistApiType[] }, {}>(
-	'todolists/fetchTodolists',
+	'todolistsReducer/fetchTodolists',
 	async ({}, thunkAPI) => {
 		thunkAPI.dispatch(appActions.setStatus({ status: 'loading' }))
 		try {
@@ -41,7 +41,7 @@ const fetchTodolistsTC = createAppAsyncThunk<{ todolistsFromAPI: TodolistApiType
 )
 
 const addTodolistTC = createAppAsyncThunk<{ newTodolistFromAPI: TodolistApiType }, string>(
-	'todolists/addTodolistTC',
+	'todolistsReducer/addTodolistTC',
 	async (title, thunkAPI) => {
 		thunkAPI.dispatch(appActions.setStatus({ status: 'loading' }))
 		try {
@@ -61,7 +61,7 @@ const addTodolistTC = createAppAsyncThunk<{ newTodolistFromAPI: TodolistApiType 
 )
 
 const removeTodolistTC = createAppAsyncThunk<{ todolistId: string }, string>(
-	'todolists/removeTodolistTC',
+	'todolistsReducer/removeTodolistTC',
 	async (todolistId, thunkAPI) => {
 		thunkAPI.dispatch(appActions.setStatus({ status: 'loading' }))
 		thunkAPI.dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'loading' }))
@@ -86,7 +86,7 @@ const removeTodolistTC = createAppAsyncThunk<{ todolistId: string }, string>(
 
 const updateTodolistTitleTC = createAppAsyncThunk<{ todolistId: string, title: string },
 	{ todolistId: string, newTitle: string }>(
-	'todolists/updateTodolistTitleTC',
+	'todolistsReducer/updateTodolistTitleTC',
 	async ({ todolistId, newTitle }, thunkAPI) => {
 		thunkAPI.dispatch(appActions.setStatus({ status: 'loading' }))
 		thunkAPI.dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'loading' }))
@@ -114,7 +114,7 @@ const updateTodolistTitleTC = createAppAsyncThunk<{ todolistId: string, title: s
 const initialState: TodolistReducerType[] = []
 
 const slice = createSlice({
-	name: 'todolists',
+	name: 'todolistsReducer',
 	initialState,
 	reducers: {
 		changeTodolistFilter: (state, action: PayloadAction<{
