@@ -24,7 +24,7 @@ function App(props: AppPropsType) {
 
 	useEffect(() => {
 		if (props.demo) return
-		dispatch(authThunks.authIsInitializedTC({}))
+		dispatch(authThunks.authIsInitializedTC())
 	}, [])
 
 	if (!isInitialized) {

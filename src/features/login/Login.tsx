@@ -52,14 +52,25 @@ export const Login: FC = () => {
 
 			return errors
 		},
-		onSubmit: values => {
+		onSubmit: (values, { setSubmitting }) => {
+			setSubmitting(true)
 			dispatch(authThunks.authSetLoggedTC({
 				email: values.email,
 				password: values.password,
 				rememberMe: values.rememberMe,
 				captcha: true
 			}))
-			formik.resetForm()
+				.unwrap()
+				.then(() => {
+					formik.resetForm()
+				})
+				.catch((error) => {
+					// email значит что ошибка полетит в errors.email
+					formik.setFieldError('email', error.message)
+				})
+				.finally(() => {
+					setSubmitting(false)
+				})
 		}
 	})
 
@@ -93,6 +104,7 @@ export const Login: FC = () => {
 								margin='normal'
 								color={'success'}
 								error={!!emailError}
+								disabled={formik.isSubmitting}
 								{...formik.getFieldProps('email')}
 							/>
 							{emailError ? <div className={S.error}>{formik.errors.email}</div> : null}
@@ -102,6 +114,7 @@ export const Login: FC = () => {
 								label='Password'
 								margin='normal'
 								color={'success'}
+								disabled={formik.isSubmitting}
 								error={!!passwordError}
 								{...formik.getFieldProps('password')}
 							/>
@@ -115,6 +128,7 @@ export const Login: FC = () => {
 										name='remember me'
 										onChange={formik.handleChange}
 										value={formik.values.rememberMe}
+										disabled={formik.isSubmitting}
 									/>
 								}
 							/>
@@ -123,7 +137,7 @@ export const Login: FC = () => {
 								type={'submit'}
 								variant={'contained'}
 								color={'success'}
-								disabled={!!isError}
+								disabled={formik.isSubmitting || !!isError}
 							>
 								Login
 							</Button>

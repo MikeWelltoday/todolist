@@ -21,7 +21,7 @@ export const HeaderAppBar = () => {
 	const isLogged = useSelector(isLoggedSelector)
 
 	function logoutOnClickHandler() {
-		dispatch(authThunks.authLogoutTC({}))
+		dispatch(authThunks.authLogoutTC())
 	}
 
 	return (

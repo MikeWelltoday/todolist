@@ -25,7 +25,7 @@ export const TodolistsList: FC<TodolistsListPropsType> = (props) => {
 	useEffect(() => {
 		if (props.demo) return
 		if (!isLogged) return
-		dispatch(todolistsThunks.fetchTodolistsTC({}))
+		dispatch(todolistsThunks.fetchTodolistsTC())
 	}, [])
 
 	const addTodolist = useCallback((newTodolistTitle: string) => {

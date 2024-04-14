@@ -1,5 +1,4 @@
-import { TodolistReducerType, todolistsActions, todolistsReducer, todolistsThunks } from 'state'
-import { tasksReducer, TasksReducerType } from 'state'
+import { tasksReducer, TasksReducerType, TodolistReducerType, todolistsReducer, todolistsThunks } from 'state'
 
 //========================================================================================
 

@@ -1,6 +1,5 @@
 import { tasksActions, tasksReducer, TasksReducerType, tasksThunks, todolistsThunks } from 'state'
 import { TaskPrioritiesEnum, TaskStatusesEnum, TodolistApiType } from 'api'
-import { todolistsActions } from 'state'
 
 //========================================================================================
 
@@ -173,7 +172,7 @@ test('setTodolists', () => {
 	const action = todolistsThunks.fetchTodolistsTC.fulfilled(
 		{ todolistsFromAPI },
 		'',
-		{}
+		undefined
 	)
 	const endState = tasksReducer(startState, action)
 	const endStateLength = Object.keys(endState).length

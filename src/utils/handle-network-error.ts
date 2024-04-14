@@ -3,7 +3,7 @@ import { appActions } from 'state'
 import { isAxiosError } from 'axios'
 
 
-export function handleServerNetworkError(error: unknown, dispatch: AppDispatchType): void {
+export function handleNetworkError(error: unknown, dispatch: AppDispatchType): void {
 	let errorMessage = 'Some error occurred'
 	if (isAxiosError(error)) {
 		errorMessage = error.response?.data?.message || error?.message || errorMessage

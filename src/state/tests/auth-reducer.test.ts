@@ -13,7 +13,7 @@ beforeEach(() => {
 
 test('setIsLogged with authSetLoggedTC', () => {
 	const action = authThunks.authSetLoggedTC.fulfilled(
-		{},
+		undefined,
 		'',
 		{ email: '', password: '', rememberMe: true, captcha: true }
 	)
@@ -23,9 +23,9 @@ test('setIsLogged with authSetLoggedTC', () => {
 
 test('setIsLogged with authIsInitializedTC', () => {
 	const action = authThunks.authIsInitializedTC.fulfilled(
-		{},
+		undefined,
 		'',
-		{}
+		undefined
 	)
 	const endState = authReducer(startState, action)
 	expect(endState.isLogged).toBe(true)
@@ -36,9 +36,9 @@ test('setIsLogged with authLogoutTC', () => {
 		isLogged: true
 	}
 	const action = authThunks.authLogoutTC.fulfilled(
-		{},
+		undefined,
 		'',
-		{}
+		undefined
 	)
 	const endState = authReducer(startState, action)
 	expect(endState.isLogged).toBe(false)

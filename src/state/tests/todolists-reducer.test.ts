@@ -73,7 +73,7 @@ test('setTodolists', () => {
 	const action = todolistsThunks.fetchTodolistsTC.fulfilled(
 		{ todolistsFromAPI: newTodolists },
 		'',
-		{}
+		undefined
 	)
 	const endState = todolistsReducer(startState, action)
 	const keys = Object.keys(endState[0])
