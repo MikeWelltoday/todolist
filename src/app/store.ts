@@ -12,20 +12,16 @@ import { authReducer } from 'state/reducers/auth-reducer'
 export type AppRootStateType = ReturnType<typeof store.getState>
 export type AppDispatchType = typeof store.dispatch
 
-//========================================================================================
-
-
 export const useAppDispatch = () => useDispatch<AppDispatchType>()
 
-const rootReducer = combineReducers({
-	todolistsReducer,
-	tasksReducer,
-	appReducer,
-	authReducer
-})
-
 export const store = configureStore({
-	reducer: rootReducer,
+	reducer:
+		{
+			todolistsReducer,
+			tasksReducer,
+			appReducer,
+			authReducer
+		},
 	middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(thunk)
 })
 

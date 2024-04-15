@@ -66,13 +66,18 @@ export const Login: FC = () => {
 					// formik.resetForm()
 				})
 				.catch((data: AuthLoginResponseType) => {
-
-					if (data.fieldsErrors.length) {
-						data.fieldsErrors.forEach(field => {
-							formik.setFieldError(field.field, field.error)
-						})
-					} else {
-						formik.setFieldError('email', data.messages[0])
+					// проверка что вообще пришло что-то в data
+					// зависит - попали ли мы в санке в handleServerError
+					if (data.fieldsErrors || data.messages) {
+						// проверяем есть ли поле fieldsErrors
+						if (data.fieldsErrors.length) {
+							data.fieldsErrors.forEach(field => {
+								formik.setFieldError(field.field, field.error)
+							})
+						} else {
+							// если нет поля fieldsErrors, то отобразим поле messages
+							formik.setFieldError('email', data.messages[0])
+						}
 					}
 				})
 				.finally(() => {

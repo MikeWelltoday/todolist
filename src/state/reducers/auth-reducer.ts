@@ -1,5 +1,5 @@
 import { authAPI, AuthLoginResponseType, ResultCodeEnum } from 'api'
-import { createAppAsyncThunk, handleServerError, handleNetworkError } from 'utils'
+import { createAppAsyncThunk, handleServerError, handleNetworkError, thunkTryCatch } from 'utils'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { appActions } from 'state/reducers/app-reducer'
 import { AppDispatchType } from 'app/store'
@@ -56,9 +56,10 @@ const authIsInitializedTC = createAppAsyncThunk<undefined, undefined>(
 
 const authLogoutTC = createAppAsyncThunk<undefined, undefined>(
 	'authReducer/authLogoutTC',
-	async (_, { dispatch, rejectWithValue }) => {
-		dispatch(appActions.setStatus({ status: 'loading' }))
-		try {
+	async (_, thunkAPI) => {
+		const { dispatch, rejectWithValue } = thunkAPI
+
+		const logic = async () => {
 			const res = await authAPI.logout()
 			if (res.data.resultCode === ResultCodeEnum.Success) {
 				dispatch(appActions.setStatus({ status: 'idle' }))
@@ -67,13 +68,34 @@ const authLogoutTC = createAppAsyncThunk<undefined, undefined>(
 				handleServerError(res.data.messages, dispatch)
 				return rejectWithValue(null)
 			}
-
-		} catch (error) {
-			handleNetworkError(error, dispatch)
-			return rejectWithValue(null)
 		}
+
+		return thunkTryCatch(thunkAPI, logic)
+
 	}
 )
+
+
+// const authLogoutTC = createAppAsyncThunk<undefined, undefined>(
+// 	'authReducer/authLogoutTC',
+// 	async (_, { dispatch, rejectWithValue }) => {
+// 		dispatch(appActions.setStatus({ status: 'loading' }))
+// 		try {
+// 			const res = await authAPI.logout()
+// 			if (res.data.resultCode === ResultCodeEnum.Success) {
+// 				dispatch(appActions.setStatus({ status: 'idle' }))
+// 				return
+// 			} else {
+// 				handleServerError(res.data.messages, dispatch)
+// 				return rejectWithValue(null)
+// 			}
+//
+// 		} catch (error) {
+// 			handleNetworkError(error, dispatch)
+// 			return rejectWithValue(null)
+// 		}
+// 	}
+// )
 
 //========================================================================================
 
