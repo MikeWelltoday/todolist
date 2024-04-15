@@ -18,12 +18,16 @@ type AuthResponseType<D = {}> = {
 	data: D
 }
 
+export type AuthLoginResponseType = AuthResponseType<LoginResponseType> & {
+	fieldsErrors: { error: string, field: string }[]
+}
+
 //========================================================================================
 
 export const authAPI = {
 
 	login(email: string, password: string, rememberMe: boolean, captcha: boolean) {
-		return instance.post<AuthResponseType<LoginResponseType>>('auth/login', {
+		return instance.post<AuthLoginResponseType>('auth/login', {
 			email,
 			password,
 			rememberMe,

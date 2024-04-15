@@ -17,6 +17,7 @@ export { todolistsAPI } from 'api/todolists-api'
 
 //========================================================================================
 // auth-api
+export type { AuthLoginResponseType } from 'api/auth-api'
 export { authAPI } from 'api/auth-api'
 
 

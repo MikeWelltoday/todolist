@@ -13,6 +13,7 @@ import { authThunks, isLoggedSelector } from 'state'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import { useAppDispatch } from 'app/store'
+import { AuthLoginResponseType } from 'api'
 
 //========================================================================================
 
@@ -62,11 +63,17 @@ export const Login: FC = () => {
 			}))
 				.unwrap()
 				.then(() => {
-					formik.resetForm()
+					// formik.resetForm()
 				})
-				.catch((error) => {
-					// email значит что ошибка полетит в errors.email
-					formik.setFieldError('email', error.message)
+				.catch((data: AuthLoginResponseType) => {
+
+					if (data.fieldsErrors.length) {
+						data.fieldsErrors.forEach(field => {
+							formik.setFieldError(field.field, field.error)
+						})
+					} else {
+						formik.setFieldError('email', data.messages[0])
+					}
 				})
 				.finally(() => {
 					setSubmitting(false)

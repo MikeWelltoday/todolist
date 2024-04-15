@@ -1,7 +1,8 @@
-import { authAPI, ResultCodeEnum } from 'api'
+import { authAPI, AuthLoginResponseType, ResultCodeEnum } from 'api'
 import { createAppAsyncThunk, handleServerError, handleNetworkError } from 'utils'
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { appActions } from 'state/reducers/app-reducer'
+import { AppDispatchType } from 'app/store'
 
 //========================================================================================
 
@@ -9,10 +10,12 @@ export type AuthReducerType = { isLogged: boolean }
 
 //========================================================================================
 
-const authSetLoggedTC = createAppAsyncThunk<undefined,
-	{ email: string, password: string, rememberMe: boolean, captcha: boolean }>(
+const authSetLoggedTC = createAsyncThunk<
+	undefined, { email: string, password: string, rememberMe: boolean, captcha: boolean },
+	{ dispatch: AppDispatchType, rejectWithValue: null | AuthLoginResponseType }>(
 	'authReducer/authSetLoggedTC',
 	async ({ email, password, rememberMe, captcha }, { dispatch, rejectWithValue }) => {
+
 		dispatch(appActions.setStatus({ status: 'loading' }))
 		try {
 			const res = await authAPI.login(email, password, rememberMe, captcha)
@@ -20,8 +23,8 @@ const authSetLoggedTC = createAppAsyncThunk<undefined,
 				dispatch(appActions.setStatus({ status: 'idle' }))
 				return
 			} else {
-				handleServerError(res.data.messages, dispatch)
-				return rejectWithValue(null)
+				handleServerError(res.data.messages, dispatch, false)
+				return rejectWithValue(res.data)
 			}
 		} catch (error) {
 			handleNetworkError(error, dispatch)
