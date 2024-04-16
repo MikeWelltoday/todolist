@@ -8,6 +8,7 @@ import { HeaderAppBar, Login, TodolistsList } from 'features'
 import { ErrorSnackbar } from 'components'
 import { authThunks, isAppInitializedSelector } from 'state'
 import { useAppDispatch } from 'app/store'
+import { useActions } from 'hooks/useAction'
 
 //========================================================================================
 
@@ -22,10 +23,18 @@ function App(props: AppPropsType) {
 	const dispatch = useAppDispatch()
 	const isInitialized = useSelector(isAppInitializedSelector)
 
+
+	const { authIsInitializedTC } = useActions(authThunks)
+
 	useEffect(() => {
 		if (props.demo) return
-		dispatch(authThunks.authIsInitializedTC())
+		authIsInitializedTC()
 	}, [])
+
+	// useEffect(() => {
+	// 	if (props.demo) return
+	// 	dispatch(authThunks.authIsInitializedTC())
+	// }, [])
 
 	if (!isInitialized) {
 		return (
