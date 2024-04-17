@@ -1,12 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Task } from 'features/todolistsList/ui/task/Task'
 import { TaskStatusesEnum } from 'features/todolistsList/api/tasks-api'
+import { ReduxStoreProviderDecorator } from '../../../../stories'
 
 //========================================================================================
 
 const meta: Meta<typeof Task> = {
 	title: 'App/Task',
 	component: Task,
+	decorators: [ReduxStoreProviderDecorator],
 	parameters: {
 		layout: 'centered'
 	},

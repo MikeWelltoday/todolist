@@ -8,7 +8,7 @@ import { Navigate } from 'react-router-dom'
 import { useAppDispatch } from 'app/store'
 import { todolistsSelector } from '../model/todolist/todolists-selector'
 import { isLoggedSelector } from 'state/selectors/isLogged-selector'
-import { todolistsThunks } from 'features/todolistsList/model/todolist/todolists-reducer'
+import { todolistsThunks } from '../model/todolist/todolists-reducer'
 
 //========================================================================================
 
@@ -51,7 +51,7 @@ export const TodolistsList: FC<TodolistsListPropsType> = (props) => {
 										key={t.id}
 										todolistId={t.id}
 										title={t.title}
-										filter={t.filter}
+										todolistFilter={t.filter}
 										entityStatus={t.entityStatus}
 
 										demo={props.demo}
