@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import { useAppDispatch } from 'app/store'
 import { AuthLoginResponseType } from 'api'
+import { useLogin } from 'hooks/useLogin'
 
 //========================================================================================
 
@@ -30,61 +31,63 @@ export const Login: FC = () => {
 	const dispatch = useAppDispatch()
 	const isLogged = useSelector(isLoggedSelector)
 
-	const formik = useFormik({
-		initialValues: {
-			email: '',
-			password: '',
-			rememberMe: false
-		},
-		validate: values => {
-			const errors: FormikErrorType = {}
+	// const formik = useFormik({
+	// 	initialValues: {
+	// 		email: '',
+	// 		password: '',
+	// 		rememberMe: false
+	// 	},
+	// 	validate: values => {
+	// 		const errors: FormikErrorType = {}
+	//
+	// 		if (!values.email) {
+	// 			errors.email = 'Required'
+	// 		} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+	// 			errors.email = 'Invalid email address'
+	// 		}
+	//
+	// 		if (!values.password) {
+	// 			errors.password = 'Required'
+	// 		} else if (values.password.length < 6) {
+	// 			errors.password = 'Password has to be more than 6 symbols'
+	// 		}
+	//
+	// 		return errors
+	// 	},
+	// 	onSubmit: (values, { setSubmitting }) => {
+	// 		setSubmitting(true)
+	// 		dispatch(authThunks.authSetLoggedTC({
+	// 			email: values.email,
+	// 			password: values.password,
+	// 			rememberMe: values.rememberMe,
+	// 			captcha: true
+	// 		}))
+	// 			.unwrap()
+	// 			.then(() => {
+	// 				// formik.resetForm()
+	// 			})
+	// 			.catch((data: AuthLoginResponseType) => {
+	// 				// проверка что вообще пришло что-то в data
+	// 				// зависит - попали ли мы в санке в handleServerError
+	// 				if (data.fieldsErrors || data.messages) {
+	// 					// проверяем есть ли поле fieldsErrors
+	// 					if (data.fieldsErrors.length) {
+	// 						data.fieldsErrors.forEach(field => {
+	// 							formik.setFieldError(field.field, field.error)
+	// 						})
+	// 					} else {
+	// 						// если нет поля fieldsErrors, то отобразим поле messages
+	// 						formik.setFieldError('email', data.messages[0])
+	// 					}
+	// 				}
+	// 			})
+	// 			.finally(() => {
+	// 				setSubmitting(false)
+	// 			})
+	// 	}
+	// })
 
-			if (!values.email) {
-				errors.email = 'Required'
-			} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-				errors.email = 'Invalid email address'
-			}
-
-			if (!values.password) {
-				errors.password = 'Required'
-			} else if (values.password.length < 6) {
-				errors.password = 'Password has to be more than 6 symbols'
-			}
-
-			return errors
-		},
-		onSubmit: (values, { setSubmitting }) => {
-			setSubmitting(true)
-			dispatch(authThunks.authSetLoggedTC({
-				email: values.email,
-				password: values.password,
-				rememberMe: values.rememberMe,
-				captcha: true
-			}))
-				.unwrap()
-				.then(() => {
-					// formik.resetForm()
-				})
-				.catch((data: AuthLoginResponseType) => {
-					// проверка что вообще пришло что-то в data
-					// зависит - попали ли мы в санке в handleServerError
-					if (data.fieldsErrors || data.messages) {
-						// проверяем есть ли поле fieldsErrors
-						if (data.fieldsErrors.length) {
-							data.fieldsErrors.forEach(field => {
-								formik.setFieldError(field.field, field.error)
-							})
-						} else {
-							// если нет поля fieldsErrors, то отобразим поле messages
-							formik.setFieldError('email', data.messages[0])
-						}
-					}
-				})
-				.finally(() => {
-					setSubmitting(false)
-				})
-		}
-	})
+	const { formik } = useLogin()
 
 	const emailError = formik.touched.email && formik.errors.email
 	const passwordError = formik.touched.password && formik.errors.password
