@@ -6,9 +6,10 @@ import Container from '@mui/material/Container'
 import CircularProgress from '@mui/material/CircularProgress'
 import { HeaderAppBar, Login, TodolistsList } from 'features'
 import { ErrorSnackbar } from 'components'
-import { authThunks, isAppInitializedSelector } from 'state'
 import { useAppDispatch } from 'app/store'
 import { useActions } from 'hooks/useAction'
+import { isAppInitializedSelector } from 'state/selectors/isAppInitialized-selector'
+import { authThunks } from 'state/reducers/auth-reducer'
 
 //========================================================================================
 

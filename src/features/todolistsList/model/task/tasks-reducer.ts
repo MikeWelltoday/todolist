@@ -1,16 +1,21 @@
-import { RequestStatusType, todolistsActions, todolistsThunks } from './todolists-reducer'
 import {
-	ApiUpdateTaskModelType,
-	ResultCodeEnum,
-	TaskApiType,
-	TaskPrioritiesEnum,
-	tasksAPI,
-	TaskStatusesEnum
-} from 'api'
+	RequestStatusType,
+	todolistsActions,
+	todolistsThunks
+} from 'features/todolistsList/model/todolist/todolists-reducer'
+
 import { createAppAsyncThunk, handleServerError, handleNetworkError } from 'utils'
 import { appActions } from 'state/reducers/app-reducer'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { authThunks } from 'state/reducers/auth-reducer'
+import {
+	ApiUpdateTaskModelType,
+	TaskApiType,
+	TaskPrioritiesEnum,
+	tasksAPI,
+	TaskStatusesEnum
+} from 'features/todolistsList/api/tasks-api'
+import { ResultCodeEnum } from 'api/result-code'
 
 //========================================================================================
 

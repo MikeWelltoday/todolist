@@ -1,6 +1,6 @@
 import { AppDispatchType } from 'app/store'
-import { appActions } from 'state'
 import { isAxiosError } from 'axios'
+import { appActions } from 'state/reducers/app-reducer'
 
 
 export function handleNetworkError(error: unknown, dispatch: AppDispatchType): void {

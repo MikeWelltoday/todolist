@@ -1,5 +1,5 @@
 import { AppDispatchType } from 'app/store'
-import { appActions } from 'state'
+import { appActions } from 'state/reducers/app-reducer'
 
 /**
  * Данная функция обрабатывает ошибки, которые могут возникнуть при взаимодействии с сервером.

@@ -1,4 +1,9 @@
-import { tasksReducer, TasksReducerType, TodolistReducerType, todolistsReducer, todolistsThunks } from 'state'
+import { tasksReducer, TasksReducerType } from 'features/todolistsList/model/task/tasks-reducer'
+import {
+	TodolistReducerType,
+	todolistsReducer,
+	todolistsThunks
+} from 'features/todolistsList/model/todolist/todolists-reducer'
 
 //========================================================================================
 

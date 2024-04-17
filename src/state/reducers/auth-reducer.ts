@@ -1,8 +1,9 @@
-import { authAPI, AuthLoginResponseType, ResultCodeEnum } from 'api'
 import { createAppAsyncThunk, handleServerError, handleNetworkError, thunkTryCatch } from 'utils'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { appActions } from 'state/reducers/app-reducer'
 import { AppDispatchType } from 'app/store'
+import { authAPI, AuthLoginResponseType } from 'api/auth-api'
+import { ResultCodeEnum } from 'api/result-code'
 
 //========================================================================================
 

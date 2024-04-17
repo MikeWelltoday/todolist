@@ -3,7 +3,7 @@ import S from 'components/addItemForm/AddItemForm.module.scss'
 import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
-import { RequestStatusType } from 'state'
+import { RequestStatusType } from 'features/todolistsList/model/todolist/todolists-reducer'
 
 //========================================================================================
 

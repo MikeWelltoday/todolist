@@ -1,14 +1,12 @@
 import {
 	TodolistFilterReducerType,
-	TodolistReducerType,
-	todolistsActions,
+	TodolistReducerType, todolistsActions,
 	todolistsReducer,
 	todolistsThunks
-} from 'state'
-import { TodolistApiType } from 'api'
+} from 'features/todolistsList/model/todolist/todolists-reducer'
+import { TodolistApiType } from '../../api/todolists-api'
 
 //========================================================================================
-
 
 let startState: TodolistReducerType[]
 

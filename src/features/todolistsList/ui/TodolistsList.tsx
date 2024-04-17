@@ -2,11 +2,13 @@ import React, { FC, useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
-import { Todolist } from '../todolist/Todolist'
-import { isLoggedSelector, todolistsSelector, todolistsThunks } from 'state'
+import { Todolist } from 'features/todolistsList/ui/todolist/Todolist'
 import { AddItemForm } from 'components'
 import { Navigate } from 'react-router-dom'
 import { useAppDispatch } from 'app/store'
+import { todolistsSelector } from '../model/todolist/todolists-selector'
+import { isLoggedSelector } from 'state/selectors/isLogged-selector'
+import { todolistsThunks } from 'features/todolistsList/model/todolist/todolists-reducer'
 
 //========================================================================================
 

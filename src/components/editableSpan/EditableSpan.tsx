@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC, useState, KeyboardEvent, memo, useCallback } from 'react'
 import s from 'components/editableSpan/EditableSpan.module.scss'
 import TextField from '@mui/material/TextField'
-import { RequestStatusType } from 'state'
+import { RequestStatusType } from 'features/todolistsList/model/todolist/todolists-reducer'
 
 //========================================================================================
 

@@ -1,9 +1,10 @@
-import { ResultCodeEnum, TodolistApiType, todolistsAPI } from 'api'
 import { createAppAsyncThunk, handleServerError, handleNetworkError } from 'utils'
-import { tasksThunks } from './tasks-reducer'
+import { tasksThunks } from 'features/todolistsList/model/task/tasks-reducer'
 import { appActions } from 'state/reducers/app-reducer'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { authThunks } from 'state/reducers/auth-reducer'
+import { TodolistApiType, todolistsAPI } from 'features/todolistsList/api/todolists-api'
+import { ResultCodeEnum } from 'api/result-code'
 
 //========================================================================================
 

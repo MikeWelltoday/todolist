@@ -1,8 +1,6 @@
-import {
-	appReducer, AppReducerType, appActions
-} from 'state'
-
 //========================================================================================
+
+import { appActions, appReducer, AppReducerType } from 'state/reducers/app-reducer'
 
 let startState: AppReducerType
 

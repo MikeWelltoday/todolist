@@ -1,7 +1,7 @@
 import { BaseThunkAPI } from '@reduxjs/toolkit/dist/createAsyncThunk'
 import { AppDispatchType, AppRootStateType } from 'app/store'
-import { appActions } from 'state'
 import { handleNetworkError } from 'utils/handle-network-error'
+import { appActions } from 'state/reducers/app-reducer'
 
 // AuthLoginResponseType для санки authSetLoggedTC
 

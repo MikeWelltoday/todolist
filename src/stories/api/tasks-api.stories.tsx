@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { TaskPrioritiesEnum, tasksAPI, TaskStatusesEnum, ApiUpdateTaskModelType } from 'api'
+import {
+	ApiUpdateTaskModelType,
+	TaskPrioritiesEnum,
+	tasksAPI,
+	TaskStatusesEnum
+} from 'features/todolistsList/api/tasks-api'
 
 //========================================================================================
 

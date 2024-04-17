@@ -1,5 +1,6 @@
+import { todolistsAPI } from 'features/todolistsList/api/todolists-api'
 import React, { useEffect, useState } from 'react'
-import { todolistsAPI } from 'api'
+
 
 //========================================================================================
 

@@ -8,13 +8,11 @@ import FormGroup from '@mui/material/FormGroup'
 import FormLabel from '@mui/material/FormLabel'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-import { useFormik } from 'formik'
-import { authThunks, isLoggedSelector } from 'state'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import { useAppDispatch } from 'app/store'
-import { AuthLoginResponseType } from 'api'
 import { useLogin } from 'hooks/useLogin'
+import { isLoggedSelector } from 'state/selectors/isLogged-selector'
 
 //========================================================================================
 

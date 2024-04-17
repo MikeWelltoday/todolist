@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
-import { authThunks } from 'state'
-import { AuthLoginResponseType } from 'api'
 import { useAppDispatch } from 'app/store'
+import { authThunks } from 'state/reducers/auth-reducer'
+import { AuthLoginResponseType } from 'api/auth-api'
 
 type FormikErrorType = {
 	email?: string

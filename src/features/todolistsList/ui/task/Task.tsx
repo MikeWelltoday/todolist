@@ -1,23 +1,22 @@
 import React, { ChangeEvent, FC, memo, useCallback } from 'react'
-import S from './Task.module.scss'
+import S from 'features/todolistsList/ui/task/Task.module.scss'
 import Checkbox from '@mui/material/Checkbox'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { EditableSpan } from 'components'
-import { TaskStatusesEnum } from 'api'
-import { RequestStatusType } from 'state'
+import { TaskStatusesEnum } from 'features/todolistsList/api/tasks-api'
+import { RequestStatusType } from 'features/todolistsList/model/todolist/todolists-reducer'
+import { tasksThunks } from 'features/todolistsList/model/task/tasks-reducer'
+import { useAppDispatch } from 'app/store'
 
 //========================================================================================
 
 type TaskPropsType = {
+	todolistId: string
 	taskId: string
 	title: string
 	status: TaskStatusesEnum
 	entityStatus: RequestStatusType
-
-	removeTaskOnClickHandler: (taskId: string) => void
-	changeTaskStatusOnChangeHandler: (taskId: string, status: TaskStatusesEnum) => void
-	changeTaskTitleOnChangeHandler: (taskId: string, newTitle: string) => void
 }
 
 //========================================================================================
@@ -26,21 +25,30 @@ export const Task: FC<TaskPropsType> = memo((props) => {
 
 	console.log('🍓 TASK')
 
+	const dispatch = useAppDispatch()
 	const isDisabled = props.entityStatus === 'loading'
 
-	const removeTaskOnClickHandler = useCallback(() => {
-		props.removeTaskOnClickHandler(props.taskId)
-	}, [props.removeTaskOnClickHandler, props.taskId])
+	const removeTaskOnClickHandler = () => {
+		dispatch(tasksThunks.removeTaskTC({ todolistId: props.todolistId, taskId: props.taskId }))
+	}
 
-	const changeTaskStatusOnChangeHandler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-		const status = event.currentTarget.checked ? TaskStatusesEnum.Completed : TaskStatusesEnum.New
-		props.changeTaskStatusOnChangeHandler(props.taskId, status)
-
-	}, [props.changeTaskStatusOnChangeHandler, props.taskId])
+	const changeTaskStatusOnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+		const status: TaskStatusesEnum = event.currentTarget.checked ? TaskStatusesEnum.Completed : TaskStatusesEnum.New
+		dispatch(tasksThunks.updateTaskTC({
+			todolistId: props.todolistId,
+			taskId: props.taskId,
+			taskUpdateModel: { status }
+		}))
+	}
 
 	const changeTaskTitleOnChangeHandler = useCallback((newTitle: string) => {
-		props.changeTaskTitleOnChangeHandler(props.taskId, newTitle)
-	}, [props.changeTaskTitleOnChangeHandler, props.taskId])
+		dispatch(tasksThunks.updateTaskTC({
+			todolistId: props.todolistId,
+			taskId: props.taskId,
+			taskUpdateModel: { title: newTitle }
+		}))
+	}, [props.todolistId, props.taskId])
+
 
 	return (
 		<div className={`${S.task} ${props.status && S.isDone}`}>

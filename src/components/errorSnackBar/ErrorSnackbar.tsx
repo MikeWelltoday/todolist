@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { appActions, appErrorSelector } from 'state'
 import { useAppDispatch } from 'app/store'
 import Alert from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
+import { appErrorSelector } from 'state/selectors/appError-selector'
+import { appActions } from 'state/reducers/app-reducer'
 
 //========================================================================================
 

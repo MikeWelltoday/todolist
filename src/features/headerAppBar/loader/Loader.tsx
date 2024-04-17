@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import S from './Loader.module.scss'
 import LinearProgress from '@mui/material/LinearProgress'
 import { useSelector } from 'react-redux'
-import { appStatusSelector } from 'state'
+import { appStatusSelector } from 'state/selectors/appStatus-selector'
 
 //========================================================================================
 

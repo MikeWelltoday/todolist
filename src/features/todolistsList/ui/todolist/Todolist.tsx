@@ -1,20 +1,18 @@
 import React, { FC, memo, useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import S from './Todolist.module.scss'
+import S from 'features/todolistsList/ui/todolist/Todolist.module.scss'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { Task } from '../task/Task'
+import { Task } from 'features/todolistsList/ui/task/Task'
 import { AddItemForm, EditableSpan, FilterButton } from 'components'
+import { AppRootStateType, useAppDispatch } from 'app/store'
+import { tasksThunks, TaskType } from 'features/todolistsList/model/task/tasks-reducer'
 import {
 	RequestStatusType,
-	tasksThunks,
-	TaskType,
 	TodolistFilterReducerType,
 	todolistsActions,
 	todolistsThunks
-} from 'state'
-import { TaskStatusesEnum } from 'api'
-import { AppRootStateType, useAppDispatch } from 'app/store'
+} from 'features/todolistsList/model/todolist/todolists-reducer'
 
 
 //========================================================================================
@@ -53,6 +51,7 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
 		dispatch(tasksThunks.addTaskTC({ todolistId: props.todolistId, newTitle: title }))
 	}), [props.todolistId])
 
+
 	const removeTodolistOnClickHandler = useCallback((() => {
 		dispatch(todolistsThunks.removeTodolistTC(props.todolistId))
 	}), [props.todolistId])
@@ -60,6 +59,7 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
 	const changeTodolistTitleOnChangeHandler = useCallback(((newTitle: string) => {
 		dispatch(todolistsThunks.updateTodolistTitleTC({ todolistId: props.todolistId, newTitle }))
 	}), [props.todolistId])
+
 
 	const changeTaskFilterAllOnClickHandler = useCallback((() => {
 		dispatch(todolistsActions.changeTodolistFilter({ todolistId: props.todolistId, filter: 'all' }))
@@ -72,23 +72,6 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
 	const changeTaskFilterCompletedOnClickHandler = useCallback((() => {
 		dispatch(todolistsActions.changeTodolistFilter({ todolistId: props.todolistId, filter: 'completed' }))
 	}), [props.todolistId])
-
-	// task
-	const removeTaskOnClickHandler = useCallback((taskId: string) => {
-		dispatch(tasksThunks.removeTaskTC({ todolistId: props.todolistId, taskId }))
-	}, [props.todolistId])
-
-	const changeTaskStatusOnChangeHandler = useCallback((taskId: string, status: TaskStatusesEnum) => {
-		dispatch(tasksThunks.updateTaskTC({ todolistId: props.todolistId, taskId, taskUpdateModel: { status } }))
-	}, [props.todolistId])
-
-	const changeTaskTitleOnChangeHandler = useCallback((taskId: string, newTitle: string) => {
-		dispatch(tasksThunks.updateTaskTC({
-			todolistId: props.todolistId,
-			taskId,
-			taskUpdateModel: { title: newTitle }
-		}))
-	}, [props.todolistId])
 
 	return (
 		<div className={S.todolist}>
@@ -113,14 +96,11 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
 						return (
 							<Task
 								key={t.id}
+								todolistId={t.todoListId}
 								taskId={t.id}
 								title={t.title}
 								status={t.status}
 								entityStatus={t.entityStatus}
-
-								removeTaskOnClickHandler={removeTaskOnClickHandler}
-								changeTaskStatusOnChangeHandler={changeTaskStatusOnChangeHandler}
-								changeTaskTitleOnChangeHandler={changeTaskTitleOnChangeHandler}
 							/>
 						)
 					})}
