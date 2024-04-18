@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { AddItemForm } from 'components/addItemForm/AddItemForm'
+import { AddItemForm } from './AddItemForm'
 import { fn } from '@storybook/test'
-
-//========================================================================================
 
 const meta: Meta<typeof AddItemForm> = {
 	title: 'App/AddItemForm',
@@ -30,7 +28,5 @@ const meta: Meta<typeof AddItemForm> = {
 export default meta
 
 type Story = StoryObj<typeof meta>;
-
-//========================================================================================
 
 export const Primary: Story = {}

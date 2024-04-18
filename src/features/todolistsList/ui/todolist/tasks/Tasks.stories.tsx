@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { TodolistTitle } from './TodolistTitle'
 import { ReduxStoreProviderDecorator } from '../../../../../stories'
+import { Tasks } from './Tasks'
 
-const meta: Meta<typeof TodolistTitle> = {
-	title: 'App/TodolistTitle',
-	component: TodolistTitle,
+const meta: Meta<typeof Tasks> = {
+	title: 'App/Tasks',
+	component: Tasks,
 
 	decorators: [ReduxStoreProviderDecorator],
 
@@ -18,18 +18,15 @@ const meta: Meta<typeof TodolistTitle> = {
 		todolistId: {
 			description: 'unique todolist id'
 		},
-		title: {
-			description: 'todolist title'
-		},
-		entityStatus: {
-			description: 'entityStatus for loading and disable'
+		todolistFilter: {
+			description: 'todolist filter'
 		}
+
 	},
 
 	args: {
 		todolistId: 'todolistId1',
-		title: 'todolist title',
-		entityStatus: 'idle'
+		todolistFilter: 'all'
 	}
 }
 export default meta

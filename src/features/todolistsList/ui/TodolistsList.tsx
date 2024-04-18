@@ -31,7 +31,7 @@ export const TodolistsList: FC<TodolistsListPropsType> = (props) => {
 	}, [])
 
 	const addTodolist = useCallback((newTodolistTitle: string) => {
-		dispatch(todolistsThunks.addTodolistTC(newTodolistTitle))
+		return dispatch(todolistsThunks.addTodolistTC(newTodolistTitle)).unwrap()
 	}, [])
 
 	if (!isLogged) return <Navigate to={'/login'} />

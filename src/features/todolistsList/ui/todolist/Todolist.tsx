@@ -1,19 +1,13 @@
 import React, { FC, memo, useCallback, useEffect } from 'react'
 import S from 'features/todolistsList/ui/todolist/Todolist.module.scss'
-import { AddItemForm, FilterButton } from 'components'
-import { AppRootStateType, useAppDispatch } from 'app/store'
-import { tasksThunks, TaskType } from 'features/todolistsList/model/task/tasks-reducer'
-import {
-	RequestStatusType,
-	TodolistFilterReducerType,
-	todolistsActions
-} from 'features/todolistsList/model/todolist/todolists-reducer'
+import { AddItemForm } from 'components'
+import { useAppDispatch } from 'app/store'
+import { tasksThunks } from 'features/todolistsList/model/task/tasks-reducer'
+import { RequestStatusType, TodolistFilterReducerType } from 'features/todolistsList/model/todolist/todolists-reducer'
 import { TodolistTitle } from './todolistTitle/TodolistTitle'
-import { useSelector } from 'react-redux'
-import { Task } from '../task/Task'
+import { Tasks } from './tasks/Tasks'
+import { TodolistButtons } from './todolistsButtons/TodolistButtons'
 
-
-//========================================================================================
 
 type TodolistPropsType = {
 	todolistId: string
@@ -25,11 +19,8 @@ type TodolistPropsType = {
 
 }
 
-//========================================================================================
 
 export const Todolist: FC<TodolistPropsType> = memo((props) => {
-
-	console.log('🍄 TODOLIST')
 
 	const dispatch = useAppDispatch()
 
@@ -37,79 +28,16 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
 		if (props.demo) return
 	}, [])
 
-	let tasks = useSelector<AppRootStateType, TaskType[]>(state => state.tasksReducer[props.todolistId])
-
-	if (props.todolistFilter === 'active') {
-		tasks = tasks.filter(item => !item.status)
-	}
-	if (props.todolistFilter === 'completed') {
-		tasks = tasks.filter(item => item.status)
-	}
-
 	const addTaskHandler = useCallback(((title: string) => {
-		dispatch(tasksThunks.addTaskTC({ todolistId: props.todolistId, newTitle: title }))
-	}), [props.todolistId])
-
-	const changeTaskFilterAllOnClickHandler = useCallback((() => {
-		dispatch(todolistsActions.changeTodolistFilter({ todolistId: props.todolistId, filter: 'all' }))
-	}), [props.todolistId])
-
-	const changeTaskFilterActiveOnClickHandler = useCallback((() => {
-		dispatch(todolistsActions.changeTodolistFilter({ todolistId: props.todolistId, filter: 'active' }))
-	}), [props.todolistId])
-
-	const changeTaskFilterCompletedOnClickHandler = useCallback((() => {
-		dispatch(todolistsActions.changeTodolistFilter({ todolistId: props.todolistId, filter: 'completed' }))
+		return dispatch(tasksThunks.addTaskTC({ todolistId: props.todolistId, newTitle: title })).unwrap()
 	}), [props.todolistId])
 
 	return (
 		<div className={S.todolist}>
-
-			<TodolistTitle
-				todolistId={props.todolistId}
-				title={props.title}
-				entityStatus={props.entityStatus}
-			/>
-
+			<TodolistTitle todolistId={props.todolistId} title={props.title} entityStatus={props.entityStatus} />
 			<AddItemForm addItem={addTaskHandler} todolistEntityStatus={props.entityStatus} />
-
-			{tasks.length ?
-				(<div className={S.tasksList}>
-					{tasks.map(t => {
-						return (
-							<Task
-								key={t.id}
-								todolistId={t.todoListId}
-								taskId={t.id}
-								title={t.title}
-								status={t.status}
-								entityStatus={t.entityStatus}
-							/>
-						)
-					})}
-				</div>) : <div>NO TASKS</div>}
-
-			<div className={S.buttonContainer}>
-				<FilterButton
-					title={'All'}
-					color={'inherit'}
-					variant={props.todolistFilter === 'all' ? 'outlined' : 'text'}
-					onClick={changeTaskFilterAllOnClickHandler}
-				/>
-				<FilterButton
-					title={'Active'}
-					color={'success'}
-					variant={props.todolistFilter === 'active' ? 'outlined' : 'text'}
-					onClick={changeTaskFilterActiveOnClickHandler}
-				/>
-				<FilterButton
-					title={'Completed'}
-					color={'secondary'}
-					variant={props.todolistFilter === 'completed' ? 'outlined' : 'text'}
-					onClick={changeTaskFilterCompletedOnClickHandler}
-				/>
-			</div>
-
+			<Tasks todolistId={props.todolistId} todolistFilter={props.todolistFilter} />
+			<TodolistButtons todolistId={props.todolistId} todolistFilter={props.todolistFilter} />
 		</div>
 	)
 })

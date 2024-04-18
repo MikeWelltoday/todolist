@@ -23,8 +23,6 @@ type TaskPropsType = {
 
 export const Task: FC<TaskPropsType> = memo((props) => {
 
-	console.log('🍓 TASK')
-
 	const dispatch = useAppDispatch()
 	const isDisabled = props.entityStatus === 'loading'
 

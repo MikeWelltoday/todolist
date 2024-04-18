@@ -15,8 +15,6 @@ type EditableSpanPropsType = {
 
 export const EditableSpan: FC<EditableSpanPropsType> = memo((props) => {
 
-	console.log('🧄 EDITABLE-SPAN')
-
 	const [changeMode, setChangeMode] = useState(false)
 	const [title, setTitle] = useState(props.title)
 	const isDisabled = props.entityStatus === 'loading'

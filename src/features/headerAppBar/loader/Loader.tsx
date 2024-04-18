@@ -8,8 +8,6 @@ import { appStatusSelector } from 'state/selectors/appStatus-selector'
 
 export const Loader: FC = () => {
 
-	console.log('⏳ LOADER')
-
 	const status = useSelector(appStatusSelector)
 
 	return (

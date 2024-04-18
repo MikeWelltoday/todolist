@@ -10,8 +10,6 @@ import { appActions } from 'state/reducers/app-reducer'
 
 export const ErrorSnackbar = () => {
 
-	console.log('🍅 ERROR-SNACK-BAR')
-
 	const dispatch = useAppDispatch()
 	const error = useSelector(appErrorSelector)
 

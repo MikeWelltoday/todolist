@@ -16,8 +16,6 @@ import { authThunks } from 'state/reducers/auth-reducer'
 
 export const HeaderAppBar = () => {
 
-	console.log('🍭 APP-BAR')
-
 	const dispatch = useAppDispatch()
 	const isLogged = useSelector(isLoggedSelector)
 

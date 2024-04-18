@@ -5,55 +5,57 @@ import IconButton from '@mui/material/IconButton'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import { RequestStatusType } from 'features/todolistsList/model/todolist/todolists-reducer'
 
-//========================================================================================
-
 type AddItemFormPropsType = {
 	todolistEntityStatus?: RequestStatusType
 
-	addItem: (title: string) => void
+	addItem: (title: string) => Promise<any>
 }
-
-//========================================================================================
 
 export const AddItemForm: FC<AddItemFormPropsType> = memo((props) => {
 
-	console.log('🥨 ADD-ITEM-FROM ')
-
-	const [newTitle, setNewInput] = useState('')
-	const [error, setError] = useState(false)
-	const disabled = props.todolistEntityStatus === 'loading'
+	const [title, setTitle] = useState('')
+	const [error, setError] = useState('')
+	const isDisabled = props.todolistEntityStatus === 'loading'
 
 	function newTitleOnChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
-		setNewInput(e.currentTarget.value)
+		setTitle(e.currentTarget.value)
 	}
 
 	function addItemOnKeyUPHandler(e: React.KeyboardEvent<HTMLInputElement>) {
-		error && setError(false)
+		error && setError('')
 		if (e.key === 'Enter') addItemOnClickHandler()
 	}
 
 	function addItemOnClickHandler() {
-		if (newTitle.trim() !== '') {
-			props.addItem(newTitle)
-			setNewInput('')
-		} else {
-			setError(true)
+
+		if (title.trim() === '') {
+			setError('Title Required')
+			return
 		}
+
+		if (title.trim().length >= 100) {
+			setError('Title shorter than 100 symbols')
+			return
+		}
+
+		props.addItem(title)
+			.then(() => setTitle(''))
+			.catch(() => setError('Error'))
 	}
 
 	return (
 		<div className={S.addItemForm}>
 			<TextField
-				value={newTitle}
+				value={title}
 				onChange={newTitleOnChangeHandler}
 				onKeyUp={addItemOnKeyUPHandler}
 
-				label={error ? 'TITLE IS REQUIRED' : 'NEW TITLE'}
-				error={error}
-				disabled={disabled}
+				label={error || 'NEW TITLE'}
+				error={!!error}
+				disabled={isDisabled}
 			/>
 
-			<IconButton onClick={addItemOnClickHandler} color={'primary'} disabled={disabled}>
+			<IconButton onClick={addItemOnClickHandler} color={'primary'} disabled={isDisabled}>
 				<AddCircleOutlineIcon />
 			</IconButton>
 
