@@ -1,5 +1,5 @@
 import { createAppAsyncThunk, handleServerError, handleNetworkError, thunkTryCatch } from 'utils'
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit'
 import { appActions } from 'state/reducers/app-reducer'
 import { AppDispatchType } from 'app/store'
 import { authAPI, AuthLoginResponseType } from 'api/auth-api'
@@ -16,12 +16,11 @@ const authSetLoggedTC = createAsyncThunk<
 	{ dispatch: AppDispatchType, rejectWithValue: null | AuthLoginResponseType }>(
 	'authReducer/authSetLoggedTC',
 	async ({ email, password, rememberMe, captcha }, { dispatch, rejectWithValue }) => {
-
-		dispatch(appActions.setStatus({ status: 'loading' }))
+		// dispatch(appActions.setStatus({ status: 'loading' }))
 		try {
 			const res = await authAPI.login(email, password, rememberMe, captcha)
 			if (res.data.resultCode === ResultCodeEnum.Success) {
-				dispatch(appActions.setStatus({ status: 'idle' }))
+				// dispatch(appActions.setStatus({ status: 'idle' }))
 				return
 			} else {
 				handleServerError(res.data.messages, dispatch, false)
@@ -63,16 +62,14 @@ const authLogoutTC = createAppAsyncThunk<undefined, undefined>(
 		const logic = async () => {
 			const res = await authAPI.logout()
 			if (res.data.resultCode === ResultCodeEnum.Success) {
-				dispatch(appActions.setStatus({ status: 'idle' }))
+				// dispatch(appActions.setStatus({ status: 'idle' }))
 				return
 			} else {
 				handleServerError(res.data.messages, dispatch)
 				return rejectWithValue(null)
 			}
 		}
-
 		return thunkTryCatch(thunkAPI, logic)
-
 	}
 )
 

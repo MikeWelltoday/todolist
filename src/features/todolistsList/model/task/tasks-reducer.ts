@@ -41,10 +41,10 @@ export type TasksReducerType = {
 const fetchTasksTC = createAppAsyncThunk<{ tasks: TaskApiType[], todolistId: string }, string>(
 	'tasksReducer/fetchTasksTC',
 	async (todolistId, { dispatch, rejectWithValue }) => {
-		dispatch(appActions.setStatus({ status: 'loading' }))
+		// dispatch(appActions.setStatus({ status: 'loading' }))
 		try {
 			const res = await tasksAPI.getTasks(todolistId)
-			dispatch(appActions.setStatus({ status: 'idle' }))
+			// dispatch(appActions.setStatus({ status: 'idle' }))
 			return { tasks: res.data.items, todolistId }
 		} catch (error) {
 			handleNetworkError(error, dispatch)
@@ -56,12 +56,12 @@ const fetchTasksTC = createAppAsyncThunk<{ tasks: TaskApiType[], todolistId: str
 const addTaskTC = createAppAsyncThunk<{ newTaskFromAPI: TaskApiType }, { todolistId: string, newTitle: string }>(
 	'tasksReducer/addTaskTC',
 	async ({ todolistId, newTitle }, { dispatch, rejectWithValue }) => {
-		dispatch(appActions.setStatus({ status: 'loading' }))
+		// dispatch(appActions.setStatus({ status: 'loading' }))
 		dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'loading' }))
 		try {
 			const res = await tasksAPI.createTask(todolistId, newTitle)
 			if (res.data.resultCode === ResultCodeEnum.Success) {
-				dispatch(appActions.setStatus({ status: 'idle' }))
+				// dispatch(appActions.setStatus({ status: 'idle' }))
 				dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
 				return { newTaskFromAPI: res.data.data.item }
 			} else {
@@ -82,12 +82,12 @@ const updateTaskTC = createAppAsyncThunk<
 	{ todolistId: string, taskId: string, taskUpdateModel: UiUpdateTaskModelType }>(
 	'tasksReducer/updateTaskTC',
 	async ({ todolistId, taskId, taskUpdateModel }, { dispatch, rejectWithValue, getState }) => {
-		dispatch(appActions.setStatus({ status: 'loading' }))
+		// dispatch(appActions.setStatus({ status: 'loading' }))
 		dispatch(tasksActions.changeTasksEntityStatusAC({ todolistId, taskId, newStatus: 'loading' }))
 		const taskToUpdate = getState().tasksReducer[todolistId].filter(t => t.id === taskId)[0]
 		if (!taskToUpdate) {
 			dispatch(appActions.setError({ error: 'Task not found' }))
-			dispatch(appActions.setStatus({ status: 'idle' }))
+			// dispatch(appActions.setStatus({ status: 'idle' }))
 			dispatch(tasksActions.changeTasksEntityStatusAC({ todolistId, taskId, newStatus: 'idle' }))
 			return rejectWithValue(null)
 		}
@@ -103,7 +103,7 @@ const updateTaskTC = createAppAsyncThunk<
 		try {
 			const res = await tasksAPI.updateTask(todolistId, taskId, model)
 			if (res.data.resultCode === ResultCodeEnum.Success) {
-				dispatch(appActions.setStatus({ status: 'idle' }))
+				// dispatch(appActions.setStatus({ status: 'idle' }))
 				dispatch(tasksActions.changeTasksEntityStatusAC({ todolistId, taskId, newStatus: 'idle' }))
 				return { todolistId, taskId, taskUpdateModel: model }
 			} else {
@@ -123,12 +123,12 @@ const removeTaskTC = createAppAsyncThunk<
 	{ todolistId: string, taskId: string }, { todolistId: string, taskId: string }>(
 	'tasksReducer/removeTaskTC',
 	async ({ todolistId, taskId }, { dispatch, rejectWithValue }) => {
-		dispatch(appActions.setStatus({ status: 'loading' }))
+		// dispatch(appActions.setStatus({ status: 'loading' }))
 		dispatch(tasksActions.changeTasksEntityStatusAC({ todolistId, taskId, newStatus: 'loading' }))
 		try {
 			const res = await tasksAPI.deleteTask(todolistId, taskId)
 			if (res.data.resultCode === ResultCodeEnum.Success) {
-				dispatch(appActions.setStatus({ status: 'idle' }))
+				// dispatch(appActions.setStatus({ status: 'idle' }))
 				return { todolistId, taskId }
 			} else {
 				handleServerError(res.data.messages, dispatch)

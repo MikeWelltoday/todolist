@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, isFulfilled, isPending, isRejected, PayloadAction } from '@reduxjs/toolkit'
+import { todolistsThunks } from '../../features/todolistsList/model/todolist/todolists-reducer'
 
 //========================================================================================
 
@@ -36,15 +37,15 @@ const slice = createSlice({
 	},
 	extraReducers: builder => {
 		builder
-			.addMatcher(
-				(action) => {
-					console.log('addMatcher matcher: ', action.type)
-					return action.type.endsWith('/pending')
-				},
-				(state, action) => {
-					console.log('🔵🔵🔵 DONE')
-				}
-			)
+			.addMatcher(isPending, state => {
+				state.status = 'loading'
+			})
+			.addMatcher(isFulfilled, state => {
+				state.status = 'idle'
+			})
+			.addMatcher(isRejected, state => {
+				state.status = 'idle'
+			})
 	}
 })
 

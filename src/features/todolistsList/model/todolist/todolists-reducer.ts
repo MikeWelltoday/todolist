@@ -21,14 +21,14 @@ export type TodolistReducerType = TodolistApiType & {
 const fetchTodolistsTC = createAppAsyncThunk<{ todolistsFromAPI: TodolistApiType[] }, undefined>(
 	'todolistsReducer/fetchTodolists',
 	async (_, { dispatch, rejectWithValue }) => {
-		dispatch(appActions.setStatus({ status: 'loading' }))
+		// dispatch(appActions.setStatus({ status: 'loading' }))
 		try {
 			const res = await todolistsAPI.getTodolist()
 			if (res.data.length) {
 				res.data.forEach((todolist) => {
 					dispatch(tasksThunks.fetchTasksTC(todolist.id))
 				})
-				dispatch(appActions.setStatus({ status: 'idle' }))
+				// dispatch(appActions.setStatus({ status: 'idle' }))
 				return { todolistsFromAPI: res.data }
 			} else {
 				dispatch(appActions.setError({ error: 'to get Todolists is failed' }))
@@ -44,11 +44,11 @@ const fetchTodolistsTC = createAppAsyncThunk<{ todolistsFromAPI: TodolistApiType
 const addTodolistTC = createAppAsyncThunk<{ newTodolistFromAPI: TodolistApiType }, string>(
 	'todolistsReducer/addTodolistTC',
 	async (title, { dispatch, rejectWithValue }) => {
-		dispatch(appActions.setStatus({ status: 'loading' }))
+		// dispatch(appActions.setStatus({ status: 'loading' }))
 		try {
 			const res = await todolistsAPI.createTodolist(title)
 			if (res.data.resultCode === ResultCodeEnum.Success) {
-				dispatch(appActions.setStatus({ status: 'idle' }))
+				// dispatch(appActions.setStatus({ status: 'idle' }))
 				return { newTodolistFromAPI: res.data.data.item }
 			} else {
 				handleServerError(res.data.messages, dispatch)
@@ -64,12 +64,12 @@ const addTodolistTC = createAppAsyncThunk<{ newTodolistFromAPI: TodolistApiType 
 const removeTodolistTC = createAppAsyncThunk<{ todolistId: string }, string>(
 	'todolistsReducer/removeTodolistTC',
 	async (todolistId, { dispatch, rejectWithValue }) => {
-		dispatch(appActions.setStatus({ status: 'loading' }))
+		// dispatch(appActions.setStatus({ status: 'loading' }))
 		dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'loading' }))
 		try {
 			const res = await todolistsAPI.deleteTodolist(todolistId)
 			if (res.data.resultCode === ResultCodeEnum.Success) {
-				dispatch(appActions.setStatus({ status: 'idle' }))
+				// dispatch(appActions.setStatus({ status: 'idle' }))
 				dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
 				return { todolistId }
 			} else {
@@ -89,12 +89,12 @@ const updateTodolistTitleTC = createAppAsyncThunk<
 	{ todolistId: string, title: string }, { todolistId: string, newTitle: string }>(
 	'todolistsReducer/updateTodolistTitleTC',
 	async ({ todolistId, newTitle }, { dispatch, rejectWithValue }) => {
-		dispatch(appActions.setStatus({ status: 'loading' }))
+		// dispatch(appActions.setStatus({ status: 'loading' }))
 		dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'loading' }))
 		try {
 			const res = await todolistsAPI.updateTodolist(todolistId, newTitle)
 			if (res.data.resultCode === ResultCodeEnum.Success) {
-				dispatch(appActions.setStatus({ status: 'idle' }))
+				// dispatch(appActions.setStatus({ status: 'idle' }))
 				dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
 				return { todolistId, title: newTitle }
 			} else {
