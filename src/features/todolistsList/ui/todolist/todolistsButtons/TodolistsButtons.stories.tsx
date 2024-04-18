@@ -4,7 +4,7 @@ import { TodolistButtons } from './TodolistButtons'
 
 
 const meta: Meta<typeof TodolistButtons> = {
-	title: 'App/Todolist',
+	title: 'App/TodoListButtons',
 	component: TodolistButtons,
 
 	decorators: [ReduxStoreProviderDecorator],
