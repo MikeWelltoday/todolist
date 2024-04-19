@@ -4,9 +4,9 @@ import { appActions } from 'state/reducers/app-reducer'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { authThunks } from 'state/reducers/auth-reducer'
 import { TodolistApiType, todolistsAPI } from 'features/todolistsList/api/todolists-api'
-import { ResultCodeEnum } from 'api/result-code'
 import { AppDispatchType } from '../../../../app/store'
 import { AuthLoginResponseType } from '../../../../api/auth-api'
+import { ResultCodeEnum } from '../../../../shared'
 
 //========================================================================================
 
@@ -76,29 +76,41 @@ const addTodolistTC = createAsyncThunk<{ newTodolistFromAPI: TodolistApiType }, 
 // 	}
 // )
 
-const removeTodolistTC = createAppAsyncThunk<{ todolistId: string }, string>(
+const removeTodolistTC = createAsyncThunk<{ todolistId: string }, string>(
 	'todolistsReducer/removeTodolistTC',
 	async (todolistId, { dispatch, rejectWithValue }) => {
-		// dispatch(appActions.setStatus({ status: 'loading' }))
 		dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'loading' }))
-		try {
-			const res = await todolistsAPI.deleteTodolist(todolistId)
-			if (res.data.resultCode === ResultCodeEnum.Success) {
-				// dispatch(appActions.setStatus({ status: 'idle' }))
-				dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
-				return { todolistId }
-			} else {
-				handleServerError(res.data.messages, dispatch)
-				dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
-				return rejectWithValue(null)
-			}
-		} catch (error) {
-			handleNetworkError(error, dispatch)
-			dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
-			return rejectWithValue(null)
+		const res = await todolistsAPI.deleteTodolist(todolistId)
+			.finally(() => dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' })))
+		if (res.data.resultCode === ResultCodeEnum.Success) {
+			return { todolistId }
+		} else {
+			return rejectWithValue(res.data)
 		}
 	}
 )
+
+// const removeTodolistTC = createAppAsyncThunk<{ todolistId: string }, string>(
+// 	'todolistsReducer/removeTodolistTC',
+// 	async (todolistId, { dispatch, rejectWithValue }) => {
+// 		dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'loading' }))
+// 		try {
+// 			const res = await todolistsAPI.deleteTodolist(todolistId)
+// 			if (res.data.resultCode === ResultCodeEnum.Success) {
+// 				dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
+// 				return { todolistId }
+// 			} else {
+// 				handleServerError(res.data.messages, dispatch)
+// 				dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
+// 				return rejectWithValue(null)
+// 			}
+// 		} catch (error) {
+// 			handleNetworkError(error, dispatch)
+// 			dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
+// 			return rejectWithValue(null)
+// 		}
+// 	}
+// )
 
 const updateTodolistTitleTC = createAppAsyncThunk<
 	{ todolistId: string, title: string }, { todolistId: string, newTitle: string }>(

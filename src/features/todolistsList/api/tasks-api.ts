@@ -1,6 +1,4 @@
-import { instance } from 'api/instance'
-
-//========================================================================================
+import { instance } from '../../../shared'
 
 export const enum TaskStatusesEnum {
 	New = 0,

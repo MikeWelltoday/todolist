@@ -13,3 +13,5 @@ export const handleServerError = (resMessagesArr: string[], dispatch: AppDispatc
 		dispatch(appActions.setError({ error: resMessagesArr.length ? resMessagesArr[0] : 'Some error occurred' }))
 	}
 }
+
+

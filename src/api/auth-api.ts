@@ -1,6 +1,4 @@
-import { instance } from 'api/instance'
-
-//========================================================================================
+import { instance } from '../shared'
 
 type LoginResponseType = {
 	userId: number
@@ -22,7 +20,6 @@ export type AuthLoginResponseType = AuthResponseType<LoginResponseType> & {
 	fieldsErrors: { error: string, field: string }[]
 }
 
-//========================================================================================
 
 export const authAPI = {
 

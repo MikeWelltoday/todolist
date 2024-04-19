@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit'
 import { appActions } from 'state/reducers/app-reducer'
 import { AppDispatchType } from 'app/store'
 import { authAPI, AuthLoginResponseType } from 'api/auth-api'
-import { ResultCodeEnum } from 'api/result-code'
+import { ResultCodeEnum } from '../../shared'
 
 //========================================================================================
 
@@ -33,23 +33,15 @@ const authSetLoggedTC = createAsyncThunk<
 	}
 )
 
-const authIsInitializedTC = createAppAsyncThunk<undefined, undefined>(
+const authIsInitializedTC = createAsyncThunk<undefined, undefined>(
 	'authReducer/authIsInitializedTC',
 	async (_, { dispatch, rejectWithValue }) => {
-		try {
-			const res = await authAPI.me()
-			if (res.data.resultCode === ResultCodeEnum.Success) {
-				return
-			} else {
-				return rejectWithValue(null)
-			}
-		} catch (error) {
-			// нет нужды выключать loader, так как мы его и не включали
-			// в этой утилите он отключается, но дублировать код обработки ошибки не хочется
-			handleNetworkError(error, dispatch)
-			return rejectWithValue(null)
-		} finally {
-			dispatch(appActions.setAppIsInitialized({ isAppInitialized: true }))
+		const res = await authAPI.me()
+			.finally(() => dispatch(appActions.setAppIsInitialized({ isAppInitialized: true })))
+		if (res.data.resultCode === ResultCodeEnum.Success) {
+			return
+		} else {
+			return rejectWithValue(res.data)
 		}
 	}
 )

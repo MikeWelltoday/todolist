@@ -7,7 +7,6 @@ import CircularProgress from '@mui/material/CircularProgress'
 import { HeaderAppBar, Login, TodolistsList } from 'features'
 import { ErrorSnackbar } from 'components'
 import { useAppDispatch } from 'app/store'
-import { useActions } from 'hooks/useAction'
 import { isAppInitializedSelector } from 'state/selectors/isAppInitialized-selector'
 import { authThunks } from 'state/reducers/auth-reducer'
 
@@ -24,18 +23,10 @@ function App(props: AppPropsType) {
 	const dispatch = useAppDispatch()
 	const isInitialized = useSelector(isAppInitializedSelector)
 
-
-	const { authIsInitializedTC } = useActions(authThunks)
-
 	useEffect(() => {
 		if (props.demo) return
-		authIsInitializedTC()
+		dispatch(authThunks.authIsInitializedTC())
 	}, [])
-
-	// useEffect(() => {
-	// 	if (props.demo) return
-	// 	dispatch(authThunks.authIsInitializedTC())
-	// }, [])
 
 	if (!isInitialized) {
 		return (

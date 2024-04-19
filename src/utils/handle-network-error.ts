@@ -13,6 +13,5 @@ export function handleNetworkError(error: unknown, dispatch: AppDispatchType): v
 		errorMessage = JSON.stringify(error)
 	}
 	dispatch(appActions.setError({ error: errorMessage }))
-	// dispatch(appActions.setStatus({ status: 'idle' }))
 }
 

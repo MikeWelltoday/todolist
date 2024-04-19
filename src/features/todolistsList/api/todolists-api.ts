@@ -1,6 +1,4 @@
-import { instance } from 'api/instance'
-
-//========================================================================================
+import { instance } from '../../../shared'
 
 export type TodolistApiType = {
 	id: string
@@ -21,7 +19,6 @@ export type TodolistsApiResponseType<D = {}> = {
 	data: D
 }
 
-//========================================================================================
 
 export const todolistsAPI = {
 

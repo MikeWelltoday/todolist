@@ -15,7 +15,7 @@ import {
 	tasksAPI,
 	TaskStatusesEnum
 } from 'features/todolistsList/api/tasks-api'
-import { ResultCodeEnum } from 'api/result-code'
+import { ResultCodeEnum } from '../../../../shared'
 
 //========================================================================================
 

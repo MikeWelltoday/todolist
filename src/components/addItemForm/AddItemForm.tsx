@@ -33,10 +33,10 @@ export const AddItemForm: FC<AddItemFormPropsType> = memo((props) => {
 			return
 		}
 
-		// if (title.trim().length >= 100) {
-		// 	setError('Title shorter than 100 symbols')
-		// 	return
-		// }
+		if (title.trim().length >= 100) {
+			setError('Title shorter than 100 symbols')
+			return
+		}
 
 		props.addItem(title)
 			.then(() => setTitle(''))

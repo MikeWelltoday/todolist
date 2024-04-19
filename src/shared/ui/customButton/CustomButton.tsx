@@ -7,9 +7,6 @@ type FilterButtonPropsType = {
 } & ButtonProps
 
 export const CustomButton: FC<FilterButtonPropsType> = memo((props) => {
-
-	// console.log('🟡🟡🟡 => CustomButton')
-
 	return (
 		<Button
 			color={props.color}
