@@ -1,5 +1,6 @@
 import { createSlice, isFulfilled, isPending, isRejected, PayloadAction } from '@reduxjs/toolkit'
 import { todolistsThunks } from '../../features/todolistsList/model/todolist/todolists-reducer'
+import { tasksThunks } from '../../features/todolistsList/model/task/tasks-reducer'
 
 //========================================================================================
 
@@ -43,9 +44,24 @@ const slice = createSlice({
 			.addMatcher(isFulfilled, state => {
 				state.status = 'idle'
 			})
-			.addMatcher(isRejected, state => {
-				state.status = 'idle'
-			})
+
+			.addMatcher(isRejected, (state, action: any) => {
+					state.status = 'idle'
+					if (action.payload && action.payload.messages) {
+						console.log('🟡 SERVER => ', action)
+						if (action.type === todolistsThunks.addTodolistTC.rejected.type ||
+							action.type === tasksThunks.addTaskTC.rejected.type) {
+							return
+						}
+						state.error = action.payload.messages[0] || 'Server Error'
+
+					} else {
+						console.log('🔴 NETWORK => ', action)
+						state.error = action.error.message ? action.error.message : 'Network Error'
+					}
+
+				}
+			)
 	}
 })
 

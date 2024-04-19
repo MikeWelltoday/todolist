@@ -6,7 +6,7 @@ import {
 
 import { createAppAsyncThunk, handleServerError, handleNetworkError } from 'utils'
 import { appActions } from 'state/reducers/app-reducer'
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { authThunks } from 'state/reducers/auth-reducer'
 import {
 	ApiUpdateTaskModelType,
@@ -53,29 +53,43 @@ const fetchTasksTC = createAppAsyncThunk<{ tasks: TaskApiType[], todolistId: str
 	}
 )
 
-const addTaskTC = createAppAsyncThunk<{ newTaskFromAPI: TaskApiType }, { todolistId: string, newTitle: string }>(
+const addTaskTC = createAsyncThunk<{ newTaskFromAPI: TaskApiType }, { todolistId: string, newTitle: string }>(
 	'tasksReducer/addTaskTC',
 	async ({ todolistId, newTitle }, { dispatch, rejectWithValue }) => {
-		// dispatch(appActions.setStatus({ status: 'loading' }))
 		dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'loading' }))
-		try {
-			const res = await tasksAPI.createTask(todolistId, newTitle)
-			if (res.data.resultCode === ResultCodeEnum.Success) {
-				// dispatch(appActions.setStatus({ status: 'idle' }))
-				dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
-				return { newTaskFromAPI: res.data.data.item }
-			} else {
-				handleServerError(res.data.messages, dispatch)
-				dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
-				return rejectWithValue(null)
-			}
-		} catch (error) {
-			handleNetworkError(error, dispatch)
+		const res = await tasksAPI.createTask(todolistId, newTitle)
+		if (res.data.resultCode === ResultCodeEnum.Success) {
 			dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
-			return rejectWithValue(null)
+			return { newTaskFromAPI: res.data.data.item }
+		} else {
+			dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
+			return rejectWithValue(res.data)
 		}
+
 	}
 )
+
+// const addTaskTC = createAppAsyncThunk<{ newTaskFromAPI: TaskApiType }, { todolistId: string, newTitle: string }>(
+// 	'tasksReducer/addTaskTC',
+// 	async ({ todolistId, newTitle }, { dispatch, rejectWithValue }) => {
+// 		dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'loading' }))
+// 		try {
+// 			const res = await tasksAPI.createTask(todolistId, newTitle)
+// 			if (res.data.resultCode === ResultCodeEnum.Success) {
+// 				dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
+// 				return { newTaskFromAPI: res.data.data.item }
+// 			} else {
+// 				// handleServerError(res.data.messages, dispatch)
+// 				dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
+// 				return rejectWithValue(null)
+// 			}
+// 		} catch (error) {
+// 			handleNetworkError(error, dispatch)
+// 			dispatch(todolistsActions.changeTodolistEntityStatus({ todolistId, newStatus: 'idle' }))
+// 			return rejectWithValue(null)
+// 		}
+// 	}
+// )
 
 const updateTaskTC = createAppAsyncThunk<
 	{ todolistId: string, taskId: string, taskUpdateModel: ApiUpdateTaskModelType },

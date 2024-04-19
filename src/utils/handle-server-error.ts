@@ -12,5 +12,4 @@ export const handleServerError = (resMessagesArr: string[], dispatch: AppDispatc
 	if (showError) {
 		dispatch(appActions.setError({ error: resMessagesArr.length ? resMessagesArr[0] : 'Some error occurred' }))
 	}
-	// dispatch(appActions.setStatus({ status: 'idle' }))
 }
