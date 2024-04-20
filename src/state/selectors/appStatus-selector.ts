@@ -1,4 +1,4 @@
-import { AppRootStateType } from 'app/store'
+import { AppRootStateType } from 'store/store'
 import { StatusType } from 'state/reducers/app-reducer'
 
 //========================================================================================

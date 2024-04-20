@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react'
 import { useSelector } from 'react-redux'
-import { AppRootStateType } from '../../../../../app/store'
+import { AppRootStateType } from '../../../../../store/store'
 import { TaskType } from '../../../model/task/tasks-reducer'
 import { TodolistFilterReducerType } from '../../../model/todolist/todolists-reducer'
 import S from './Tasks.module.scss'

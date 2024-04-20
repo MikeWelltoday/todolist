@@ -1,15 +1,11 @@
-import { createAppAsyncThunk, handleServerError, handleNetworkError, thunkTryCatch } from 'utils'
-import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { appActions } from 'state/reducers/app-reducer'
-import { AppDispatchType } from 'app/store'
+import { AppDispatchType } from 'store/store'
 import { authAPI, AuthLoginResponseType } from 'api/auth-api'
-import { ResultCodeEnum } from '../../shared'
-
-//========================================================================================
+import { handleNetworkError, handleServerError, ResultCodeEnum, thunkTryCatch } from '../../shared'
+import { createAppAsyncThunk } from '../../store/create-app-async-thunk'
 
 export type AuthReducerType = { isLogged: boolean }
-
-//========================================================================================
 
 const authSetLoggedTC = createAsyncThunk<
 	undefined, { email: string, password: string, rememberMe: boolean, captcha: boolean },

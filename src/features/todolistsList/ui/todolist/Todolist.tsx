@@ -1,7 +1,7 @@
 import React, { FC, memo, useCallback, useEffect } from 'react'
 import S from 'features/todolistsList/ui/todolist/Todolist.module.scss'
 import { AddItemForm } from 'components'
-import { useAppDispatch } from 'app/store'
+import { useAppDispatch } from 'store/store'
 import { tasksThunks } from 'features/todolistsList/model/task/tasks-reducer'
 import { RequestStatusType, TodolistFilterReducerType } from 'features/todolistsList/model/todolist/todolists-reducer'
 import { TodolistTitle } from './todolistTitle/TodolistTitle'

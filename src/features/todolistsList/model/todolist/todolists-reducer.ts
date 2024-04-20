@@ -1,12 +1,10 @@
-import { createAppAsyncThunk, handleServerError, handleNetworkError } from 'utils'
 import { tasksThunks } from 'features/todolistsList/model/task/tasks-reducer'
 import { appActions } from 'state/reducers/app-reducer'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { authThunks } from 'state/reducers/auth-reducer'
 import { TodolistApiType, todolistsAPI } from 'features/todolistsList/api/todolists-api'
-import { AppDispatchType } from '../../../../app/store'
-import { AuthLoginResponseType } from '../../../../api/auth-api'
-import { ResultCodeEnum } from '../../../../shared'
+import { handleNetworkError, handleServerError, ResultCodeEnum } from '../../../../shared'
+import { createAppAsyncThunk } from '../../../../store/create-app-async-thunk'
 
 //========================================================================================
 

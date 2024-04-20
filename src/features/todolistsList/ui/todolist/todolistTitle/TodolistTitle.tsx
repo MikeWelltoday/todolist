@@ -4,7 +4,7 @@ import { EditableSpan } from '../../../../../components'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { RequestStatusType, todolistsThunks } from '../../../model/todolist/todolists-reducer'
-import { useAppDispatch } from '../../../../../app/store'
+import { useAppDispatch } from '../../../../../store/store'
 
 
 type TodolistTitlePropsType = {

@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Loader } from './loader/Loader'
 import { useSelector } from 'react-redux'
-import { useAppDispatch } from 'app/store'
+import { useAppDispatch } from 'store/store'
 import { isLoggedSelector } from 'state/selectors/isLogged-selector'
 import { authThunks } from 'state/reducers/auth-reducer'
 

@@ -3,8 +3,6 @@ import {
 	todolistsActions,
 	todolistsThunks
 } from 'features/todolistsList/model/todolist/todolists-reducer'
-
-import { createAppAsyncThunk, handleServerError, handleNetworkError } from 'utils'
 import { appActions } from 'state/reducers/app-reducer'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { authThunks } from 'state/reducers/auth-reducer'
@@ -15,9 +13,10 @@ import {
 	tasksAPI,
 	TaskStatusesEnum
 } from 'features/todolistsList/api/tasks-api'
-import { ResultCodeEnum } from '../../../../shared'
+import { handleNetworkError, handleServerError, ResultCodeEnum } from '../../../../shared'
+import { createAppAsyncThunk } from '../../../../store/create-app-async-thunk'
+import { TodolistApiType } from '../../api/todolists-api'
 
-//========================================================================================
 
 export type UiUpdateTaskModelType = {
 	title?: string
@@ -36,7 +35,6 @@ export type TasksReducerType = {
 	[key: string]: TaskType[]
 }
 
-//========================================================================================
 
 const fetchTasksTC = createAppAsyncThunk<{ tasks: TaskApiType[], todolistId: string }, string>(
 	'tasksReducer/fetchTasksTC',

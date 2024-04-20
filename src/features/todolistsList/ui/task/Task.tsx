@@ -7,7 +7,7 @@ import { EditableSpan } from 'components'
 import { TaskStatusesEnum } from 'features/todolistsList/api/tasks-api'
 import { RequestStatusType } from 'features/todolistsList/model/todolist/todolists-reducer'
 import { tasksThunks } from 'features/todolistsList/model/task/tasks-reducer'
-import { useAppDispatch } from 'app/store'
+import { useAppDispatch } from 'store/store'
 
 //========================================================================================
 

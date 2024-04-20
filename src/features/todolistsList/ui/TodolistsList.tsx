@@ -5,18 +5,16 @@ import Paper from '@mui/material/Paper'
 import { Todolist } from 'features/todolistsList/ui/todolist/Todolist'
 import { AddItemForm } from 'components'
 import { Navigate } from 'react-router-dom'
-import { useAppDispatch } from 'app/store'
+import { useAppDispatch } from 'store/store'
 import { todolistsSelector } from '../model/todolist/todolists-selector'
 import { isLoggedSelector } from 'state/selectors/isLogged-selector'
 import { todolistsThunks } from '../model/todolist/todolists-reducer'
 
-//========================================================================================
 
 type TodolistsListPropsType = {
 	demo: boolean
 }
 
-//========================================================================================
 
 export const TodolistsList: FC<TodolistsListPropsType> = (props) => {
 

@@ -1,4 +1,4 @@
-import { AppDispatchType } from 'app/store'
+import { AppDispatchType } from 'store/store'
 import { appActions } from 'state/reducers/app-reducer'
 
 /**

@@ -2,8 +2,6 @@ import { createSlice, isFulfilled, isPending, isRejected, PayloadAction } from '
 import { todolistsThunks } from '../../features/todolistsList/model/todolist/todolists-reducer'
 import { tasksThunks } from '../../features/todolistsList/model/task/tasks-reducer'
 
-//========================================================================================
-
 export type AppErrorType = string | null
 
 export type StatusType = 'idle' | 'loading'
@@ -13,8 +11,6 @@ export type AppReducerType = {
 	error: AppErrorType
 	isAppInitialized: boolean
 }
-
-//========================================================================================
 
 const initialState: AppReducerType = {
 	status: 'idle',
