@@ -1,6 +1,6 @@
-//========================================================================================
-export { HeaderAppBar } from './headerAppBar/HeaderAppBar'
-export { Task } from 'features/todolistsList/ui/task/Task'
-export { Todolist } from 'features/todolistsList/ui/todolist/Todolist'
-export { TodolistsList } from 'features/todolistsList/ui/TodolistsList'
-export { Login } from './login/Login'
+export { Todolist } from './todolist/ui/Todolist'
+export { todolistsSlice, todolistsThunks } from './todolist/model/todolistsSlice'
+export { todolistsSelector } from './todolist/model/todolistsSelector'
+
+
+export { tasksSlice } from './tasks/model/tasksSlice'

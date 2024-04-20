@@ -1,11 +1,16 @@
-// api
 export { instance } from './api/instance'
-export { ResultCodeEnum } from './api/result-code'
+export { ResultCodeEnum } from './api/resultCode'
 
-// ui
+
+export type { RequestStatusType } from './types/commonTypes'
+export { TaskStatusesEnum, TaskPrioritiesEnum } from './types/taskTypes'
+
+
+export { AddItemForm } from './ui/addItemForm/AddItemForm'
 export { CustomButton } from './ui/customButton/CustomButton'
+export { EditableSpan } from './ui/editableSpan/EditableSpan'
 
-// lib => utils
-export { handleNetworkError } from './lib/utils/handle-network-error'
-export { handleServerError } from './lib/utils/handle-server-error'
-export { thunkTryCatch } from './lib/utils/thunk-try-catch'
+
+export { handleNetworkError } from './utils/handleNetworkError'
+export { handleServerError } from './utils/handleServerError'
+export { thunkTryCatch } from './utils/thunkTryCatch'

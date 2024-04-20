@@ -1,9 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import App from './App'
-import { ReduxStoreProviderDecorator } from 'stories'
-import { BrowserRouterDecorator } from 'stories/decorators/ReduxStoreProviderDecorator'
-
-//========================================================================================
+import { ReduxStoreProviderDecorator } from '../store/storybook-decorators/ReduxStoreProviderDecorator'
+import { BrowserRouterDecorator } from '../store/storybook-decorators/BrowserRouterProviderDecorator'
 
 const meta: Meta<typeof App> = {
 	title: 'App/App',
@@ -29,7 +27,5 @@ const meta: Meta<typeof App> = {
 export default meta
 
 type Story = StoryObj<typeof meta>;
-
-//========================================================================================
 
 export const AppWithReduxStory: Story = {}
