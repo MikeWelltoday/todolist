@@ -1,6 +1,6 @@
-import { AppDispatchType } from 'store/store'
+import { AppDispatchType } from 'state/store/store'
 import { isAxiosError } from 'axios'
-import { appActions } from 'store/appSlice/appSlice'
+import { appActions } from 'state/appSlice/appSlice'
 
 
 export function handleNetworkError(error: unknown, dispatch: AppDispatchType): void {

@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Alert from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
-import { useAppDispatch } from 'store/store'
-import { appActions, appErrorSelector } from '../store'
+import { useAppDispatch } from '../shared'
+import { appErrorSelector } from '../state/appSlice'
+import { appActions } from '../state/appSlice/appSlice'
 
 export const ErrorSnackbar = () => {
 

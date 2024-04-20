@@ -3,11 +3,11 @@ import S from 'shared/ui/addItemForm/AddItemForm.module.scss'
 import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
-import { RequestStatusType } from '../../types/commonTypes'
+import { RequestEntityStatusType } from '../../types/commonTypes'
 
 
 type PropsType = {
-	todolistEntityStatus?: RequestStatusType
+	todolistEntityStatus?: RequestEntityStatusType
 
 	addItem: (title: string) => Promise<any>
 }

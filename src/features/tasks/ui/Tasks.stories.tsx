@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Tasks } from './Tasks'
-import { ReduxStoreProviderDecorator } from '../../../store/storybook-decorators/ReduxStoreProviderDecorator'
+import { ReduxStoreProviderDecorator } from '../../../state/storybookDecorators/ReduxStoreProviderDecorator'
 
 const meta: Meta<typeof Tasks> = {
 	title: 'App/Tasks',

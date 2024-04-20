@@ -3,14 +3,13 @@ import S from './TodolisTitle.module.scss'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { todolistsThunks } from '../todolist/model/todolistsSlice'
-import { EditableSpan, RequestStatusType } from '../../shared'
-import { useAppDispatch } from '../../store/store'
+import { EditableSpan, RequestEntityStatusType, useAppDispatch } from '../../shared'
 
 
 type TodolistTitlePropsType = {
 	todolistId: string
 	title: string
-	entityStatus: RequestStatusType
+	entityStatus: RequestEntityStatusType
 }
 
 

@@ -1,11 +1,11 @@
 import React, { ChangeEvent, FC, useState, KeyboardEvent, memo, useCallback } from 'react'
 import s from 'shared/ui/editableSpan/EditableSpan.module.scss'
 import TextField from '@mui/material/TextField'
-import { RequestStatusType } from '../../types/commonTypes'
+import { RequestEntityStatusType } from '../../types/commonTypes'
 
 type EditableSpanPropsType = {
 	title: string
-	entityStatus: RequestStatusType
+	entityStatus: RequestEntityStatusType
 	onChangeTitle: (newTitle: string) => void
 }
 

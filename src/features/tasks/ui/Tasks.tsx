@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { TaskType } from '../model/tasksSlice'
 import { TodolistFilterReducerType } from '../../todolist/model/todolistsSlice'
 import { Task } from '../../task/Task'
-import { AppRootStateType } from '../../../store/store'
+import { AppRootStateType } from '../../../state/store/store'
 
 
 type TasksPropsType = {

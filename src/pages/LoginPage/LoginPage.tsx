@@ -11,8 +11,9 @@ import FormLabel from '@mui/material/FormLabel'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { useFormik } from 'formik'
-import { AuthLoginResponseType, authThunks, isLoggedSelector } from '../../entities'
-import { useAppDispatch } from '../../store/store'
+import { AuthLoginResponseType, isLoggedSelector } from '../../entities'
+import { useAppDispatch } from '../../shared'
+import { authThunks } from '../../entities/authSlice/authSlice'
 
 type FormikErrorType = {
 	email?: string

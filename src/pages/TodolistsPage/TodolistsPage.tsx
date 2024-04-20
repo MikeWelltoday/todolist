@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import { Navigate } from 'react-router-dom'
-import { Todolist, todolistsSelector, todolistsThunks } from '../../features'
-import { AddItemForm } from '../../shared'
-import { useAppDispatch } from '../../store/store'
+import { Todolist, todolistsSelector } from '../../features'
+import { AddItemForm, useAppDispatch } from '../../shared'
 import { isLoggedSelector } from '../../entities'
+import { todolistsThunks } from '../../features/todolist/model/todolistsSlice'
 
 
 type TodolistsListPropsType = {

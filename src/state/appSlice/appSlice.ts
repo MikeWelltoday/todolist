@@ -1,7 +1,7 @@
 import { createSlice, isFulfilled, isPending, isRejected, PayloadAction } from '@reduxjs/toolkit'
-import { todolistsThunks } from '../../features/todolist/model/todolistsSlice'
 import { tasksThunks } from '../../features/tasks/model/tasksSlice'
-import { authThunks } from '../../entities'
+import { todolistsThunks } from '../../features/todolist/model/todolistsSlice'
+import { authThunks } from '../../entities/authSlice/authSlice'
 
 
 export type AppErrorType = string | null
@@ -64,6 +64,10 @@ const slice = createSlice({
 	}
 })
 
+/**
+ * ⛔ SLICE   импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ ACTIONS импортировать напрямую из файла => если черещ index, то будет ошибка
+ */
 export const appSlice = slice.reducer
 export const appActions = slice.actions
 

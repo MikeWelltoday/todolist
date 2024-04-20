@@ -3,8 +3,7 @@ import S from 'features/task/Task.module.scss'
 import Checkbox from '@mui/material/Checkbox'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { useAppDispatch } from 'store/store'
-import { EditableSpan, RequestStatusType, TaskStatusesEnum } from '../../shared'
+import { EditableSpan, RequestEntityStatusType, TaskStatusesEnum, useAppDispatch } from '../../shared'
 import { tasksThunks } from '../tasks/model/tasksSlice'
 
 
@@ -13,7 +12,7 @@ type PropsType = {
 	taskId: string
 	title: string
 	status: TaskStatusesEnum
-	entityStatus: RequestStatusType
+	entityStatus: RequestEntityStatusType
 }
 
 

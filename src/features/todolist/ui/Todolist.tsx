@@ -1,19 +1,18 @@
 import React, { FC, memo, useCallback, useEffect } from 'react'
 import S from 'features/todolist/ui/Todolist.module.scss'
-import { useAppDispatch } from 'store/store'
-import { tasksThunks } from 'features/tasks/model/tasksSlice'
-import { TodolistFilterReducerType } from 'features/todolist/model/todolistsSlice'
 import { TodolistTitle } from '../../todolistTitle/TodolistTitle'
 import { Tasks } from '../../tasks/ui/Tasks'
 import { TodolistButtons } from '../../todolistButtons/TodolistButtons'
-import { AddItemForm, RequestStatusType } from '../../../shared'
+import { AddItemForm, RequestEntityStatusType, useAppDispatch } from '../../../shared'
+import { TodolistFilterReducerType } from '../model/todolistsSlice'
+import { tasksThunks } from '../../tasks/model/tasksSlice'
 
 
 type TodolistPropsType = {
 	todolistId: string
 	title: string
 	todolistFilter: TodolistFilterReducerType
-	entityStatus: RequestStatusType
+	entityStatus: RequestEntityStatusType
 
 	demo?: boolean
 }

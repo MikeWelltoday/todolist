@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Task } from 'features/task/Task'
 import { TaskStatusesEnum } from '../../shared'
-import { ReduxStoreProviderDecorator } from '../../store/storybook-decorators/ReduxStoreProviderDecorator'
+import { ReduxStoreProviderDecorator } from '../../state/storybookDecorators/ReduxStoreProviderDecorator'
 
 
 const meta: Meta<typeof Task> = {

@@ -1,11 +1,14 @@
 import { thunk } from 'redux-thunk'
-import { useDispatch } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
-import { appSlice } from 'store/appSlice/appSlice'
 import { authSlice } from 'entities/authSlice/authSlice'
-import { tasksSlice, todolistsSlice } from '../features'
+import { tasksSlice } from '../../features/tasks/model/tasksSlice'
+import { todolistsSlice } from '../../features/todolist/model/todolistsSlice'
+import { appSlice } from '../appSlice/appSlice'
 
 
+/**
+ * ⛔ STORE импортировать напрямую из файла => если черещ index, то будет ошибка
+ */
 export const store = configureStore({
 	reducer:
 		{
@@ -20,8 +23,6 @@ export const store = configureStore({
 
 export type AppRootStateType = ReturnType<typeof store.getState>
 export type AppDispatchType = typeof store.dispatch
-export const useAppDispatch = () => useDispatch<AppDispatchType>()
-
 
 // @ts-ignore
 window.store = store

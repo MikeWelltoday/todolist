@@ -1,5 +1,5 @@
-import { AppDispatchType } from 'store/store'
-import { appActions } from 'store/appSlice/appSlice'
+import { AppDispatchType } from 'state/store/store'
+import { appActions } from 'state/appSlice/appSlice'
 
 /**
  * Данная функция обрабатывает ошибки, которые могут возникнуть при взаимодействии с сервером.

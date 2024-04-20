@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { appActions } from 'store/appSlice/appSlice'
-import { AppDispatchType } from 'store/store'
+import { appActions } from 'state/appSlice/appSlice'
+import { AppDispatchType } from 'state/store/store'
 import { authAPI, AuthLoginResponseType } from 'entities/authSlice/authAPI'
 import { handleNetworkError, handleServerError, ResultCodeEnum, thunkTryCatch } from '../../shared'
-import { createAppAsyncThunk } from '../../store/createAppAsyncThunk'
+import { createAppAsyncThunk } from '../../state/utils/createAppAsyncThunk'
 
 export type AuthReducerType = { isLogged: boolean }
 
@@ -107,6 +107,10 @@ const slice = createSlice({
 	}
 })
 
+/**
+ * ⛔ SLICE  импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ THUNKS импортировать напрямую из файла => если черещ index, то будет ошибка
+ */
 export const authSlice = slice.reducer
 export const authThunks = { authSetLoggedTC, authIsInitializedTC, authLogoutTC }
 

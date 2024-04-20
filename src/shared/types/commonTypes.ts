@@ -1,1 +1,1 @@
-export type RequestStatusType = 'idle' | 'loading'
+export type RequestEntityStatusType = 'idle' | 'loading'

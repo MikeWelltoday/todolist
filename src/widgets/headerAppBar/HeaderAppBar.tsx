@@ -7,9 +7,10 @@ import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import { useSelector } from 'react-redux'
-import { useAppDispatch } from 'store/store'
 import { Loader } from './loader/Loader'
-import { authThunks, isLoggedSelector } from '../../entities'
+import { isLoggedSelector } from '../../entities'
+import { useAppDispatch } from '../../shared'
+import { authThunks } from '../../entities/authSlice/authSlice'
 
 export const HeaderAppBar = () => {
 

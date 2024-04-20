@@ -1,13 +1,13 @@
 import { todolistsActions, todolistsThunks } from 'features/todolist/model/todolistsSlice'
-import { appActions } from 'store/appSlice/appSlice'
+import { appActions } from 'state/appSlice/appSlice'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { authThunks } from 'entities/authSlice/authSlice'
 import { ApiUpdateTaskModelType, TaskApiType, tasksAPI } from 'features/tasks/api/tasksAPI'
 import {
-	handleNetworkError, handleServerError, RequestStatusType, ResultCodeEnum, TaskPrioritiesEnum,
+	handleNetworkError, handleServerError, RequestEntityStatusType, ResultCodeEnum, TaskPrioritiesEnum,
 	TaskStatusesEnum
 } from '../../../shared'
-import { createAppAsyncThunk } from '../../../store/createAppAsyncThunk'
+import { createAppAsyncThunk } from '../../../state/utils/createAppAsyncThunk'
 
 
 export type UiUpdateTaskModelType = {
@@ -20,7 +20,7 @@ export type UiUpdateTaskModelType = {
 }
 
 export type TaskType = TaskApiType & {
-	entityStatus: RequestStatusType
+	entityStatus: RequestEntityStatusType
 }
 
 export type TasksReducerType = {
@@ -156,7 +156,7 @@ const slice = createSlice({
 		changeTasksEntityStatusAC: (state, action: PayloadAction<{
 			todolistId: string,
 			taskId: string,
-			newStatus: RequestStatusType
+			newStatus: RequestEntityStatusType
 		}>) => {
 			const tasks = state[action.payload.todolistId]
 			const taskIndex = state[action.payload.todolistId].findIndex(tsk => tsk.id === action.payload.taskId)
@@ -208,6 +208,11 @@ const slice = createSlice({
 	}
 })
 
+/**
+ * ⛔ SLICE   импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ ACTIONS импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ THUNKS  импортировать напрямую из файла => если черещ index, то будет ошибка
+ */
 export const tasksSlice = slice.reducer
 export const tasksActions = slice.actions
 export const tasksThunks = { fetchTasksTC, addTaskTC, updateTaskTC, removeTaskTC }

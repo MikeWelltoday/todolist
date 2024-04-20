@@ -1,6 +1,6 @@
 //========================================================================================
 
-import { appActions, appSlice, AppReducerType } from 'store/appSlice/appSlice'
+import { appActions, appSlice, AppReducerType } from 'state/appSlice/appSlice'
 
 let startState: AppReducerType
 

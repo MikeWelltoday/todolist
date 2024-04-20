@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux'
 import { Route, Routes, Navigate } from 'react-router-dom'
 import Container from '@mui/material/Container'
 import CircularProgress from '@mui/material/CircularProgress'
-import { useAppDispatch } from 'store/store'
 import { LoginPage, TodolistsPage } from '../pages'
 import { ErrorSnackbar, HeaderAppBar } from '../widgets'
-import { authThunks } from '../entities'
-import { appInitializationSelector } from '../store'
+import { useAppDispatch } from '../shared'
+import { appInitializationSelector } from '../state/appSlice'
+import { authThunks } from '../entities/authSlice/authSlice'
 
 
 type AppPropsType = {

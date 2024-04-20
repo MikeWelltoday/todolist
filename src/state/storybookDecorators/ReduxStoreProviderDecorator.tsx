@@ -2,12 +2,12 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { thunk } from 'redux-thunk'
 import { configureStore } from '@reduxjs/toolkit'
-import { AppRootStateType } from 'store/store'
-import { tasksSlice } from 'features/tasks/model/tasksSlice'
-import { todolistsSlice } from 'features/todolist/model/todolistsSlice'
-import { appSlice } from 'store/appSlice/appSlice'
-import { authSlice } from 'entities/authSlice/authSlice'
 import { TaskPrioritiesEnum, TaskStatusesEnum } from '../../shared'
+import { AppRootStateType } from '../store/store'
+import { tasksSlice } from '../../features/tasks/model/tasksSlice'
+import { todolistsSlice } from '../../features/todolist/model/todolistsSlice'
+import { appSlice } from '../appSlice/appSlice'
+import { authSlice } from '../../entities/authSlice/authSlice'
 
 const initialGlobalState: AppRootStateType = {
 	todolistsSlice:
@@ -105,10 +105,13 @@ const initialGlobalState: AppRootStateType = {
 	}
 }
 
+/**
+ * ⛔ storyBookStore импортировать напрямую из файла => если черещ index, то будет ошибка
+ */
 export const storyBookStore = configureStore({
 	reducer: {
-		tasksSlice,
 		todolistsSlice,
+		tasksSlice,
 		appSlice,
 		authSlice
 	},

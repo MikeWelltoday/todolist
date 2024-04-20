@@ -1,13 +1,10 @@
 import { tasksThunks } from 'features/tasks/model/tasksSlice'
-
-
-// сраная ошибка
-import { appActions } from 'store/appSlice/appSlice'
+import { appActions } from 'state/appSlice/appSlice'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { handleNetworkError, handleServerError, RequestStatusType, ResultCodeEnum } from '../../../shared'
-import { createAppAsyncThunk } from '../../../store/createAppAsyncThunk'
+import { handleNetworkError, handleServerError, RequestEntityStatusType, ResultCodeEnum } from '../../../shared'
+import { createAppAsyncThunk } from '../../../state/utils/createAppAsyncThunk'
 import { TodolistApiType, todolistsAPI } from '../api/todolistsAPI'
-import { authThunks } from '../../../entities'
+import { authThunks } from '../../../entities/authSlice/authSlice'
 
 
 export type TodolistFilterReducerType = 'all' | 'active' | 'completed'
@@ -15,7 +12,7 @@ export type TodolistFilterReducerType = 'all' | 'active' | 'completed'
 
 export type TodolistReducerType = TodolistApiType & {
 	filter: TodolistFilterReducerType
-	entityStatus: RequestStatusType
+	entityStatus: RequestEntityStatusType
 }
 
 
@@ -154,7 +151,7 @@ const slice = createSlice({
 		},
 		changeTodolistEntityStatus: (state, action: PayloadAction<{
 			todolistId: string,
-			newStatus: RequestStatusType
+			newStatus: RequestEntityStatusType
 		}>) => {
 			const todolist = state.find(t => t.id === action.payload.todolistId)
 			if (todolist) {
@@ -185,6 +182,11 @@ const slice = createSlice({
 	}
 })
 
+/**
+ * ⛔ SLICE   импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ ACTIONS импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ THUNKS  импортировать напрямую из файла => если черещ index, то будет ошибка
+ */
 export const todolistsSlice = slice.reducer
 export const todolistsActions = slice.actions
 export const todolistsThunks = { fetchTodolistsTC, addTodolistTC, removeTodolistTC, updateTodolistTitleTC }

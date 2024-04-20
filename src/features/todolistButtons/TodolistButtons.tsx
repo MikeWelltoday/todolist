@@ -1,8 +1,8 @@
 import React, { FC, memo, useCallback } from 'react'
 import S from './TodolistButtons.module.scss'
 import { TodolistFilterReducerType, todolistsActions } from '../todolist/model/todolistsSlice'
-import { CustomButton } from '../../shared'
-import { useAppDispatch } from '../../store/store'
+import { CustomButton, useAppDispatch } from '../../shared'
+
 
 type TodolistButtonsPropsType = {
 	todolistId: string

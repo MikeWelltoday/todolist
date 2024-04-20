@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { TodolistButtons } from './TodolistButtons'
-import { ReduxStoreProviderDecorator } from '../../store'
+import { ReduxStoreProviderDecorator } from '../../state/storybookDecorators/ReduxStoreProviderDecorator'
 
 
 const meta: Meta<typeof TodolistButtons> = {
