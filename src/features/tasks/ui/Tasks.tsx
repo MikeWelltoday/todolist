@@ -39,6 +39,6 @@ export const Tasks: FC<TasksPropsType> = memo((props) => {
 					)
 				})}
 			</div>
-		) : (<div>NO TASKS</div>)
+		) : (<div>no tasks</div>)
 	)
 })

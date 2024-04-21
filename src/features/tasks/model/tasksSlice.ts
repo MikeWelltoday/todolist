@@ -48,16 +48,14 @@ const slice = createAppSlice({
 			}),
 
 			fetchTasksThunk: creators.asyncThunk<{ tasks: TaskApiType[], todolistId: string },
-				string, { rejectValue: GetTasksApiResponseType }>(
+				string, { rejectValue: null }>(
 				async (todolistId, thunkAPI) => {
-					const res = await tasksAPI.getTasks('123')
-					if (res.data.items.length) {
+					const res = await tasksAPI.getTasks(todolistId)
+					// чтообы даже пустой туулист не летел в ошибки
+					if (res.data.items.length >= 0) {
 						return { tasks: res.data.items, todolistId }
 					} else {
-
-						// поставит конскую todolistID и подшаманить ошибку
-						// return thunkAPI.rejectWithValue(res.data.error)
-						return thunkAPI.rejectWithValue(res.data)
+						return thunkAPI.rejectWithValue(null)
 					}
 				}, {
 					fulfilled: (state, action) => {
