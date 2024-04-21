@@ -13,7 +13,7 @@ import Button from '@mui/material/Button'
 import { useFormik } from 'formik'
 import { AuthLoginResponseType, isLoggedSelector } from '../../entities'
 import { useAppDispatch } from '../../shared'
-import { authThunks } from '../../entities/authSlice/authSlice'
+import { authActions } from '../../entities/authSlice/authSlice'
 
 type FormikErrorType = {
 	email?: string
@@ -51,7 +51,7 @@ export const LoginPage: FC = () => {
 		},
 		onSubmit: (values, { setSubmitting }) => {
 			setSubmitting(true)
-			dispatch(authThunks.authSetLoggedTC({
+			dispatch(authActions.loginThunk({
 				email: values.email,
 				password: values.password,
 				rememberMe: values.rememberMe,

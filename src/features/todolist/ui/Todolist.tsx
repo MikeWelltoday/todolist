@@ -4,14 +4,14 @@ import { TodolistTitle } from '../../todolistTitle/TodolistTitle'
 import { Tasks } from '../../tasks/ui/Tasks'
 import { TodolistButtons } from '../../todolistButtons/TodolistButtons'
 import { AddItemForm, RequestEntityStatusType, useAppDispatch } from '../../../shared'
-import { TodolistFilterReducerType } from '../model/todolistsSlice'
-import { tasksThunks } from '../../tasks/model/tasksSlice'
+import { TodolistFilterType } from '../model/todolistsSlice'
+import { tasksActions } from '../../tasks/model/tasksSlice'
 
 
 type TodolistPropsType = {
 	todolistId: string
 	title: string
-	todolistFilter: TodolistFilterReducerType
+	todolistFilter: TodolistFilterType
 	entityStatus: RequestEntityStatusType
 
 	demo?: boolean
@@ -27,7 +27,7 @@ export const Todolist: FC<TodolistPropsType> = memo((props) => {
 	}, [])
 
 	const addTaskHandler = useCallback(((title: string) => {
-		return dispatch(tasksThunks.addTaskTC({ todolistId: props.todolistId, newTitle: title })).unwrap()
+		return dispatch(tasksActions.addTaskThunk({ todolistId: props.todolistId, newTitle: title })).unwrap()
 	}), [props.todolistId])
 
 	return (

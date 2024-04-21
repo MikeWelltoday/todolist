@@ -1,12 +1,12 @@
 import React, { FC, memo, useCallback } from 'react'
 import S from './TodolistButtons.module.scss'
-import { TodolistFilterReducerType, todolistsActions } from '../todolist/model/todolistsSlice'
+import { TodolistFilterType, todolistsActions } from '../todolist/model/todolistsSlice'
 import { CustomButton, useAppDispatch } from '../../shared'
 
 
 type TodolistButtonsPropsType = {
 	todolistId: string
-	todolistFilter: TodolistFilterReducerType
+	todolistFilter: TodolistFilterType
 }
 
 export const TodolistButtons: FC<TodolistButtonsPropsType> = memo((props) => {
@@ -16,15 +16,15 @@ export const TodolistButtons: FC<TodolistButtonsPropsType> = memo((props) => {
 	const dispatch = useAppDispatch()
 
 	const changeFilterHandlerAll = useCallback(() => {
-		dispatch(todolistsActions.changeTodolistFilter({ todolistId: props.todolistId, filter: 'all' }))
+		dispatch(todolistsActions.changeTodolistFilterAction({ todolistId: props.todolistId, filter: 'all' }))
 	}, [props.todolistId])
 
 	const changeFilterHandlerActive = useCallback(() => {
-		dispatch(todolistsActions.changeTodolistFilter({ todolistId: props.todolistId, filter: 'active' }))
+		dispatch(todolistsActions.changeTodolistFilterAction({ todolistId: props.todolistId, filter: 'active' }))
 	}, [props.todolistId])
 
 	const changeFilterHandlerComplete = useCallback(() => {
-		dispatch(todolistsActions.changeTodolistFilter({ todolistId: props.todolistId, filter: 'completed' }))
+		dispatch(todolistsActions.changeTodolistFilterAction({ todolistId: props.todolistId, filter: 'completed' }))
 	}, [props.todolistId])
 
 	return (

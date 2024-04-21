@@ -10,7 +10,7 @@ import { appActions } from 'state/appSlice/appSlice'
 
 export const handleServerError = (resMessagesArr: string[], dispatch: AppDispatchType, showError: boolean = true) => {
 	if (showError) {
-		dispatch(appActions.setError({ error: resMessagesArr.length ? resMessagesArr[0] : 'Some error occurred' }))
+		dispatch(appActions.setErrorAction({ error: resMessagesArr.length ? resMessagesArr[0] : 'Some error occurred' }))
 	}
 }
 

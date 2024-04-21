@@ -2,14 +2,14 @@ import S from './Tasks.module.scss'
 import React, { FC, memo } from 'react'
 import { useSelector } from 'react-redux'
 import { TaskType } from '../model/tasksSlice'
-import { TodolistFilterReducerType } from '../../todolist/model/todolistsSlice'
+import { TodolistFilterType } from '../../todolist/model/todolistsSlice'
 import { Task } from '../../task/Task'
 import { AppRootStateType } from '../../../state/store/store'
 
 
 type TasksPropsType = {
 	todolistId: string
-	todolistFilter: TodolistFilterReducerType
+	todolistFilter: TodolistFilterType
 }
 
 export const Tasks: FC<TasksPropsType> = memo((props) => {

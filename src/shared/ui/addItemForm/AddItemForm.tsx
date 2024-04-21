@@ -44,12 +44,17 @@ export const AddItemForm: FC<PropsType> = memo((props) => {
 			.catch(() => setError('Error'))
 	}
 
+	function onBlurErrorClearHandler() {
+		setError('')
+	}
+
 	return (
 		<div className={S.addItemForm}>
 			<TextField
 				value={title}
 				onChange={newTitleOnChangeHandler}
 				onKeyUp={addItemOnKeyUPHandler}
+				onBlur={onBlurErrorClearHandler}
 
 				label={error || 'NEW TITLE'}
 				error={!!error}

@@ -12,6 +12,6 @@ export function handleNetworkError(error: unknown, dispatch: AppDispatchType): v
 	} else {
 		errorMessage = JSON.stringify(error)
 	}
-	dispatch(appActions.setError({ error: errorMessage }))
+	dispatch(appActions.setErrorAction({ error: errorMessage }))
 }
 

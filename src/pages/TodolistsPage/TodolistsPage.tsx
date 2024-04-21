@@ -6,7 +6,7 @@ import { Navigate } from 'react-router-dom'
 import { Todolist, todolistsSelector } from '../../features'
 import { AddItemForm, useAppDispatch } from '../../shared'
 import { isLoggedSelector } from '../../entities'
-import { todolistsThunks } from '../../features/todolist/model/todolistsSlice'
+import { todolistsActions } from '../../features/todolist/model/todolistsSlice'
 
 
 type TodolistsListPropsType = {
@@ -22,11 +22,11 @@ export const TodolistsPage: FC<TodolistsListPropsType> = (props) => {
 	useEffect(() => {
 		if (props.demo) return
 		if (!isLogged) return
-		dispatch(todolistsThunks.fetchTodolistsTC())
+		dispatch(todolistsActions.fetchTodolistsThunk())
 	}, [])
 
 	const addTodolist = useCallback((newTodolistTitle: string) => {
-		return dispatch(todolistsThunks.addTodolistTC(newTodolistTitle)).unwrap()
+		return dispatch(todolistsActions.addTodolistThunk(newTodolistTitle)).unwrap()
 	}, [])
 
 	if (!isLogged) return <Navigate to={'/login'} />

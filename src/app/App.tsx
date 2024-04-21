@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import './App.scss'
 import { useSelector } from 'react-redux'
-import { Route, Routes, Navigate } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import Container from '@mui/material/Container'
 import CircularProgress from '@mui/material/CircularProgress'
 import { LoginPage, TodolistsPage } from '../pages'
 import { ErrorSnackbar, HeaderAppBar } from '../widgets'
 import { useAppDispatch } from '../shared'
-import { appInitializationSelector } from '../state/appSlice'
-import { authThunks } from '../entities/authSlice/authSlice'
+import { authActions } from '../entities/authSlice/authSlice'
+import { appInitializationSelector } from '../state'
 
 
 type AppPropsType = {
@@ -22,7 +22,7 @@ function App(props: AppPropsType) {
 
 	useEffect(() => {
 		if (props.demo) return
-		dispatch(authThunks.authIsInitializedTC())
+		dispatch(authActions.initializationThunk())
 	}, [])
 
 	if (!isInitialized) {

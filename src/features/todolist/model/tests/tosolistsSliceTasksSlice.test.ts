@@ -1,11 +1,11 @@
 import { tasksSlice, TasksReducerType } from 'features/tasks/model/tasksSlice'
 import {
-	TodolistReducerType, todolistsSlice, todolistsThunks
+	TodolistUiType, todolistsSlice, todolistsActions
 } from 'features/todolist/model/todolistsSlice'
 
 
 let startStateTasks: TasksReducerType
-let startStateTodolists: TodolistReducerType[]
+let startStateTodolists: TodolistUiType[]
 
 beforeEach(() => {
 	startStateTasks = {}
@@ -14,7 +14,7 @@ beforeEach(() => {
 
 test('addTodolist', () => {
 	const newTodolistFromAPI = { id: 'todolistId3', title: 'todolist from server', addedDate: '', order: 0 }
-	const action = todolistsThunks.addTodolistTC.fulfilled(
+	const action = todolistsActions.addTodolistThunk.fulfilled(
 		{ newTodolistFromAPI },
 		'',
 		newTodolistFromAPI.title

@@ -1,9 +1,6 @@
-import { authSlice, AuthReducerType, authThunks } from 'entities/authSlice/authSlice'
+import { authSlice, AuthSliceType, authActions } from 'entities/authSlice/authSlice'
 
-//========================================================================================
-
-
-let startState: AuthReducerType
+let startState: AuthSliceType
 
 beforeEach(() => {
 	startState = {
@@ -12,7 +9,7 @@ beforeEach(() => {
 })
 
 test('setIsLogged with authSetLoggedTC', () => {
-	const action = authThunks.authSetLoggedTC.fulfilled(
+	const action = authActions.loginThunk.fulfilled(
 		undefined,
 		'',
 		{ email: '', password: '', rememberMe: true, captcha: true }
@@ -22,7 +19,7 @@ test('setIsLogged with authSetLoggedTC', () => {
 })
 
 test('setIsLogged with authIsInitializedTC', () => {
-	const action = authThunks.authIsInitializedTC.fulfilled(
+	const action = authActions.initializationThunk.fulfilled(
 		undefined,
 		'',
 		undefined
@@ -35,7 +32,7 @@ test('setIsLogged with authLogoutTC', () => {
 	startState = {
 		isLogged: true
 	}
-	const action = authThunks.authLogoutTC.fulfilled(
+	const action = authActions.logoutThunk.fulfilled(
 		undefined,
 		'',
 		undefined

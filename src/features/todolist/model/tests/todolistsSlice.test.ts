@@ -1,13 +1,10 @@
 import {
-	TodolistFilterReducerType,
-	TodolistReducerType, todolistsActions,
-	todolistsSlice,
-	todolistsThunks
+	TodolistFilterType, TodolistUiType, todolistsActions, todolistsSlice
 } from 'features/todolist/model/todolistsSlice'
 import { TodolistApiType } from '../../api/todolistsAPI'
 
 
-let startState: TodolistReducerType[]
+let startState: TodolistUiType[]
 
 beforeEach(() => {
 	startState = [
@@ -16,8 +13,8 @@ beforeEach(() => {
 	]
 })
 
-test('removeTodolist', () => {
-	const action = todolistsThunks.removeTodolistTC.fulfilled(
+test('removeTodolistThunk', () => {
+	const action = todolistsActions.removeTodolistThunk.fulfilled(
 		{ todolistId: 'todolistId2' },
 		'',
 		'todolistId2'
@@ -27,9 +24,9 @@ test('removeTodolist', () => {
 	expect(endState[0].id).toBe('todolistId1')
 })
 
-test('addTodolist', () => {
+test('addTodolistThunk', () => {
 	const newTodolistFromAPI = { id: 'todolistId3', title: 'todolist from server', addedDate: '', order: 0 }
-	const action = todolistsThunks.addTodolistTC.fulfilled(
+	const action = todolistsActions.addTodolistThunk.fulfilled(
 		{ newTodolistFromAPI },
 		'',
 		newTodolistFromAPI.title
@@ -43,10 +40,10 @@ test('addTodolist', () => {
 	expect(keys.length).toBe(6)
 })
 
-test('changeTodolistTitle', () => {
+test('updateTodolistTitleThunk', () => {
 	const changedTodolistTitle = 'New Todolist'
-	const action = todolistsThunks.updateTodolistTitleTC.fulfilled(
-		{ todolistId: 'todolistId2', title: changedTodolistTitle },
+	const action = todolistsActions.updateTodolistTitleThunk.fulfilled(
+		{ todolistId: 'todolistId2', newTitle: changedTodolistTitle },
 		'',
 		{ todolistId: 'todolistId2', newTitle: changedTodolistTitle }
 	)
@@ -55,19 +52,19 @@ test('changeTodolistTitle', () => {
 	expect(endState[1].title).toBe(changedTodolistTitle)
 })
 
-test('changeTodolistFilter', () => {
-	const newFilter: TodolistFilterReducerType = 'completed'
+test('changeTodolistFilterAction', () => {
+	const newFilter: TodolistFilterType = 'completed'
 	const endState = todolistsSlice(startState,
-		todolistsActions.changeTodolistFilter({ todolistId: 'todolistId2', filter: newFilter }))
+		todolistsActions.changeTodolistFilterAction({ todolistId: 'todolistId2', filter: newFilter }))
 	expect(endState[0].filter).toBe('all')
 	expect(endState[1].filter).toBe(newFilter)
 })
 
-test('setTodolists', () => {
+test('fetchTodolistsThunk', () => {
 	const newTodolists: TodolistApiType[] = [
 		{ id: 'todolistId3', title: 'new todolists', addedDate: '', order: 0 }
 	]
-	const action = todolistsThunks.fetchTodolistsTC.fulfilled(
+	const action = todolistsActions.fetchTodolistsThunk.fulfilled(
 		{ todolistsFromAPI: newTodolists },
 		'',
 		undefined
@@ -82,10 +79,10 @@ test('setTodolists', () => {
 	expect(keys.length).toBe(6)
 })
 
-test('changeTodolistEntityStatus', () => {
+test('changeTodolistEntityStatusAction', () => {
 	const newEntityStatus = 'loading'
 	const endState = todolistsSlice(startState,
-		todolistsActions.changeTodolistEntityStatus({ todolistId: 'todolistId2', newStatus: newEntityStatus }))
+		todolistsActions.changeTodolistEntityStatusAction({ todolistId: 'todolistId2', newStatus: newEntityStatus }))
 	expect(endState[0].entityStatus).toBe('idle')
 	expect(endState[1].entityStatus).toBe(newEntityStatus)
 })

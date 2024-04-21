@@ -4,7 +4,7 @@ import Checkbox from '@mui/material/Checkbox'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { EditableSpan, RequestEntityStatusType, TaskStatusesEnum, useAppDispatch } from '../../shared'
-import { tasksThunks } from '../tasks/model/tasksSlice'
+import { tasksActions } from '../tasks/model/tasksSlice'
 
 
 type PropsType = {
@@ -22,23 +22,19 @@ export const Task: FC<PropsType> = memo((props) => {
 	const isDisabled = props.entityStatus === 'loading'
 
 	const removeTaskOnClickHandler = () => {
-		dispatch(tasksThunks.removeTaskTC({ todolistId: props.todolistId, taskId: props.taskId }))
+		dispatch(tasksActions.removeTaskThunk({ todolistId: props.todolistId, taskId: props.taskId }))
 	}
 
 	const changeTaskStatusOnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
 		const status: TaskStatusesEnum = event.currentTarget.checked ? TaskStatusesEnum.Completed : TaskStatusesEnum.New
-		dispatch(tasksThunks.updateTaskTC({
-			todolistId: props.todolistId,
-			taskId: props.taskId,
-			taskUpdateModel: { status }
+		dispatch(tasksActions.updateTaskThunk({
+			todolistId: props.todolistId, taskId: props.taskId, taskToUpdateModel: { status }
 		}))
 	}
 
 	const changeTaskTitleOnChangeHandler = useCallback((newTitle: string) => {
-		dispatch(tasksThunks.updateTaskTC({
-			todolistId: props.todolistId,
-			taskId: props.taskId,
-			taskUpdateModel: { title: newTitle }
+		dispatch(tasksActions.updateTaskThunk({
+			todolistId: props.todolistId, taskId: props.taskId, taskToUpdateModel: { title: newTitle }
 		}))
 	}, [props.todolistId, props.taskId])
 

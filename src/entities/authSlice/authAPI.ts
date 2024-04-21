@@ -1,16 +1,17 @@
 import { instance } from '../../shared'
 
+// for API requests
 type LoginResponseType = {
 	userId: number
 }
 
-type MeResponseType = {
+export type MeResponseType = {
 	id: number
 	email: string
 	login: string
 }
 
-type AuthResponseType<D = {}> = {
+export type AuthResponseType<D = {}> = {
 	resultCode: number
 	messages: string[]
 	data: D

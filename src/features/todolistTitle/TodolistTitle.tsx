@@ -2,8 +2,8 @@ import React, { FC, memo, useCallback } from 'react'
 import S from './TodolisTitle.module.scss'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { todolistsThunks } from '../todolist/model/todolistsSlice'
 import { EditableSpan, RequestEntityStatusType, useAppDispatch } from '../../shared'
+import { todolistsActions } from '../todolist/model/todolistsSlice'
 
 
 type TodolistTitlePropsType = {
@@ -18,11 +18,11 @@ export const TodolistTitle: FC<TodolistTitlePropsType> = memo((props) => {
 	const dispatch = useAppDispatch()
 
 	const removeTodolistCallBack = () => {
-		dispatch(todolistsThunks.removeTodolistTC(props.todolistId))
+		dispatch(todolistsActions.removeTodolistThunk(props.todolistId))
 	}
 
 	const changeTodolistTitleCallBack = useCallback(((newTitle: string) => {
-		dispatch(todolistsThunks.updateTodolistTitleTC({ todolistId: props.todolistId, newTitle }))
+		dispatch(todolistsActions.updateTodolistTitleThunk({ todolistId: props.todolistId, newTitle }))
 	}), [props.todolistId])
 
 

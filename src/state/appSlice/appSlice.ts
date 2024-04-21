@@ -1,7 +1,8 @@
-import { createSlice, isFulfilled, isPending, isRejected, PayloadAction } from '@reduxjs/toolkit'
-import { tasksThunks } from '../../features/tasks/model/tasksSlice'
-import { todolistsThunks } from '../../features/todolist/model/todolistsSlice'
-import { authThunks } from '../../entities/authSlice/authSlice'
+import { isFulfilled, isPending, isRejected, PayloadAction } from '@reduxjs/toolkit'
+import { tasksActions } from '../../features/tasks/model/tasksSlice'
+import { todolistsActions } from '../../features/todolist/model/todolistsSlice'
+import { authActions } from '../../entities/authSlice/authSlice'
+import { createAppSlice } from '../utils/createAppSlice'
 
 
 export type AppErrorType = string | null
@@ -19,46 +20,70 @@ const initialState: AppReducerType = {
 	isAppInitialized: false
 }
 
-const slice = createSlice({
-	name: 'appReducer',
+const slice = createAppSlice({
+	name: 'appSlice',
 	initialState,
-	reducers: {
-		setStatus: (state, action: PayloadAction<{ status: StatusType }>) => {
-			state.status = action.payload.status
-		},
-		setError: (state, action: PayloadAction<{ error: AppErrorType }>) => {
-			state.error = action.payload.error
-		},
-		setAppIsInitialized: (state, action: PayloadAction<{ isAppInitialized: boolean }>) => {
-			state.isAppInitialized = action.payload.isAppInitialized
-		}
-	},
-	extraReducers: builder => {
-		builder
-			.addMatcher(isPending, state => {
-				state.status = 'loading'
-			})
-			.addMatcher(isFulfilled, state => {
-				state.status = 'idle'
+	reducers: (creators) => {
+		return {
+
+			setStatusAction: creators.reducer((state, action: PayloadAction<{ status: StatusType }>) => {
+				state.status = action.payload.status
+			}),
+
+			setErrorAction: creators.reducer((state, action: PayloadAction<{ error: AppErrorType }>) => {
+				state.error = action.payload.error
+			}),
+
+			setInitializationAction: creators.reducer((state, action: PayloadAction<{ isAppInitialized: boolean }>) => {
+				state.isAppInitialized = action.payload.isAppInitialized
 			})
 
+		}
+	},
+
+	extraReducers: builder => {
+		builder
+			.addMatcher(isPending, (state, action: any) => {
+				if (action.type === authActions.initializationThunk.pending.type) {
+					return
+				}
+				state.status = 'loading'
+			})
+			.addMatcher(isFulfilled, (state, action: any) => {
+				if (action.type === authActions.initializationThunk.pending.type) {
+					return
+				}
+				state.status = 'idle'
+			})
 			.addMatcher(isRejected, (state, action: any) => {
 					state.status = 'idle'
 					if (action.payload && action.payload.messages) {
 						console.log('🟡 SERVER => ', action)
-						if (action.type === todolistsThunks.addTodolistTC.rejected.type ||
-							action.type === tasksThunks.addTaskTC.rejected.type ||
-							action.type === authThunks.authIsInitializedTC.rejected.type ||
-							action.type === authThunks.authSetLoggedTC.rejected.type) {
+						if (action.type === todolistsActions.addTodolistThunk.rejected.type ||
+							action.type === tasksActions.addTaskThunk.rejected.type ||
+							action.type === authActions.initializationThunk.rejected.type ||
+							action.type === authActions.loginThunk.rejected.type) {
 							return
 						}
-						state.error = action.payload.messages[0] || 'Server Error'
 
+						// todolistsActions.fetchTodolistsThunk ответа от сервера нет ошибки
+						if (action.type === todolistsActions.fetchTodolistsThunk.rejected.type) {
+							state.error = 'to fetch todolists attempt is failed'
+							return
+						}
+
+						if (action.type === tasksActions.fetchTasksThunk.rejected.type) {
+							state.error = 'to fetch tasks attempt is failed'
+							return
+						}
+
+						// action.payload.error для fetchTasksThunk
+						state.error = action.payload.messages[0] || action.payload.error || 'Server Error'
 					} else {
 						console.log('🔴 NETWORK => ', action)
+
 						state.error = action.error.message ? action.error.message : 'Network Error'
 					}
-
 				}
 			)
 	}

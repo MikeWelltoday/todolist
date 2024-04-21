@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux'
 import { Loader } from './loader/Loader'
 import { isLoggedSelector } from '../../entities'
 import { useAppDispatch } from '../../shared'
-import { authThunks } from '../../entities/authSlice/authSlice'
+import { authActions } from '../../entities/authSlice/authSlice'
 
 export const HeaderAppBar = () => {
 
@@ -18,7 +18,7 @@ export const HeaderAppBar = () => {
 	const isLogged = useSelector(isLoggedSelector)
 
 	function logoutOnClickHandler() {
-		dispatch(authThunks.authLogoutTC())
+		dispatch(authActions.logoutThunk())
 	}
 
 	return (

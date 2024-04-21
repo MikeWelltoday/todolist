@@ -15,19 +15,19 @@ export type TaskApiType = {
 	deadline: string
 }
 
-type GetTasksApiResponseType = {
+export type GetTasksApiResponseType = {
 	items: TaskApiType[]
 	totalCount: number
 	error: string
 }
 
-type TasksAxiosResponseType<D = { item: TaskApiType }> = {
+export type TasksAxiosResponseType<D = { item: TaskApiType }> = {
 	resultCode: number
 	messages: string[]
 	data: D
 }
 
-export type ApiUpdateTaskModelType = {
+export type ApiUpdatedTaskModelType = {
 	title: string
 	description: string
 	status: TaskStatusesEnum
@@ -51,7 +51,7 @@ export const tasksAPI = {
 		return instance.delete<TasksAxiosResponseType<{}>>(`todo-lists/${todolistId}/tasks/${tasksId}`)
 	},
 
-	updateTask(todolistId: string, tasksId: string, model: ApiUpdateTaskModelType) {
+	updateTask(todolistId: string, tasksId: string, model: ApiUpdatedTaskModelType) {
 		return instance.put<TasksAxiosResponseType>(`todo-lists/${todolistId}/tasks/${tasksId}`, model)
 	}
 }

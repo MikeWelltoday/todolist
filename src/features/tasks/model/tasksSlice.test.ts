@@ -1,7 +1,7 @@
-import { tasksActions, tasksSlice, TasksReducerType, tasksThunks } from './tasksSlice'
-import { todolistsThunks } from 'features/todolist/model/todolistsSlice'
+import { tasksActions, tasksSlice, TasksReducerType } from './tasksSlice'
 import { TodolistApiType } from 'features/todolist/api/todolistsAPI'
 import { TaskPrioritiesEnum, TaskStatusesEnum } from 'shared'
+import { todolistsActions } from '../../todolist/model/todolistsSlice'
 
 let startState: TasksReducerType
 beforeEach(() => {
@@ -70,8 +70,8 @@ beforeEach(() => {
 	}
 })
 
-test('removeTask', () => {
-	const action = tasksThunks.removeTaskTC.fulfilled(
+test('removeTaskThunk', () => {
+	const action = tasksActions.removeTaskThunk.fulfilled(
 		{ todolistId: 'todolistId2', taskId: '2' },
 		'metaData',
 		{ todolistId: 'todolistId2', taskId: '2' }
@@ -83,7 +83,7 @@ test('removeTask', () => {
 })
 
 
-test('addTask', () => {
+test('addTaskThunk', () => {
 	const newTaskFromAPI = {
 		todoListId: 'todolistId2',
 		id: '2lwjk-1-dcjk1',
@@ -98,7 +98,7 @@ test('addTask', () => {
 		deadline: ''
 	}
 
-	const action = tasksThunks.addTaskTC.fulfilled(
+	const action = tasksActions.addTaskThunk.fulfilled(
 		{ newTaskFromAPI },
 		'metaData',
 		{ todolistId: newTaskFromAPI.todoListId, newTitle: newTaskFromAPI.title }
@@ -116,14 +116,14 @@ test('addTask', () => {
 })
 
 
-test('updateTask', () => {
+test('updateTaskThunk', () => {
 	const newTitle = 'MEAT'
 	const newStatus = TaskStatusesEnum.New
 	const updatedTask = { ...startState['todolistId2'][1], title: newTitle, status: newStatus }
-	const action = tasksThunks.updateTaskTC.fulfilled(
-		{ todolistId: 'todolistId2', taskId: '2', taskUpdateModel: updatedTask },
+	const action = tasksActions.updateTaskThunk.fulfilled(
+		{ todolistId: 'todolistId2', taskId: '2', taskUpdatedModel: updatedTask },
 		'metaData',
-		{ todolistId: 'todolistId2', taskId: '2', taskUpdateModel: { title: newTitle, status: newStatus } }
+		{ todolistId: 'todolistId2', taskId: '2', taskToUpdateModel: { title: newTitle, status: newStatus } }
 	)
 	const endState = tasksSlice(startState, action)
 	expect(endState['todolistId1'][1].title).toBe('Redux')
@@ -133,9 +133,9 @@ test('updateTask', () => {
 })
 
 
-test('addTodolist', () => {
+test('addTodolistThunk', () => {
 	const newTodolistFromAPI = { id: 'todolistId3', title: 'todolist from server', addedDate: '', order: 0 }
-	const action = todolistsThunks.addTodolistTC.fulfilled(
+	const action = todolistsActions.addTodolistThunk.fulfilled(
 		{ newTodolistFromAPI },
 		'',
 		newTodolistFromAPI.title
@@ -149,8 +149,8 @@ test('addTodolist', () => {
 })
 
 
-test('removeTodolist', () => {
-	const action = todolistsThunks.removeTodolistTC.fulfilled(
+test('removeTodolistThunk', () => {
+	const action = todolistsActions.removeTodolistThunk.fulfilled(
 		{ todolistId: 'todolistId2' },
 		'',
 		'todolistId2'
@@ -162,14 +162,14 @@ test('removeTodolist', () => {
 })
 
 
-test('setTodolists', () => {
+test('fetchTodolistsThunk', () => {
 	const todolistsFromAPI: TodolistApiType[] =
 		[
 			{ id: 'todolistId3', title: 'new todolists 3', addedDate: '', order: 0 },
 			{ id: 'todolistId4', title: 'new todolists 4', addedDate: '', order: 0 },
 			{ id: 'todolistId5', title: 'new todolists 5', addedDate: '', order: 0 }
 		]
-	const action = todolistsThunks.fetchTodolistsTC.fulfilled(
+	const action = todolistsActions.fetchTodolistsThunk.fulfilled(
 		{ todolistsFromAPI },
 		'',
 		undefined
@@ -182,8 +182,8 @@ test('setTodolists', () => {
 	expect(endState['todolistId5']).toEqual([])
 })
 
-test('changeTasksEntityStatusAC', () => {
-	const endState = tasksSlice(startState, tasksActions.changeTasksEntityStatusAC({
+test('changeTasksEntityStatusAction', () => {
+	const endState = tasksSlice(startState, tasksActions.changeTasksEntityStatusAction({
 		todolistId: 'todolistId2',
 		taskId: '2',
 		newStatus: 'loading'
@@ -194,7 +194,7 @@ test('changeTasksEntityStatusAC', () => {
 	expect(endState['todolistId2'][1].entityStatus).toBe('loading')
 })
 
-test('setTasks', () => {
+test('fetchTasksThunk', () => {
 	const todolistID = 'todolistId1'
 	const tasksFromAPI = [
 		{
@@ -225,7 +225,7 @@ test('setTasks', () => {
 		}
 	]
 
-	const action = tasksThunks.fetchTasksTC.fulfilled(
+	const action = tasksActions.fetchTasksThunk.fulfilled(
 		{ tasks: tasksFromAPI, todolistId: todolistID },
 		'metaData',
 		todolistID

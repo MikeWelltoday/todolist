@@ -12,7 +12,7 @@ type FieldErrorType = {
 	field: string
 }
 
-type TodolistsApiResponseType<D = {}> = {
+export type TodolistsApiResponseType<D = {}> = {
 	resultCode: number
 	messages: string[]
 	fieldsErrors: FieldErrorType[]

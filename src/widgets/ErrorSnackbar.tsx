@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import Alert from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
 import { useAppDispatch } from '../shared'
-import { appErrorSelector } from '../state/appSlice'
 import { appActions } from '../state/appSlice/appSlice'
+import { appErrorSelector } from '../state'
 
 export const ErrorSnackbar = () => {
 
@@ -29,7 +29,7 @@ export const ErrorSnackbar = () => {
 	}
 
 	const handleExited = () => {
-		dispatch(appActions.setError({ error: null }))
+		dispatch(appActions.setErrorAction({ error: null }))
 	}
 
 	return (
