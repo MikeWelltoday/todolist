@@ -10,8 +10,9 @@ export type AppRootStateType = ReturnType<typeof store.getState>
 export type AppDispatchType = typeof store.dispatch
 
 /**
- * ⛔ STORE импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ STORE импортировать напрямую из файла => если через index, то будет ошибка
  */
+
 export const store = configureStore({
 	reducer:
 		{
@@ -26,4 +27,3 @@ export const store = configureStore({
 
 // @ts-ignore
 window.store = store
-

@@ -108,7 +108,7 @@ const initialGlobalState: AppRootStateType = {
 /**
  * ⛔ storyBookStore импортировать напрямую из файла => если черещ index, то будет ошибка
  */
-export const storyBookStore = configureStore({
+const storyBookStore = configureStore({
 	reducer: {
 		todolistsSlice,
 		tasksSlice,
