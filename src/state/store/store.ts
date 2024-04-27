@@ -1,13 +1,16 @@
 import { thunk } from 'redux-thunk'
 import { configureStore } from '@reduxjs/toolkit'
 import { authSlice } from 'entities/authSlice/authSlice'
-import { tasksSlice } from '../../features/tasks/model/tasksSlice'
-import { todolistsSlice } from '../../features/todolist/model/todolistsSlice'
+import { tasksSlice } from 'features/tasks/model/tasksSlice'
+import { todolistsSlice } from 'features/todolist/model/todolistsSlice'
 import { appSlice } from '../appSlice/appSlice'
 
+//========================================================================================
 
 export type AppRootStateType = ReturnType<typeof store.getState>
 export type AppDispatchType = typeof store.dispatch
+
+//========================================================================================
 
 /**
  * ⛔ STORE импортировать напрямую из файла => если через index, то будет ошибка
@@ -20,8 +23,10 @@ export const store = configureStore({
 			tasksSlice,
 			appSlice,
 			authSlice
-		},
-	middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(thunk)
+		}
+
+	// не нужно исопльзовать, в RTK уже идет это под копотом
+	// middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(thunk)
 })
 
 

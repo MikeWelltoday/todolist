@@ -3,11 +3,12 @@ import S from 'features/task/Task.module.scss'
 import Checkbox from '@mui/material/Checkbox'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { EditableSpan, RequestEntityStatusType, TaskStatusesEnum, useAppDispatch } from '../../shared'
+import { EditableSpan, RequestEntityStatusType, TaskStatusesEnum, useAppDispatch } from 'shared'
 import { tasksActions } from '../tasks/model/tasksSlice'
 
+//========================================================================================
 
-type PropsType = {
+type TaskPropsType = {
 	todolistId: string
 	taskId: string
 	title: string
@@ -15,8 +16,10 @@ type PropsType = {
 	entityStatus: RequestEntityStatusType
 }
 
+//========================================================================================
 
-export const Task: FC<PropsType> = memo((props) => {
+
+export const Task: FC<TaskPropsType> = memo((props) => {
 
 	const dispatch = useAppDispatch()
 	const isDisabled = props.entityStatus === 'loading'

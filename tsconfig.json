@@ -2,6 +2,7 @@
   "compilerOptions": {
     "preserveConstEnums": true,
     "baseUrl": "src",
+    // "baseUrl": "src" стартавая папка для всех импортов
     "target": "es5",
     "lib": [
       "dom",
