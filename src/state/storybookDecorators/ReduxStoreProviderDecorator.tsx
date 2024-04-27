@@ -101,7 +101,8 @@ const initialGlobalState: AppRootStateType = {
 		isAppInitialized: true
 	},
 	authSlice: {
-		isLogged: true
+		isLogged: true,
+		captchaUrl: null
 	}
 }
 

@@ -11,26 +11,33 @@ import FormLabel from '@mui/material/FormLabel'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { useFormik } from 'formik'
-import { AuthLoginResponseType, isLoggedSelector } from '../../entities'
+import { AuthLoginResponseType, captchaSelector, isLoggedSelector } from '../../entities'
 import { useAppDispatch } from '../../shared'
 import { authActions } from '../../entities/authSlice/authSlice'
+
+//========================================================================================
 
 type FormikErrorType = {
 	email?: string
 	password?: string
 	rememberMe?: boolean
+	captcha?: string
 }
+
+//========================================================================================
 
 export const LoginPage: FC = () => {
 
 	const dispatch = useAppDispatch()
 	const isLogged = useSelector(isLoggedSelector)
+	const captcha = useSelector(captchaSelector)
 
 	const formik = useFormik({
 		initialValues: {
 			email: '',
 			password: '',
-			rememberMe: false
+			rememberMe: false,
+			captcha: ''
 		},
 		validate: values => {
 			const errors: FormikErrorType = {}
@@ -51,11 +58,15 @@ export const LoginPage: FC = () => {
 		},
 		onSubmit: (values, { setSubmitting }) => {
 			setSubmitting(true)
+
+			// если обычная логинизация без каптчи, то просто отправим пустую строку
+			// там в API запроссе она преобразуется к boolean
+
 			dispatch(authActions.loginThunk({
 				email: values.email,
 				password: values.password,
 				rememberMe: values.rememberMe,
-				captcha: true
+				captcha: values.captcha
 			}))
 				.unwrap()
 				.catch((data: AuthLoginResponseType) => {
@@ -81,6 +92,7 @@ export const LoginPage: FC = () => {
 
 	const emailError = formik.touched.email && formik.errors.email
 	const passwordError = formik.touched.password && formik.errors.password
+	const captchaError = formik.errors.captcha
 	const isError = emailError || passwordError
 
 	if (isLogged) return <Navigate to={'/'} />
@@ -148,6 +160,23 @@ export const LoginPage: FC = () => {
 							</Button>
 
 
+							{/*{ помещаем ошибку captcha в field }*/}
+							{captchaError &&
+								<div className={`${S.error} ${S.captchaError}`}>{formik.errors.captcha}</div>}
+							{/*{ отобразим саму картинку captcha }*/}
+							{captcha &&
+								<>
+									<img className={S.captchaImg} src={captcha} alt={'captcha'} />
+
+									<TextField
+										label='Captcha'
+										margin='normal'
+										color={'secondary'}
+										disabled={formik.isSubmitting}
+										{...formik.getFieldProps('captcha')}
+									/>
+								</>
+							}
 						</FormGroup>
 					</FormControl>
 

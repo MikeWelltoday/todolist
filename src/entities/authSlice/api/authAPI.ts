@@ -1,4 +1,4 @@
-import { instance } from '../../shared'
+import { instance } from '../../../shared'
 
 // for API requests
 type LoginResponseType = {
@@ -24,12 +24,13 @@ export type AuthLoginResponseType = AuthResponseType<LoginResponseType> & {
 
 export const authAPI = {
 
-	login(email: string, password: string, rememberMe: boolean, captcha: boolean) {
+	login(email: string, password: string, rememberMe: boolean, captcha: string) {
 		return instance.post<AuthLoginResponseType>('auth/login', {
 			email,
 			password,
 			rememberMe,
-			captcha
+			// если указали каптчу, то отправим ее, или просто true если в captcha пришла пустая строка
+			captcha: captcha || true
 		})
 	},
 
