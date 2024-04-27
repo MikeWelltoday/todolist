@@ -5,10 +5,8 @@
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
-  column-gap: 10px;
 
-  span {
-    display: inline-block;
+  & div {
     flex-grow: 1;
   }
 

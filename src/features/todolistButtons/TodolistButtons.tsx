@@ -11,8 +11,6 @@ type TodolistButtonsPropsType = {
 
 export const TodolistButtons: FC<TodolistButtonsPropsType> = memo((props) => {
 
-	// console.log('🟣🟣🟣 => TodolistButtons')
-
 	const dispatch = useAppDispatch()
 
 	const changeFilterHandlerAll = useCallback(() => {

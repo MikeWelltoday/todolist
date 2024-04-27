@@ -42,18 +42,21 @@ export const Task: FC<PropsType> = memo((props) => {
 	return (
 		<div className={`${S.task} ${props.status && S.isDone}`}>
 
-			<Checkbox
-				checked={!!props.status}
-				onChange={changeTaskStatusOnChangeHandler}
-				color='secondary'
-				disabled={isDisabled}
-			/>
+			<div>
 
-			<EditableSpan
-				title={props.title}
-				onChangeTitle={changeTaskTitleOnChangeHandler}
-				entityStatus={props.entityStatus}
-			/>
+				<Checkbox
+					checked={!!props.status}
+					onChange={changeTaskStatusOnChangeHandler}
+					disabled={isDisabled}
+				/>
+
+				<EditableSpan
+					title={props.title}
+					onChangeTitle={changeTaskTitleOnChangeHandler}
+					entityStatus={props.entityStatus}
+				/>
+
+			</div>
 
 			<IconButton onClick={removeTaskOnClickHandler} disabled={isDisabled}>
 				<DeleteIcon />

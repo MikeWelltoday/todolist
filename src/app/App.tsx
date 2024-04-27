@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.scss'
 import { useSelector } from 'react-redux'
 import { Navigate, Route, Routes } from 'react-router-dom'
@@ -9,14 +9,39 @@ import { ErrorSnackbar, HeaderAppBar } from '../widgets'
 import { useAppDispatch } from '../shared'
 import { authActions } from '../entities/authSlice/authSlice'
 import { appInitializationSelector } from '../state'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import CssBaseline from '@mui/material/CssBaseline'
 
+//========================================================================================
 
 type AppPropsType = {
 	demo: boolean
 }
 
+type ThemeMode = 'dark' | 'light'
+
+//========================================================================================
+
 function App(props: AppPropsType) {
 
+// логи стилизации
+	const [themeMode, setThemeMode] = useState<ThemeMode>('light')
+
+	const theme = createTheme({
+		palette: {
+			mode: themeMode === 'light' ? 'light' : 'dark',
+			primary: {
+				main: '#087EA4'
+			}
+		}
+	}) // общрая тема для всех компонетнов
+
+	// отправляем cb-fnc в AppBar так как там будет кнопка переключения темы
+	const changeModeHandler = () => {
+		setThemeMode(themeMode === 'light' ? 'dark' : 'light')
+	}
+
+//========================================================================================
 	const dispatch = useAppDispatch()
 	const isInitialized = useSelector(appInitializationSelector)
 
@@ -34,23 +59,28 @@ function App(props: AppPropsType) {
 	}
 
 	return (
-		<div className='App'>
+		<ThemeProvider theme={theme}>
+			<CssBaseline />
 
-			<ErrorSnackbar />
+			<div className='App'>
 
-			<HeaderAppBar />
+				<ErrorSnackbar />
 
-			<Container fixed>
-				<Routes>
-					<Route path={'/'} element={<TodolistsPage demo={props.demo} />} />
-					<Route path={'/login'} element={<LoginPage />} />
+				<HeaderAppBar changeModeHandler={changeModeHandler} />
 
-					<Route path={'/404'} element={<h1>404: PAGE NOT FOUND</h1>} />
-					<Route path={'*'} element={<Navigate to={'/404'} />} />
-				</Routes>
-			</Container>
+				<Container fixed>
+					<Routes>
+						<Route path={'/'} element={<TodolistsPage demo={props.demo} />} />
+						<Route path={'/login'} element={<LoginPage />} />
 
-		</div>
+						<Route path={'/404'} element={<h1>404: PAGE NOT FOUND</h1>} />
+						<Route path={'*'} element={<Navigate to={'/404'} />} />
+					</Routes>
+				</Container>
+
+			</div>
+
+		</ThemeProvider>
 	)
 }
 

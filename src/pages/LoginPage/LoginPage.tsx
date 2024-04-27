@@ -104,13 +104,7 @@ export const LoginPage: FC = () => {
 
 					<FormControl>
 						<FormLabel>
-							<p>
-								To log in get registered
-								<a href={'https://social-network.samuraijs.com/'} target={'_blank'}>
-									here
-								</a>
-							</p>
-							<p>or use common test account credentials:</p>
+							<p>use common test account credentials:</p>
 							<p>Email: free@samuraijs.com</p>
 							<p>Password: free</p>
 						</FormLabel>
@@ -119,7 +113,6 @@ export const LoginPage: FC = () => {
 							<TextField
 								label='Email'
 								margin='normal'
-								color={'success'}
 								error={!!emailError}
 								disabled={formik.isSubmitting}
 								{...formik.getFieldProps('email')}
@@ -130,7 +123,6 @@ export const LoginPage: FC = () => {
 								type='password'
 								label='Password'
 								margin='normal'
-								color={'success'}
 								disabled={formik.isSubmitting}
 								error={!!passwordError}
 								{...formik.getFieldProps('password')}
@@ -141,7 +133,6 @@ export const LoginPage: FC = () => {
 								label={'Remember me'}
 								control={
 									<Checkbox
-										color={'success'}
 										name='remember me'
 										onChange={formik.handleChange}
 										value={formik.values.rememberMe}
@@ -153,7 +144,6 @@ export const LoginPage: FC = () => {
 							<Button
 								type={'submit'}
 								variant={'contained'}
-								color={'success'}
 								disabled={formik.isSubmitting || !!isError}
 							>
 								Login
@@ -171,7 +161,6 @@ export const LoginPage: FC = () => {
 									<TextField
 										label='Captcha'
 										margin='normal'
-										color={'secondary'}
 										disabled={formik.isSubmitting}
 										{...formik.getFieldProps('captcha')}
 									/>

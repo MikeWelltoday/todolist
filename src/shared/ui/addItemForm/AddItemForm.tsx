@@ -2,7 +2,7 @@ import React, { FC, useState, memo } from 'react'
 import S from 'shared/ui/addItemForm/AddItemForm.module.scss'
 import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
+import AddBoxIcon from '@mui/icons-material/AddBox'
 import { RequestEntityStatusType } from '../../types/commonTypes'
 
 
@@ -62,7 +62,7 @@ export const AddItemForm: FC<PropsType> = memo((props) => {
 			/>
 
 			<IconButton onClick={addItemOnClickHandler} color={'primary'} disabled={isDisabled}>
-				<AddCircleOutlineIcon />
+				<AddBoxIcon />
 			</IconButton>
 
 		</div>

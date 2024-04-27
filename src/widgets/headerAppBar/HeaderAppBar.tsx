@@ -1,18 +1,24 @@
-import React from 'react'
+import React, { FC } from 'react'
 import Box from '@mui/material/Box'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import { useSelector } from 'react-redux'
 import { Loader } from './loader/Loader'
 import { isLoggedSelector } from '../../entities'
-import { useAppDispatch } from '../../shared'
+import { useAppDispatch, MenuButton } from '../../shared'
 import { authActions } from '../../entities/authSlice/authSlice'
+import Switch from '@mui/material/Switch'
 
-export const HeaderAppBar = () => {
+//========================================================================================
+
+type HedaerAppBarPropsType = {
+	changeModeHandler: () => void
+}
+
+export const HeaderAppBar: FC<HedaerAppBarPropsType> = (props) => {
 
 	const dispatch = useAppDispatch()
 	const isLogged = useSelector(isLoggedSelector)
@@ -23,7 +29,7 @@ export const HeaderAppBar = () => {
 
 	return (
 		<Box sx={{ flexGrow: 1 }}>
-			<AppBar position='static' color={'success'}>
+			<AppBar position='static' sx={{ mb: '20px' }}>
 				<Toolbar>
 
 					<IconButton
@@ -40,7 +46,9 @@ export const HeaderAppBar = () => {
 						Todolist
 					</Typography>
 
-					{isLogged && <Button color='inherit' onClick={logoutOnClickHandler}>LOGOUT</Button>}
+					{isLogged && <MenuButton onClick={logoutOnClickHandler}>LOGOUT</MenuButton>}
+					
+					<Switch color={'default'} onChange={props.changeModeHandler} />
 
 				</Toolbar>
 

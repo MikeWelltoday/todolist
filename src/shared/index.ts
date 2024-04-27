@@ -13,6 +13,7 @@ export { TaskStatusesEnum, TaskPrioritiesEnum } from './types/taskTypes'
 export { AddItemForm } from './ui/addItemForm/AddItemForm'
 export { CustomButton } from './ui/customButton/CustomButton'
 export { EditableSpan } from './ui/editableSpan/EditableSpan'
+export { MenuButton } from './ui/MenuButton'
 
 // utils
 export { handleNetworkError } from './utils/handleNetworkError'

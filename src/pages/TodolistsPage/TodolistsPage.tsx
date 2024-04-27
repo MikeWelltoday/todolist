@@ -7,6 +7,7 @@ import { Todolist, todolistsSelector } from '../../features'
 import { AddItemForm, useAppDispatch } from '../../shared'
 import { isLoggedSelector } from '../../entities'
 import { todolistsActions } from '../../features/todolist/model/todolistsSlice'
+import { paperSx } from './TodolistsPage.styles'
 
 
 type TodolistsListPropsType = {
@@ -41,7 +42,7 @@ export const TodolistsPage: FC<TodolistsListPropsType> = (props) => {
 				{todolists.map(t => {
 						return (
 							<Grid item key={t.id}>
-								<Paper sx={{ padding: '10px' }} elevation={3}>
+								<Paper elevation={3} sx={paperSx}>
 									<Todolist
 										key={t.id}
 										todolistId={t.id}
