@@ -1,4 +1,3 @@
-import { thunk } from 'redux-thunk'
 import { configureStore } from '@reduxjs/toolkit'
 import { authSlice } from 'entities/authSlice/authSlice'
 import { tasksSlice } from 'features/tasks/model/tasksSlice'

@@ -89,18 +89,27 @@ const slice = createAppSlice({
 				}
 			)
 		}
+	},
+
+	selectors: {
+		selectCaptcha: (sliceState) => sliceState.captchaUrl,
+		selectIsLogged: (sliceState) => sliceState.isLogged
 	}
+
 })
 
-//========================================================================================
+//========================================================================= ===============
 
 /**
- * ⛔ SLICE   импортировать напрямую из файла => если черещ index, то будет ошибка
- * ⛔ THUNKS  импортировать напрямую из файла => если черещ index, то будет ошибка
- * ⛔ ACTIONS импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ SLICE     импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ THUNKS    импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ ACTIONS   импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ SELECTORS импортировать напрямую из файла => если черещ index, то будет ошибка
  */
+
 export const authSlice = slice.reducer
 export const authActions = slice.actions
+export const authSelectors = slice.selectors
 
 
 

@@ -4,13 +4,13 @@ import { useSelector } from 'react-redux'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Container from '@mui/material/Container'
 import CircularProgress from '@mui/material/CircularProgress'
-import { LoginPage, TodolistsPage } from '../pages'
-import { ErrorSnackbar, HeaderAppBar } from '../widgets'
-import { useAppDispatch } from '../shared'
-import { authActions } from '../entities/authSlice/authSlice'
-import { appInitializationSelector } from '../state'
+import { LoginPage, TodolistsPage } from 'pages'
+import { ErrorSnackbar, HeaderAppBar } from 'widgets'
+import { useAppDispatch } from 'shared'
+import { authActions } from 'entities/authSlice/authSlice'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
+import { appSelectors } from 'state/appSlice/appSlice'
 
 //========================================================================================
 
@@ -43,7 +43,7 @@ function App(props: AppPropsType) {
 
 //========================================================================================
 	const dispatch = useAppDispatch()
-	const isInitialized = useSelector(appInitializationSelector)
+	const isInitialized = useSelector(appSelectors.selectInitialization)
 
 	useEffect(() => {
 		if (props.demo) return

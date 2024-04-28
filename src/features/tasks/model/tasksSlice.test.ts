@@ -1,9 +1,9 @@
-import { tasksActions, tasksSlice, TasksReducerType } from './tasksSlice'
+import { tasksActions, tasksSlice, TasksSliceType } from './tasksSlice'
 import { TodolistApiType } from 'features/todolist/api/todolistsAPI'
 import { TaskPrioritiesEnum, TaskStatusesEnum } from 'shared'
 import { todolistsActions } from '../../todolist/model/todolistsSlice'
 
-let startState: TasksReducerType
+let startState: TasksSliceType
 beforeEach(() => {
 	startState = {
 		'todolistId1': [

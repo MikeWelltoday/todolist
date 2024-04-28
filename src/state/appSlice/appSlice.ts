@@ -86,14 +86,23 @@ const slice = createAppSlice({
 					}
 				}
 			)
+	},
+
+	selectors: {
+		selectError: (sliceState) => sliceState.error,
+		selectInitialization: (sliceState) => sliceState.isAppInitialized,
+		selectStatus: (sliceState) => sliceState.status
 	}
 })
 
 /**
- * ⛔ SLICE   импортировать напрямую из файла => если черещ index, то будет ошибка
- * ⛔ ACTIONS импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ SLICE     импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ THUNKS    импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ ACTIONS   импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ SELECTORS импортировать напрямую из файла => если черещ index, то будет ошибка
  */
 export const appSlice = slice.reducer
 export const appActions = slice.actions
+export const appSelectors = slice.selectors
 
 

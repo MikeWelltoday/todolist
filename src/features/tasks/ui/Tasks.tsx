@@ -1,27 +1,34 @@
 import S from './Tasks.module.scss'
 import React, { FC, memo } from 'react'
 import { useSelector } from 'react-redux'
-import { TaskType } from '../model/tasksSlice'
+import { tasksSelectors, TaskType } from '../model/tasksSlice'
 import { TodolistFilterType } from '../../todolist/model/todolistsSlice'
 import { Task } from '../../task/Task'
-import { AppRootStateType } from '../../../state/store/store'
+import { AppRootStateType } from 'state/store/store'
 
+//========================================================================================
 
 type TasksPropsType = {
 	todolistId: string
 	todolistFilter: TodolistFilterType
 }
 
+//========================================================================================
+
 export const Tasks: FC<TasksPropsType> = memo((props) => {
 
-	let tasks = useSelector<AppRootStateType, TaskType[]>(state => state.tasksSlice[props.todolistId])
+	// let tasks = useSelector<AppRootStateType, TaskType[]>(state => state.tasksSlice[props.todolistId])
 
-	if (props.todolistFilter === 'active') {
-		tasks = tasks.filter(item => !item.status)
-	}
-	if (props.todolistFilter === 'completed') {
-		tasks = tasks.filter(item => item.status)
-	}
+	// вынес логику фильтрации в tasksSlice
+	const tasks = useSelector((state: AppRootStateType) =>
+		tasksSelectors.selectTasks({ tasksSlice: state.tasksSlice })(props.todolistId, props.todolistFilter))
+
+	// if (props.todolistFilter === 'active') {
+	// 	tasks = tasks.filter(item => !item.status)
+	// }
+	// if (props.todolistFilter === 'completed') {
+	// 	tasks = tasks.filter(item => item.status)
+	// }
 
 	return (
 		tasks.length ? (

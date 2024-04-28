@@ -7,21 +7,22 @@ import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import { useSelector } from 'react-redux'
 import { Loader } from './loader/Loader'
-import { isLoggedSelector } from '../../entities'
-import { useAppDispatch, MenuButton } from '../../shared'
-import { authActions } from '../../entities/authSlice/authSlice'
+import { useAppDispatch, MenuButton } from 'shared'
+import { authActions, authSelectors } from 'entities/authSlice/authSlice'
 import Switch from '@mui/material/Switch'
 
 //========================================================================================
 
-type HedaerAppBarPropsType = {
+type HeaderAppBarPropsType = {
 	changeModeHandler: () => void
 }
 
-export const HeaderAppBar: FC<HedaerAppBarPropsType> = (props) => {
+//========================================================================================
+
+export const HeaderAppBar: FC<HeaderAppBarPropsType> = (props) => {
 
 	const dispatch = useAppDispatch()
-	const isLogged = useSelector(isLoggedSelector)
+	const isLogged = useSelector(authSelectors.selectIsLogged)
 
 	function logoutOnClickHandler() {
 		dispatch(authActions.logoutThunk())
@@ -47,7 +48,7 @@ export const HeaderAppBar: FC<HedaerAppBarPropsType> = (props) => {
 					</Typography>
 
 					{isLogged && <MenuButton onClick={logoutOnClickHandler}>LOGOUT</MenuButton>}
-					
+
 					<Switch color={'default'} onChange={props.changeModeHandler} />
 
 				</Toolbar>

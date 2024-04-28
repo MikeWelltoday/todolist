@@ -3,22 +3,25 @@ import { useSelector } from 'react-redux'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import { Navigate } from 'react-router-dom'
-import { Todolist, todolistsSelector } from '../../features'
-import { AddItemForm, useAppDispatch } from '../../shared'
-import { isLoggedSelector } from '../../entities'
-import { todolistsActions } from '../../features/todolist/model/todolistsSlice'
+import { Todolist } from 'features'
+import { AddItemForm, useAppDispatch } from 'shared'
+import { todolistsActions, todolistsSelectors } from 'features/todolist/model/todolistsSlice'
 import { paperSx } from './TodolistsPage.styles'
+import { authSelectors } from 'entities/authSlice/authSlice'
 
+//========================================================================================
 
 type TodolistsListPropsType = {
 	demo: boolean
 }
 
+//========================================================================================
+
 export const TodolistsPage: FC<TodolistsListPropsType> = (props) => {
 
 	const dispatch = useAppDispatch()
-	const todolists = useSelector(todolistsSelector)
-	const isLogged = useSelector(isLoggedSelector)
+	const todolists = useSelector(todolistsSelectors.selectTodolists)
+	const isLogged = useSelector(authSelectors.selectIsLogged)
 
 	useEffect(() => {
 		if (props.demo) return

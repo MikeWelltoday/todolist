@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Alert from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
-import { useAppDispatch } from '../shared'
-import { appActions } from '../state/appSlice/appSlice'
-import { appErrorSelector } from '../state'
+import { useAppDispatch } from 'shared'
+import { appActions, appSelectors } from 'state/appSlice/appSlice'
+
+//========================================================================================
 
 export const ErrorSnackbar = () => {
 
 	const dispatch = useAppDispatch()
-	const error = useSelector(appErrorSelector)
+	const error = useSelector(appSelectors.selectError)
 
 	// добавил локальное состояния, по которому будет отрисовываться компонент
 	const [open, setOpen] = useState(false)

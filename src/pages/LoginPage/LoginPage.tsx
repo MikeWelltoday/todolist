@@ -11,9 +11,9 @@ import FormLabel from '@mui/material/FormLabel'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { useFormik } from 'formik'
-import { AuthLoginResponseType, captchaSelector, isLoggedSelector } from '../../entities'
-import { useAppDispatch } from '../../shared'
-import { authActions } from '../../entities/authSlice/authSlice'
+import { AuthLoginResponseType } from 'entities'
+import { useAppDispatch } from 'shared'
+import { authActions, authSelectors } from 'entities/authSlice/authSlice'
 
 //========================================================================================
 
@@ -29,8 +29,8 @@ type FormikErrorType = {
 export const LoginPage: FC = () => {
 
 	const dispatch = useAppDispatch()
-	const isLogged = useSelector(isLoggedSelector)
-	const captcha = useSelector(captchaSelector)
+	const isLogged = useSelector(authSelectors.selectIsLogged)
+	const captcha = useSelector(authSelectors.selectCaptcha)
 
 	const formik = useFormik({
 		initialValues: {

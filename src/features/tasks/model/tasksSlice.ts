@@ -1,13 +1,14 @@
-import { todolistsActions } from 'features/todolist/model/todolistsSlice'
+import { TodolistFilterType, todolistsActions } from 'features/todolist/model/todolistsSlice'
 import { appActions } from 'state/appSlice/appSlice'
 import { PayloadAction } from '@reduxjs/toolkit'
 import { ApiUpdatedTaskModelType, TaskApiType, tasksAPI, TasksAxiosResponseType } from 'features/tasks/api/tasksAPI'
-import { RequestEntityStatusType, ResultCodeEnum, TaskPrioritiesEnum, TaskStatusesEnum } from '../../../shared'
-import { createAppSlice } from '../../../state'
-import { AppDispatchType, AppRootStateType } from '../../../state/store/store'
+import { RequestEntityStatusType, ResultCodeEnum, TaskPrioritiesEnum, TaskStatusesEnum } from 'shared'
+import { createAppSlice } from 'state'
+import { AppDispatchType, AppRootStateType } from 'state/store/store'
 import { TodolistApiType } from '../../todolist/api/todolistsAPI'
-import { authActions } from '../../../entities/authSlice/authSlice'
+import { authActions } from 'entities/authSlice/authSlice'
 
+//========================================================================================
 
 export type UiTaskToUpdateModelType = {
 	title?: string
@@ -22,11 +23,13 @@ export type TaskType = TaskApiType & {
 	entityStatus: RequestEntityStatusType
 }
 
-export type TasksReducerType = {
+export type TasksSliceType = {
 	[key: string]: TaskType[]
 }
 
-const initialState: TasksReducerType = {}
+//========================================================================================
+
+const initialState: TasksSliceType = {}
 
 const slice = createAppSlice({
 	name: 'tasksSlice',
@@ -153,7 +156,7 @@ const slice = createAppSlice({
 	extraReducers: builder => {
 		builder
 			.addCase(todolistsActions.fetchTodolistsThunk.fulfilled, (state, action) => {
-				const tasks: TasksReducerType = {}
+				const tasks: TasksSliceType = {}
 				action.payload.todolistsFromAPI.forEach((tl: TodolistApiType) => {
 					tasks[tl.id] = []
 				})
@@ -168,14 +171,32 @@ const slice = createAppSlice({
 			.addCase(authActions.logoutThunk.fulfilled, () => {
 				return {}
 			})
+	},
+
+	selectors: {
+		selectTasks: (sliceState) => (todolistId: string, todolistFilter: TodolistFilterType) => {
+			let tasks = sliceState[todolistId]
+			if (todolistFilter === 'active') {
+				tasks = tasks.filter(item => !item.status)
+			}
+			if (todolistFilter === 'completed') {
+				tasks = tasks.filter(item => item.status)
+			}
+			return tasks
+		}
+
 	}
+
 })
 
+
 /**
- * ⛔ SLICE   импортировать напрямую из файла => если черещ index, то будет ошибка
- * ⛔ ACTIONS импортировать напрямую из файла => если черещ index, то будет ошибка
- * ⛔ THUNKS  импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ SLICE     импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ THUNKS    импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ ACTIONS   импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ SELECTORS импортировать напрямую из файла => если черещ index, то будет ошибка
  */
 
 export const tasksSlice = slice.reducer
 export const tasksActions = slice.actions
+export const tasksSelectors = slice.selectors

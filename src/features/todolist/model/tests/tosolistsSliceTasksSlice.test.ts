@@ -1,10 +1,10 @@
-import { tasksSlice, TasksReducerType } from 'features/tasks/model/tasksSlice'
+import { tasksSlice, TasksSliceType } from 'features/tasks/model/tasksSlice'
 import {
 	TodolistUiType, todolistsSlice, todolistsActions
 } from 'features/todolist/model/todolistsSlice'
 
 
-let startStateTasks: TasksReducerType
+let startStateTasks: TasksSliceType
 let startStateTodolists: TodolistUiType[]
 
 beforeEach(() => {

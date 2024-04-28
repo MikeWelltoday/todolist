@@ -3,10 +3,11 @@ import S from 'features/todolist/ui/Todolist.module.scss'
 import { TodolistTitle } from '../../todolistTitle/TodolistTitle'
 import { Tasks } from '../../tasks/ui/Tasks'
 import { TodolistButtons } from '../../todolistButtons/TodolistButtons'
-import { AddItemForm, RequestEntityStatusType, useAppDispatch } from '../../../shared'
+import { AddItemForm, RequestEntityStatusType, useAppDispatch } from 'shared'
 import { TodolistFilterType } from '../model/todolistsSlice'
 import { tasksActions } from '../../tasks/model/tasksSlice'
 
+//========================================================================================
 
 type TodolistPropsType = {
 	todolistId: string
@@ -17,6 +18,7 @@ type TodolistPropsType = {
 	demo?: boolean
 }
 
+//========================================================================================
 
 export const Todolist: FC<TodolistPropsType> = memo((props) => {
 

@@ -126,15 +126,21 @@ const slice = createAppSlice({
 			.addCase(authActions.logoutThunk.fulfilled, () => {
 				return []
 			})
+	},
+
+	selectors: {
+		selectTodolists: sliceState => sliceState
 	}
 
 })
 
 /**
- * ⛔ SLICE   импортировать напрямую из файла => если черещ index, то будет ошибка
- * ⛔ ACTIONS импортировать напрямую из файла => если черещ index, то будет ошибка
- * ⛔ THUNKS  импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ SLICE     импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ THUNKS    импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ ACTIONS   импортировать напрямую из файла => если черещ index, то будет ошибка
+ * ⛔ SELECTORS импортировать напрямую из файла => если черещ index, то будет ошибка
  */
 
 export const todolistsSlice = slice.reducer
 export const todolistsActions = slice.actions
+export const todolistsSelectors = slice.selectors
