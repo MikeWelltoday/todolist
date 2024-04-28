@@ -1,9 +1,9 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import { RequestEntityStatusType, ResultCodeEnum } from '../../../shared'
+import { RequestEntityStatusType, ResultCodeEnum } from 'shared'
 import { TodolistApiType, todolistsAPI, TodolistsApiResponseType } from '../api/todolistsAPI'
-import { createAppSlice } from '../../../state'
-import { AppDispatchType } from '../../../state/store/store'
-import { authActions } from '../../../entities/authSlice/authSlice'
+import { createAppSlice } from 'state'
+import { AppDispatchType } from 'state/store/store'
+import { authActions } from 'entities/authSlice/authSlice'
 import { tasksActions } from '../../tasks/model/tasksSlice'
 
 
