@@ -8,7 +8,6 @@ export { useAppDispatch } from './hooks/useAppDispatch'
 // types
 export type { RequestEntityStatusType } from './types/commonTypes'
 export { TaskStatusesEnum, TaskPrioritiesEnum } from './types/taskTypes'
-export { SlicesNamesTypes } from './types/slicesNamesTypes'
 
 // ui
 export { AddItemForm } from './ui/addItemForm/AddItemForm'
@@ -17,8 +16,10 @@ export { EditableSpan } from './ui/editableSpan/EditableSpan'
 export { MenuButton } from './ui/MenuButton'
 
 // utils
+export { SlicesNames } from './utils/slicesNames'
 export { handleNetworkError } from './utils/handleNetworkError'
 export { handleServerError } from './utils/handleServerError'
 export { thunkTryCatch } from './utils/thunkTryCatch'
+
 
 

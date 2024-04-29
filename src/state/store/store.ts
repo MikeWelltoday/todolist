@@ -3,7 +3,7 @@ import { authSlice } from 'entities/authSlice/authSlice'
 import { tasksSlice } from 'features/tasks/model/tasksSlice'
 import { todolistsSlice } from 'features/todolist/model/todolistsSlice'
 import { appSlice } from '../appSlice/appSlice'
-import { SlicesNamesTypes } from 'shared'
+import { SlicesNames } from 'shared'
 
 //========================================================================================
 
@@ -20,10 +20,10 @@ export type AppDispatchType = typeof store.dispatch
 export const store = configureStore({
 	reducer:
 		{
-			[SlicesNamesTypes.todolistsSlice]: todolistsSlice,
-			[SlicesNamesTypes.tasksSlice]: tasksSlice,
-			[SlicesNamesTypes.appSlice]: appSlice,
-			[SlicesNamesTypes.authSlice]: authSlice
+			[SlicesNames.todolistsSlice]: todolistsSlice,
+			[SlicesNames.tasksSlice]: tasksSlice,
+			[SlicesNames.appSlice]: appSlice,
+			[SlicesNames.authSlice]: authSlice
 		}
 
 	// не нужно исопльзовать, в RTK уже идет это под копотом

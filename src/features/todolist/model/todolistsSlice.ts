@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import { RequestEntityStatusType, ResultCodeEnum, SlicesNamesTypes } from 'shared'
+import { RequestEntityStatusType, ResultCodeEnum, SlicesNames } from 'shared'
 import { TodolistApiType, todolistsAPI, TodolistsApiResponseType } from '../api/todolistsAPI'
 import { createAppSlice } from 'state'
 import { AppDispatchType } from 'state/store/store'
@@ -18,7 +18,7 @@ export type TodolistUiType = TodolistApiType & {
 //========================================================================================
 
 const slice = createAppSlice({
-	name: SlicesNamesTypes.todolistsSlice,
+	name: SlicesNames.todolistsSlice,
 	initialState: [] as TodolistUiType[],
 
 	reducers: (creators) => {

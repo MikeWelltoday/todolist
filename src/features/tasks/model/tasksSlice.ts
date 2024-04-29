@@ -2,7 +2,13 @@ import { todolistsActions } from 'features/todolist/model/todolistsSlice'
 import { appActions } from 'state/appSlice/appSlice'
 import { PayloadAction } from '@reduxjs/toolkit'
 import { ApiUpdatedTaskModelType, TaskApiType, tasksAPI, TasksAxiosResponseType } from 'features/tasks/api/tasksAPI'
-import { RequestEntityStatusType, ResultCodeEnum, SlicesNamesTypes, TaskPrioritiesEnum, TaskStatusesEnum } from 'shared'
+import {
+	RequestEntityStatusType,
+	ResultCodeEnum,
+	SlicesNames,
+	TaskPrioritiesEnum,
+	TaskStatusesEnum
+} from 'shared'
 import { createAppSlice } from 'state'
 import { AppDispatchType, AppRootStateType } from 'state/store/store'
 import { TodolistApiType } from '../../todolist/api/todolistsAPI'
@@ -30,7 +36,7 @@ export type TasksSliceType = {
 //========================================================================================
 
 const slice = createAppSlice({
-	name: SlicesNamesTypes.tasksSlice,
+	name: SlicesNames.tasksSlice,
 	initialState: {} as TasksSliceType,
 	reducers: (creators) => {
 		return {

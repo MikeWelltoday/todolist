@@ -1,11 +1,11 @@
-export const enum TaskStatusesEnum {
+export enum TaskStatusesEnum {
 	New = 0,
 	InProgress = 1,
 	Completed = 2,
 	Draft = 3
 }
 
-export const enum TaskPrioritiesEnum {
+export enum TaskPrioritiesEnum {
 	Low = 0,
 	Middle = 1,
 	High = 2,

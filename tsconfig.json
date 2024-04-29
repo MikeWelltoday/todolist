@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "preserveConstEnums": true,
+    "preserveConstEnums": false,
     "baseUrl": "src",
     // "baseUrl": "src" стартавая папка для всех импортов
     "target": "es5",
