@@ -8,6 +8,7 @@ export { useAppDispatch } from './hooks/useAppDispatch'
 // types
 export type { RequestEntityStatusType } from './types/commonTypes'
 export { TaskStatusesEnum, TaskPrioritiesEnum } from './types/taskTypes'
+export { SlicesNamesTypes } from './types/slicesNamesTypes'
 
 // ui
 export { AddItemForm } from './ui/addItemForm/AddItemForm'

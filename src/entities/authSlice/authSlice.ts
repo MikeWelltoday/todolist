@@ -1,7 +1,7 @@
 import { appActions } from 'state/appSlice/appSlice'
 import { AppDispatchType } from 'state/store/store'
 import { authAPI, AuthLoginResponseType, AuthResponseType, MeResponseType } from 'entities/authSlice/api/authAPI'
-import { ResultCodeEnum } from 'shared'
+import { ResultCodeEnum, SlicesNamesTypes } from 'shared'
 import { createAppSlice } from 'state'
 import { securityAPI } from './api/securityAPI'
 
@@ -12,7 +12,7 @@ export type AuthSliceType = ReturnType<typeof slice.getInitialState>
 //========================================================================================
 
 const slice = createAppSlice({
-	name: 'authSlice',
+	name: SlicesNamesTypes.authSlice,
 	initialState: {
 		isLogged: false as boolean,
 		captchaUrl: null as string | null

@@ -3,6 +3,7 @@ import { tasksActions } from 'features/tasks/model/tasksSlice'
 import { todolistsActions } from 'features/todolist/model/todolistsSlice'
 import { authActions } from 'entities/authSlice/authSlice'
 import { createAppSlice } from '../utils/createAppSlice'
+import { SlicesNamesTypes } from 'shared'
 
 //========================================================================================
 
@@ -14,7 +15,7 @@ export type AppSliceType = ReturnType<typeof slice.getInitialState>
 //========================================================================================
 
 const slice = createAppSlice({
-	name: 'appSlice',
+	name: SlicesNamesTypes.appSlice,
 	initialState: {
 		status: 'idle' as StatusType,
 		error: null as AppErrorType,
