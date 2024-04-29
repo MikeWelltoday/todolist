@@ -1,4 +1,4 @@
-import { TodolistFilterType, todolistsActions } from 'features/todolist/model/todolistsSlice'
+import { todolistsActions } from 'features/todolist/model/todolistsSlice'
 import { appActions } from 'state/appSlice/appSlice'
 import { PayloadAction } from '@reduxjs/toolkit'
 import { ApiUpdatedTaskModelType, TaskApiType, tasksAPI, TasksAxiosResponseType } from 'features/tasks/api/tasksAPI'
@@ -29,11 +29,9 @@ export type TasksSliceType = {
 
 //========================================================================================
 
-const initialState: TasksSliceType = {}
-
 const slice = createAppSlice({
 	name: 'tasksSlice',
-	initialState,
+	initialState: {} as TasksSliceType,
 	reducers: (creators) => {
 		return {
 
@@ -55,6 +53,7 @@ const slice = createAppSlice({
 					if (res.data.items.length >= 0) {
 						return { tasks: res.data.items, todolistId }
 					} else {
+						// в документации к API нет возврата ошибки => обрабатываем ошибку в appSlice
 						return thunkAPI.rejectWithValue(null)
 					}
 				}, {
@@ -174,21 +173,12 @@ const slice = createAppSlice({
 	},
 
 	selectors: {
-		selectTasks: (sliceState) => (todolistId: string, todolistFilter: TodolistFilterType) => {
-			let tasks = sliceState[todolistId]
-			if (todolistFilter === 'active') {
-				tasks = tasks.filter(item => !item.status)
-			}
-			if (todolistFilter === 'completed') {
-				tasks = tasks.filter(item => item.status)
-			}
-			return tasks
-		}
-
+		selectTasks: (sliceState) => (todolistId: string) => sliceState[todolistId]
 	}
 
 })
 
+//========================================================================================
 
 /**
  * ⛔ SLICE     импортировать напрямую из файла => если черещ index, то будет ошибка

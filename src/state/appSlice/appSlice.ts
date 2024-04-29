@@ -1,28 +1,25 @@
 import { isFulfilled, isPending, isRejected, PayloadAction } from '@reduxjs/toolkit'
-import { tasksActions } from '../../features/tasks/model/tasksSlice'
-import { todolistsActions } from '../../features/todolist/model/todolistsSlice'
-import { authActions } from '../../entities/authSlice/authSlice'
+import { tasksActions } from 'features/tasks/model/tasksSlice'
+import { todolistsActions } from 'features/todolist/model/todolistsSlice'
+import { authActions } from 'entities/authSlice/authSlice'
 import { createAppSlice } from '../utils/createAppSlice'
 
+//========================================================================================
 
-export type AppErrorType = string | null
 export type StatusType = 'idle' | 'loading'
+export type AppErrorType = string | null
 
-export type AppReducerType = {
-	status: StatusType,
-	error: AppErrorType
-	isAppInitialized: boolean
-}
+export type AppSliceType = ReturnType<typeof slice.getInitialState>
 
-const initialState: AppReducerType = {
-	status: 'idle',
-	error: null,
-	isAppInitialized: false
-}
+//========================================================================================
 
 const slice = createAppSlice({
 	name: 'appSlice',
-	initialState,
+	initialState: {
+		status: 'idle' as StatusType,
+		error: null as AppErrorType,
+		isAppInitialized: false as boolean
+	},
 	reducers: (creators) => {
 		return {
 
@@ -66,7 +63,8 @@ const slice = createAppSlice({
 							return
 						}
 
-						// todolistsActions.fetchTodolistsThunk ответа от сервера нет ошибки
+						// todolistsActions.fetchTodolistsThunk в документации к API нет возврата ошибки
+						// также с tasks
 						if (action.type === todolistsActions.fetchTodolistsThunk.rejected.type) {
 							state.error = 'to fetch todolists attempt is failed'
 							return

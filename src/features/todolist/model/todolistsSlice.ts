@@ -6,6 +6,7 @@ import { AppDispatchType } from 'state/store/store'
 import { authActions } from 'entities/authSlice/authSlice'
 import { tasksActions } from '../../tasks/model/tasksSlice'
 
+//========================================================================================
 
 export type TodolistFilterType = 'all' | 'active' | 'completed'
 
@@ -14,11 +15,11 @@ export type TodolistUiType = TodolistApiType & {
 	entityStatus: RequestEntityStatusType
 }
 
-const initialState: TodolistUiType[] = []
+//========================================================================================
 
 const slice = createAppSlice({
 	name: 'todolistsSlice',
-	initialState,
+	initialState: [] as TodolistUiType[],
 
 	reducers: (creators) => {
 		return {
@@ -50,6 +51,7 @@ const slice = createAppSlice({
 						})
 						return { todolistsFromAPI: res.data }
 					} else {
+						// в документации к API нет возврата ошибки => обрабатываем ошибку в appSlice
 						return thunkAPI.rejectWithValue(null)
 					}
 				},
@@ -133,6 +135,8 @@ const slice = createAppSlice({
 	}
 
 })
+
+//========================================================================================
 
 /**
  * ⛔ SLICE     импортировать напрямую из файла => если черещ index, то будет ошибка

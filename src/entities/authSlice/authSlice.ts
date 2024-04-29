@@ -7,7 +7,7 @@ import { securityAPI } from './api/securityAPI'
 
 //========================================================================================
 
-export type InitialStateType = ReturnType<typeof slice.getInitialState>
+export type AuthSliceType = ReturnType<typeof slice.getInitialState>
 
 //========================================================================================
 
