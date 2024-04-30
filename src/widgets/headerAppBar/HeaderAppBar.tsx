@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import Box from '@mui/material/Box'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
@@ -7,19 +7,19 @@ import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import { useSelector } from 'react-redux'
 import { Loader } from './loader/Loader'
-import { useAppDispatch, MenuButton } from 'shared'
+import { MenuButton, useAppDispatch } from 'shared'
 import { authActions, authSelectors } from 'entities/authSlice/authSlice'
 import Switch from '@mui/material/Switch'
 
 //========================================================================================
 
-type HeaderAppBarPropsType = {
+type Props = {
 	changeModeHandler: () => void
 }
 
 //========================================================================================
 
-export const HeaderAppBar: FC<HeaderAppBarPropsType> = (props) => {
+export const HeaderAppBar = (props: Props) => {
 
 	const dispatch = useAppDispatch()
 	const isLogged = useSelector(authSelectors.selectIsLogged)

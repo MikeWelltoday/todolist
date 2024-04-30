@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback } from 'react'
+import React, { memo, useCallback } from 'react'
 import S from './TodolisTitle.module.scss'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -7,7 +7,7 @@ import { todolistsActions } from '../todolist/model/todolistsSlice'
 
 //========================================================================================
 
-type TodolistTitleProps = {
+type Props = {
 	todolistId: string
 	title: string
 	entityStatus: RequestEntityStatus
@@ -15,7 +15,7 @@ type TodolistTitleProps = {
 
 //========================================================================================
 
-export const TodolistTitle: FC<TodolistTitleProps> = memo((props) => {
+export const TodolistTitle = memo((props: Props) => {
 
 	const dispatch = useAppDispatch()
 

@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
@@ -11,13 +11,13 @@ import { authSelectors } from 'entities/authSlice/authSlice'
 
 //========================================================================================
 
-type TodolistsListProps = {
+type Props = {
 	demo: boolean
 }
 
 //========================================================================================
 
-export const TodolistsPage: FC<TodolistsListProps> = (props) => {
+export const TodolistsPage = (props: Props) => {
 
 	const dispatch = useAppDispatch()
 	const todolists = useSelector(todolistsSelectors.selectTodolists)

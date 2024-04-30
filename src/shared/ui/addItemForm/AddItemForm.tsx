@@ -1,4 +1,4 @@
-import React, { FC, useState, memo } from 'react'
+import React, { memo, useState } from 'react'
 import S from 'shared/ui/addItemForm/AddItemForm.module.scss'
 import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
@@ -7,7 +7,7 @@ import { RequestEntityStatus } from '../../types/commonTypes'
 
 //========================================================================================
 
-type AddItemFormProps = {
+type Props = {
 	todolistEntityStatus?: RequestEntityStatus
 
 	addItem: (title: string) => Promise<any>
@@ -15,7 +15,7 @@ type AddItemFormProps = {
 
 //========================================================================================
 
-export const AddItemForm: FC<AddItemFormProps> = memo((props) => {
+export const AddItemForm = memo((props: Props) => {
 
 	const [title, setTitle] = useState('')
 	const [error, setError] = useState('')

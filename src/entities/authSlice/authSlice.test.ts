@@ -1,6 +1,6 @@
-import { authActions, authSlice, AuthSliceType } from 'entities/authSlice/authSlice'
+import { authActions, authSlice, AuthSlice } from 'entities/authSlice/authSlice'
 
-let startState: AuthSliceType
+let startState: AuthSlice
 
 beforeEach(() => {
 	startState = {
@@ -10,7 +10,7 @@ beforeEach(() => {
 })
 
 test('setIsLogged with authSetLoggedTC', () => {
-	const startState: AuthSliceType = {
+	const startState: AuthSlice = {
 		isLogged: false,
 		// также проверим что каптча зануляется при успешнов входе
 		// если вход был с каптчей

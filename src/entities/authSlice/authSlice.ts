@@ -7,7 +7,7 @@ import { securityAPI } from 'entities/authSlice/api/security.api'
 
 //========================================================================================
 
-export type AuthSliceType = ReturnType<typeof slice.getInitialState>
+export type AuthSlice = ReturnType<typeof slice.getInitialState>
 
 //========================================================================================
 

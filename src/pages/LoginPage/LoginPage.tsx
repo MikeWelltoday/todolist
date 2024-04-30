@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import S from './LoginPage.module.scss'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
@@ -26,7 +26,7 @@ type FormikError = {
 
 //========================================================================================
 
-export const LoginPage: FC = () => {
+export const LoginPage = () => {
 
 	const dispatch = useAppDispatch()
 	const isLogged = useSelector(authSelectors.selectIsLogged)

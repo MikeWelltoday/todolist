@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import App from './App'
-import { ReduxStoreProviderDecorator } from '../state/storybookDecorators/ReduxStoreProviderDecorator'
-import { BrowserRouterProviderDecorator } from '../state/storybookDecorators/BrowserRouterProviderDecorator'
+import { ReduxStoreProviderDecorator } from 'state/storybookDecorators/ReduxStoreProviderDecorator'
+import { BrowserRouterProviderDecorator } from 'state/storybookDecorators/BrowserRouterProviderDecorator'
 
 const meta: Meta<typeof App> = {
 	title: 'App/App',

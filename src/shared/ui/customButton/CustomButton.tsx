@@ -1,16 +1,15 @@
-import Button from '@mui/material/Button'
-import { ButtonProps } from '@mui/material/Button'
-import { FC, memo } from 'react'
+import Button, { ButtonProps } from '@mui/material/Button'
+import { memo } from 'react'
 
 //========================================================================================
 
-type FilterButtonProps = {
+type Props = {
 	title: string
 } & ButtonProps
 
 //========================================================================================
 
-export const CustomButton: FC<FilterButtonProps> = memo((props) => {
+export const CustomButton = memo((props: Props) => {
 	return (
 		<Button
 			color={props.color}

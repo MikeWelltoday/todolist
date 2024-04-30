@@ -5,7 +5,7 @@ import { RequestEntityStatus } from '../../types/commonTypes'
 
 //========================================================================================
 
-type EditableSpanPropsType = {
+type Props = {
 	title: string
 	entityStatus: RequestEntityStatus
 	onChangeTitle: (newTitle: string) => void
@@ -13,7 +13,7 @@ type EditableSpanPropsType = {
 
 //========================================================================================
 
-export const EditableSpan: FC<EditableSpanPropsType> = memo((props) => {
+export const EditableSpan = memo((props: Props) => {
 
 	const [changeMode, setChangeMode] = useState(false)
 	const [title, setTitle] = useState(props.title)

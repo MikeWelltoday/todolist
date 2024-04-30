@@ -14,7 +14,7 @@ import { appSelectors } from 'state/appSlice/appSlice'
 
 //========================================================================================
 
-type AppProps = {
+type Props = {
 	demo: boolean
 }
 
@@ -22,7 +22,7 @@ type ThemeMode = 'dark' | 'light'
 
 //========================================================================================
 
-function App(props: AppProps) {
+function App(props: Props) {
 
 // логи стилизации
 	const [themeMode, setThemeMode] = useState<ThemeMode>('light')
