@@ -1,7 +1,7 @@
 import {
 	TodolistFilterType, TodolistUiType, todolistsActions, todolistsSlice
 } from 'features/todolist/model/todolistsSlice'
-import { TodolistApiType } from '../../api/todolistsAPI'
+import { TodolistApiType } from 'features/todolist/api/todolists.api'
 
 
 let startState: TodolistUiType[]

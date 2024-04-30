@@ -3,31 +3,34 @@ import S from 'shared/ui/addItemForm/AddItemForm.module.scss'
 import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
 import AddBoxIcon from '@mui/icons-material/AddBox'
-import { RequestEntityStatusType } from '../../types/commonTypes'
+import { RequestEntityStatus } from '../../types/commonTypes'
 
+//========================================================================================
 
-type PropsType = {
-	todolistEntityStatus?: RequestEntityStatusType
+type AddItemFormProps = {
+	todolistEntityStatus?: RequestEntityStatus
 
 	addItem: (title: string) => Promise<any>
 }
 
-export const AddItemForm: FC<PropsType> = memo((props) => {
+//========================================================================================
+
+export const AddItemForm: FC<AddItemFormProps> = memo((props) => {
 
 	const [title, setTitle] = useState('')
 	const [error, setError] = useState('')
 	const isDisabled = props.todolistEntityStatus === 'loading'
 
-	function newTitleOnChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
+	function newTitleHandler(e: React.ChangeEvent<HTMLInputElement>) {
 		setTitle(e.currentTarget.value)
 	}
 
-	function addItemOnKeyUPHandler(e: React.KeyboardEvent<HTMLInputElement>) {
+	function addItemOnKeyUpHandler(e: React.KeyboardEvent<HTMLInputElement>) {
 		error && setError('')
-		if (e.key === 'Enter') addItemOnClickHandler()
+		if (e.key === 'Enter') addItemHandler()
 	}
 
-	function addItemOnClickHandler() {
+	function addItemHandler() {
 
 		if (title.trim() === '') {
 			setError('Title Required')
@@ -52,8 +55,8 @@ export const AddItemForm: FC<PropsType> = memo((props) => {
 		<div className={S.addItemForm}>
 			<TextField
 				value={title}
-				onChange={newTitleOnChangeHandler}
-				onKeyUp={addItemOnKeyUPHandler}
+				onChange={newTitleHandler}
+				onKeyUp={addItemOnKeyUpHandler}
 				onBlur={onBlurErrorClearHandler}
 
 				label={error || 'NEW TITLE'}
@@ -61,7 +64,7 @@ export const AddItemForm: FC<PropsType> = memo((props) => {
 				disabled={isDisabled}
 			/>
 
-			<IconButton onClick={addItemOnClickHandler} color={'primary'} disabled={isDisabled}>
+			<IconButton onClick={addItemHandler} color={'primary'} disabled={isDisabled}>
 				<AddBoxIcon />
 			</IconButton>
 

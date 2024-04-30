@@ -1,5 +1,5 @@
 import { tasksActions, tasksSlice, TasksSliceType } from './tasksSlice'
-import { TodolistApiType } from 'features/todolist/api/todolistsAPI'
+import { TodolistApiType } from 'features/todolist/api/todolists.api'
 import { TaskPrioritiesEnum, TaskStatusesEnum } from 'shared'
 import { todolistsActions } from '../../todolist/model/todolistsSlice'
 

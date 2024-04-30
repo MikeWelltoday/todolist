@@ -2,14 +2,16 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { thunk } from 'redux-thunk'
 import { configureStore } from '@reduxjs/toolkit'
-import { TaskPrioritiesEnum, TaskStatusesEnum } from '../../shared'
-import { AppRootStateType } from '../store/store'
-import { tasksSlice } from '../../features/tasks/model/tasksSlice'
-import { todolistsSlice } from '../../features/todolist/model/todolistsSlice'
+import { TaskPrioritiesEnum, TaskStatusesEnum } from 'shared'
+import { AppRootState } from '../store/store'
+import { tasksSlice } from 'features/tasks/model/tasksSlice'
+import { todolistsSlice } from 'features/todolist/model/todolistsSlice'
 import { appSlice } from '../appSlice/appSlice'
-import { authSlice } from '../../entities/authSlice/authSlice'
+import { authSlice } from 'entities/authSlice/authSlice'
 
-const initialGlobalState: AppRootStateType = {
+//========================================================================================
+
+const initialGlobalState: AppRootState = {
 	todolistsSlice:
 		[
 			{
@@ -116,7 +118,7 @@ const storyBookStore = configureStore({
 		appSlice,
 		authSlice
 	},
-	preloadedState: initialGlobalState as AppRootStateType,
+	preloadedState: initialGlobalState as AppRootState,
 	middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(thunk)
 })
 

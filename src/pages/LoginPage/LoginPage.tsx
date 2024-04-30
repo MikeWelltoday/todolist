@@ -11,13 +11,13 @@ import FormLabel from '@mui/material/FormLabel'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { useFormik } from 'formik'
-import { AuthLoginResponseType } from 'entities'
+import { AuthLoginResponse } from 'entities'
 import { useAppDispatch } from 'shared'
 import { authActions, authSelectors } from 'entities/authSlice/authSlice'
 
 //========================================================================================
 
-type FormikErrorType = {
+type FormikError = {
 	email?: string
 	password?: string
 	rememberMe?: boolean
@@ -40,7 +40,7 @@ export const LoginPage: FC = () => {
 			captcha: ''
 		},
 		validate: values => {
-			const errors: FormikErrorType = {}
+			const errors: FormikError = {}
 
 			if (!values.email) {
 				errors.email = 'Required'
@@ -69,7 +69,7 @@ export const LoginPage: FC = () => {
 				captcha: values.captcha
 			}))
 				.unwrap()
-				.catch((data: AuthLoginResponseType) => {
+				.catch((data: AuthLoginResponse) => {
 					// проверка что вообще пришло что-то в data
 					// зависит - попали ли мы в санке в handleServerError
 					if (data.fieldsErrors || data.messages) {

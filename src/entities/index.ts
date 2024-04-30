@@ -1,2 +1,2 @@
-// authAPI
-export type { AuthLoginResponseType } from './authSlice/api/authAPI'
+// authApi
+export type { AuthLoginResponse } from 'entities/authSlice/api/auth.api'

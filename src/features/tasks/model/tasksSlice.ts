@@ -1,17 +1,17 @@
 import { todolistsActions } from 'features/todolist/model/todolistsSlice'
 import { appActions } from 'state/appSlice/appSlice'
 import { PayloadAction } from '@reduxjs/toolkit'
-import { ApiUpdatedTaskModelType, TaskApiType, tasksAPI, TasksAxiosResponseType } from 'features/tasks/api/tasksAPI'
+import { ApiUpdatedTaskModelType, TaskApiType, tasksAPI, TasksAxiosResponseType } from 'features/tasks/api/tasks.api'
 import {
-	RequestEntityStatusType,
+	RequestEntityStatus,
 	ResultCodeEnum,
 	SlicesNames,
 	TaskPrioritiesEnum,
 	TaskStatusesEnum
 } from 'shared'
 import { createAppSlice } from 'state'
-import { AppDispatchType, AppRootStateType } from 'state/store/store'
-import { TodolistApiType } from '../../todolist/api/todolistsAPI'
+import { AppDispatch, AppRootState } from 'state/store/store'
+import { TodolistApiType } from 'features/todolist/api/todolists.api'
 import { authActions } from 'entities/authSlice/authSlice'
 
 //========================================================================================
@@ -26,7 +26,7 @@ export type UiTaskToUpdateModelType = {
 }
 
 export type TaskType = TaskApiType & {
-	entityStatus: RequestEntityStatusType
+	entityStatus: RequestEntityStatus
 }
 
 export type TasksSliceType = {
@@ -42,7 +42,7 @@ const slice = createAppSlice({
 		return {
 
 			changeTasksEntityStatusAction: creators.reducer((state, action: PayloadAction<{
-				todolistId: string, taskId: string, newStatus: RequestEntityStatusType
+				todolistId: string, taskId: string, newStatus: RequestEntityStatus
 			}>) => {
 				const tasks = state[action.payload.todolistId]
 				const taskIndex = state[action.payload.todolistId].findIndex(tsk => tsk.id === action.payload.taskId)
@@ -74,7 +74,7 @@ const slice = createAppSlice({
 			addTaskThunk: creators.asyncThunk<{ newTaskFromAPI: TaskApiType },
 				{ todolistId: string, newTitle: string }, { rejectValue: TasksAxiosResponseType }>(
 				async ({ todolistId, newTitle }, thunkAPI) => {
-					const dispatch = thunkAPI.dispatch as AppDispatchType
+					const dispatch = thunkAPI.dispatch as AppDispatch
 					dispatch(todolistsActions.changeTodolistEntityStatusAction({ todolistId, newStatus: 'loading' }))
 					const res = await tasksAPI.createTask(todolistId, newTitle)
 					dispatch(todolistsActions.changeTodolistEntityStatusAction({ todolistId, newStatus: 'idle' }))
@@ -95,7 +95,7 @@ const slice = createAppSlice({
 			removeTaskThunk: creators.asyncThunk<{ todolistId: string, taskId: string },
 				{ todolistId: string, taskId: string }, { rejectValue: TasksAxiosResponseType<{}> }>(
 				async ({ todolistId, taskId }, thunkAPI) => {
-					const dispatch = thunkAPI.dispatch as AppDispatchType
+					const dispatch = thunkAPI.dispatch as AppDispatch
 					dispatch(todolistsActions.changeTodolistEntityStatusAction({ todolistId, newStatus: 'loading' }))
 					const res = await tasksAPI.deleteTask(todolistId, taskId)
 					dispatch(todolistsActions.changeTodolistEntityStatusAction({ todolistId, newStatus: 'idle' }))
@@ -116,10 +116,10 @@ const slice = createAppSlice({
 				{ todolistId: string, taskId: string, taskToUpdateModel: UiTaskToUpdateModelType },
 				{ rejectValue: TasksAxiosResponseType | null }>(
 				async ({ todolistId, taskId, taskToUpdateModel }, thunkAPI) => {
-					const dispatch = thunkAPI.dispatch as AppDispatchType
+					const dispatch = thunkAPI.dispatch as AppDispatch
 					dispatch(todolistsActions.changeTodolistEntityStatusAction({ todolistId, newStatus: 'loading' }))
 
-					const taskToUpdate = (thunkAPI.getState() as AppRootStateType).tasksSlice[todolistId].filter(t => t.id === taskId)[0]
+					const taskToUpdate = (thunkAPI.getState() as AppRootState).tasksSlice[todolistId].filter(t => t.id === taskId)[0]
 					if (!taskToUpdate) {
 						dispatch(appActions.setErrorAction({ error: 'Task To Update Not Found' }))
 						dispatch(todolistsActions.changeTodolistEntityStatusAction({ todolistId, newStatus: 'idle' }))

@@ -2,26 +2,28 @@ import React, { FC, memo, useCallback } from 'react'
 import S from './TodolisTitle.module.scss'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { EditableSpan, RequestEntityStatusType, useAppDispatch } from '../../shared'
+import { EditableSpan, RequestEntityStatus, useAppDispatch } from 'shared'
 import { todolistsActions } from '../todolist/model/todolistsSlice'
 
+//========================================================================================
 
-type TodolistTitlePropsType = {
+type TodolistTitleProps = {
 	todolistId: string
 	title: string
-	entityStatus: RequestEntityStatusType
+	entityStatus: RequestEntityStatus
 }
 
+//========================================================================================
 
-export const TodolistTitle: FC<TodolistTitlePropsType> = memo((props) => {
+export const TodolistTitle: FC<TodolistTitleProps> = memo((props) => {
 
 	const dispatch = useAppDispatch()
 
-	const removeTodolistCallBack = () => {
+	const removeTodolistHandler = () => {
 		dispatch(todolistsActions.removeTodolistThunk(props.todolistId))
 	}
 
-	const changeTodolistTitleCallBack = useCallback(((newTitle: string) => {
+	const changeTodolistTitleHandler = useCallback(((newTitle: string) => {
 		dispatch(todolistsActions.updateTodolistTitleThunk({ todolistId: props.todolistId, newTitle }))
 	}), [props.todolistId])
 
@@ -30,11 +32,11 @@ export const TodolistTitle: FC<TodolistTitlePropsType> = memo((props) => {
 		<div className={S.todolistTitle}>
 			<EditableSpan
 				title={props.title}
-				onChangeTitle={changeTodolistTitleCallBack}
+				onChangeTitle={changeTodolistTitleHandler}
 				entityStatus={props.entityStatus}
 			/>
 
-			<IconButton onClick={removeTodolistCallBack} disabled={props.entityStatus === 'loading'}>
+			<IconButton onClick={removeTodolistHandler} disabled={props.entityStatus === 'loading'}>
 				<DeleteIcon />
 			</IconButton>
 		</div>

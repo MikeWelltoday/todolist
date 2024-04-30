@@ -1,6 +1,6 @@
-import { appActions, AppSliceType, appSlice } from 'state/appSlice/appSlice'
+import { appActions, AppSlice, appSlice } from 'state/appSlice/appSlice'
 
-let startState: AppSliceType
+let startState: AppSlice
 
 beforeEach(() => {
 	startState = {

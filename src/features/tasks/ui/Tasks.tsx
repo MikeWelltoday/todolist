@@ -1,26 +1,25 @@
 import S from './Tasks.module.scss'
 import React, { FC, memo } from 'react'
 import { useSelector } from 'react-redux'
-import { tasksSelectors, TaskType } from '../model/tasksSlice'
+import { tasksSelectors } from '../model/tasksSlice'
 import { TodolistFilterType } from '../../todolist/model/todolistsSlice'
 import { Task } from '../../task/Task'
-import { AppRootStateType } from 'state/store/store'
+import { AppRootState } from 'state/store/store'
 
 //========================================================================================
 
-export type TasksPropsType = {
+export type TasksProps = {
 	todolistId: string
 	todolistFilter: TodolistFilterType
 }
 
 //========================================================================================
 
-export const Tasks: FC<TasksPropsType> = memo((props) => {
+export const Tasks: FC<TasksProps> = memo((props) => {
 
 	// let tasks = useSelector<AppRootStateType, TaskType[]>(state => state.tasksSlice[props.todolistId])
 
-
-	let tasks = useSelector((state: AppRootStateType) =>
+	let tasks = useSelector((state: AppRootState) =>
 		tasksSelectors.selectTasks({ tasksSlice: state.tasksSlice })(props.todolistId))
 
 

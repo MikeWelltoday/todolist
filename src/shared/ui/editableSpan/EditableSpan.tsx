@@ -1,13 +1,17 @@
 import React, { ChangeEvent, FC, useState, KeyboardEvent, memo, useCallback } from 'react'
 import s from 'shared/ui/editableSpan/EditableSpan.module.scss'
 import TextField from '@mui/material/TextField'
-import { RequestEntityStatusType } from '../../types/commonTypes'
+import { RequestEntityStatus } from '../../types/commonTypes'
+
+//========================================================================================
 
 type EditableSpanPropsType = {
 	title: string
-	entityStatus: RequestEntityStatusType
+	entityStatus: RequestEntityStatus
 	onChangeTitle: (newTitle: string) => void
 }
+
+//========================================================================================
 
 export const EditableSpan: FC<EditableSpanPropsType> = memo((props) => {
 
@@ -15,22 +19,22 @@ export const EditableSpan: FC<EditableSpanPropsType> = memo((props) => {
 	const [title, setTitle] = useState(props.title)
 	const isDisabled = props.entityStatus === 'loading'
 
-	function newTitleOnChangeHandler(event: ChangeEvent<HTMLInputElement>) {
+	function newTitleHandler(event: ChangeEvent<HTMLInputElement>) {
 		setTitle(event.currentTarget.value)
 	}
 
-	const deactivateChangeMode = useCallback(() => {
+	const deactivateChangeModeHandler = useCallback(() => {
 		setChangeMode(false)
 		props.onChangeTitle(title.trim())
 	}, [title, props.onChangeTitle, props.title])
 
-	function activateChangeMode() {
+	function activateChangeModeHandler() {
 		setChangeMode(true)
 		setTitle(props.title)
 	}
 
-	function onKeyDown(event: KeyboardEvent<HTMLInputElement>) {
-		if (event.key === 'Escape' || event.key === 'Enter') deactivateChangeMode()
+	function onKeyDownHandler(event: KeyboardEvent<HTMLInputElement>) {
+		if (event.key === 'Escape' || event.key === 'Enter') deactivateChangeModeHandler()
 	}
 
 	return (
@@ -39,15 +43,15 @@ export const EditableSpan: FC<EditableSpanPropsType> = memo((props) => {
 				className={s.EditableSpan}
 				variant='standard'
 				value={title}
-				onBlur={deactivateChangeMode}
-				onKeyDown={onKeyDown}
-				onChange={newTitleOnChangeHandler}
+				onBlur={deactivateChangeModeHandler}
+				onKeyDown={onKeyDownHandler}
+				onChange={newTitleHandler}
 				autoFocus
 			/>
 			:
 			<span
 				className={`${s.EditableSpan} ${isDisabled && s.disabled}`}
-				onDoubleClick={activateChangeMode}
+				onDoubleClick={activateChangeModeHandler}
 			>
                 {props.title}
             </span>

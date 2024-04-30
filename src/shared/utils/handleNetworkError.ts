@@ -1,9 +1,10 @@
-import { AppDispatchType } from 'state/store/store'
+import { AppDispatch } from 'state/store/store'
 import { isAxiosError } from 'axios'
 import { appActions } from 'state/appSlice/appSlice'
 
+//========================================================================================
 
-export function handleNetworkError(error: unknown, dispatch: AppDispatchType): void {
+export function handleNetworkError(error: unknown, dispatch: AppDispatch): void {
 	let errorMessage = 'Some error occurred'
 	if (isAxiosError(error)) {
 		errorMessage = error.response?.data?.message || error?.message || errorMessage

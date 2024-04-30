@@ -1,5 +1,6 @@
-import { instance, TaskPrioritiesEnum, TaskStatusesEnum } from '../../../shared'
+import { instance, TaskPrioritiesEnum, TaskStatusesEnum } from 'shared'
 
+//========================================================================================
 
 export type TaskApiType = {
 	todoListId: string
@@ -36,6 +37,7 @@ export type ApiUpdatedTaskModelType = {
 	deadline: string
 }
 
+//========================================================================================
 
 export const tasksAPI = {
 

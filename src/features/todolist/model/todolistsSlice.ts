@@ -1,8 +1,8 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import { RequestEntityStatusType, ResultCodeEnum, SlicesNames } from 'shared'
-import { TodolistApiType, todolistsAPI, TodolistsApiResponseType } from '../api/todolistsAPI'
+import { RequestEntityStatus, ResultCodeEnum, SlicesNames } from 'shared'
+import { TodolistApiType, todolistsAPI, TodolistsApiResponseType } from 'features/todolist/api/todolists.api'
 import { createAppSlice } from 'state'
-import { AppDispatchType } from 'state/store/store'
+import { AppDispatch } from 'state/store/store'
 import { authActions } from 'entities/authSlice/authSlice'
 import { tasksActions } from '../../tasks/model/tasksSlice'
 
@@ -12,7 +12,7 @@ export type TodolistFilterType = 'all' | 'active' | 'completed'
 
 export type TodolistUiType = TodolistApiType & {
 	filter: TodolistFilterType
-	entityStatus: RequestEntityStatusType
+	entityStatus: RequestEntityStatus
 }
 
 //========================================================================================
@@ -33,7 +33,7 @@ const slice = createAppSlice({
 			}),
 
 			changeTodolistEntityStatusAction: creators.reducer((state, action: PayloadAction<
-				{ todolistId: string, newStatus: RequestEntityStatusType }>) => {
+				{ todolistId: string, newStatus: RequestEntityStatus }>) => {
 				const todolist = state.find(t => t.id === action.payload.todolistId)
 				if (todolist) {
 					todolist.entityStatus = action.payload.newStatus
@@ -43,7 +43,7 @@ const slice = createAppSlice({
 			fetchTodolistsThunk: creators.asyncThunk<{ todolistsFromAPI: TodolistApiType[] },
 				undefined, { rejectValue: null }>(
 				async (_, thunkAPI) => {
-					const dispatch = thunkAPI.dispatch as AppDispatchType
+					const dispatch = thunkAPI.dispatch as AppDispatch
 					const res = await todolistsAPI.getTodolist()
 					if (res.data.length) {
 						res.data.forEach((todolist) => {
@@ -82,7 +82,7 @@ const slice = createAppSlice({
 			removeTodolistThunk: creators.asyncThunk<{ todolistId: string },
 				string, { rejectValue: TodolistsApiResponseType }>(
 				async (todolistId, thunkAPI) => {
-					const dispatch = thunkAPI.dispatch as AppDispatchType
+					const dispatch = thunkAPI.dispatch as AppDispatch
 					dispatch(todolistsActions.changeTodolistEntityStatusAction({ todolistId, newStatus: 'loading' }))
 					const res = await todolistsAPI.deleteTodolist(todolistId)
 					dispatch(todolistsActions.changeTodolistEntityStatusAction({ todolistId, newStatus: 'idle' }))
@@ -101,7 +101,7 @@ const slice = createAppSlice({
 			updateTodolistTitleThunk: creators.asyncThunk<{ todolistId: string, newTitle: string },
 				{ todolistId: string, newTitle: string }, { rejectValue: TodolistsApiResponseType }>(
 				async ({ todolistId, newTitle }, thunkAPI) => {
-					const dispatch = thunkAPI.dispatch as AppDispatchType
+					const dispatch = thunkAPI.dispatch as AppDispatch
 					dispatch(todolistsActions.changeTodolistEntityStatusAction({ todolistId, newStatus: 'loading' }))
 					const res = await todolistsAPI.updateTodolist(todolistId, newTitle)
 					dispatch(todolistsActions.changeTodolistEntityStatusAction({ todolistId, newStatus: 'idle' }))

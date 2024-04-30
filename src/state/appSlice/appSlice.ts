@@ -7,28 +7,28 @@ import { SlicesNames } from 'shared'
 
 //========================================================================================
 
-export type StatusType = 'idle' | 'loading'
-export type AppErrorType = string | null
+export type AppStatus = 'idle' | 'loading'
+export type AppError = string | null
 
-export type AppSliceType = ReturnType<typeof slice.getInitialState>
+export type AppSlice = ReturnType<typeof slice.getInitialState>
 
 //========================================================================================
 
 const slice = createAppSlice({
 	name: SlicesNames.appSlice,
 	initialState: {
-		status: 'idle' as StatusType,
-		error: null as AppErrorType,
+		status: 'idle' as AppStatus,
+		error: null as AppError,
 		isAppInitialized: false as boolean
 	},
 	reducers: (creators) => {
 		return {
 
-			setStatusAction: creators.reducer((state, action: PayloadAction<{ status: StatusType }>) => {
+			setStatusAction: creators.reducer((state, action: PayloadAction<{ status: AppStatus }>) => {
 				state.status = action.payload.status
 			}),
 
-			setErrorAction: creators.reducer((state, action: PayloadAction<{ error: AppErrorType }>) => {
+			setErrorAction: creators.reducer((state, action: PayloadAction<{ error: AppError }>) => {
 				state.error = action.payload.error
 			}),
 

@@ -11,13 +11,13 @@ import { authSelectors } from 'entities/authSlice/authSlice'
 
 //========================================================================================
 
-type TodolistsListPropsType = {
+type TodolistsListProps = {
 	demo: boolean
 }
 
 //========================================================================================
 
-export const TodolistsPage: FC<TodolistsListPropsType> = (props) => {
+export const TodolistsPage: FC<TodolistsListProps> = (props) => {
 
 	const dispatch = useAppDispatch()
 	const todolists = useSelector(todolistsSelectors.selectTodolists)
@@ -29,7 +29,7 @@ export const TodolistsPage: FC<TodolistsListPropsType> = (props) => {
 		dispatch(todolistsActions.fetchTodolistsThunk())
 	}, [])
 
-	const addTodolist = useCallback((newTodolistTitle: string) => {
+	const addTodolistHandler = useCallback((newTodolistTitle: string) => {
 		return dispatch(todolistsActions.addTodolistThunk(newTodolistTitle)).unwrap()
 	}, [])
 
@@ -38,7 +38,7 @@ export const TodolistsPage: FC<TodolistsListPropsType> = (props) => {
 	return (
 		<>
 			<Grid container sx={{ padding: '20px' }}>
-				<AddItemForm addItem={addTodolist} />
+				<AddItemForm addItem={addTodolistHandler} />
 			</Grid>
 
 			<Grid container spacing={5}>

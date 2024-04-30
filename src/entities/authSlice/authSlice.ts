@@ -1,9 +1,9 @@
 import { appActions } from 'state/appSlice/appSlice'
-import { AppDispatchType } from 'state/store/store'
-import { authAPI, AuthLoginResponseType, AuthResponseType, MeResponseType } from 'entities/authSlice/api/authAPI'
+import { AppDispatch } from 'state/store/store'
+import { authApi, AuthLoginResponse, AuthResponse, MeResponse } from 'entities/authSlice/api/auth.api'
 import { ResultCodeEnum, SlicesNames } from 'shared'
 import { createAppSlice } from 'state'
-import { securityAPI } from './api/securityAPI'
+import { securityAPI } from 'entities/authSlice/api/security.api'
 
 //========================================================================================
 
@@ -21,10 +21,10 @@ const slice = createAppSlice({
 		return {
 
 			initializationThunk: creators.asyncThunk<undefined, undefined,
-				{ rejectValue: AuthResponseType<MeResponseType> }>(
+				{ rejectValue: AuthResponse<MeResponse> }>(
 				async (_, thunkAPI) => {
-					const dispatch = thunkAPI.dispatch as AppDispatchType
-					const res = await authAPI.me()
+					const dispatch = thunkAPI.dispatch as AppDispatch
+					const res = await authApi.me()
 					dispatch(appActions.setInitializationAction({ isAppInitialized: true }))
 					if (res.data.resultCode === ResultCodeEnum.Success) {
 						return
@@ -39,10 +39,10 @@ const slice = createAppSlice({
 
 			loginThunk: creators.asyncThunk<undefined,
 				{ email: string, password: string, rememberMe: boolean, captcha: string },
-				{ rejectValue: AuthLoginResponseType }>(
+				{ rejectValue: AuthLoginResponse }>(
 				async ({ email, password, rememberMe, captcha }, thunkAPI) => {
-					const dispatch = thunkAPI.dispatch as AppDispatchType
-					const res = await authAPI.login(email, password, rememberMe, captcha)
+					const dispatch = thunkAPI.dispatch as AppDispatch
+					const res = await authApi.login(email, password, rememberMe, captcha)
 					if (res.data.resultCode === ResultCodeEnum.Success) {
 						return
 					} else if (res.data.resultCode === ResultCodeEnum.Captcha) {
@@ -63,9 +63,9 @@ const slice = createAppSlice({
 				}
 			),
 
-			logoutThunk: creators.asyncThunk<undefined, undefined, { rejectValue: AuthResponseType }>(
+			logoutThunk: creators.asyncThunk<undefined, undefined, { rejectValue: AuthResponse }>(
 				async (_, thunkAPI) => {
-					const res = await authAPI.logout()
+					const res = await authApi.logout()
 					if (res.data.resultCode === ResultCodeEnum.Success) {
 						return
 					} else {

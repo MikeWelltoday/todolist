@@ -1,4 +1,6 @@
-import { instance } from '../../../shared'
+import { instance } from 'shared'
+
+//========================================================================================
 
 export type TodolistApiType = {
 	id: string
@@ -18,6 +20,8 @@ export type TodolistsApiResponseType<D = {}> = {
 	fieldsErrors: FieldErrorType[]
 	data: D
 }
+
+//========================================================================================
 
 export const todolistsAPI = {
 

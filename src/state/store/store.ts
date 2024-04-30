@@ -7,8 +7,8 @@ import { SlicesNames } from 'shared'
 
 //========================================================================================
 
-export type AppRootStateType = ReturnType<typeof store.getState>
-export type AppDispatchType = typeof store.dispatch
+export type AppRootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
 
 //========================================================================================
 

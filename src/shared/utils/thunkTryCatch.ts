@@ -1,11 +1,11 @@
 import { BaseThunkAPI } from '@reduxjs/toolkit/dist/createAsyncThunk'
-import { AppDispatchType, AppRootStateType } from 'state/store/store'
+import { AppDispatch, AppRootState } from 'state/store/store'
 import { handleNetworkError } from 'shared/utils/handleNetworkError'
 
-// AuthLoginResponseType для санки authSetLoggedTC
+//========================================================================================
 
 export const thunkTryCatch = async <T>(
-	thunkAPI: BaseThunkAPI<AppRootStateType, unknown, AppDispatchType, null>,
+	thunkAPI: BaseThunkAPI<AppRootState, unknown, AppDispatch, null>,
 	logic: () => Promise<T>): Promise<T | ReturnType<typeof thunkAPI.rejectWithValue>> => {
 	const { dispatch, rejectWithValue } = thunkAPI
 	// dispatch(appActions.setStatus({ status: 'loading' }))

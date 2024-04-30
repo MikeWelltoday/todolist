@@ -1,15 +1,18 @@
 import React, { FC, memo, useCallback } from 'react'
 import S from './TodolistButtons.module.scss'
 import { TodolistFilterType, todolistsActions } from '../todolist/model/todolistsSlice'
-import { CustomButton, useAppDispatch } from '../../shared'
+import { CustomButton, useAppDispatch } from 'shared'
 
+//========================================================================================
 
-type TodolistButtonsPropsType = {
+type TodolistButtonsProps = {
 	todolistId: string
 	todolistFilter: TodolistFilterType
 }
 
-export const TodolistButtons: FC<TodolistButtonsPropsType> = memo((props) => {
+//========================================================================================
+
+export const TodolistButtons: FC<TodolistButtonsProps> = memo((props) => {
 
 	const dispatch = useAppDispatch()
 
