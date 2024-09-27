@@ -7,6 +7,3 @@ export const instance = axios.create({
 		'API-KEY': '833317a0-7a1b-4997-ba09-b643d5fe2749'
 	}
 })
-
-// mk.mikhail.k@gmail.com
-// cvfgrty342es
