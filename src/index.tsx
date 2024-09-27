@@ -11,14 +11,19 @@ const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
 )
 root.render(
-	<Provider store={store}>
-		{/*<BrowserRouter>*/}
-		{/*	<App demo={false} />*/}
-		{/*</BrowserRouter>*/}
-		<HashRouter>
+	<HashRouter>
+
+
+		<Provider store={store}>
+			{/*<BrowserRouter>*/}
+			{/*	<App demo={false} />*/}
+			{/*</BrowserRouter>*/}
+
 			<App demo={false} />
-		</HashRouter>
-	</Provider>
+
+		</Provider>
+
+	</HashRouter>
 )
 
 
